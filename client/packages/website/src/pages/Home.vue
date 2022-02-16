@@ -1,7 +1,1 @@
-<template>
-  <UButton />
-</template>
-
-<script setup lang="ts">
-  import { UButton } from '@vcp-web-client/ui';
-</script>
+<template><div>Home page</div></template>

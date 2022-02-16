@@ -1,5 +1,7 @@
 <template>
-  <div class="container px-10 py-8 mx-auto">
+  <WHeader />
+
+  <div class="container mx-auto mt-24">
     <RouterView />
   </div>
 </template>
@@ -9,6 +11,7 @@
   import { RouterView, useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useHead } from '@vueuse/head';
+  import WHeader from '~/components/WHeader.vue';
 
   const route = useRoute();
   const { t } = useI18n();

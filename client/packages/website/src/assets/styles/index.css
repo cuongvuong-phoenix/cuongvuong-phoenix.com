@@ -1,5 +1,5 @@
-@import './vendors/tailwind.css';
-@import './vendors/nprogress.css';
+@import './tailwind.css';
+@import './nprogress.css';
 @import './forms';
 
 :root {

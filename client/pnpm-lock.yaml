@@ -25,6 +25,7 @@ importers:
       tailwindcss: ^3.0.22
       typescript: ^4.5.5
       vue: ^3.2.31
+      vue-router: '4'
       vue-tsc: ^0.31.4
     devDependencies:
       autoprefixer: 10.4.2_postcss@8.4.6
@@ -34,6 +35,7 @@ importers:
       tailwindcss: 3.0.22_autoprefixer@10.4.2
       typescript: 4.5.5
       vue: 3.2.31
+      vue-router: 4.0.12_vue@3.2.31
       vue-tsc: 0.31.4_typescript@4.5.5
 
   packages/website:
@@ -752,7 +754,6 @@ packages:
 
   /@vue/devtools-api/6.0.11:
     resolution: {integrity: sha512-0X7/3plmtdBFAG0dS5u1utBsA2++E/TJxWQlnlUydP/21q71CCn/F4b0ir49us/Cn8mzemednIL8ZMjX/boiQw==}
-    dev: false
 
   /@vue/reactivity-transform/3.2.31:
     resolution: {integrity: sha512-uS4l4z/W7wXdI+Va5pgVxBJ345wyGFKvpPYtdSgvfJfX/x2Ymm6ophQlXXB6acqGHtXuBqNyyO3zVp9b1r0MOA==}
@@ -3892,7 +3893,6 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.0.11
       vue: 3.2.31
-    dev: false
 
   /vue-tsc/0.31.4_typescript@4.5.5:
     resolution: {integrity: sha512-8RnKGmQRo/0rbXkyZmKCOdT62fNWyEaMdS/BDAPE+saGNAniUZsjpOSOjAiLwsQc5qgeI9/mY1W3o4tX7H/7MA==}
