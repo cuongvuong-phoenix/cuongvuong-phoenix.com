@@ -26,7 +26,7 @@ export const routes: RouteRecordRaw[] = [
       {
         path: 'blog',
         name: RouteName.BLOG,
-        component: Home,
+        component: () => import('~/pages/Blog.vue'),
       },
       {
         path: 'notes',
