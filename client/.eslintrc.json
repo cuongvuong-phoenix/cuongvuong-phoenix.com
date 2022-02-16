@@ -2,5 +2,13 @@
   "extends": ["@antfu/eslint-config", "prettier"],
   "rules": {
     "vue/no-setup-props-destructure": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.vue"],
+      "rules": {
+        "import/first": "off"
+      }
+    }
+  ]
 }
