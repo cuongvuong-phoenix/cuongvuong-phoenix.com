@@ -2,7 +2,7 @@
   <div
     class="fixed inset-x-0 top-0"
     :class="{
-      'bg-foreground-dark-default/5': !route.meta.dimHeader,
+      'bg-foreground-dark-default/5': !route.meta.dimHeaderFooter,
     }"
   >
     <div class="container flex items-center justify-between h-24 mx-auto space-x-8">

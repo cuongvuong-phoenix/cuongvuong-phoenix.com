@@ -4,6 +4,8 @@
   <div class="container mx-auto mt-24">
     <RouterView />
   </div>
+
+  <WFooter />
 </template>
 
 <script setup lang="ts">
@@ -12,6 +14,7 @@
   import { useI18n } from 'vue-i18n';
   import { useHead } from '@vueuse/head';
   import WHeader from '~/components/WHeader.vue';
+  import WFooter from '~/components/WFooter.vue';
 
   const route = useRoute();
   const { t } = useI18n();

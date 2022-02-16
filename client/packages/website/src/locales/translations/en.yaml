@@ -5,7 +5,12 @@ nav:
   blog: "@:{'common.blog'}"
   notes: "@:{'common.note'}"
 
+footer:
+  about: Designed and developed by {0}.{1}Built with {2}.
+
 common:
+  whoami: Cuong Vuong
+
   home: Home
   about: About
   contact: Contact

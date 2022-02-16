@@ -13,7 +13,7 @@ export const routes: RouteRecordRaw[] = [
         name: RouteName.HOME,
         component: Home,
         meta: {
-          dimHeader: true,
+          dimHeaderFooter: true,
         },
       },
       {
