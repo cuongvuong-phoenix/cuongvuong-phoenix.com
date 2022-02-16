@@ -1,7 +1,5 @@
 <template>
   <div class="container px-10 py-8 mx-auto">
-    <Header />
-
     <RouterView />
   </div>
 </template>
@@ -11,7 +9,6 @@
   import { RouterView, useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useHead } from '@vueuse/head';
-  import Header from '~/components/Header.vue';
 
   const route = useRoute();
   const { t } = useI18n();
@@ -19,7 +16,7 @@
   /* ----------------------------------------------------------------
   App title
   ---------------------------------------------------------------- */
-  const titleBase = 'Vite-VCP';
+  const titleBase = 'VCP-Web';
 
   const title = reactive({
     full: titleBase,
