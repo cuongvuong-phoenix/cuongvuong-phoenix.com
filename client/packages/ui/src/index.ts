@@ -1,1 +1,1 @@
-export { default as CButton } from './components/CButton.vue'
+export { default as UButton } from './components/UButton.vue'
