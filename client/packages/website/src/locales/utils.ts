@@ -7,7 +7,8 @@ Constants
 ---------------------------------------------------------------- */
 export const LANGUAGES: { locale: string; name: string; default?: boolean }[] = [
   { locale: 'en', name: 'English', default: true },
-  { locale: 'vi', name: 'Tiếng Việt' },
+  // TODO: support Vietnamese.
+  // { locale: 'vi', name: 'Tiếng Việt' },
 ];
 
 export const LOCALES = LANGUAGES.map((lang) => lang.locale);

@@ -1,2 +1,13 @@
 nav:
+  home: "@:{'common.home'}"
+  about: "@:{'common.about'}"
+  contact: "@:{'common.contact'}"
+  blog: "@:{'common.blog'}"
+  notes: "@:{'common.note'}"
+
+common:
   home: Home
+  about: About
+  contact: Contact
+  blog: Blog
+  note: Note | Notes
