@@ -3,9 +3,9 @@
   <button
     v-if="!link || (link && disabled)"
     v-bind="$attrs"
-    :type="buttonType"
+    :type="type"
     :disabled="disabled"
-    class="flex items-center justify-center font-bold"
+    class="disabled:opacity-50"
     :class="classes"
   >
     <slot />
@@ -13,7 +13,15 @@
   <!-- END "Regular" -->
 
   <!-- "Link" -->
-  <RouterLink v-else v-bind="$attrs" :to="link" class="flex items-center justify-center font-bold" :class="classes">
+  <RouterLink
+    v-else
+    v-bind="$attrs"
+    :to="link"
+    :replace="linkReplace"
+    :active-class="!linkActiveExact ? activeClasses : undefined"
+    :exact-active-class="linkActiveExact ? activeClasses : undefined"
+    :class="classes"
+  >
     <slot />
   </RouterLink>
   <!-- END "Link" -->
@@ -34,26 +42,34 @@
 
   const {
     link,
-    buttonType = 'button',
+    linkReplace,
+    linkActiveExact,
+    type = 'button',
     size = 'default',
-    unified = false,
+    unified,
     variant = 'flat',
     color = 'default',
-    disabled = false,
+    active,
+    disabled,
   } = defineProps<{
+    // `link` specific props.
     link?: RouteLocationRaw;
-    buttonType?: ButtonType;
+    linkReplace?: boolean;
+    linkActiveExact?: boolean;
+    // Shared props.
+    type?: ButtonType;
     size?: Size;
     unified?: boolean;
     variant?: Variant;
     color?: Color;
+    active?: boolean;
     disabled?: boolean;
   }>();
 
   /* ----------------------------------------------------------------
   Icon + Size classes
   ---------------------------------------------------------------- */
-  const unifiedWithSizeClasses = computed<string>(() => {
+  const unifiedWithSizeClasses = computed<string | undefined>(() => {
     if (!unified) {
       switch (size) {
         case 'sm':
@@ -63,7 +79,7 @@
         case 'lg':
           return 'px-[14px] py-[10px] space-x-[10px] text-lg';
         default:
-          return '';
+          return undefined;
       }
     } else {
       switch (size) {
@@ -74,7 +90,7 @@
         case 'lg':
           return 'p-[10px] space-x-[10px] text-lg';
         default:
-          return '';
+          return undefined;
       }
     }
   });
@@ -82,7 +98,7 @@
   /* ----------------------------------------------------------------
   Variant + Color classes
   ---------------------------------------------------------------- */
-  const variantWithColorClasses = computed<string>(() => {
+  const variantWithColorClasses = computed<string | undefined>(() => {
     switch (variant) {
       case 'flat':
         switch (color) {
@@ -99,7 +115,7 @@
           case 'error':
             return 'dark:text-error-dark-default';
           default:
-            return '';
+            return undefined;
         }
       case 'outlined': {
         const base = 'border border-current rounded-lg';
@@ -118,7 +134,7 @@
           case 'error':
             return `${base} dark:text-error-dark-default`;
           default:
-            return '';
+            return undefined;
         }
       }
 
@@ -137,25 +153,38 @@
           case 'error':
             return 'dark:text-foreground-dark-default dark:bg-error-dark-default';
           default:
-            return '';
+            return undefined;
         }
 
       default:
-        return '';
+        return undefined;
     }
   });
 
   /* ----------------------------------------------------------------
-  Disabled classes
+  Active classes
   ---------------------------------------------------------------- */
-  const disabledClasses = computed<string>(() => (disabled ? 'opacity-50' : ''));
+  const activeClasses = computed<string | undefined>(() => {
+    switch (variant) {
+      case 'flat':
+        switch (color) {
+          case 'default':
+            return 'dark:text-primary-dark-default';
+          default:
+            return undefined;
+        }
+      default:
+        return undefined;
+    }
+  });
 
   /* ----------------------------------------------------------------
   Classes
   ---------------------------------------------------------------- */
-  const classes = computed(
-    () => `${unifiedWithSizeClasses.value} ${variantWithColorClasses.value} ${disabledClasses.value}`
-  );
+  const classes = computed(() => [
+    'flex items-center justify-center font-bold ',
+    unifiedWithSizeClasses.value,
+    variantWithColorClasses.value,
+    active ? activeClasses.value : undefined,
+  ]);
 </script>
-
-<style scoped></style>
