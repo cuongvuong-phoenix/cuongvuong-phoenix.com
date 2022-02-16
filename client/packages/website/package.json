@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vcp-web-client/ui": "workspace:*",
     "@vueuse/core": "^7.6.2",
     "@vueuse/head": "^0.7.5",
     "nprogress": "^0.2.0",

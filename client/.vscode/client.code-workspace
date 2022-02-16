@@ -5,6 +5,11 @@
       "path": ".."
     },
     {
+      "name": "ui",
+      "path": "../packages/ui"
+    },
+    {
+      "name": "website",
       "path": "../packages/website"
     }
   ],
