@@ -12,16 +12,19 @@ export const routes: RouteRecordRaw[] = [
         path: '',
         name: RouteName.HOME,
         component: Home,
+        meta: {
+          dimHeader: true,
+        },
       },
       {
         path: 'about',
         name: RouteName.ABOUT,
-        component: Home,
+        component: () => import('~/pages/About.vue'),
       },
       {
         path: 'contact',
         name: RouteName.CONTACT,
-        component: Home,
+        component: () => import('~/pages/Contact.vue'),
       },
       {
         path: 'blog',
@@ -31,7 +34,7 @@ export const routes: RouteRecordRaw[] = [
       {
         path: 'notes',
         name: RouteName.NOTES,
-        component: Home,
+        component: () => import('~/pages/Notes.vue'),
       },
     ],
   },
