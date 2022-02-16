@@ -1,11 +1,20 @@
 {
-    "name": "@vcp-web-client/ui",
-    "version": "0.0.0",
-    "private": true,
-    "author": "Cuong Vuong Chi",
-    "devDependencies": {
-        "typescript": "^4.5.5",
-        "vue": "^3.2.31",
-        "vue-tsc": "^0.31.4"
-    }
+  "name": "@vcp-web-client/ui",
+  "version": "0.0.0",
+  "private": true,
+  "author": "Cuong Vuong Chi",
+  "scripts": {
+    "dev": "postcss src/assets/index.css --output dist/assets/index.css --watch",
+    "build": "postcss src/assets/index.css --output dist/assets/index.css"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.6",
+    "postcss-cli": "^9.1.0",
+    "postcss-import": "^14.0.2",
+    "tailwindcss": "^3.0.22",
+    "typescript": "^4.5.5",
+    "vue": "^3.2.31",
+    "vue-tsc": "^0.31.4"
+  }
 }

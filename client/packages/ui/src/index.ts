@@ -1,1 +1,2 @@
-export { default as UButton } from './components/UButton.vue'
+export * from './components';
+export * from './utils';
