@@ -33,6 +33,12 @@ module.exports = {
           default: colors.rose[500],
         },
       },
+
+      fontFamily: {
+        sans: "'IBM Plex Sans', sans-serif",
+        serif: "'IBM Plex Serif', serif",
+      },
+
       // Customize from official styles
       // (https://github.com/tailwindlabs/tailwindcss-typography/blob/master/src/styles.js)
       typography: (theme) => ({
