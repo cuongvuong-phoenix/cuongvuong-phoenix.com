@@ -2,7 +2,7 @@
   <div
     class="fixed inset-x-0 top-0"
     :class="{
-      'bg-foreground-dark-default/5': uiStore.headerFloat,
+      'bg-foreground-dark-default/5': !route.meta.dimHeader,
     }"
   >
     <div class="container flex items-center justify-between h-24 mx-auto space-x-8">
@@ -30,13 +30,15 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, shallowRef } from 'vue';
+  import { shallowRef } from 'vue';
+  import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useDark } from '@vueuse/core';
   import { UButton } from '@vcp-web-client/ui';
   import { useUiStore } from '~/store/ui';
   import { RouteName } from '~/utils/constants';
 
+  const route = useRoute();
   const { t } = useI18n();
   const uiStore = useUiStore();
 
