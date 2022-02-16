@@ -182,7 +182,7 @@
   Classes
   ---------------------------------------------------------------- */
   const classes = computed(() => [
-    'flex items-center justify-center font-bold ',
+    'flex items-center justify-center font-bold transition duration-300',
     unifiedWithSizeClasses.value,
     variantWithColorClasses.value,
     active ? activeClasses.value : undefined,
