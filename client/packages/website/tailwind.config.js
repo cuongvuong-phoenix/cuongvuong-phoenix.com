@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   safelist: ['prose', 'dark:prose-light', 'mx-auto'],
@@ -5,6 +7,32 @@ module.exports = {
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
   theme: {
     extend: {
+      colors: {
+        'background-dark': {
+          default: `#20182B`,
+        },
+        'foreground-dark': {
+          default: colors.zinc[100],
+          darker: colors.zinc[400],
+          darkest: colors.zinc[600],
+        },
+        'primary-dark': {
+          default: colors.amber[400],
+          darker: colors.amber[500],
+        },
+        'secondary-dark': {
+          default: colors.pink[400],
+        },
+        'alternative-dark': {
+          default: colors.sky[600],
+        },
+        'success-dark': {
+          default: colors.emerald[400],
+        },
+        'error-dark': {
+          default: colors.rose[500],
+        },
+      },
       // Customize from official styles
       // (https://github.com/tailwindlabs/tailwindcss-typography/blob/master/src/styles.js)
       typography: (theme) => ({

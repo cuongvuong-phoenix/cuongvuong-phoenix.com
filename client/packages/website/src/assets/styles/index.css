@@ -30,14 +30,11 @@
   background: var(--scrollbar--thumb-hover);
 }
 
-html:not(.dark) {
-  @apply text-gray-800 bg-white;
-}
-
-html.dark {
+/* TODO: Implement light theme */
+html {
   --scrollbar--bg: theme('colors.gray.800');
   --scrollbar--thumb: theme('colors.gray.600');
   --scrollbar--thumb-hover: theme('colors.gray.500');
 
-  @apply text-gray-300 bg-gray-900;
+  @apply text-foreground-dark-default bg-background-dark-default;
 }
