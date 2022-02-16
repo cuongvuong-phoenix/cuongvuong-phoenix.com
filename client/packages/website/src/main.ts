@@ -1,11 +1,13 @@
 import { createApp } from 'vue';
 import { createHead } from '@vueuse/head';
+import messages from '@intlify/vite-plugin-vue-i18n/messages';
 import NProgress from 'nprogress';
 import App from '~/App.vue';
 import { router } from '~/router';
 import { store } from '~/store';
 import { setupI18n } from '~/locales';
-import '~/assets/styles/main.css';
+import '@vcp-web-client/ui/css';
+import '~/assets/styles/index.css';
 
 const app = createApp(App);
 
@@ -18,7 +20,7 @@ router.afterEach(() => {
 });
 
 // vue-i18n.
-const i18n = setupI18n(router);
+const i18n = setupI18n(router, messages);
 
 // @vueuse/head.
 const head = createHead();

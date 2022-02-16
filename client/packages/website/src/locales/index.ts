@@ -1,6 +1,6 @@
 import { createI18n } from 'vue-i18n';
 import { type Router } from 'vue-router';
-import { DEFAULT_LOCALE, type I18n, LOCALES, loadLocaleMessage, setI18nLocale } from '~/locales/utils';
+import { DEFAULT_LOCALE, type I18n, LOCALES, setI18nLocale } from '~/locales/utils';
 import { RouteNameNotProvidedError } from '~/errors';
 
 export * from '~/locales/utils';
@@ -21,19 +21,15 @@ function setupRouterForI18n(i18n: I18n, router: Router) {
       return { name, params: { ...params, locale: DEFAULT_LOCALE }, query, hash };
     }
 
-    // Only load if not exist.
-    if (!i18n.global.availableLocales.includes(locale)) {
-      await loadLocaleMessage(i18n, locale);
-    }
-
     setI18nLocale(i18n, locale);
   });
 }
 
-export function setupI18n(router: Router) {
+export function setupI18n(router: Router, messages: any) {
   const i18n = createI18n({
     legacy: false,
     fallbackLocale: DEFAULT_LOCALE,
+    messages,
     missingWarn: false,
     fallbackWarn: false,
   }) as I18n;
