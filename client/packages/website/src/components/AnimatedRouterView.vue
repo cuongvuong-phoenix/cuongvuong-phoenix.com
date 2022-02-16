@@ -8,7 +8,11 @@
         leave-active-class="transition-opacity duration-200 ease-in"
         leave-to-class="opacity-0"
       >
-        <component :is="Component" />
+        <KeepAlive>
+          <Suspense>
+            <component :is="Component" />
+          </Suspense>
+        </KeepAlive>
       </transition>
     </template>
   </RouterView>
