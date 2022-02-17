@@ -31,10 +31,10 @@ module.exports = {
     ---------------------------------------------------------------- */
     extend: {
       colors: {
-        'background-dark': {
+        'bg-dark': {
           default: `#20182B`,
         },
-        'foreground-dark': {
+        'fg-dark': {
           default: colors.zinc[100],
           darker: colors.zinc[400],
           darkest: colors.zinc[600],

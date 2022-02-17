@@ -141,17 +141,17 @@
       case 'full':
         switch (color) {
           case 'default':
-            return 'dark:text-background-dark-default dark:bg-foreground-dark-default';
+            return 'dark:text-bg-dark-default dark:bg-fg-dark-default';
           case 'primary':
-            return 'dark:text-background-dark-default dark:bg-primary-dark-default';
+            return 'dark:text-bg-dark-default dark:bg-primary-dark-default';
           case 'secondary':
-            return 'dark:text-background-dark-default dark:bg-secondary-dark-default';
+            return 'dark:text-bg-dark-default dark:bg-secondary-dark-default';
           case 'alternative':
-            return 'dark:text-background-dark-default dark:bg-alternative-dark-default';
+            return 'dark:text-bg-dark-default dark:bg-alternative-dark-default';
           case 'success':
-            return 'dark:text-background-dark-default dark:bg-success-dark-default';
+            return 'dark:text-bg-dark-default dark:bg-success-dark-default';
           case 'error':
-            return 'dark:text-foreground-dark-default dark:bg-error-dark-default';
+            return 'dark:text-fg-dark-default dark:bg-error-dark-default';
           default:
             return undefined;
         }

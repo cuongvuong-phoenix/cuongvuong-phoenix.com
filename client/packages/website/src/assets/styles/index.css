@@ -39,5 +39,5 @@ html.dark {
   --scrollbar--thumb: theme('colors.gray.600');
   --scrollbar--thumb-hover: theme('colors.gray.500');
 
-  @apply font-sans text-foreground-dark-default bg-background-dark-default;
+  @apply font-sans text-fg-dark-default bg-bg-dark-default;
 }
