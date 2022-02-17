@@ -5,7 +5,13 @@ module.exports = {
   safelist: ['prose', 'dark:prose-light', 'mx-auto'],
   darkMode: 'class',
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms'), require('@tailwindcss/line-clamp')],
+  corePlugins: {
+    container: false,
+  },
   theme: {
+    /* ----------------------------------------------------------------
+    Overriding
+    ---------------------------------------------------------------- */
     screens: {
       '3xl': { max: '1920px' },
       '2xl': { max: '1536px' },
