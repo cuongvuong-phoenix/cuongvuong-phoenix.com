@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="py-12"
-    :class="{
-      'dark:bg-fg-dark-default/5': !route.meta.dimHeaderFooter,
-    }"
-  >
+  <div class="py-12">
     <div class="container flex items-center justify-between mx-auto space-x-8">
       <!-- "Left" -->
       <i18n-t keypath="footer.about" tag="p" class="dark:text-fg-dark-darker">
