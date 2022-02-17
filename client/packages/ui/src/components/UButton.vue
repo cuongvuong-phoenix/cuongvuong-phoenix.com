@@ -12,6 +12,12 @@
   </button>
   <!-- END "Regular" -->
 
+  <!-- "External Link" -->
+  <a v-else-if="isExternalLink" v-bind="$attrs" :href="(link as string)" target="_blank" :class="classes">
+    <slot />
+  </a>
+  <!-- END "External Link" -->
+
   <!-- "Link" -->
   <RouterLink
     v-else
@@ -47,6 +53,7 @@
     type = 'button',
     size = 'default',
     unified,
+    rounded,
     variant = 'flat',
     color = 'default',
     active,
@@ -60,11 +67,17 @@
     type?: ButtonType;
     size?: Size;
     unified?: boolean;
+    rounded?: boolean;
     variant?: Variant;
     color?: Color;
     active?: boolean;
     disabled?: boolean;
   }>();
+
+  /* ----------------------------------------------------------------
+  Link
+  ---------------------------------------------------------------- */
+  const isExternalLink = computed(() => typeof link === 'string' && link.startsWith('http'));
 
   /* ----------------------------------------------------------------
   Icon + Size classes
@@ -98,28 +111,17 @@
   /* ----------------------------------------------------------------
   Variant + Color classes
   ---------------------------------------------------------------- */
-  const variantWithColorClasses = computed<string | undefined>(() => {
+  const variantWithRoundedWithColorClasses = computed<string | undefined>(() => {
+    let base;
+
+    if (!rounded) {
+      base = 'rounded-lg';
+    } else {
+      base = 'rounded-full';
+    }
+
     switch (variant) {
       case 'flat':
-        switch (color) {
-          case 'default':
-            return 'dark:hover:text-primary-dark-darker';
-          case 'primary':
-            return 'dark:text-primary-dark-default';
-          case 'secondary':
-            return 'dark:text-secondary-dark-default';
-          case 'alternative':
-            return 'dark:text-alternative-dark-default';
-          case 'success':
-            return 'dark:text-success-dark-default';
-          case 'error':
-            return 'dark:text-error-dark-default';
-          default:
-            return undefined;
-        }
-      case 'outlined': {
-        const base = 'border border-current rounded-lg';
-
         switch (color) {
           case 'default':
             return `${base} dark:hover:text-primary-dark-darker`;
@@ -136,25 +138,45 @@
           default:
             return undefined;
         }
-      }
+      case 'outlined': {
+        const baseOutlined = 'border border-current';
 
-      case 'full':
         switch (color) {
           case 'default':
-            return 'dark:text-bg-dark-default dark:bg-fg-dark-default';
+            return `${base} ${baseOutlined} dark:hover:text-primary-dark-darker`;
           case 'primary':
-            return 'dark:text-bg-dark-default dark:bg-primary-dark-default';
+            return `${base} ${baseOutlined} dark:text-primary-dark-default`;
           case 'secondary':
-            return 'dark:text-bg-dark-default dark:bg-secondary-dark-default';
+            return `${base} ${baseOutlined} dark:text-secondary-dark-default`;
           case 'alternative':
-            return 'dark:text-bg-dark-default dark:bg-alternative-dark-default';
+            return `${base} ${baseOutlined} dark:text-alternative-dark-default`;
           case 'success':
-            return 'dark:text-bg-dark-default dark:bg-success-dark-default';
+            return `${base} ${baseOutlined} dark:text-success-dark-default`;
           case 'error':
-            return 'dark:text-fg-dark-default dark:bg-error-dark-default';
+            return `${base} ${baseOutlined} dark:text-error-dark-default`;
           default:
             return undefined;
         }
+      }
+
+      case 'full': {
+        switch (color) {
+          case 'default':
+            return `${base} dark:text-bg-dark-default dark:bg-fg-dark-default dark:hover:bg-primary-dark-darker`;
+          case 'primary':
+            return `${base} dark:text-bg-dark-default dark:bg-primary-dark-default dark:hover:bg-primary-dark-darker`;
+          case 'secondary':
+            return `${base} dark:text-bg-dark-default dark:bg-secondary-dark-default`;
+          case 'alternative':
+            return `${base} dark:text-bg-dark-default dark:bg-alternative-dark-default`;
+          case 'success':
+            return `${base} dark:text-bg-dark-default dark:bg-success-dark-default`;
+          case 'error':
+            return `${base} dark:text-fg-dark-default dark:bg-error-dark-default`;
+          default:
+            return undefined;
+        }
+      }
 
       default:
         return undefined;
@@ -191,7 +213,7 @@
   const classes = computed(() => [
     'flex items-center justify-center font-bold transition duration-300',
     unifiedWithSizeClasses.value,
-    variantWithColorClasses.value,
+    variantWithRoundedWithColorClasses.value,
     active ? activeClasses.value : undefined,
   ]);
 </script>
