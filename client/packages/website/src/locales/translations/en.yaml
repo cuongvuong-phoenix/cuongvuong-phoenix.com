@@ -8,11 +8,25 @@ nav:
 footer:
   about: Designed and developed by {0}.{1}Built with {2}.
 
+pages:
+  home:
+    kebab-sections:
+      biography: "@:{'common.biography'}"
+      contact: "@:{'common.contact'}"
+      years-of-experience: Years of experience
+      blog: "@:{'common.blog'}"
+      notes: "@:{'common.note'}"
+
 common:
   whoami: Cuong Vuong
+  my-expertise: Fullstack Developer & UI/UX Designer
 
   home: Home
   about: About
   contact: Contact
   blog: Blog
   note: Note | Notes
+
+  biography: Biography
+
+  avatar: Avatar

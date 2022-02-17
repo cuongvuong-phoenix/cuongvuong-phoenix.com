@@ -1,7 +1,12 @@
 <template>
   <WHeader />
 
-  <div class="container mx-auto mt-24">
+  <div
+    class="container mx-auto"
+    :class="{
+      'mt-24': !route.meta.dimHeaderFooter,
+    }"
+  >
     <RouterView />
   </div>
 
