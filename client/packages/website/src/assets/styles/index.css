@@ -1,4 +1,6 @@
-@import './tailwind.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 @import './nprogress.css';
 @import './layout.css';
 @import './forms';
