@@ -34,7 +34,7 @@
 }
 
 /* TODO: Implement light theme */
-html {
+html.dark {
   --scrollbar--bg: theme('colors.gray.800');
   --scrollbar--thumb: theme('colors.gray.600');
   --scrollbar--thumb-hover: theme('colors.gray.500');

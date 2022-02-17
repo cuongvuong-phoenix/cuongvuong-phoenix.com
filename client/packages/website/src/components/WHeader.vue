@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-      'fixed inset-x-0 top-0 bg-foreground-dark-default/5': !route.meta.dimHeaderFooter,
+      'fixed inset-x-0 top-0 dark:bg-foreground-dark-default/5': !route.meta.dimHeaderFooter,
     }"
   >
     <div class="container flex items-center justify-between h-24 mx-auto space-x-8">
@@ -14,7 +14,7 @@
       <!-- END "Left" -->
 
       <!-- "Middle" -->
-      <div class="flex-shrink-0 w-16 h-16 border rounded-full border-foreground-dark-default"></div>
+      <div class="flex-shrink-0 w-16 h-16 border rounded-full dark:border-foreground-dark-default"></div>
       <!-- END "Middle" -->
 
       <!-- "Right" -->
