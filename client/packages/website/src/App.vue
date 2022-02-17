@@ -1,12 +1,14 @@
 <template>
   <WHeader />
 
-  <RouterView
-    class="container mx-auto"
+  <div
+    class="container py-16 mx-auto"
     :class="{
       'mt-24': !route.meta.dimHeaderFooter,
     }"
-  />
+  >
+    <RouterView />
+  </div>
 
   <WFooter />
 </template>

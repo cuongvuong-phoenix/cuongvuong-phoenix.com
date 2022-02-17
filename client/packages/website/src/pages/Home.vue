@@ -1,7 +1,7 @@
 <!-- TestComponent.vue -->
 
 <template>
-  <div class="py-16">
+  <div>
     <!-- "Top" -->
     <div class="font-serif font-bold text-center">
       <h1 class="text-5xl">{{ t('common.whoami') }}</h1>
