@@ -14,7 +14,11 @@
       <!-- END "Left" -->
 
       <!-- "Middle" -->
-      <div class="flex-shrink-0 w-16 h-16 border rounded-full dark:border-fg-dark-default"></div>
+      <UButton
+        :link="{ name: RouteName.HOME }"
+        variant="outlined"
+        class="flex-shrink-0 w-16 h-16 rounded-full"
+      ></UButton>
       <!-- END "Middle" -->
 
       <!-- "Right" -->
@@ -34,12 +38,10 @@
   import { useI18n } from 'vue-i18n';
   import { useDark } from '@vueuse/core';
   import { UButton } from '@vcp-web-client/ui';
-  import { useUiStore } from '~/store/ui';
   import { RouteName } from '~/utils/constants';
 
   const route = useRoute();
   const { t } = useI18n();
-  const uiStore = useUiStore();
 
   /* ----------------------------------------------------------------
   Dark theme

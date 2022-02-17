@@ -122,7 +122,7 @@
 
         switch (color) {
           case 'default':
-            return base;
+            return `${base} dark:hover:text-primary-dark-darker`;
           case 'primary':
             return `${base} dark:text-primary-dark-default`;
           case 'secondary':
