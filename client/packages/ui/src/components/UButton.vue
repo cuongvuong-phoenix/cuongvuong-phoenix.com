@@ -173,6 +173,13 @@
           default:
             return undefined;
         }
+      case 'outlined':
+        switch (color) {
+          case 'default':
+            return 'dark:text-bg-dark-default dark:bg-primary-dark-default dark:hover:text-bg-dark-default dark:hover:bg-primary-dark-darker';
+          default:
+            return undefined;
+        }
       default:
         return undefined;
     }
