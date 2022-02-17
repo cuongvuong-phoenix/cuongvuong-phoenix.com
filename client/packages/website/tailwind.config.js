@@ -4,8 +4,25 @@ module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   safelist: ['prose', 'dark:prose-light', 'mx-auto'],
   darkMode: 'class',
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms'), require('@tailwindcss/line-clamp')],
   theme: {
+    screens: {
+      '3xl': { max: '1920px' },
+      '2xl': { max: '1536px' },
+      'xl': { max: '1280px' },
+      'lg': { max: '1024px' },
+      'md': { max: '768px' },
+      'sm': { max: '640px' },
+    },
+
+    fontFamily: {
+      sans: "'IBM Plex Sans', sans-serif",
+      serif: "'IBM Plex Serif', serif",
+    },
+
+    /* ----------------------------------------------------------------
+    Extending
+    ---------------------------------------------------------------- */
     extend: {
       colors: {
         'background-dark': {
@@ -32,11 +49,6 @@ module.exports = {
         'error-dark': {
           default: colors.rose[500],
         },
-      },
-
-      fontFamily: {
-        sans: "'IBM Plex Sans', sans-serif",
-        serif: "'IBM Plex Serif', serif",
       },
 
       // Customize from official styles

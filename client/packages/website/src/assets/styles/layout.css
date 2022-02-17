@@ -1,0 +1,27 @@
+.container {
+  @apply max-w-[2240px] px-80;
+
+  @screen 3xl {
+    @apply max-w-[1728px] px-64;
+  }
+
+  @screen 2xl {
+    @apply max-w-[1408px] px-48;
+  }
+
+  @screen xl {
+    @apply max-w-[1152px] px-32;
+  }
+
+  @screen lg {
+    @apply max-w-[896px] px-24;
+  }
+
+  @screen md {
+    @apply max-w-[704px] px-14;
+  }
+
+  @screen sm {
+    @apply max-w-[608px] px-4;
+  }
+}
