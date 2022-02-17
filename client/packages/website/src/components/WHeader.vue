@@ -6,7 +6,7 @@
   >
     <div class="container flex items-center justify-between h-24 mx-auto space-x-8">
       <!-- "Left" -->
-      <div class="flex space-x-12">
+      <div class="flex flex-1 space-x-12">
         <UButton v-for="nav in leftNavs" :key="nav" :link="{ name: nav }" size="lg" class="!p-0">
           {{ t(`nav.${nav}`) }}
         </UButton>
@@ -14,11 +14,11 @@
       <!-- END "Left" -->
 
       <!-- "Middle" -->
-      <div class="w-16 h-16 border rounded-full border-foreground-dark-default"></div>
+      <div class="flex-shrink-0 w-16 h-16 border rounded-full border-foreground-dark-default"></div>
       <!-- END "Middle" -->
 
       <!-- "Right" -->
-      <div class="flex justify-end space-x-12">
+      <div class="flex justify-end flex-1 space-x-12">
         <UButton v-for="nav in rightNavs" :key="nav" :link="{ name: nav }" size="lg" class="!p-0">
           {{ t(`nav.${nav}`) }}
         </UButton>
