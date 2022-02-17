@@ -12,15 +12,15 @@
       <!-- "Right" -->
       <div class="flex items-center space-x-1">
         <UButton link="https://github.com/vuong-cuong-phoenix" size="lg" unified rounded>
-          <i-mdi-github class="square-lg" />
+          <i-mdi-github class="square-7" />
         </UButton>
 
         <UButton link="https://www.facebook.com/vuongcuong.phoenix/" size="lg" unified rounded>
-          <i-mdi-facebook class="square-lg" />
+          <i-mdi-facebook class="square-7" />
         </UButton>
 
         <UButton link="https://www.linkedin.com/in/vuong-cuong-phoenix/" size="lg" unified rounded>
-          <i-mdi-linkedin class="square-lg" />
+          <i-mdi-linkedin class="square-7" />
         </UButton>
       </div>
       <!-- END "Right" -->

@@ -1,13 +1,8 @@
-.square {
-  &-default {
-    @apply w-6 h-6;
-  }
-
-  &-sm {
-    @apply w-5 h-5;
-  }
-
-  &-lg {
-    @apply w-7 h-7;
+a,
+button,
+select,
+input[type='number'] {
+  &:focus {
+    @apply outline-none dark:border-primary-dark-darker ring dark:ring-primary-dark-darker/40;
   }
 }
