@@ -1,7 +1,7 @@
 module.exports = {
   plugins: {
-    'postcss-import': {},
     'postcss-at-rules-variables': {},
+    'postcss-import': {},
     'postcss-for': {},
     'tailwindcss/nesting': {},
     'tailwindcss': {},
