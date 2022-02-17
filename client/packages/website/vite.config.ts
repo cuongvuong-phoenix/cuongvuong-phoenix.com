@@ -1,9 +1,6 @@
 import * as path from 'path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import components from 'unplugin-vue-components/vite';
-import icons from 'unplugin-icons/vite';
-import iconsResolver from 'unplugin-icons/resolver';
 import purgeIcons from 'vite-plugin-purge-icons';
 import vueI18n from '@intlify/vite-plugin-vue-i18n';
 
@@ -21,14 +18,6 @@ export default defineConfig({
     vue({
       include: [/\.vue$/, /\.md$/],
       reactivityTransform: true,
-    }),
-    components({
-      dirs: [],
-      resolvers: [iconsResolver()],
-      dts: path.resolve(__dirname, 'src/types/components.d.ts'),
-    }),
-    icons({
-      scale: 1.5,
     }),
     purgeIcons(),
     vueI18n({

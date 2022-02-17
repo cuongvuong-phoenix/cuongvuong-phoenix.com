@@ -10,17 +10,15 @@
       <!-- END "Left" -->
 
       <!-- "Right" -->
-      <div class="flex items-center space-x-1">
-        <UButton link="https://github.com/vuong-cuong-phoenix" size="lg" unified rounded>
-          <i-mdi-github class="square-7" />
-        </UButton>
-
-        <UButton link="https://www.facebook.com/vuongcuong.phoenix/" size="lg" unified rounded>
-          <i-mdi-facebook class="square-7" />
-        </UButton>
-
-        <UButton link="https://www.linkedin.com/in/vuong-cuong-phoenix/" size="lg" unified rounded>
-          <i-mdi-linkedin class="square-7" />
+      <div class="flex items-center space-x-2">
+        <UButton
+          v-for="socialNetwork in socialNetworks"
+          :key="socialNetwork.href"
+          :link="socialNetwork.href"
+          unified
+          rounded
+        >
+          <WIcon :icon="socialNetwork.icon" class="square-7" />
         </UButton>
       </div>
       <!-- END "Right" -->
@@ -29,10 +27,31 @@
 </template>
 
 <script setup lang="ts">
-  import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { UButton } from '@vcp-web-client/ui';
+  import WIcon from '~/components/WIcon.vue';
 
-  const route = useRoute();
   const { t } = useI18n();
+
+  /* ----------------------------------------------------------------
+  Social Networks
+  ---------------------------------------------------------------- */
+  interface SocialNetwork {
+    href: string;
+    icon: string;
+  }
+  const socialNetworks = [
+    {
+      href: 'https://github.com/vuong-cuong-phoenix',
+      icon: 'mdi:github',
+    },
+    {
+      href: 'https://www.facebook.com/vuongcuong.phoenix/',
+      icon: 'mdi:facebook',
+    },
+    {
+      href: 'https://www.linkedin.com/in/vuong-cuong-phoenix/',
+      icon: 'mdi:linkedin',
+    },
+  ] as SocialNetwork[];
 </script>
