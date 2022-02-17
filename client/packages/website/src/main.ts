@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import { createHead } from '@vueuse/head';
 import messages from '@intlify/vite-plugin-vue-i18n/messages';
+import '@purge-icons/generated';
 import NProgress from 'nprogress';
 import App from '~/App.vue';
 import { router } from '~/router';
