@@ -4,6 +4,7 @@
 @import './nprogress.css';
 @import './layout.css';
 @import './forms';
+@import './components.css';
 
 :root {
   --scrollbar--bg: theme('colors.gray.200');

@@ -2,13 +2,7 @@ a,
 button,
 select,
 input[type='number'] {
-  @apply bg-transparent rounded-lg;
-
   &:focus {
     @apply outline-none dark:border-primary-dark-darker ring dark:ring-primary-dark-darker/40;
   }
-}
-
-input[type='number'] {
-  @apply px-3 py-2 border border-current;
 }

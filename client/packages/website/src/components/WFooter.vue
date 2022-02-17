@@ -10,17 +10,17 @@
       <!-- END "Left" -->
 
       <!-- "Right" -->
-      <div class="flex items-center">
-        <UButton link="https://github.com/vuong-cuong-phoenix" unified>
-          <i-mdi-github />
+      <div class="flex items-center space-x-1">
+        <UButton link="https://github.com/vuong-cuong-phoenix" size="lg" unified rounded>
+          <i-mdi-github class="square-lg" />
         </UButton>
 
-        <UButton link="https://www.facebook.com/vuongcuong.phoenix/" unified>
-          <i-mdi-facebook />
+        <UButton link="https://www.facebook.com/vuongcuong.phoenix/" size="lg" unified rounded>
+          <i-mdi-facebook class="square-lg" />
         </UButton>
 
-        <UButton link="https://www.linkedin.com/in/vuong-cuong-phoenix/" unified>
-          <i-mdi-linkedin />
+        <UButton link="https://www.linkedin.com/in/vuong-cuong-phoenix/" size="lg" unified rounded>
+          <i-mdi-linkedin class="square-lg" />
         </UButton>
       </div>
       <!-- END "Right" -->
