@@ -16,17 +16,32 @@ pages:
       years-of-experience: Years of experience
       blog: "@:{'common.blog'}"
       notes: "@:{'common.note'}"
+  blog:
+    filters:
+      by-tags: "By @.lower:{'common.tag'}"
 
 common:
   whoami: Cuong Vuong
   my-expertise: Fullstack Developer & UI/UX Designer
+  avatar: Avatar
 
   home: Home
   about: About
-  contact: Contact
-  blog: Blog
-  note: Note | Notes
-
   biography: Biography
 
-  avatar: Avatar
+  contact: Contact
+  note: Note | Notes
+
+  blog: Blog
+  post: Post | Posts | {count} Posts
+
+  total: Total
+
+  sort: Sort
+  updated: Updated
+  created: Created
+  relevance: Relevance
+  reading-time: Reading Time
+
+  filter: Filter | Filters
+  tag: Tag | Tags
