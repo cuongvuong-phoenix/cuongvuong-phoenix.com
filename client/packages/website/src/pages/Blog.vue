@@ -24,7 +24,7 @@
         <!-- END "Total results count" -->
 
         <!-- "Sort" -->
-        <div class="flex items-center space-x-4 overflow-ellipsis">
+        <div class="flex items-center space-x-4">
           <div class="flex items-center flex-1 min-w-0">
             <span class="font-bold text-fg-darker">{{ t('common.sort').toUpperCase() }}:&nbsp;</span>
 

@@ -24,7 +24,7 @@
         :link="{ name: RouteName.HOME }"
         variant="outlined"
         link-active-exact
-        class="flex-shrink-0 w-16 h-16 rounded-full"
+        class="shrink-0 w-16 h-16 rounded-full"
       ></UButton>
       <!-- END "Middle" -->
 

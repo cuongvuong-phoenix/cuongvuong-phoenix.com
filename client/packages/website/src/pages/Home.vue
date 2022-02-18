@@ -10,7 +10,7 @@
     <!-- "Next" -->
     <div class="flex justify-between mt-16 space-x-32">
       <!-- "Left" -->
-      <div class="flex flex-col justify-between flex-1">
+      <div class="flex flex-col justify-between flex-1 min-w-0">
         <div v-for="section in leftKebabSections" :key="section.label">
           <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
           <div class="mt-4 font-serif text-xl font-medium line-clamp-5">{{ section.body }}</div>
@@ -20,7 +20,7 @@
 
       <!-- "Middle" -->
       <div
-        class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring hover:ring-primary-default"
+        class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring-primary-default"
       >
         <div class="w-full h-full rounded-[8rem] border border-fg-darkest overflow-hidden">
           <img :src="avatarUrl" :alt="t('common.avatar')" class="object-cover w-full h-full" />
@@ -29,10 +29,10 @@
       <!-- END "Middle" -->
 
       <!-- "Right" -->
-      <div class="flex flex-col justify-between flex-1">
+      <div class="flex flex-col justify-between flex-1 min-w-0">
         <div v-for="section in rightKebabSections" :key="section.label" class="text-right">
           <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
-          <div class="mt-4 font-serif text-5xl font-medium text-ellipsis">{{ section.body }}</div>
+          <div class="mt-4 font-serif text-5xl font-medium truncate">{{ section.body }}</div>
         </div>
       </div>
       <!-- END "Right" -->
