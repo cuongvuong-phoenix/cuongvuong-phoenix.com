@@ -7,8 +7,8 @@ import App from '~/App.vue';
 import { router } from '~/router';
 import { store } from '~/store';
 import { setupI18n } from '~/locales';
-import '@vcp-web-client/ui/css';
 import '~/assets/styles/index.css';
+import '@vcp-web-client/ui/css';
 
 const app = createApp(App);
 
