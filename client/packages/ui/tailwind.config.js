@@ -10,7 +10,8 @@ module.exports = {
     extend: {
       colors: {
         bg: {
-          default: `#20182B`,
+          default: '#20182B',
+          lighter: '#2b2436',
         },
         fg: {
           default: colors.zinc[100],
