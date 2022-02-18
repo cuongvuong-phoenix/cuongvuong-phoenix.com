@@ -1,14 +1,13 @@
 <template>
   <div
     :class="{
-      'fixed inset-x-0 backdrop-blur-xl z-10 border-b dark:border-fg-dark-darkest duration-500':
+      'fixed inset-x-0 z-10 backdrop-blur-xl transition-[top] duration-500 border-b dark:border-fg-dark-darkest':
         !route.meta.staticHeader,
       'ease-out': !route.meta.staticHeader && scrolledOutDirection !== 'down',
       'ease-in': !route.meta.staticHeader && scrolledOutDirection === 'down',
     }"
     :style="{
-      'top': !route.meta.staticHeader ? (scrolledOutDirection !== 'down' ? 0 : 'calc(-6rem - 1px)') : undefined,
-      'transition-property': !route.meta.staticHeader ? 'top' : undefined,
+      top: !route.meta.staticHeader ? (scrolledOutDirection !== 'down' ? 0 : 'calc(-6rem - 1px)') : undefined,
     }"
   >
     <div class="container flex items-center justify-between h-24 mx-auto space-x-8">
