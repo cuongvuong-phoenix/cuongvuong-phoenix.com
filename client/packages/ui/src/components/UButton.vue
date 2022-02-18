@@ -34,28 +34,28 @@
 </template>
 
 <script lang="ts">
-  export const variants = ['flat', 'outlined', 'full'] as const;
-  export type Variant = typeof variants[number];
-
   export const buttonTypes = ['button', 'reset', 'submit'] as const;
   export type ButtonType = typeof buttonTypes[number];
+
+  export const buttonVariants = ['flat', 'outlined', 'full'] as const;
+  export type ButtonVariant = typeof buttonVariants[number];
 </script>
 
 <script setup lang="ts">
   import { computed } from 'vue';
   import { type RouteLocationRaw, RouterLink } from 'vue-router';
-  import { type Color, type Size } from '../utils/constants';
+  import { type Color, type Size, colors, sizes } from '../utils/constants';
 
   const {
     link,
     linkReplace,
     linkActiveExact,
-    type = 'button',
-    size = 'default',
+    type = buttonTypes[0],
+    size = sizes[0],
     unified,
     rounded,
-    variant = 'flat',
-    color = 'default',
+    variant = buttonVariants[0],
+    color = colors[0],
     active,
     disabled,
   } = defineProps<{
@@ -68,7 +68,7 @@
     size?: Size;
     unified?: boolean;
     rounded?: boolean;
-    variant?: Variant;
+    variant?: ButtonVariant;
     color?: Color;
     active?: boolean;
     disabled?: boolean;
@@ -211,7 +211,7 @@
   Classes
   ---------------------------------------------------------------- */
   const classes = computed(() => [
-    'inline-flex items-center justify-center font-bold focusible-default',
+    'inline-flex items-center justify-center font-bold focusible-visible',
     unifiedWithSizeClasses.value,
     variantWithRoundedWithColorClasses.value,
     active ? activeClasses.value : undefined,
