@@ -1,0 +1,13 @@
+{
+  "name": "@vcp-web-client/tailwind-plugins",
+  "version": "0.0.0",
+  "private": true,
+  "author": "Cuong Vuong Chi",
+  "main": "src/index.js",
+  "devDependencies": {
+    "tailwindcss": "^3.0.22"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.0.22"
+  }
+}

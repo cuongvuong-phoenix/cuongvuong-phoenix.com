@@ -5,6 +5,10 @@
       "path": ".."
     },
     {
+      "name": "tailwind-plugins",
+      "path": "../packages/tailwind-plugins"
+    },
+    {
       "name": "ui",
       "path": "../packages/ui"
     },
