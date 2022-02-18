@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@iconify/iconify": "^2.1.2",
+    "@vcp-web-client/tailwind-plugins": "workspace:*",
     "@vcp-web-client/ui": "workspace:*",
     "@vueuse/core": "^7.6.2",
     "@vueuse/head": "^0.7.5",
