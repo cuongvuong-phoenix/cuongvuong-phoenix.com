@@ -124,7 +124,7 @@
       case 'flat':
         switch (color) {
           case 'default':
-            return `${base} dark:hover:text-primary-dark-darker`;
+            return `${base} hover:dark:text-primary-dark-darker`;
           case 'primary':
             return `${base} dark:text-primary-dark-default`;
           case 'secondary':
@@ -143,7 +143,7 @@
 
         switch (color) {
           case 'default':
-            return `${base} ${baseOutlined} dark:hover:text-primary-dark-darker`;
+            return `${base} ${baseOutlined} hover:dark:text-primary-dark-darker`;
           case 'primary':
             return `${base} ${baseOutlined} dark:text-primary-dark-default`;
           case 'secondary':
@@ -162,9 +162,9 @@
       case 'full': {
         switch (color) {
           case 'default':
-            return `${base} dark:text-bg-dark-default dark:bg-fg-dark-default dark:hover:bg-primary-dark-darker`;
+            return `${base} dark:text-bg-dark-default dark:bg-fg-dark-default hover:dark:bg-primary-dark-darker`;
           case 'primary':
-            return `${base} dark:text-bg-dark-default dark:bg-primary-dark-default dark:hover:bg-primary-dark-darker`;
+            return `${base} dark:text-bg-dark-default dark:bg-primary-dark-default hover:dark:bg-primary-dark-darker`;
           case 'secondary':
             return `${base} dark:text-bg-dark-default dark:bg-secondary-dark-default`;
           case 'alternative':
@@ -198,7 +198,7 @@
       case 'outlined':
         switch (color) {
           case 'default':
-            return 'dark:text-bg-dark-default dark:bg-primary-dark-default dark:hover:text-bg-dark-default dark:hover:bg-primary-dark-darker';
+            return 'dark:text-bg-dark-default dark:bg-primary-dark-default hover:dark:text-bg-dark-default hover:dark:bg-primary-dark-darker';
           default:
             return undefined;
         }
