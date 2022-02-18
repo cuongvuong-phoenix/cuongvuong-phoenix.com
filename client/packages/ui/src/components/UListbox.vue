@@ -10,7 +10,7 @@
       class="inline-flex items-center justify-center w-full space-x-2 text-left"
       :class="[defaultButtonClasses, buttonClasses]"
     >
-      <UIcon v-if="buttonIconPrepended" :icon="buttonIconPrepended" class="shrink-0" />
+      <UIcon v-if="buttonIconPrepended" :icon="buttonIconPrepended" />
 
       <div
         class="flex-1 min-w-0 truncate"
@@ -22,7 +22,7 @@
         <template v-else>{{ buttonPlaceholder }} </template>
       </div>
 
-      <UIcon :icon="buttonIconAppended" class="shrink-0" />
+      <UIcon :icon="buttonIconAppended" />
     </ListboxButton>
     <!-- END "Button" -->
 
@@ -55,7 +55,7 @@
               'opacity-50': option.disabled,
             }"
           >
-            <UIcon v-if="option.icon" :icon="option.icon" class="shrink-0" />
+            <UIcon v-if="option.icon" :icon="option.icon" />
             <div
               class="flex-1"
               :class="{

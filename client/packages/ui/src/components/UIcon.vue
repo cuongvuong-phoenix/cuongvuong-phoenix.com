@@ -1,5 +1,5 @@
 <template>
-  <div ref="el" class="min-w-[1.5em] min-h-[1.5em]"></div>
+  <div ref="el" class="min-w-[1.5em] min-h-[1.5em] shrink-0"></div>
 </template>
 
 <script setup lang="ts">

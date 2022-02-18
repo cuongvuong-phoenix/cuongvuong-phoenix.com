@@ -14,15 +14,26 @@ const plugins = {
   whUtilities: ({ addUtilities, theme }) => {
     const spacings = Object.entries(theme('spacing'));
 
-    const wh = spacings.reduce((accum, [key, value]) => {
-      return {
+    const wh = spacings.reduce(
+      (accum, [key, value]) => ({
         ...accum,
+
         [`.wh-${key}`]: {
           width: value,
           height: value,
         },
-      };
-    }, {});
+        [`.min-wh-${key}`]: {
+          'min-width': value,
+          'min-height': value,
+        },
+
+        [`.max-wh-${key}`]: {
+          'max-width': value,
+          'max-height': value,
+        },
+      }),
+      {}
+    );
 
     addUtilities(wh);
   },
