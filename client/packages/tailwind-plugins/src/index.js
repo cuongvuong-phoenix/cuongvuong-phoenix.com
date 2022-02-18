@@ -23,14 +23,8 @@ const plugins = {
 
   focusibleComponents: ({ addComponents }) => {
     const states = [
-      {
-        name: 'default',
-        state: 'focus',
-      },
-      {
-        name: 'within',
-        state: 'focus-within',
-      },
+      { name: 'default', state: 'focus' },
+      { name: 'within', state: 'focus-within' },
     ];
 
     const focusible = states.reduce(

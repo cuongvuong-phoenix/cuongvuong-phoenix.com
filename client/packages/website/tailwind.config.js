@@ -3,7 +3,6 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   safelist: ['prose', 'dark:prose-light', 'mx-auto'],
-  darkMode: false,
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
