@@ -14,7 +14,7 @@
 
         <!-- "Total results count" -->
         <p>
-          <span class="font-bold text-fg-dark-darker">{{ t('common.total').toUpperCase() }}:</span>&nbsp;<span
+          <span class="font-bold text-fg-darker">{{ t('common.total').toUpperCase() }}:</span>&nbsp;<span
             class="italic"
             >{{ t('common.post', { count: 93 }, 3) }}</span
           >
@@ -24,7 +24,7 @@
         <!-- "Sort" -->
         <div class="flex items-center space-x-4">
           <p class="flex-1">
-            <span class="font-bold text-fg-dark-darker">{{ t('common.sort').toUpperCase() }}:</span>&nbsp;<span
+            <span class="font-bold text-fg-darker">{{ t('common.sort').toUpperCase() }}:</span>&nbsp;<span
               class="italic"
               >{{ t('common.updated') }}</span
             >
@@ -38,7 +38,7 @@
 
         <!-- "Filter (by Tags)" -->
         <div class="space-y-2">
-          <div class="font-bold text-fg-dark-darker">{{ t('pages.blog.filters.by-tags', 2).toUpperCase() }}</div>
+          <div class="font-bold text-fg-darker">{{ t('pages.blog.filters.by-tags', 2).toUpperCase() }}</div>
 
           <div class="flex flex-wrap items-center -mx-1">
             <div v-for="tag in tags" :key="tag.name" class="p-1">

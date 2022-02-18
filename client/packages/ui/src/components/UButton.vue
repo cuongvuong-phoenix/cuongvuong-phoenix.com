@@ -124,17 +124,17 @@
       case 'flat':
         switch (color) {
           case 'default':
-            return `${base} hover:text-primary-dark-darker`;
+            return `${base} hover:text-primary-darker`;
           case 'primary':
-            return `${base} text-primary-dark-default`;
+            return `${base} text-primary-default`;
           case 'secondary':
-            return `${base} text-secondary-dark-default`;
+            return `${base} text-secondary-default`;
           case 'alternative':
-            return `${base} text-alternative-dark-default`;
+            return `${base} text-alternative-default`;
           case 'success':
-            return `${base} text-success-dark-default`;
+            return `${base} text-success-default`;
           case 'error':
-            return `${base} text-error-dark-default`;
+            return `${base} text-error-default`;
           default:
             return undefined;
         }
@@ -143,17 +143,17 @@
 
         switch (color) {
           case 'default':
-            return `${base} ${baseOutlined} hover:text-primary-dark-darker`;
+            return `${base} ${baseOutlined} hover:text-primary-darker`;
           case 'primary':
-            return `${base} ${baseOutlined} text-primary-dark-default`;
+            return `${base} ${baseOutlined} text-primary-default`;
           case 'secondary':
-            return `${base} ${baseOutlined} text-secondary-dark-default`;
+            return `${base} ${baseOutlined} text-secondary-default`;
           case 'alternative':
-            return `${base} ${baseOutlined} text-alternative-dark-default`;
+            return `${base} ${baseOutlined} text-alternative-default`;
           case 'success':
-            return `${base} ${baseOutlined} text-success-dark-default`;
+            return `${base} ${baseOutlined} text-success-default`;
           case 'error':
-            return `${base} ${baseOutlined} text-error-dark-default`;
+            return `${base} ${baseOutlined} text-error-default`;
           default:
             return undefined;
         }
@@ -162,17 +162,17 @@
       case 'full': {
         switch (color) {
           case 'default':
-            return `${base} text-bg-dark-default bg-fg-dark-default hover:bg-primary-dark-darker`;
+            return `${base} text-bg-default bg-fg-default hover:bg-primary-darker`;
           case 'primary':
-            return `${base} text-bg-dark-default bg-primary-dark-default hover:bg-primary-dark-darker`;
+            return `${base} text-bg-default bg-primary-default hover:bg-primary-darker`;
           case 'secondary':
-            return `${base} text-bg-dark-default bg-secondary-dark-default`;
+            return `${base} text-bg-default bg-secondary-default`;
           case 'alternative':
-            return `${base} text-bg-dark-default bg-alternative-dark-default`;
+            return `${base} text-bg-default bg-alternative-default`;
           case 'success':
-            return `${base} text-bg-dark-default bg-success-dark-default`;
+            return `${base} text-bg-default bg-success-default`;
           case 'error':
-            return `${base} text-fg-dark-default bg-error-dark-default`;
+            return `${base} text-fg-default bg-error-default`;
           default:
             return undefined;
         }
@@ -191,14 +191,14 @@
       case 'flat':
         switch (color) {
           case 'default':
-            return 'text-primary-dark-default';
+            return 'text-primary-default';
           default:
             return undefined;
         }
       case 'outlined':
         switch (color) {
           case 'default':
-            return 'text-bg-dark-default bg-primary-dark-default hover:text-bg-dark-default hover:bg-primary-dark-darker';
+            return 'text-bg-default bg-primary-default hover:text-bg-default hover:bg-primary-darker';
           default:
             return undefined;
         }

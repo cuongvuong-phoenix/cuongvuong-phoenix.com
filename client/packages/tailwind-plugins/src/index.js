@@ -43,7 +43,7 @@ const plugins = {
           '@apply transition duration-300': {},
 
           [`&:${state}`]: {
-            '@apply border-primary-dark-darker ring ring-primary-dark-darker/40': {},
+            '@apply border-primary-darker ring ring-primary-darker/40': {},
           },
         },
       }),

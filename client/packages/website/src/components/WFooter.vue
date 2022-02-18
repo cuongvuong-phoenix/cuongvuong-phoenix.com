@@ -2,10 +2,10 @@
   <div class="py-12">
     <div class="container flex items-center justify-between mx-auto space-x-8">
       <!-- "Left" -->
-      <i18n-t keypath="footer.about" tag="p" class="text-fg-dark-darker">
-        <span class="text-fg-dark-default">{{ t('common.whoami') }}</span>
+      <i18n-t keypath="footer.about" tag="p" class="text-fg-darker">
+        <span class="text-fg-default">{{ t('common.whoami') }}</span>
         <br />
-        <span class="text-fg-dark-default">Vue 3, GraphQL, Rust (Axum), PostgreSQL</span>
+        <span class="text-fg-default">Vue 3, GraphQL, Rust (Axum), PostgreSQL</span>
       </i18n-t>
       <!-- END "Left" -->
 

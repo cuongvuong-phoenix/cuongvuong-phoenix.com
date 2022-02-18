@@ -4,7 +4,6 @@
 @import './nprogress.css';
 @import './layout.css';
 @import './components.css';
-@import './utilities.css';
 
 :root {
   --scrollbar--bg: theme('colors.gray.200');
@@ -40,5 +39,5 @@ html.dark {
   --scrollbar--thumb: theme('colors.gray.600');
   --scrollbar--thumb-hover: theme('colors.gray.500');
 
-  @apply font-sans text-fg-dark-default bg-bg-dark-default;
+  @apply font-sans text-fg-default bg-bg-default;
 }

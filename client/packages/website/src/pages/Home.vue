@@ -12,7 +12,7 @@
       <!-- "Left" -->
       <div class="flex flex-col justify-between flex-1">
         <div v-for="section in leftKebabSections" :key="section.label">
-          <div class="font-bold text-fg-dark-darker">{{ section.label.toUpperCase() }}</div>
+          <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
           <div class="mt-4 font-serif text-xl font-medium line-clamp-5">{{ section.body }}</div>
         </div>
       </div>
@@ -20,9 +20,9 @@
 
       <!-- "Middle" -->
       <div
-        class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-dark-darkest hover:ring hover:ring-primary-dark-darker"
+        class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring hover:ring-primary-darker"
       >
-        <div class="w-full h-full rounded-[8rem] border border-fg-dark-darkest overflow-hidden">
+        <div class="w-full h-full rounded-[8rem] border border-fg-darkest overflow-hidden">
           <img :src="avatarUrl" :alt="t('common.avatar')" class="object-cover w-full h-full" />
         </div>
       </div>
@@ -31,7 +31,7 @@
       <!-- "Right" -->
       <div class="flex flex-col justify-between flex-1">
         <div v-for="section in rightKebabSections" :key="section.label" class="text-right">
-          <div class="font-bold text-fg-dark-darker">{{ section.label.toUpperCase() }}</div>
+          <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
           <div class="mt-4 font-serif text-5xl font-medium text-ellipsis">{{ section.body }}</div>
         </div>
       </div>

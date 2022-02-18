@@ -35,28 +35,28 @@ module.exports = {
     ---------------------------------------------------------------- */
     extend: {
       colors: {
-        'bg-dark': {
+        bg: {
           default: `#20182B`,
         },
-        'fg-dark': {
+        fg: {
           default: colors.zinc[100],
           darker: colors.zinc[400],
           darkest: colors.zinc[600],
         },
-        'primary-dark': {
+        primary: {
           default: colors.amber[400],
           darker: colors.amber[500],
         },
-        'secondary-dark': {
+        secondary: {
           default: colors.pink[400],
         },
-        'alternative-dark': {
+        alternative: {
           default: colors.sky[600],
         },
-        'success-dark': {
+        success: {
           default: colors.emerald[400],
         },
-        'error-dark': {
+        error: {
           default: colors.rose[500],
         },
       },
