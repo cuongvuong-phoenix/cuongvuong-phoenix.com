@@ -40,7 +40,7 @@ const plugins = {
       (accum, { name, state }) => ({
         ...accum,
         [`.focusible-${name}`]: {
-          '@apply transition duration-300': {},
+          '@apply outline-none transition duration-300': {},
 
           [`&:${state}`]: {
             '@apply border-primary-darker ring ring-primary-darker/40': {},

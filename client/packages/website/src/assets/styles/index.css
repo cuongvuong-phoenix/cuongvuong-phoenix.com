@@ -3,7 +3,6 @@
 @import 'tailwindcss/utilities';
 @import './nprogress.css';
 @import './layout.css';
-@import './components.css';
 
 :root {
   --scrollbar--bg: theme('colors.gray.200');
