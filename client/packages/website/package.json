@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.5.0",
     "@iconify/iconify": "^2.1.2",
     "@vcp-web-client/tailwind-plugins": "workspace:*",
     "@vcp-web-client/ui": "workspace:*",

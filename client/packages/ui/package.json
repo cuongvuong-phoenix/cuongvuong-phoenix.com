@@ -8,6 +8,7 @@
     "build": "postcss src/assets/index.css --output=dist/assets/index.css"
   },
   "devDependencies": {
+    "@headlessui/vue": "^1.5.0",
     "@iconify/iconify": "^2.1.2",
     "@iconify/json": "^2.1.1",
     "@purge-icons/generated": "^0.7.0",

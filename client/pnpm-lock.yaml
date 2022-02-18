@@ -24,6 +24,7 @@ importers:
 
   packages/ui:
     specifiers:
+      '@headlessui/vue': ^1.5.0
       '@iconify/iconify': ^2.1.2
       '@iconify/json': ^2.1.1
       '@purge-icons/generated': ^0.7.0
@@ -42,6 +43,7 @@ importers:
       vue-router: '4'
       vue-tsc: ^0.31.4
     devDependencies:
+      '@headlessui/vue': 1.5.0_vue@3.2.31
       '@iconify/iconify': 2.1.2
       '@iconify/json': 2.1.1
       '@purge-icons/generated': 0.7.0
@@ -62,6 +64,7 @@ importers:
 
   packages/website:
     specifiers:
+      '@headlessui/vue': ^1.5.0
       '@iconify/iconify': ^2.1.2
       '@iconify/json': ^2.1.1
       '@intlify/vite-plugin-vue-i18n': ^3.3.0
@@ -95,6 +98,7 @@ importers:
       vue-router: ^4
       vue-tsc: ^0.31.4
     dependencies:
+      '@headlessui/vue': 1.5.0_vue@3.2.31
       '@iconify/iconify': 2.1.2
       '@vcp-web-client/tailwind-plugins': link:../tailwind-plugins
       '@vcp-web-client/ui': link:../ui
@@ -290,6 +294,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@headlessui/vue/1.5.0_vue@3.2.31:
+    resolution: {integrity: sha512-jAp6XYpqdEv32xhszaj5ejvjaX5qhu20sCbxu7lplePEfZL+4ffabivJBBTZAiPWczqAXmnZWNWG5DOyqjRa4w==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.2.31
 
   /@humanwhocodes/config-array/0.9.3:
     resolution: {integrity: sha512-3xSMlXHh03hCcCmFc0rbKp3Ivt2PFEJnQUJDDMTJQ2wkECZWdq4GePs2ctc5H8zV+cHPaq8k2vU8mrQjA6iHdQ==}
