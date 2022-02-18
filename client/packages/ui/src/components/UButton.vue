@@ -86,22 +86,22 @@
     if (!unified) {
       switch (size) {
         case 'sm':
-          return 'px-[0.625rem] py-[0.375rem] space-x-[0.375rem] text-sm';
+          return 'px-2.5 py-1.5 space-x-1.5 text-sm';
         case 'default':
           return 'px-3 py-2 space-x-2';
         case 'lg':
-          return 'px-[0.875rem] py-[0.625rem] space-x-[0.625rem] text-lg';
+          return 'px-3.5 py-2.5 space-x-2.5 text-lg';
         default:
           return undefined;
       }
     } else {
       switch (size) {
         case 'sm':
-          return 'p-[0.375rem] space-x-[0.375rem] text-sm';
+          return 'p-1.5 space-x-1.5 text-sm';
         case 'default':
           return 'p-2 space-x-2';
         case 'lg':
-          return 'p-[0.625rem] space-x-[0.625rem] text-lg';
+          return 'p-2.5 space-x-2.5 text-lg';
         default:
           return undefined;
       }
