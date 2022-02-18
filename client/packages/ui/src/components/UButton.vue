@@ -124,9 +124,9 @@
       case 'flat':
         switch (color) {
           case 'default':
-            return `${base} hover:text-primary-darker`;
+            return `${base} hover:text-primary-default`;
           case 'primary':
-            return `${base} text-primary-default`;
+            return `${base} text-primary-default hover:text-primary-darker`;
           case 'secondary':
             return `${base} text-secondary-default`;
           case 'alternative':
@@ -143,9 +143,9 @@
 
         switch (color) {
           case 'default':
-            return `${base} ${baseOutlined} hover:text-primary-darker`;
+            return `${base} ${baseOutlined} hover:text-primary-default`;
           case 'primary':
-            return `${base} ${baseOutlined} text-primary-default`;
+            return `${base} ${baseOutlined} text-primary-default hover:text-primary-darker`;
           case 'secondary':
             return `${base} ${baseOutlined} text-secondary-default`;
           case 'alternative':
@@ -162,7 +162,7 @@
       case 'full': {
         switch (color) {
           case 'default':
-            return `${base} text-bg-default bg-fg-default hover:bg-primary-darker`;
+            return `${base} text-bg-default bg-fg-default hover:bg-primary-default`;
           case 'primary':
             return `${base} text-bg-default bg-primary-default hover:bg-primary-darker`;
           case 'secondary':

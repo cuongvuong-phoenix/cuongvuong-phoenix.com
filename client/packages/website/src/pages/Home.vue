@@ -20,7 +20,7 @@
 
       <!-- "Middle" -->
       <div
-        class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring hover:ring-primary-darker"
+        class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring hover:ring-primary-default"
       >
         <div class="w-full h-full rounded-[8rem] border border-fg-darkest overflow-hidden">
           <img :src="avatarUrl" :alt="t('common.avatar')" class="object-cover w-full h-full" />
