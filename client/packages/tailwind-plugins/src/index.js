@@ -34,6 +34,7 @@ const plugins = {
     const states = [
       { name: 'default', state: 'focus' },
       { name: 'within', state: 'focus-within' },
+      { name: 'visible', state: 'focus-visible' },
     ];
 
     const focusible = states.reduce(
