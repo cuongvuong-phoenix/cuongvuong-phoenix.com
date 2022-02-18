@@ -1,10 +1,16 @@
 const plugin = require('tailwindcss/plugin');
 
 const plugins = {
+  /* ----------------------------------------------------------------
+  Variants
+  ---------------------------------------------------------------- */
   lightVariants: ({ addVariant }) => {
     addVariant('light', '.light &');
   },
 
+  /* ----------------------------------------------------------------
+  Utilities
+  ---------------------------------------------------------------- */
   whUtilities: ({ addUtilities, theme }) => {
     const spacings = Object.entries(theme('spacing'));
 
@@ -21,6 +27,9 @@ const plugins = {
     addUtilities(wh);
   },
 
+  /* ----------------------------------------------------------------
+  Components
+  ---------------------------------------------------------------- */
   focusibleComponents: ({ addComponents }) => {
     const states = [
       { name: 'default', state: 'focus' },

@@ -18,7 +18,7 @@
           unified
           rounded
         >
-          <WIcon :icon="socialNetwork.icon" class="square-7" />
+          <WIcon :icon="socialNetwork.icon" class="wh-7" />
         </UButton>
       </div>
       <!-- END "Right" -->

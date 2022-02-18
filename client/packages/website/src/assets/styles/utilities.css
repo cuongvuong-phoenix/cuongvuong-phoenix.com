@@ -1,8 +1,0 @@
-@layer utilities {
-  @for $i from 1 to 16 {
-    .square-$i {
-      width: calc(0.25rem * $i);
-      height: calc(0.25rem * $i);
-    }
-  }
-}
