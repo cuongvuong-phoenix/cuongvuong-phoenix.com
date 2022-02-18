@@ -61,6 +61,10 @@ module.exports = {
         },
       },
 
+      borderRadius: {
+        '4xl': '2rem',
+      },
+
       // Customize from official styles
       // (https://github.com/tailwindlabs/tailwindcss-typography/blob/master/src/styles.js)
       typography: (theme) => ({

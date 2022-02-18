@@ -31,6 +31,10 @@ module.exports = {
           default: colors.rose[500],
         },
       },
+
+      borderRadius: {
+        '4xl': '2rem',
+      },
     },
   },
 };

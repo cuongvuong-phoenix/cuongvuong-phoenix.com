@@ -46,7 +46,7 @@
 
           <div class="flex flex-wrap items-center -mx-1">
             <div v-for="tag in tags" :key="tag.name" class="p-1">
-              <div class="border rounded-[2rem] border-current px-[0.625rem] py-[0.375rem] space-x-1 flex items-center">
+              <div class="border rounded-4xl border-current px-2.5 py-1.5 space-x-1 flex items-center">
                 <WIcon v-if="tag.icon" :icon="tag.icon" />
                 <span>{{ tag.name }}</span>
               </div>
