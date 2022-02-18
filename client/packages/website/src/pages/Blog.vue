@@ -9,7 +9,11 @@
       <!-- "Left" -->
       <div class="sticky top-0 space-y-4">
         <!-- "Search box" -->
-        <div>Input</div>
+        <UInput id="search-box" v-model="search" :placeholder="`${t('common.search')}...`">
+          <template #prepended>
+            <WIcon icon="fluent:search-24-regular" />
+          </template>
+        </UInput>
         <!-- END "Search box" -->
 
         <!-- "Total results count" -->
@@ -64,11 +68,15 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { useIntervalFn } from '@vueuse/core';
-  import { UButton } from '@vcp-web-client/ui';
+  import { UButton, UInput } from '@vcp-web-client/ui';
   import WIcon from '~/components/WIcon.vue';
 
   const { t } = useI18n();
+
+  /* ----------------------------------------------------------------
+  Search
+  ---------------------------------------------------------------- */
+  const search = ref();
 
   /* ----------------------------------------------------------------
   READ tags

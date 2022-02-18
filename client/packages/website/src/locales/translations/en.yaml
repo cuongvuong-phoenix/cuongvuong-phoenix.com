@@ -35,6 +35,8 @@ common:
   blog: Blog
   post: Post | Posts | {count} Posts
 
+  search: Search
+
   total: Total
 
   sort: Sort
