@@ -8,6 +8,9 @@
     "build": "postcss src/assets/index.css --output=dist/assets/index.css"
   },
   "devDependencies": {
+    "@iconify/iconify": "^2.1.2",
+    "@iconify/json": "^2.1.1",
+    "@purge-icons/generated": "^0.7.0",
     "@vcp-web-client/tailwind-plugins": "workspace:*",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.6",
@@ -24,6 +27,7 @@
     "vue-tsc": "^0.31.4"
   },
   "peerDependencies": {
+    "@iconify/iconify": "^2.1.2",
     "vue": "^3.2.31",
     "vue-router": "4"
   }

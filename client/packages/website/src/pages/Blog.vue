@@ -11,7 +11,7 @@
         <!-- "Search box" -->
         <UInput id="search-box" v-model="search" :placeholder="`${t('common.search')}...`">
           <template #prepended>
-            <WIcon icon="fluent:search-24-regular" />
+            <UIcon icon="fluent:search-24-regular" />
           </template>
         </UInput>
         <!-- END "Search box" -->
@@ -35,7 +35,7 @@
           </p>
 
           <UButton class="!p-0">
-            <WIcon icon="octicon:sort-desc-24" />
+            <UIcon icon="octicon:sort-desc-24" />
           </UButton>
         </div>
         <!-- END "Sort" -->
@@ -47,7 +47,7 @@
           <div class="flex flex-wrap items-center -mx-1">
             <div v-for="tag in tags" :key="tag.name" class="p-1">
               <div class="border rounded-4xl border-current px-2.5 py-1.5 space-x-1 flex items-center">
-                <WIcon v-if="tag.icon" :icon="tag.icon" />
+                <UIcon v-if="tag.icon" :icon="tag.icon" />
                 <span>{{ tag.name }}</span>
               </div>
             </div>
@@ -68,8 +68,7 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { UButton, UInput } from '@vcp-web-client/ui';
-  import WIcon from '~/components/WIcon.vue';
+  import { UButton, UIcon, UInput } from '@vcp-web-client/ui';
 
   const { t } = useI18n();
 

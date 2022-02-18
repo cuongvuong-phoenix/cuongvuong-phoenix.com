@@ -18,7 +18,7 @@
           unified
           rounded
         >
-          <WIcon :icon="socialNetwork.icon" class="wh-7" />
+          <UIcon :icon="socialNetwork.icon" class="wh-7" />
         </UButton>
       </div>
       <!-- END "Right" -->
@@ -28,8 +28,7 @@
 
 <script setup lang="ts">
   import { useI18n } from 'vue-i18n';
-  import { UButton } from '@vcp-web-client/ui';
-  import WIcon from '~/components/WIcon.vue';
+  import { UButton, UIcon } from '@vcp-web-client/ui';
 
   const { t } = useI18n();
 

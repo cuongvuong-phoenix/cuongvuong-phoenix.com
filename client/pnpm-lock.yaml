@@ -24,6 +24,9 @@ importers:
 
   packages/ui:
     specifiers:
+      '@iconify/iconify': ^2.1.2
+      '@iconify/json': ^2.1.1
+      '@purge-icons/generated': ^0.7.0
       '@vcp-web-client/tailwind-plugins': workspace:*
       autoprefixer: ^10.4.2
       postcss: ^8.4.6
@@ -39,6 +42,9 @@ importers:
       vue-router: '4'
       vue-tsc: ^0.31.4
     devDependencies:
+      '@iconify/iconify': 2.1.2
+      '@iconify/json': 2.1.1
+      '@purge-icons/generated': 0.7.0
       '@vcp-web-client/tailwind-plugins': link:../tailwind-plugins
       autoprefixer: 10.4.2_postcss@8.4.6
       postcss: 8.4.6
