@@ -17,22 +17,24 @@
         <!-- END "Search box" -->
 
         <!-- "Total results count" -->
-        <p>
-          <span class="font-bold text-fg-darker">{{ t('common.total').toUpperCase() }}:</span>&nbsp;<span
-            class="italic"
-            >{{ t('common.post', { count: 93 }, 3) }}</span
-          >
+        <p class="truncate">
+          <span class="font-bold text-fg-darker">{{ t('common.total').toUpperCase() }}:&nbsp;</span
+          ><span class="italic">{{ t('common.post', { count: 93 }, 3) }}</span>
         </p>
         <!-- END "Total results count" -->
 
         <!-- "Sort" -->
-        <div class="flex items-center space-x-4">
-          <p class="flex-1">
-            <span class="font-bold text-fg-darker">{{ t('common.sort').toUpperCase() }}:</span>&nbsp;<span
-              class="italic"
-              >{{ t('common.updated') }}</span
-            >
-          </p>
+        <div class="flex items-center space-x-4 overflow-ellipsis">
+          <div class="flex items-center flex-1 min-w-0">
+            <span class="font-bold text-fg-darker">{{ t('common.sort').toUpperCase() }}:&nbsp;</span>
+
+            <UListbox
+              v-model="selectedSortOption"
+              :options="sortOptions"
+              button-variant="flat"
+              button-classes="italic"
+            />
+          </div>
 
           <UButton class="!p-0">
             <UIcon icon="octicon:sort-desc-24" />
@@ -63,9 +65,9 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
+  import { type Ref, computed, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { UButton, UIcon, UInput, UPill } from '@vcp-web-client/ui';
+  import { type Option, UButton, UIcon, UInput, UListbox, UPill } from '@vcp-web-client/ui';
 
   const { t } = useI18n();
 
@@ -73,6 +75,16 @@
   Search
   ---------------------------------------------------------------- */
   const search = ref();
+
+  /* ----------------------------------------------------------------
+  Sort
+  ---------------------------------------------------------------- */
+  const sortOptions = computed<Option[]>(() => [
+    { value: 'updated', text: t('common.updated') },
+    { value: 'relevance', text: t('common.relevance') },
+    { value: 'reading-time', text: t('common.reading-time') },
+  ]);
+  const selectedSortOption = ref(sortOptions.value[0]) as Ref<Option>;
 
   /* ----------------------------------------------------------------
   READ tags
