@@ -46,10 +46,7 @@
 
           <div class="flex flex-wrap items-center -mx-1">
             <div v-for="tag in tags" :key="tag.name" class="p-1">
-              <div class="border rounded-4xl border-current px-2.5 py-1.5 space-x-1 flex items-center">
-                <UIcon v-if="tag.icon" :icon="tag.icon" />
-                <span>{{ tag.name }}</span>
-              </div>
+              <UPill :icon="tag.icon" :name="tag.name" :active="tag.active" dim @click="tag.active = !tag.active" />
             </div>
           </div>
         </div>
@@ -68,7 +65,7 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { UButton, UIcon, UInput } from '@vcp-web-client/ui';
+  import { UButton, UIcon, UInput, UPill } from '@vcp-web-client/ui';
 
   const { t } = useI18n();
 
@@ -83,9 +80,10 @@
   interface Tag {
     name: string;
     icon?: string;
+    active?: boolean;
   }
 
-  const tags = computed<Tag[]>(() => [
+  const tags = ref<Tag[]>([
     { name: 'Vue.JS', icon: 'mdi:vuejs' },
     { name: 'Rust', icon: 'mdi:language-rust' },
     { name: 'Figma', icon: 'feather:figma' },
