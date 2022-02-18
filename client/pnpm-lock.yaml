@@ -58,6 +58,8 @@ importers:
       pinia: ^2.0.11
       postcss: ^8.4.6
       postcss-at-rules-variables: ^0.3.0
+      postcss-calc: ^8.2.4
+      postcss-each: ^1.1.0
       postcss-for: ^2.1.1
       postcss-import: ^14.0.2
       tailwindcss: ^3.0.22
@@ -92,6 +94,8 @@ importers:
       autoprefixer: 10.4.2_postcss@8.4.6
       postcss: 8.4.6
       postcss-at-rules-variables: 0.3.0_postcss@8.4.6
+      postcss-calc: 8.2.4_postcss@8.4.6
+      postcss-each: 1.1.0_postcss@8.4.6
       postcss-for: 2.1.1
       postcss-import: 14.0.2_postcss@8.4.6
       tailwindcss: 3.0.22_autoprefixer@10.4.2
@@ -2942,6 +2946,16 @@ packages:
       postcss: 8.4.6
     dev: true
 
+  /postcss-calc/8.2.4_postcss@8.4.6:
+    resolution: {integrity: sha512-SmWMSJmB8MRnnULldx0lQIyhSNvuDl9HfrZkaqqE/WHAhToYsAvDq+yAsA/kIyINDszOp3Rh0GFoNuH5Ypsm3Q==}
+    peerDependencies:
+      postcss: ^8.2.2
+    dependencies:
+      postcss: 8.4.6
+      postcss-selector-parser: 6.0.9
+      postcss-value-parser: 4.2.0
+    dev: true
+
   /postcss-cli/9.1.0_postcss@8.4.6:
     resolution: {integrity: sha512-zvDN2ADbWfza42sAnj+O2uUWyL0eRL1V+6giM2vi4SqTR3gTYy8XzcpfwccayF2szcUif0HMmXiEaDv9iEhcpw==}
     engines: {node: '>=12'}
@@ -2964,6 +2978,15 @@ packages:
       yargs: 17.3.1
     transitivePeerDependencies:
       - ts-node
+    dev: true
+
+  /postcss-each/1.1.0_postcss@8.4.6:
+    resolution: {integrity: sha512-YfTPHHAPFVRgEJfLg9RM4R9WYEHVU9Rf1R8QgZfnObwV2dgNqzTLzTl0w5tF71ApFcYLiJAXiTpHAoqJFYcZVw==}
+    peerDependencies:
+      postcss: ^8.0.0
+    dependencies:
+      postcss: 8.4.6
+      postcss-simple-vars: 6.0.3_postcss@8.4.6
     dev: true
 
   /postcss-for/2.1.1:
@@ -3041,6 +3064,15 @@ packages:
     resolution: {integrity: sha1-0KEJGw2iK3lQcCj3siuXbApguNU=}
     dependencies:
       postcss: 5.2.18
+    dev: true
+
+  /postcss-simple-vars/6.0.3_postcss@8.4.6:
+    resolution: {integrity: sha512-fkNn4Zio8vN4vIig9IFdb8lVlxWnYR769RgvxCM6YWlFKie/nQaOcaMMMFz/s4gsfHW4/5bJW+i57zD67mQU7g==}
+    engines: {node: '>=10.0'}
+    peerDependencies:
+      postcss: ^8.2.1
+    dependencies:
+      postcss: 8.4.6
     dev: true
 
   /postcss-value-parser/4.2.0:
