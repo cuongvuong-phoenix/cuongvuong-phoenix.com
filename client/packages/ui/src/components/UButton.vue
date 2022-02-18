@@ -211,7 +211,7 @@
   Classes
   ---------------------------------------------------------------- */
   const classes = computed(() => [
-    'flex items-center justify-center font-bold focusible-default',
+    'inline-flex items-center justify-center font-bold focusible-default',
     unifiedWithSizeClasses.value,
     variantWithRoundedWithColorClasses.value,
     active ? activeClasses.value : undefined,

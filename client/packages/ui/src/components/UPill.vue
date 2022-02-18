@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    class="px-2.5 py-1.5 space-x-1 flex items-center justify-center transition duration-300 rounded-4xl border"
+    class="px-2.5 py-1.5 space-x-1 inline-flex items-center justify-center transition duration-300 rounded-4xl border"
     :class="classes"
   >
     <UIcon v-if="icon" :icon="icon" />
