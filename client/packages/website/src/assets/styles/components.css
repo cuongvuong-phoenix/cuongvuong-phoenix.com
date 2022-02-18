@@ -3,6 +3,6 @@ button,
 select,
 input[type='number'] {
   &:focus {
-    @apply outline-none dark:border-primary-dark-darker ring dark:ring-primary-dark-darker/40;
+    @apply outline-none border-primary-dark-darker ring ring-primary-dark-darker/40;
   }
 }

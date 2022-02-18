@@ -40,7 +40,7 @@ const plugins = {
           '@apply transition duration-300': {},
 
           [`&:${state}`]: {
-            '@apply dark:border-primary-dark-darker ring ring-primary-dark-darker/40': {},
+            '@apply border-primary-dark-darker ring ring-primary-dark-darker/40': {},
           },
         },
       }),

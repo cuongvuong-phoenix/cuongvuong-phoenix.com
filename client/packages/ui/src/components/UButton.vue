@@ -124,17 +124,17 @@
       case 'flat':
         switch (color) {
           case 'default':
-            return `${base} hover:dark:text-primary-dark-darker`;
+            return `${base} hover:text-primary-dark-darker`;
           case 'primary':
-            return `${base} dark:text-primary-dark-default`;
+            return `${base} text-primary-dark-default`;
           case 'secondary':
-            return `${base} dark:text-secondary-dark-default`;
+            return `${base} text-secondary-dark-default`;
           case 'alternative':
-            return `${base} dark:text-alternative-dark-default`;
+            return `${base} text-alternative-dark-default`;
           case 'success':
-            return `${base} dark:text-success-dark-default`;
+            return `${base} text-success-dark-default`;
           case 'error':
-            return `${base} dark:text-error-dark-default`;
+            return `${base} text-error-dark-default`;
           default:
             return undefined;
         }
@@ -143,17 +143,17 @@
 
         switch (color) {
           case 'default':
-            return `${base} ${baseOutlined} hover:dark:text-primary-dark-darker`;
+            return `${base} ${baseOutlined} hover:text-primary-dark-darker`;
           case 'primary':
-            return `${base} ${baseOutlined} dark:text-primary-dark-default`;
+            return `${base} ${baseOutlined} text-primary-dark-default`;
           case 'secondary':
-            return `${base} ${baseOutlined} dark:text-secondary-dark-default`;
+            return `${base} ${baseOutlined} text-secondary-dark-default`;
           case 'alternative':
-            return `${base} ${baseOutlined} dark:text-alternative-dark-default`;
+            return `${base} ${baseOutlined} text-alternative-dark-default`;
           case 'success':
-            return `${base} ${baseOutlined} dark:text-success-dark-default`;
+            return `${base} ${baseOutlined} text-success-dark-default`;
           case 'error':
-            return `${base} ${baseOutlined} dark:text-error-dark-default`;
+            return `${base} ${baseOutlined} text-error-dark-default`;
           default:
             return undefined;
         }
@@ -162,17 +162,17 @@
       case 'full': {
         switch (color) {
           case 'default':
-            return `${base} dark:text-bg-dark-default dark:bg-fg-dark-default hover:dark:bg-primary-dark-darker`;
+            return `${base} text-bg-dark-default bg-fg-dark-default hover:bg-primary-dark-darker`;
           case 'primary':
-            return `${base} dark:text-bg-dark-default dark:bg-primary-dark-default hover:dark:bg-primary-dark-darker`;
+            return `${base} text-bg-dark-default bg-primary-dark-default hover:bg-primary-dark-darker`;
           case 'secondary':
-            return `${base} dark:text-bg-dark-default dark:bg-secondary-dark-default`;
+            return `${base} text-bg-dark-default bg-secondary-dark-default`;
           case 'alternative':
-            return `${base} dark:text-bg-dark-default dark:bg-alternative-dark-default`;
+            return `${base} text-bg-dark-default bg-alternative-dark-default`;
           case 'success':
-            return `${base} dark:text-bg-dark-default dark:bg-success-dark-default`;
+            return `${base} text-bg-dark-default bg-success-dark-default`;
           case 'error':
-            return `${base} dark:text-fg-dark-default dark:bg-error-dark-default`;
+            return `${base} text-fg-dark-default bg-error-dark-default`;
           default:
             return undefined;
         }
@@ -191,14 +191,14 @@
       case 'flat':
         switch (color) {
           case 'default':
-            return 'dark:text-primary-dark-default';
+            return 'text-primary-dark-default';
           default:
             return undefined;
         }
       case 'outlined':
         switch (color) {
           case 'default':
-            return 'dark:text-bg-dark-default dark:bg-primary-dark-default hover:dark:text-bg-dark-default hover:dark:bg-primary-dark-darker';
+            return 'text-bg-dark-default bg-primary-dark-default hover:text-bg-dark-default hover:bg-primary-dark-darker';
           default:
             return undefined;
         }
