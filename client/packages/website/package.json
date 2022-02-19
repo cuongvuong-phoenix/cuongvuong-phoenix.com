@@ -15,6 +15,7 @@
     "@vcp-web-client/ui": "workspace:*",
     "@vueuse/core": "^7.6.2",
     "@vueuse/head": "^0.7.5",
+    "date-fns": "^2.28.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.11",
     "vue": "^3.2.31",
@@ -22,6 +23,7 @@
     "vue-router": "^4"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.6",
     "@iconify/json": "^2.1.1",
     "@intlify/vite-plugin-vue-i18n": "^3.3.0",
     "@purge-icons/generated": "^0.7.0",
