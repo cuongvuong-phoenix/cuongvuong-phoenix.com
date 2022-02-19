@@ -1,7 +1,8 @@
 {
   "extends": ["@antfu/eslint-config", "prettier"],
   "rules": {
-    "vue/no-setup-props-destructure": "off"
+    "vue/no-setup-props-destructure": "off",
+    "@typescript-eslint/consistent-indexed-object-style": "off"
   },
   "overrides": [
     {
