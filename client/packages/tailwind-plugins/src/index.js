@@ -11,7 +11,7 @@ const plugins = {
   /* ----------------------------------------------------------------
   Utilities
   ---------------------------------------------------------------- */
-  whUtilities: ({ addUtilities, theme }) => {
+  whUtilities: ({ addUtilities, matchUtilities, theme }) => {
     const spacings = Object.entries(theme('spacing'));
 
     const wh = spacings.reduce(
@@ -36,6 +36,12 @@ const plugins = {
     );
 
     addUtilities(wh);
+
+    matchUtilities({
+      '.wh': (value) => ({ width: value, height: value }),
+      '.min-wh': (value) => ({ 'min-width': value, 'max-height': value }),
+      '.max-wh': (value) => ({ 'min-width': value, 'max-height': value }),
+    });
   },
 
   /* ----------------------------------------------------------------
@@ -63,6 +69,23 @@ const plugins = {
     );
 
     addComponents(focusible);
+  },
+
+  dotComponents: ({ addComponents, theme }) => {
+    const spacings = Object.entries(theme('spacing'));
+    const dots = spacings.reduce(
+      (accum, [key, value]) => ({
+        ...accum,
+        [`.dot-${key}`]: {
+          'width': value,
+          'height': value,
+          '@apply bg-current rounded-full': {},
+        },
+      }),
+      {}
+    );
+
+    addComponents(dots);
   },
 };
 

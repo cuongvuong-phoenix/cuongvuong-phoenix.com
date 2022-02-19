@@ -16,8 +16,8 @@
   const { dim, active } = defineProps<{
     name?: string;
     icon?: string;
-    dim?: boolean;
     active?: boolean;
+    dim?: boolean;
   }>();
 
   /* ----------------------------------------------------------------

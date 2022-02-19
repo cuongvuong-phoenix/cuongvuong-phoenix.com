@@ -29,7 +29,12 @@ export const routes: RouteRecordRaw[] = [
       {
         path: 'blog',
         name: RouteName.BLOG,
-        component: () => import('~/pages/Blog.vue'),
+        component: () => import('~/pages/blog/Index.vue'),
+      },
+      {
+        path: 'blog/:post',
+        name: RouteName.BLOG_POST,
+        component: () => import('~/pages/BlogPost.vue'),
       },
       {
         path: 'notes',

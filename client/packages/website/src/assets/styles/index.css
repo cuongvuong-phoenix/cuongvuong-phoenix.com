@@ -40,3 +40,9 @@ html.dark {
 
   @apply font-sans text-fg-default bg-bg-default;
 }
+
+a {
+  &:hover {
+    @apply text-primary-default;
+  }
+}

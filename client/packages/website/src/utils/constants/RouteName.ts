@@ -3,5 +3,6 @@ export enum RouteName {
   ABOUT = 'about',
   CONTACT = 'contact',
   BLOG = 'blog',
+  BLOG_POST = 'blog-post',
   NOTES = 'notes',
 }
