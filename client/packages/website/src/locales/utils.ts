@@ -5,11 +5,13 @@ export type I18n = baseI18n<{}, {}, {}, false>;
 /* ----------------------------------------------------------------
 Constants
 ---------------------------------------------------------------- */
-export const LANGUAGES: { locale: string; name: string; default?: boolean }[] = [
-  { locale: 'en', name: 'English', default: true },
+export const LANGUAGES = [
+  { locale: 'en-US', name: 'English (US)', default: true },
   // TODO: support Vietnamese.
-  // { locale: 'vi', name: 'Tiếng Việt' },
-];
+  // { locale: 'vi-VI', name: 'Tiếng Việt' },
+] as const;
+
+export type AppLocale = typeof LANGUAGES[number]['locale'];
 
 export const LOCALES = LANGUAGES.map((lang) => lang.locale);
 

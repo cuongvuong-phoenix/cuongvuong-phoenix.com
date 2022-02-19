@@ -33,7 +33,7 @@ common:
   note: Note | Notes
 
   blog: Blog
-  post: Post | Posts | {count} Posts
+  post: Post | Posts
 
   search: Search
 
@@ -47,3 +47,10 @@ common:
 
   filter: Filter | Filters
   tag: Tag | Tags
+
+  year: Year | Years
+  month: Month | Months
+  day: Day | Days
+  hour: Hour | Hours
+  minute: Minute | Minutes
+  second: Second | Seconds

@@ -1,6 +1,6 @@
 import { createI18n } from 'vue-i18n';
 import { type Router } from 'vue-router';
-import { DEFAULT_LOCALE, type I18n, LOCALES, setI18nLocale } from '~/locales/utils';
+import { type AppLocale, DEFAULT_LOCALE, type I18n, LOCALES, setI18nLocale } from './utils';
 
 export * from '~/locales/utils';
 
@@ -13,7 +13,7 @@ function setupRouterForI18n(i18n: I18n, router: Router) {
       throw new Error(`Must provide "name" for "${fullPath}" route.`);
     }
 
-    const locale = params.locale as string;
+    const locale = params.locale as AppLocale;
 
     // Check if got the right locales.
     if (!LOCALES.includes(locale)) {
