@@ -5,4 +5,5 @@ export enum RouteName {
   BLOG = 'blog',
   BLOG_POST = 'blog-post',
   NOTES = 'notes',
+  NOT_FOUND = 'not-found',
 }

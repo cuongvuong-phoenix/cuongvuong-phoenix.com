@@ -41,6 +41,11 @@ export const routes: RouteRecordRaw[] = [
         name: RouteName.NOTES,
         component: () => import('~/pages/Notes.vue'),
       },
+      {
+        path: ':pathMatch(.*)*',
+        name: RouteName.NOT_FOUND,
+        redirect: (to) => ({ name: RouteName.HOME, params: { locale: to.params.locale } }),
+      },
     ],
   },
 ];
