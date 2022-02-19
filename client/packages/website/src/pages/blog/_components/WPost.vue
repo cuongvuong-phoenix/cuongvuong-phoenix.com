@@ -8,7 +8,7 @@
 
     <!-- "Row 2" -->
     <div class="flex items-center mt-4 space-x-3 overflow-hidden text-sm text-fg-darker">
-      <span>{{ formatDatetime(post.updatedAt || post.createdAt, locale, 'PP') }}</span>
+      <span>{{ formatDatetime(post.updatedAt || post.createdAt, locale) }}</span>
 
       <span class="dot-1"></span>
       <span>{{ post.readingTime }} {{ t('common.minute', post.readingTime).toLowerCase() }}</span>

@@ -6,7 +6,7 @@ const localeObjectMap: Record<AppLocale, Locale> = {
   'en-US': enUS,
 };
 
-export function formatDatetime(date: Date, locale: string, formatString = 'P') {
+export function formatDatetime(date: Date, locale: string, formatString = 'PP') {
   return format(date, formatString, {
     locale: localeObjectMap[locale as AppLocale],
   });
