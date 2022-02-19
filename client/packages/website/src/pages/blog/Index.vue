@@ -127,5 +127,5 @@
           tags: faker.random.arrayElements(postTags, faker.datatype.number(4)),
         } as Model.PostListItemR)
     )
-  );
+  ) as Ref<Model.PostListItemR[]>;
 </script>

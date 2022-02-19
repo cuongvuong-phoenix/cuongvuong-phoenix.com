@@ -1,4 +1,7 @@
 declare namespace Model {
+  /* ----------------------------------------------------------------
+  Blog
+  ---------------------------------------------------------------- */
   export interface PostTag {
     id: string;
     name: string;
@@ -9,7 +12,7 @@ declare namespace Model {
     active?: boolean;
   }
 
-  export interface PostListItem {
+  export interface Post {
     id: string;
     slug: string;
     title: string;
@@ -17,11 +20,21 @@ declare namespace Model {
     updatedAt?: string;
     readingTime: number;
     tags: PostTag[];
+    body: string;
   }
 
-  export interface PostListItemR extends Omit<PostListItem, 'createdAt' | 'updatedAt' | 'tags'> {
+  export interface PostR extends Omit<Post, 'createdAt' | 'updatedAt'> {
+    id: string;
+    slug: string;
+    title: string;
     createdAt: Date;
     updatedAt?: Date;
-    tags: PostTagR[];
+    readingTime: number;
+    tags: PostTag[];
+    body: string;
   }
+
+  export type PostListItem = Omit<Post, 'body'>;
+
+  export type PostListItemR = Omit<PostR, 'body'>;
 }

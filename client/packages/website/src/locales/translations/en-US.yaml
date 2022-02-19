@@ -3,6 +3,7 @@ nav:
   about: "@:{'common.about'}"
   contact: "@:{'common.contact'}"
   blog: "@:{'common.blog'}"
+  blog-post: "@:{'common.post'}"
   notes: "@:{'common.note'}"
 
 footer:
@@ -44,6 +45,7 @@ common:
   created: Created
   relevance: Relevance
   reading-time: Reading Time
+  read: Read
 
   filter: Filter | Filters
   tag: Tag | Tags
