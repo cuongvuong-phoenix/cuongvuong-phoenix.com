@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="font-serif text-5xl font-bold text-center">
-      {{ t('common.blog') }}
+      {{ t('common.blog').toUpperCase() }}
     </h1>
 
     <!-- "Body" -->
