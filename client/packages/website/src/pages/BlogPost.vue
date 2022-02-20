@@ -51,7 +51,7 @@
   import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import faker from '@faker-js/faker/locale/en';
-  import { UIcon, UPill } from '@vcp-web-client/ui';
+  import { UIcon, UPill } from '@cvp-web-client/ui';
   import { postTags } from '~/utils/mocks';
   import { formatDatetime } from '~/utils/helpers';
 

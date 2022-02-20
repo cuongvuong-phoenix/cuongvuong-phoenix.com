@@ -24,11 +24,11 @@ importers:
 
   packages/ui:
     specifiers:
+      '@cvp-web-client/tailwind-plugins': workspace:*
       '@headlessui/vue': ^1.5.0
       '@iconify/iconify': ^2.1.2
       '@iconify/json': ^2.1.1
       '@purge-icons/generated': ^0.7.0
-      '@vcp-web-client/tailwind-plugins': workspace:*
       autoprefixer: ^10.4.2
       postcss: ^8.4.6
       postcss-at-rules-variables: ^0.3.0
@@ -43,11 +43,11 @@ importers:
       vue-router: '4'
       vue-tsc: ^0.31.4
     devDependencies:
+      '@cvp-web-client/tailwind-plugins': link:../tailwind-plugins
       '@headlessui/vue': 1.5.0_vue@3.2.31
       '@iconify/iconify': 2.1.2
       '@iconify/json': 2.1.1
       '@purge-icons/generated': 0.7.0
-      '@vcp-web-client/tailwind-plugins': link:../tailwind-plugins
       autoprefixer: 10.4.2_postcss@8.4.6
       postcss: 8.4.6
       postcss-at-rules-variables: 0.3.0_postcss@8.4.6
@@ -64,6 +64,8 @@ importers:
 
   packages/website:
     specifiers:
+      '@cvp-web-client/tailwind-plugins': workspace:*
+      '@cvp-web-client/ui': workspace:*
       '@faker-js/faker': ^6.0.0-alpha.6
       '@headlessui/vue': ^1.5.0
       '@iconify/iconify': ^2.1.2
@@ -75,8 +77,6 @@ importers:
       '@tailwindcss/typography': ^0.5.2
       '@types/node': ^17.0.18
       '@types/nprogress': ^0.2.0
-      '@vcp-web-client/tailwind-plugins': workspace:*
-      '@vcp-web-client/ui': workspace:*
       '@vitejs/plugin-vue': ^2.2.0
       '@vueuse/core': ^7.6.2
       '@vueuse/head': ^0.7.5
@@ -100,10 +100,10 @@ importers:
       vue-router: ^4
       vue-tsc: ^0.31.4
     dependencies:
+      '@cvp-web-client/tailwind-plugins': link:../tailwind-plugins
+      '@cvp-web-client/ui': link:../ui
       '@headlessui/vue': 1.5.0_vue@3.2.31
       '@iconify/iconify': 2.1.2
-      '@vcp-web-client/tailwind-plugins': link:../tailwind-plugins
-      '@vcp-web-client/ui': link:../ui
       '@vueuse/core': 7.6.2_vue@3.2.31
       '@vueuse/head': 0.7.5_vue@3.2.31
       date-fns: 2.28.0

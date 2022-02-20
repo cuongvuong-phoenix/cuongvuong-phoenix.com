@@ -7,7 +7,7 @@ module.exports = {
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/line-clamp'),
-    require('@vcp-web-client/tailwind-plugins'),
+    require('@cvp-web-client/tailwind-plugins'),
   ],
   corePlugins: {
     container: false,

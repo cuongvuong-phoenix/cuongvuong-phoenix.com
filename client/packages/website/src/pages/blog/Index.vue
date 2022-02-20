@@ -124,7 +124,7 @@
 <script setup lang="ts">
   import { type Ref, computed, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { type Option, UButton, UIcon, UInput, UListbox, UPill } from '@vcp-web-client/ui';
+  import { type Option, UButton, UIcon, UInput, UListbox, UPill } from '@cvp-web-client/ui';
   import faker from '@faker-js/faker/locale/en';
   import WPost from './_components/WPost.vue';
   import { useUiStore } from '~/store/ui';

@@ -40,7 +40,7 @@
 <script setup lang="ts">
   import { useI18n } from 'vue-i18n';
   import { RouterLink } from 'vue-router';
-  import { UIcon } from '@vcp-web-client/ui';
+  import { UIcon } from '@cvp-web-client/ui';
   import { RouteName } from '~/utils/constants';
   import { formatDatetime } from '~/utils/helpers';
 

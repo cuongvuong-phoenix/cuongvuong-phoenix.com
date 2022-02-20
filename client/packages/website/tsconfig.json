@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"],
-      "@vcp-web-client/ui": ["../ui/src/index.ts"]
+      "@cvp-web-client/ui": ["../ui/src/index.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

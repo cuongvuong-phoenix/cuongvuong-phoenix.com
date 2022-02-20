@@ -1,5 +1,5 @@
 {
-  "name": "@vcp-web-client/ui",
+  "name": "@cvp-web-client/ui",
   "version": "0.0.0",
   "private": true,
   "author": "Cuong Vuong Chi",
@@ -12,7 +12,7 @@
     "@iconify/iconify": "^2.1.2",
     "@iconify/json": "^2.1.1",
     "@purge-icons/generated": "^0.7.0",
-    "@vcp-web-client/tailwind-plugins": "workspace:*",
+    "@cvp-web-client/tailwind-plugins": "workspace:*",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.6",
     "postcss-at-rules-variables": "^0.3.0",

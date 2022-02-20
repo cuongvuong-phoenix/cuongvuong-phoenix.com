@@ -50,7 +50,7 @@
   import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useDark, useEventListener } from '@vueuse/core';
-  import { UButton, ULogo } from '@vcp-web-client/ui';
+  import { UButton, ULogo } from '@cvp-web-client/ui';
   import { useUiStore } from '~/store/ui';
   import { RouteName } from '~/utils/constants';
 
