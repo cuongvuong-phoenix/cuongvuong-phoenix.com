@@ -7,10 +7,19 @@
       'ease-in': !route.meta.staticHeader && scrolledOutDirection === 'down',
     }"
     :style="{
-      top: !route.meta.staticHeader ? (scrolledOutDirection !== 'down' ? 0 : 'calc(-6rem - 1px)') : undefined,
+      top: !route.meta.staticHeader
+        ? scrolledOutDirection !== 'down'
+          ? 0
+          : `${-(uiStore.headerHeight + 1)}px`
+        : undefined,
     }"
   >
-    <div class="container flex items-center justify-between h-24 mx-auto space-x-8">
+    <div
+      class="container flex items-center justify-between mx-auto space-x-8"
+      :style="{
+        height: uiStore.headerHeightString,
+      }"
+    >
       <!-- "Left" -->
       <div class="flex flex-1 space-x-12">
         <UButton v-for="nav in leftNavs" :key="nav" :link="{ name: nav }" size="lg" class="!p-0">
@@ -42,9 +51,11 @@
   import { useI18n } from 'vue-i18n';
   import { useDark, useEventListener } from '@vueuse/core';
   import { UButton, ULogo } from '@vcp-web-client/ui';
+  import { useUiStore } from '~/store/ui';
   import { RouteName } from '~/utils/constants';
 
   const route = useRoute();
+  const uiStore = useUiStore();
   const { t } = useI18n();
 
   /* ----------------------------------------------------------------

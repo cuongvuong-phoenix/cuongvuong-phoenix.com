@@ -8,7 +8,12 @@
     <div class="grid grid-cols-3 gap-8 mt-16">
       <!-- "Left" -->
       <div>
-        <div class="sticky space-y-4 top-28">
+        <div
+          class="sticky space-y-4"
+          :style="{
+            top: `${uiStore.headerHeight + 16}px`,
+          }"
+        >
           <!-- "Search box" -->
           <UInput id="search-box" v-model="search" :placeholder="`${t('common.search')}...`">
             <template #prepended>
@@ -122,9 +127,11 @@
   import { type Option, UButton, UIcon, UInput, UListbox, UPill } from '@vcp-web-client/ui';
   import faker from '@faker-js/faker/locale/en';
   import WPost from './_components/WPost.vue';
+  import { useUiStore } from '~/store/ui';
   import { postTags } from '~/utils/mocks';
   import { RouteName } from '~/utils/constants';
 
+  const uiStore = useUiStore();
   const { t, locale } = useI18n();
 
   /* ----------------------------------------------------------------

@@ -3,8 +3,8 @@
 
   <div
     class="container py-16 mx-auto"
-    :class="{
-      'mt-24': !route.meta.staticHeader,
+    :style="{
+      'margin-top': !route.meta.staticHeader ? uiStore.headerHeightString : undefined,
     }"
   >
     <RouterView />
@@ -18,10 +18,12 @@
   import { RouterView, useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useHead } from '@vueuse/head';
+  import { useUiStore } from '~/store/ui';
   import WHeader from '~/components/WHeader.vue';
   import WFooter from '~/components/WFooter.vue';
 
   const route = useRoute();
+  const uiStore = useUiStore();
   const { t } = useI18n();
 
   /* ----------------------------------------------------------------
