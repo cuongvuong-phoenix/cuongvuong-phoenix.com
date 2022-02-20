@@ -72,6 +72,43 @@
           />
         </div>
         <!-- END "Posts" -->
+
+        <!-- "Pagination" -->
+        <div class="flex items-center mt-8 space-x-8">
+          <div class="flex items-center flex-1 min-w-0">
+            <UButton
+              :link="
+                hasPreviousPage
+                  ? { name: RouteName.BLOG, params: { locale: locale }, query: { before: startCursor } }
+                  : undefined
+              "
+              :disabled="!hasPreviousPage"
+              link-active-type="none"
+            >
+              <UIcon icon="fluent:arrow-left-24-regular" />
+              <span>{{ t('common.previous') }}</span>
+            </UButton>
+          </div>
+
+          <!-- TODO: Paginator -->
+          <div></div>
+
+          <div class="flex items-center justify-end flex-1 min-w-0">
+            <UButton
+              :link="
+                hasNextPage
+                  ? { name: RouteName.BLOG, params: { locale: locale }, query: { after: endCursor } }
+                  : undefined
+              "
+              :disabled="!hasNextPage"
+              link-active-type="none"
+            >
+              <span>{{ t('common.next') }}</span>
+              <UIcon icon="fluent:arrow-right-24-regular" />
+            </UButton>
+          </div>
+        </div>
+        <!-- END "Pagination" -->
       </div>
       <!-- END "Right" -->
     </div>
@@ -86,8 +123,9 @@
   import faker from '@faker-js/faker/locale/en';
   import WPost from './_components/WPost.vue';
   import { postTags } from '~/utils/mocks';
+  import { RouteName } from '~/utils/constants';
 
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   /* ----------------------------------------------------------------
   Search
@@ -128,4 +166,12 @@
         } as Model.PostListItemR)
     )
   ) as Ref<Model.PostListItemR[]>;
+
+  /* ----------------------------------------------------------------
+  Pagination
+  ---------------------------------------------------------------- */
+  const startCursor = ref('abc');
+  const endCursor = ref('xyz');
+  const hasPreviousPage = ref(false);
+  const hasNextPage = ref(true);
 </script>

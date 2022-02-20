@@ -50,6 +50,9 @@ common:
   filter: Filter | Filters
   tag: Tag | Tags
 
+  previous: Previous
+  next: Next
+
   year: Year | Years
   month: Month | Months
   day: Day | Days
