@@ -4,8 +4,12 @@ const plugins = {
   /* ----------------------------------------------------------------
   Variants
   ---------------------------------------------------------------- */
-  lightVariants: ({ addVariant }) => {
+  lightVariant: ({ addVariant }) => {
     addVariant('light', '.light &');
+  },
+
+  enabledVariant: ({ addVariant }) => {
+    addVariant('enabled', '&:enabled');
   },
 
   /* ----------------------------------------------------------------

@@ -24,8 +24,8 @@
     v-bind="$attrs"
     :to="link"
     :replace="linkReplace"
-    :active-class="!linkActiveExact ? activeClasses : undefined"
-    :exact-active-class="linkActiveExact ? activeClasses : undefined"
+    :active-class="linkActiveType === 'default' ? activeClasses : undefined"
+    :exact-active-class="linkActiveType === 'exact' ? activeClasses : undefined"
     :class="classes"
   >
     <slot />
@@ -39,6 +39,9 @@
 
   export const buttonVariants = ['flat', 'outlined', 'full'] as const;
   export type ButtonVariant = typeof buttonVariants[number];
+
+  export const buttonLinkActiveTypes = ['default', 'exact', 'none'] as const;
+  export type ButtonLinkActiveType = typeof buttonLinkActiveTypes[number];
 </script>
 
 <script setup lang="ts">
@@ -49,7 +52,7 @@
   const {
     link,
     linkReplace,
-    linkActiveExact,
+    linkActiveType = 'default',
     type = buttonTypes[0],
     size = sizes[0],
     unified,
@@ -62,7 +65,7 @@
     // `link` specific props.
     link?: RouteLocationRaw;
     linkReplace?: boolean;
-    linkActiveExact?: boolean;
+    linkActiveType?: ButtonLinkActiveType;
     // Shared props.
     type?: ButtonType;
     size?: Size;
@@ -124,9 +127,9 @@
       case 'flat':
         switch (color) {
           case 'default':
-            return `${base} hover:text-primary-default`;
+            return `${base} enabled:hover:text-primary-default`;
           case 'primary':
-            return `${base} text-primary-default hover:text-primary-darker`;
+            return `${base} text-primary-default enabled:hover:text-primary-darker`;
           case 'secondary':
             return `${base} text-secondary-default`;
           case 'alternative':
@@ -143,9 +146,9 @@
 
         switch (color) {
           case 'default':
-            return `${base} ${baseOutlined} hover:text-primary-default`;
+            return `${base} ${baseOutlined} enabled:hover:text-primary-default`;
           case 'primary':
-            return `${base} ${baseOutlined} text-primary-default hover:text-primary-darker`;
+            return `${base} ${baseOutlined} text-primary-default enabled:hover:text-primary-darker`;
           case 'secondary':
             return `${base} ${baseOutlined} text-secondary-default`;
           case 'alternative':
@@ -162,9 +165,9 @@
       case 'full': {
         switch (color) {
           case 'default':
-            return `${base} text-bg-default bg-fg-default hover:bg-primary-default`;
+            return `${base} text-bg-default bg-fg-default enabled:hover:bg-primary-default`;
           case 'primary':
-            return `${base} text-bg-default bg-primary-default hover:bg-primary-darker`;
+            return `${base} text-bg-default bg-primary-default enabled:hover:bg-primary-darker`;
           case 'secondary':
             return `${base} text-bg-default bg-secondary-default`;
           case 'alternative':
@@ -198,7 +201,7 @@
       case 'outlined':
         switch (color) {
           case 'default':
-            return 'text-bg-default bg-primary-default hover:text-bg-default hover:bg-primary-darker';
+            return 'text-bg-default bg-primary-default enabled:hover:text-bg-default enabled:hover:bg-primary-darker';
           default:
             return undefined;
         }

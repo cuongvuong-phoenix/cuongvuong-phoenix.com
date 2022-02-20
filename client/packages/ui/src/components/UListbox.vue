@@ -48,7 +48,7 @@
           as="template"
         >
           <li
-            class="flex items-center px-3 py-2 space-x-2 cursor-pointer hover:bg-bg-default"
+            class="flex items-center px-3 py-2 space-x-2 cursor-pointer enabled:hover:bg-bg-default"
             :class="{
               'bg-bg-default': active,
               'font-medium text-primary-default': selected,
@@ -120,9 +120,9 @@
   const defaultButtonClasses = computed<string | undefined>(() => {
     switch (buttonVariant) {
       case 'flat':
-        return 'hover:text-primary-default focusible-visible';
+        return 'enabled:hover:text-primary-default focusible-visible';
       case 'outlined':
-        return 'px-3 py-2 rounded-lg border border-fg-default hover:border-primary-default focusible-default';
+        return 'px-3 py-2 rounded-lg border border-fg-default enabled:hover:border-primary-default focusible-default';
       default:
         return undefined;
     }
