@@ -1,8 +1,8 @@
 <template>
   <div
     :class="{
-      'fixed inset-x-0 z-10 backdrop-blur-xl transition-[top] duration-500 border-b border-fg-darkest':
-        !route.meta.staticHeader,
+      'fixed inset-x-0 z-10 backdrop-blur-xl transition-[top] duration-500 border-fg-darkest': !route.meta.staticHeader,
+      'border-b': !route.meta.staticHeader && scrolledOutDirection,
       'ease-out': !route.meta.staticHeader && scrolledOutDirection !== 'down',
       'ease-in': !route.meta.staticHeader && scrolledOutDirection === 'down',
     }"
