@@ -1,3 +1,4 @@
+export { default as ULogo } from './ULogo.vue';
 export { default as UButton } from './UButton.vue';
 export { default as UInput } from './UInput.vue';
 export { default as ULabel } from './ULabel.vue';
@@ -6,6 +7,7 @@ export { default as UPill } from './UPill.vue';
 export { default as UListbox } from './UListbox.vue';
 export { default as UTest } from './UTest.vue';
 
+export * from './ULogo.vue';
 export * from './UButton.vue';
 export * from './UInput.vue';
 export * from './ULabel.vue';

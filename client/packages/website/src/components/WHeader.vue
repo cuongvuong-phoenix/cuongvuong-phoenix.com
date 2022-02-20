@@ -20,12 +20,9 @@
       <!-- END "Left" -->
 
       <!-- "Middle" -->
-      <UButton
-        :link="{ name: RouteName.HOME }"
-        variant="outlined"
-        link-active-exact
-        class="shrink-0 w-16 h-16 rounded-full"
-      ></UButton>
+      <UButton :link="{ name: RouteName.HOME }" link-active-exact rounded unified class="!p-1">
+        <ULogo colored class="w-[4.5rem] h-[4.5rem]" />
+      </UButton>
       <!-- END "Middle" -->
 
       <!-- "Right" -->
@@ -44,7 +41,7 @@
   import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useDark, useEventListener } from '@vueuse/core';
-  import { UButton } from '@vcp-web-client/ui';
+  import { UButton, ULogo } from '@vcp-web-client/ui';
   import { RouteName } from '~/utils/constants';
 
   const route = useRoute();
