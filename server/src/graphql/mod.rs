@@ -10,13 +10,15 @@ use axum::{
 };
 use std::sync::Arc;
 
+mod resolvers;
 mod schema;
+mod shared;
 
 pub fn init_routes(state: Arc<State>) -> Router {
     let schema = schema::init_schema(state);
 
     Router::new().nest(
-        "graphql",
+        "/graphql",
         Router::new()
             .route("/", get(graphql_playground).post(graphql_handler))
             .layer(AddExtensionLayer::new(schema)),

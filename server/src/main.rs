@@ -32,7 +32,7 @@ async fn main() {
     // App.
     let app = Router::new()
         .route("/health", get(|| async { "Healthy!" }))
-        .nest("api", graphql::init_routes(state))
+        .nest("/api", graphql::init_routes(state))
         .layer(middlewares);
 
     tracing::info!("Server running on: {}", *ADDRESS);
