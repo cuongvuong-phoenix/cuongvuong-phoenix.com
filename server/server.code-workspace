@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"name": "root",
+			"path": "."
+		},
+		{
+			"name": "sql",
+			"path": "./sql"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.sql": "postgres"
+		},
+		"vscode-postgres.defaultConnection": "localhost",
+		"vscode-postgres.defaultDatabase": "cvp-web"
+	}
+}
