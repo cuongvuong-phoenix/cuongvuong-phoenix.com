@@ -50,7 +50,9 @@ impl Tag {
             r#"
             SELECT id, name, icon, created_at, updated_at
             FROM tag
-            ORDER BY coalesce(updated_at, created_at) DESC
+            ORDER BY
+                coalesce(updated_at, created_at) DESC,
+                name ASC
             LIMIT $1
             OFFSET $2
             "#,

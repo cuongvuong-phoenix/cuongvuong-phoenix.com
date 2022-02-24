@@ -17,7 +17,10 @@ SELECT COUNT(*) FROM post;
 PREPARE read_many_posts(INTEGER, INTEGER) AS
 	SELECT id, title, slug, reading_time, visible, created_at, updated_at
 	FROM post
-	ORDER BY coalesce(updated_at, created_at) DESC, reading_time DESC, title ASC
+	ORDER BY
+		coalesce(updated_at, created_at) DESC,
+		reading_time DESC,
+		title ASC
 	LIMIT $1
 	OFFSET $2;
 
@@ -63,7 +66,9 @@ DEALLOCATE create_tag;
 PREPARE read_tags(INTEGER, INTEGER) AS
 	SELECT id, name, icon, created_at, updated_at
 	FROM tag
-	ORDER BY coalesce(updated_at, created_at) DESC
+	ORDER BY
+		coalesce(updated_at, created_at) DESC,
+		name ASC
 	LIMIT $1
 	OFFSET $2;
 
@@ -118,7 +123,7 @@ PREPARE read_tags_of_posts(UUID[]) AS
 	WHERE pht.post_id = ANY($1)
 	ORDER BY
 		coalesce(pht.updated_at, pht.created_at) DESC,
-		coalesce(t.updated_at, t.created_at) DESC;
+		t.name ASC;
 
 EXECUTE read_tags_of_posts(ARRAY['af802536-732f-485b-ba68-845c05d0b2dd', '34c7445e-3026-4299-8eee-0e1d5920c8df']::UUID[]);
 DEALLOCATE read_tags_of_posts;
@@ -129,7 +134,6 @@ PREPARE read_posts_has_tags(UUID[]) AS
 	WHERE pht.tag_id = ANY($1) 
 	ORDER BY
 		coalesce(pht.updated_at, pht.created_at) DESC,
-		coalesce(p.updated_at, p.created_at) DESC,
 		p.reading_time DESC,
 		p.title ASC;
 

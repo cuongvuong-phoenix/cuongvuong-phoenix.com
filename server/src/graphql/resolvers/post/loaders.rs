@@ -28,7 +28,7 @@ impl Loader<Uuid> for PostTagsLoader {
             WHERE pht.post_id = ANY($1)
             ORDER BY
                 coalesce(pht.updated_at, pht.created_at) DESC,
-                coalesce(t.updated_at, t.created_at) DESC;
+                t.name ASC;
             "#,
             keys
         )
