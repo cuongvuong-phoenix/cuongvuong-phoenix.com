@@ -109,12 +109,20 @@ DEALLOCATE delete_tag;
 -- post_has_tag
 -- ----------------------------------------------------------------
 -- CREATE
-PREPARE create_post_has_tag(UUID, UUID) AS
+PREPARE create_tag_of_post(UUID, UUID) AS
 	INSERT INTO post_has_tag(post_id, tag_id)
 	VALUES ($1, $2);
 
-EXECUTE create_post_has_tag('27596ba5-0435-4bf8-9cc3-2f2b2486fdc6', 'c3f902d6-e141-4fff-b044-5f4aa972d39b');
-DEALLOCATE create_post_has_tag;
+EXECUTE create_tag_of_post('27596ba5-0435-4bf8-9cc3-2f2b2486fdc6', 'c3f902d6-e141-4fff-b044-5f4aa972d39b');
+DEALLOCATE create_tag_of_post;
+
+PREPARE create_tags_of_post(UUID, UUID[]) AS
+	INSERT INTO post_has_tag(post_id, tag_id)
+	SELECT $1 AS post_id, tag_id
+	FROM unnest($2::UUID[]) tag_id;
+
+EXECUTE create_tags_of_post('af802536-732f-485b-ba68-845c05d0b2dd', ARRAY['30c6851c-ff1b-4eb6-bf51-562ac9f90ebb', 'fe44bbc1-a7c6-447f-a8c4-d769f6b65f31']::UUID[]);
+DEALLOCATE create_tags_of_post;
 
 -- READ
 PREPARE read_tags_of_posts(UUID[]) AS
@@ -141,12 +149,20 @@ EXECUTE read_posts_has_tags(ARRAY['c3f902d6-e141-4fff-b044-5f4aa972d39b', '2b6cf
 DEALLOCATE read_posts_has_tags;
 
 -- UPDATE
-PREPARE update_tag_of_post(UUID, UUID) AS
+PREPARE update_tag_of_post(UUID, UUID, UUID) AS
 	UPDATE post_has_tag
 	SET
-		tag_id = $2,
+		tag_id = $3,
 		updated_at = NULL
-	WHERE post_id = $1;
+	WHERE post_id = $1 AND tag_id = $2;
 
-EXECUTE update_tag_of_post('773d4404-046b-4081-bea8-6e5e2e0d98f1', '2b358236-e176-42d6-9aa5-3e69281043c8');
+EXECUTE update_tag_of_post('7ff56137-8d8b-465b-afea-d0bf8f413267', 'f7c2bcba-0351-4ca0-aeba-48ea5e61c80c', 'a1baca02-7f30-4d40-98c1-bab6ff7037d7');
 DEALLOCATE update_tag_of_post;
+
+-- DELETE
+PREPARE delete_tag_of_post(UUID, UUID) AS
+	DELETE FROM post_has_tag
+	WHERE post_id = $1 AND tag_id = $2;
+
+EXECUTE delete_tag_of_post('7ff56137-8d8b-465b-afea-d0bf8f413267', 'a1baca02-7f30-4d40-98c1-bab6ff7037d7');
+DEALLOCATE delete_tag_of_post;

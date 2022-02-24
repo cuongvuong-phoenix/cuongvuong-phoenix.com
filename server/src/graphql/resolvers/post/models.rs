@@ -87,11 +87,17 @@ pub struct PostCreate {
     slug: String,
     reading_time: Option<i32>,
     visible: bool,
+    tag_ids: Vec<Uuid>,
 }
 
 impl PostCreate {
     pub async fn create(&self, db_pool: &Pool<Postgres>) -> Result<Post> {
-        sqlx::query_as!(
+        let mut transaction = db_pool
+            .begin()
+            .await
+            .map_err(|_| SharedError::Internal.extend())?;
+
+        let post = sqlx::query_as!(
             Post,
             r#"
             INSERT INTO post(title, slug, reading_time, visible)
@@ -103,9 +109,31 @@ impl PostCreate {
             self.reading_time,
             self.visible
         )
-        .fetch_one(db_pool)
+        .fetch_one(&mut transaction)
         .await
-        .map_err(|_| SharedError::Internal.extend())
+        .map_err(|_| SharedError::Internal.extend())?;
+
+        if self.tag_ids.len() > 0 {
+            sqlx::query!(
+                r#"
+                INSERT INTO post_has_tag(post_id, tag_id)
+                SELECT $1 AS post_id, tag_id
+                FROM unnest($2::UUID[]) tag_id;
+                "#,
+                post.id,
+                &self.tag_ids
+            )
+            .execute(&mut transaction)
+            .await
+            .map_err(|_| SharedError::Internal.extend())?;
+        }
+
+        transaction
+            .commit()
+            .await
+            .map_err(|_| SharedError::Internal.extend())?;
+
+        Ok(post)
     }
 }
 
