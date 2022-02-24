@@ -40,7 +40,7 @@ impl Tag {
         Ok(sqlx::query!(r#"SELECT COUNT(*) AS "count!" FROM tag"#)
             .fetch_one(db_pool)
             .await
-            .map_err(|_| SharedError::Internal.extend())?
+            .map_err(|e| SharedError::Database(e).extend())?
             .count as usize)
     }
 
@@ -61,7 +61,7 @@ impl Tag {
         )
         .fetch_all(db_pool)
         .await
-        .map_err(|_| SharedError::Internal.extend())
+        .map_err(|e| SharedError::Database(e).extend())
     }
 
     pub async fn read_one(db_pool: &Pool<Postgres>, id: Uuid) -> Result<Tag> {
@@ -76,7 +76,7 @@ impl Tag {
         )
         .fetch_optional(db_pool)
         .await
-        .map_err(|_| SharedError::Internal.extend())?
+        .map_err(|e| SharedError::Database(e).extend())?
         .ok_or_else(|| TagError::NotFound.extend())
     }
 
@@ -92,7 +92,7 @@ impl Tag {
         )
         .fetch_optional(db_pool)
         .await
-        .map_err(|_| SharedError::Internal.extend())?
+        .map_err(|e| SharedError::Database(e).extend())?
         .ok_or_else(|| TagError::NotFound.extend())
     }
 }
@@ -120,7 +120,7 @@ impl TagCreate {
         )
         .fetch_one(db_pool)
         .await
-        .map_err(|_| SharedError::Internal.extend())
+        .map_err(|e| SharedError::Database(e).extend())
     }
 }
 
@@ -153,7 +153,7 @@ impl TagUpdate {
         )
         .fetch_optional(db_pool)
         .await
-        .map_err(|_| SharedError::Internal.extend())?
+        .map_err(|e| SharedError::Database(e).extend())?
         .ok_or_else(|| TagError::NotFound.extend())
     }
 }

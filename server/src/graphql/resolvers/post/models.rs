@@ -23,7 +23,7 @@ impl Post {
         Ok(sqlx::query!(r#"SELECT COUNT(*) AS "count!" FROM post"#)
             .fetch_one(db_pool)
             .await
-            .map_err(|_| SharedError::Internal.extend())?
+            .map_err(|e| SharedError::Database(e).extend())?
             .count as usize)
     }
 
@@ -42,7 +42,7 @@ impl Post {
         )
         .fetch_all(db_pool)
         .await
-        .map_err(|_| SharedError::Internal.extend())
+        .map_err(|e| SharedError::Database(e).extend())
     }
 
     pub async fn read_one(db_pool: &Pool<Postgres>, id: Uuid) -> Result<Post> {
@@ -57,7 +57,7 @@ impl Post {
         )
         .fetch_optional(db_pool)
         .await
-        .map_err(|_| SharedError::Internal.extend())?
+        .map_err(|e| SharedError::Database(e).extend())?
         .ok_or_else(|| PostError::NotFound.extend())
     }
 
@@ -73,7 +73,7 @@ impl Post {
         )
         .fetch_optional(db_pool)
         .await
-        .map_err(|_| SharedError::Internal.extend())?
+        .map_err(|e| SharedError::Database(e).extend())?
         .ok_or_else(|| PostError::NotFound.extend())
     }
 
@@ -93,7 +93,7 @@ impl Post {
         )
         .execute(transaction)
         .await
-        .map_err(|_| SharedError::Internal.extend())?;
+        .map_err(|e| SharedError::Database(e).extend())?;
 
         Ok(())
     }
@@ -116,7 +116,7 @@ impl PostCreate {
         let mut transaction = db_pool
             .begin()
             .await
-            .map_err(|_| SharedError::Internal.extend())?;
+            .map_err(|e| SharedError::Database(e).extend())?;
 
         let post = sqlx::query_as!(
             Post,
@@ -132,14 +132,14 @@ impl PostCreate {
         )
         .fetch_one(&mut transaction)
         .await
-        .map_err(|_| SharedError::Internal.extend())?;
+        .map_err(|e| SharedError::Database(e).extend())?;
 
         Post::create_tags_transaction(&mut transaction, post.id, &self.tag_ids).await?;
 
         transaction
             .commit()
             .await
-            .map_err(|_| SharedError::Internal.extend())?;
+            .map_err(|e| SharedError::Database(e).extend())?;
 
         Ok(post)
     }
@@ -162,7 +162,7 @@ impl PostUpdate {
         let mut transaction = db_pool
             .begin()
             .await
-            .map_err(|_| SharedError::Internal.extend())?;
+            .map_err(|e| SharedError::Database(e).extend())?;
 
         let post = sqlx::query_as!(
             Post,
@@ -186,7 +186,7 @@ impl PostUpdate {
         )
         .fetch_optional(&mut transaction)
         .await
-        .map_err(|_| SharedError::Internal.extend())?
+        .map_err(|e| SharedError::Database(e).extend())?
         .ok_or_else(|| PostError::NotFound.extend())?;
 
         if let Some(tag_ids) = &self.tag_ids {
@@ -199,7 +199,7 @@ impl PostUpdate {
             )
             .execute(&mut transaction)
             .await
-            .map_err(|_| SharedError::Internal.extend())?;
+            .map_err(|e| SharedError::Database(e).extend())?;
 
             Post::create_tags_transaction(&mut transaction, id, tag_ids).await?;
         }
@@ -207,7 +207,7 @@ impl PostUpdate {
         transaction
             .commit()
             .await
-            .map_err(|_| SharedError::Internal.extend())?;
+            .map_err(|e| SharedError::Database(e).extend())?;
 
         Ok(post)
     }
