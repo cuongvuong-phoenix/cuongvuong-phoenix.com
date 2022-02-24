@@ -2,11 +2,11 @@
 	"folders": [
 		{
 			"name": "root",
-			"path": "."
+			"path": "../"
 		},
 		{
 			"name": "sql",
-			"path": "./sql"
+			"path": "../sql"
 		}
 	],
 	"settings": {
