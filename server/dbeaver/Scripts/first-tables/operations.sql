@@ -10,7 +10,6 @@ PREPARE create_post(title, slug, reading_time, visible) AS
 EXECUTE create_post('Post create', 'post-create', 30, true);
 DEALLOCATE create_post;
 
-
 -- READ
 SELECT COUNT(*) FROM post;
 
@@ -158,6 +157,20 @@ PREPARE update_tag_of_post(UUID, UUID, UUID) AS
 
 EXECUTE update_tag_of_post('7ff56137-8d8b-465b-afea-d0bf8f413267', 'f7c2bcba-0351-4ca0-aeba-48ea5e61c80c', 'a1baca02-7f30-4d40-98c1-bab6ff7037d7');
 DEALLOCATE update_tag_of_post;
+
+CREATE OR REPLACE FUNCTION update_tags_of_post(UUID, UUID[])
+RETURNS VOID AS
+$$
+	DELETE FROM post_has_tag
+	WHERE post_id = $1;
+
+	EXECUTE create_tags_of_post($1, $2);
+$$ LANGUAGE sql;
+
+SELECT update_tags_of_post('af802536-732f-485b-ba68-845c05d0b2dd', ARRAY[]::UUID[]);
+
+EXECUTE update_tags_of_post('7ff56137-8d8b-465b-afea-d0bf8f413267', 'f7c2bcba-0351-4ca0-aeba-48ea5e61c80c', 'a1baca02-7f30-4d40-98c1-bab6ff7037d7');
+DEALLOCATE update_tags_of_post;
 
 -- DELETE
 PREPARE delete_tag_of_post(UUID, UUID) AS

@@ -1,7 +1,7 @@
 use crate::graphql::shared::errors::SharedError;
 use async_graphql::{ErrorExtensions, InputObject, Result, SimpleObject};
 use chrono::{Local, NaiveDateTime};
-use sqlx::{Pool, Postgres};
+use sqlx::{Pool, Postgres, Transaction};
 use uuid::Uuid;
 
 use super::PostError;
@@ -76,6 +76,27 @@ impl Post {
         .map_err(|_| SharedError::Internal.extend())?
         .ok_or_else(|| PostError::NotFound.extend())
     }
+
+    pub async fn create_tags_transaction(
+        transaction: &mut Transaction<'_, Postgres>,
+        id: Uuid,
+        tag_ids: &[Uuid],
+    ) -> Result<()> {
+        sqlx::query!(
+            r#"
+            INSERT INTO post_has_tag(post_id, tag_id)
+            SELECT $1 AS post_id, tag_id
+            FROM unnest($2::UUID[]) tag_id;
+            "#,
+            id,
+            &tag_ids
+        )
+        .execute(transaction)
+        .await
+        .map_err(|_| SharedError::Internal.extend())?;
+
+        Ok(())
+    }
 }
 
 // ----------------------------------------------------------------
@@ -113,20 +134,7 @@ impl PostCreate {
         .await
         .map_err(|_| SharedError::Internal.extend())?;
 
-        if self.tag_ids.len() > 0 {
-            sqlx::query!(
-                r#"
-                INSERT INTO post_has_tag(post_id, tag_id)
-                SELECT $1 AS post_id, tag_id
-                FROM unnest($2::UUID[]) tag_id;
-                "#,
-                post.id,
-                &self.tag_ids
-            )
-            .execute(&mut transaction)
-            .await
-            .map_err(|_| SharedError::Internal.extend())?;
-        }
+        Post::create_tags_transaction(&mut transaction, post.id, &self.tag_ids).await?;
 
         transaction
             .commit()
@@ -146,11 +154,17 @@ pub struct PostUpdate {
     slug: Option<String>,
     reading_time: Option<i32>,
     visible: Option<bool>,
+    tag_ids: Option<Vec<Uuid>>,
 }
 
 impl PostUpdate {
     pub async fn update(&self, db_pool: &Pool<Postgres>, id: Uuid) -> Result<Post> {
-        sqlx::query_as!(
+        let mut transaction = db_pool
+            .begin()
+            .await
+            .map_err(|_| SharedError::Internal.extend())?;
+
+        let post = sqlx::query_as!(
             Post,
             r#"
             UPDATE post
@@ -170,9 +184,31 @@ impl PostUpdate {
             self.visible,
             Local::now().naive_local()
         )
-        .fetch_optional(db_pool)
+        .fetch_optional(&mut transaction)
         .await
         .map_err(|_| SharedError::Internal.extend())?
-        .ok_or_else(|| PostError::NotFound.extend())
+        .ok_or_else(|| PostError::NotFound.extend())?;
+
+        if let Some(tag_ids) = &self.tag_ids {
+            sqlx::query!(
+                r#"
+                DELETE FROM post_has_tag
+                WHERE post_id = $1;
+                "#,
+                id
+            )
+            .execute(&mut transaction)
+            .await
+            .map_err(|_| SharedError::Internal.extend())?;
+
+            Post::create_tags_transaction(&mut transaction, id, tag_ids).await?;
+        }
+
+        transaction
+            .commit()
+            .await
+            .map_err(|_| SharedError::Internal.extend())?;
+
+        Ok(post)
     }
 }
