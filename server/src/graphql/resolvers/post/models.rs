@@ -32,7 +32,7 @@ impl Post {
             r#"
             SELECT id, title, slug, reading_time, visible, created_at, updated_at
             FROM post
-            ORDER BY COALESCE(updated_at, created_at) DESC, reading_time DESC, title ASC
+            ORDER BY coalesce(updated_at, created_at) DESC, reading_time DESC, title ASC
             LIMIT $1
             OFFSET $2
             "#,
@@ -126,10 +126,10 @@ impl PostUpdate {
             r#"
             UPDATE post
             SET
-                title = COALESCE($2, title),
-                slug = COALESCE($3, slug),
-                reading_time = COALESCE($4, reading_time),
-                visible = COALESCE($5, visible),
+                title = coalesce($2, title),
+                slug = coalesce($3, slug),
+                reading_time = coalesce($4, reading_time),
+                visible = coalesce($5, visible),
                 updated_at = $6
             WHERE id = $1
             RETURNING id, title, slug, reading_time, visible, created_at, updated_at;

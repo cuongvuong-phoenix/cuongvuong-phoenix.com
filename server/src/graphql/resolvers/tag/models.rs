@@ -32,7 +32,7 @@ impl Tag {
             r#"
             SELECT id, name, icon, created_at, updated_at
             FROM tag
-            ORDER BY COALESCE(updated_at, created_at) DESC
+            ORDER BY coalesce(updated_at, created_at) DESC
             LIMIT $1
             OFFSET $2
             "#,
@@ -120,8 +120,8 @@ impl TagUpdate {
             r#"
             UPDATE tag
             SET
-                name = COALESCE($2, name),
-                icon = COALESCE($3, icon),
+                name = coalesce($2, name),
+                icon = coalesce($3, icon),
                 updated_at = $4
             WHERE id = $1
             RETURNING id, name, icon, created_at, updated_at
