@@ -7,8 +7,9 @@ use uuid::Uuid;
 use super::PostError;
 
 #[derive(SimpleObject)]
+#[graphql(complex)]
 pub struct Post {
-    id: Uuid,
+    pub id: Uuid,
     title: String,
     slug: String,
     reading_time: Option<i32>,

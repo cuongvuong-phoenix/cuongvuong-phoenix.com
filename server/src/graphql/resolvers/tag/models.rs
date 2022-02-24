@@ -8,13 +8,31 @@ use uuid::Uuid;
 // ----------------------------------------------------------------
 // READ
 // ----------------------------------------------------------------
-#[derive(SimpleObject)]
+#[derive(SimpleObject, Clone)]
 pub struct Tag {
     id: Uuid,
     name: String,
     icon: Option<String>,
     created_at: NaiveDateTime,
     updated_at: Option<NaiveDateTime>,
+}
+
+impl Tag {
+    pub fn new(
+        id: Uuid,
+        name: String,
+        icon: Option<String>,
+        created_at: NaiveDateTime,
+        updated_at: Option<NaiveDateTime>,
+    ) -> Self {
+        Self {
+            id,
+            name,
+            icon,
+            created_at,
+            updated_at,
+        }
+    }
 }
 
 impl Tag {
