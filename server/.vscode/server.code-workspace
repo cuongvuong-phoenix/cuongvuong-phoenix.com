@@ -5,15 +5,8 @@
 			"path": "../"
 		},
 		{
-			"name": "sql",
-			"path": "../sql"
+			"name": "dbeaver",
+			"path": "../dbeaver"
 		}
 	],
-	"settings": {
-		"files.associations": {
-			"*.sql": "postgres"
-		},
-		"vscode-postgres.defaultConnection": "localhost",
-		"vscode-postgres.defaultDatabase": "cvp-web"
-	}
 }

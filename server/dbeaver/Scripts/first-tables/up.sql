@@ -1,4 +1,3 @@
--- Add up migration script here
 CREATE TABLE post (
 	id				UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	title 			VARCHAR(256) NOT NULL,
@@ -15,4 +14,11 @@ CREATE TABLE tag (
 	icon 		VARCHAR(128),
 	created_at 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at 	TIMESTAMP
+);
+
+CREATE TABLE post_has_tag (
+	post_id	UUID REFERENCES post (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	tag_id	UUID REFERENCES tag (id) ON DELETE CASCADE ON UPDATE CASCADE,
+
+	PRIMARY KEY (post_id, tag_id)
 );
