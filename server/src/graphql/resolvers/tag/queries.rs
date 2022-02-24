@@ -15,7 +15,7 @@ pub struct TagQuery;
 
 #[Object]
 impl TagQuery {
-    pub async fn read_tags(
+    pub async fn tags(
         &self,
         ctx: &Context<'_>,
         params: PaginationParams,
@@ -25,7 +25,7 @@ impl TagQuery {
         query_connection(params, &state.db_pool, Tag::read_count, Tag::read_many).await
     }
 
-    pub async fn read_tag(&self, ctx: &Context<'_>, id: Uuid) -> Result<Tag> {
+    pub async fn tag(&self, ctx: &Context<'_>, id: Uuid) -> Result<Tag> {
         let state = ctx.data::<Arc<State>>()?;
 
         Tag::read_one(&state.db_pool, id).await
