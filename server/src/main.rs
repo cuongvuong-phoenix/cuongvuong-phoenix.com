@@ -15,7 +15,7 @@ pub struct State {
 #[tokio::main]
 async fn main() {
     config::load_env();
-    tracing_subscriber::fmt().init();
+    tracing_subscriber::fmt::init();
 
     let db_pool: Pool<Postgres> = Pool::connect(&DATABASE_URL).await.unwrap();
 
