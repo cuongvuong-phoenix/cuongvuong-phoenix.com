@@ -116,16 +116,33 @@ PREPARE read_tags_of_posts(UUID[]) AS
 	SELECT pht.post_id, t.id, t.name, t.icon, t.created_at, t.updated_at
 	FROM post_has_tag pht JOIN tag t ON pht.tag_id = t.id
 	WHERE pht.post_id = ANY($1)
-	ORDER BY coalesce(t.created_at, t.updated_at) DESC;
+	ORDER BY
+		coalesce(pht.updated_at, pht.created_at) DESC,
+		coalesce(t.updated_at, t.created_at) DESC;
 
-EXECUTE read_tags_of_posts(ARRAY['27596ba5-0435-4bf8-9cc3-2f2b2486fdc6', '68dfe36b-4131-49f5-a822-f57c00482048']::UUID[]);
+EXECUTE read_tags_of_posts(ARRAY['af802536-732f-485b-ba68-845c05d0b2dd', '34c7445e-3026-4299-8eee-0e1d5920c8df']::UUID[]);
 DEALLOCATE read_tags_of_posts;
 
 PREPARE read_posts_has_tags(UUID[]) AS
 	SELECT p.id, p.title, p.slug, p.reading_time, p.visible, p.created_at, p.updated_at
 	FROM post_has_tag pht JOIN post p ON pht.post_id = p.id
 	WHERE pht.tag_id = ANY($1) 
-	ORDER BY coalesce(p.created_at, p.updated_at) DESC, p.reading_time DESC, p.title ASC;
+	ORDER BY
+		coalesce(pht.updated_at, pht.created_at) DESC,
+		coalesce(p.updated_at, p.created_at) DESC,
+		p.reading_time DESC,
+		p.title ASC;
 
 EXECUTE read_posts_has_tags(ARRAY['c3f902d6-e141-4fff-b044-5f4aa972d39b', '2b6cf970-b1e8-4974-9aa3-ca78f45b0ac1']::UUID[]);
 DEALLOCATE read_posts_has_tags;
+
+-- UPDATE
+PREPARE update_tag_of_post(UUID, UUID) AS
+	UPDATE post_has_tag
+	SET
+		tag_id = $2,
+		updated_at = NULL
+	WHERE post_id = $1;
+
+EXECUTE update_tag_of_post('773d4404-046b-4081-bea8-6e5e2e0d98f1', '2b358236-e176-42d6-9aa5-3e69281043c8');
+DEALLOCATE update_tag_of_post;

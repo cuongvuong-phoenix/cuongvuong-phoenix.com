@@ -26,7 +26,9 @@ impl Loader<Uuid> for PostTagsLoader {
             SELECT pht.post_id, t.id, t.name, t.icon, t.created_at, t.updated_at
             FROM post_has_tag pht JOIN tag t ON pht.tag_id = t.id
             WHERE pht.post_id = ANY($1)
-            ORDER BY coalesce(t.created_at, t.updated_at) DESC;
+            ORDER BY
+                coalesce(pht.updated_at, pht.created_at) DESC,
+                coalesce(t.updated_at, t.created_at) DESC;
             "#,
             keys
         )
