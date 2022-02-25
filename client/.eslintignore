@@ -38,3 +38,5 @@ dist-ssr
 *.yaml
 *.yml
 *.d.ts
+
+graphql.ts

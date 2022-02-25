@@ -37,3 +37,5 @@ dist-ssr
 *.d.ts
 pnpm-lock.yaml
 tsconfig.json
+
+graphql.ts
