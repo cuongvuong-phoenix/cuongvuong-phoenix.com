@@ -17,11 +17,7 @@ const apolloClient = new ApolloClient({
   link: createHttpLink({
     uri: 'http://localhost:7878/api/graphql',
   }),
-  cache: new InMemoryCache({
-    resultCaching: false,
-    addTypename: false,
-  }),
-  assumeImmutableResults: false,
+  cache: new InMemoryCache(),
 });
 
 // Vue.
