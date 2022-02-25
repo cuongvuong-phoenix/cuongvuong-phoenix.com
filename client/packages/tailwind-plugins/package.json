@@ -5,9 +5,9 @@
   "author": "Cuong Vuong Chi",
   "main": "src/index.js",
   "devDependencies": {
-    "tailwindcss": "^3.0.22"
+    "tailwindcss": "^3.0.23"
   },
   "peerDependencies": {
-    "tailwindcss": "^3.0.22"
+    "tailwindcss": "^3.0.23"
   }
 }
