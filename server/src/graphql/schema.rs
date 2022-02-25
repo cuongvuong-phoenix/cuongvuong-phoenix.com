@@ -1,4 +1,6 @@
-use super::resolvers::{PostMutation, PostQuery, PostTagsLoader, TagMutation, TagQuery};
+use super::resolvers::{
+    PostContentLoader, PostMutation, PostQuery, PostTagsLoader, TagMutation, TagQuery,
+};
 use crate::State;
 use async_graphql::{dataloader::DataLoader, EmptySubscription, MergedObject, Schema};
 use std::sync::Arc;
@@ -16,6 +18,10 @@ pub fn init_schema(state: Arc<State>) -> AppSchema {
         .data(state.clone())
         .data(DataLoader::new(
             PostTagsLoader::new(state.clone()),
+            tokio::spawn,
+        ))
+        .data(DataLoader::new(
+            PostContentLoader::new(state.clone()),
             tokio::spawn,
         ))
         .finish()

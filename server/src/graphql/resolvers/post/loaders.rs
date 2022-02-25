@@ -5,6 +5,44 @@ use itertools::Itertools;
 use std::{collections::HashMap, sync::Arc};
 use uuid::Uuid;
 
+// ----------------------------------------------------------------
+// PostContentLoader
+// ----------------------------------------------------------------
+pub struct PostContentLoader {
+    state: Arc<State>,
+}
+
+impl PostContentLoader {
+    pub fn new(state: Arc<State>) -> Self {
+        Self { state }
+    }
+}
+
+#[async_trait]
+impl Loader<Uuid> for PostContentLoader {
+    type Value = String;
+    type Error = Arc<sqlx::Error>;
+
+    async fn load(&self, keys: &[Uuid]) -> Result<HashMap<Uuid, Self::Value>, Self::Error> {
+        Ok(sqlx::query!(
+            r#"
+            SELECT id, content
+            FROM post
+            WHERE id = ANY($1)
+            "#,
+            keys
+        )
+        .fetch_all(&self.state.db_pool)
+        .await?
+        .into_iter()
+        .map(|record| (record.id, record.content))
+        .collect())
+    }
+}
+
+// ----------------------------------------------------------------
+// PostTagsLoader
+// ----------------------------------------------------------------
 pub struct PostTagsLoader {
     state: Arc<State>,
 }

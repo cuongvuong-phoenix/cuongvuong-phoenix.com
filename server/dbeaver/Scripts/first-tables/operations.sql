@@ -26,6 +26,14 @@ PREPARE read_many_posts(INTEGER, INTEGER) AS
 EXECUTE read_many_posts(8, 0);
 DEALLOCATE read_many_posts;
 
+PREPARE read_posts_content(UUID[]) AS
+	SELECT content
+	FROM post
+	WHERE id = ANY($1);
+
+EXECUTE read_posts_content(ARRAY['b1c1209f-c247-48a8-bda4-d52fc637d90a', '359ae44d-19fc-4143-9cfd-c08bf44fdfa6']::UUID[]);
+DEALLOCATE read_posts_content;
+
 -- UPDATE
 PREPARE update_post(VARCHAR, VARCHAR, INTEGER, BOOLEAN, UUID) AS
 	UPDATE post

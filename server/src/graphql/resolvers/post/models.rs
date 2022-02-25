@@ -13,7 +13,6 @@ pub struct Post {
     slug: String,
     reading_time: i32,
     visible: bool,
-    content: String,
     created_at: NaiveDateTime,
     updated_at: Option<NaiveDateTime>,
 }
@@ -31,7 +30,7 @@ impl Post {
         sqlx::query_as!(
             Post,
             r#"
-            SELECT id, title, slug, reading_time, visible, content, created_at, updated_at
+            SELECT id, title, slug, reading_time, visible, created_at, updated_at
             FROM post
             ORDER BY coalesce(updated_at, created_at) DESC, reading_time DESC, title ASC
             LIMIT $1
@@ -49,7 +48,7 @@ impl Post {
         sqlx::query_as!(
             Post,
             r#"
-            SELECT id, title, slug, reading_time, visible, content, created_at, updated_at
+            SELECT id, title, slug, reading_time, visible, created_at, updated_at
             FROM post
             WHERE id = $1
             "#,
@@ -67,7 +66,7 @@ impl Post {
             r#"
             DELETE FROM post
             WHERE id = $1
-            RETURNING id, title, slug, reading_time, visible, content, created_at, updated_at
+            RETURNING id, title, slug, reading_time, visible, created_at, updated_at
             "#,
             id
         )
@@ -124,7 +123,7 @@ impl PostCreate {
             r#"
             INSERT INTO post(title, slug, reading_time, visible, content)
             VALUES ($1, $2, $3, $4, $5)
-            RETURNING id, title, slug, reading_time, visible, content, created_at, updated_at
+            RETURNING id, title, slug, reading_time, visible, created_at, updated_at
             "#,
             self.title,
             self.slug,
@@ -179,7 +178,7 @@ impl PostUpdate {
                 content = coalesce($6, content),
                 updated_at = $7
             WHERE id = $1
-            RETURNING id, title, slug, reading_time, visible, content, created_at, updated_at;
+            RETURNING id, title, slug, reading_time, visible, created_at, updated_at;
             "#,
             id,
             self.title,
