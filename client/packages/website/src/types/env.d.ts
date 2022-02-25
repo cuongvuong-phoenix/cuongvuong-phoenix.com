@@ -14,7 +14,7 @@ declare module '*.md' {
 }
 
 /* ----------------------------------------------------------------
-Environments
+Vite environments
 ---------------------------------------------------------------- */
 interface ImportMetaEnv {
   readonly VITE_SERVER_ADDRESS: string;
