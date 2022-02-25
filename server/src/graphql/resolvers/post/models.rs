@@ -12,7 +12,7 @@ pub struct Post {
     pub id: Uuid,
     title: String,
     slug: String,
-    reading_time: Option<i32>,
+    reading_time: i32,
     visible: bool,
     created_at: NaiveDateTime,
     updated_at: Option<NaiveDateTime>,
@@ -106,7 +106,7 @@ impl Post {
 pub struct PostCreate {
     title: String,
     slug: String,
-    reading_time: Option<i32>,
+    reading_time: i32,
     visible: bool,
     tag_ids: Vec<Uuid>,
 }

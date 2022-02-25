@@ -2,7 +2,7 @@ CREATE TABLE post (
 	id				UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	title 			VARCHAR(256) NOT NULL,
 	slug 			VARCHAR(256) UNIQUE NOT NULL,
-	reading_time 	INTEGER,
+	reading_time 	INTEGER NOT NULL,
 	visible 		BOOLEAN NOT NULL,
 	created_at 		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at 		TIMESTAMP
