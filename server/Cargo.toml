@@ -23,7 +23,7 @@ sqlx = { version = "0.5.10", features = ["chrono", "postgres", "runtime-tokio-na
 thiserror = "1.0.30"
 tokio = { version = "1.16.1", features = ["macros", "rt-multi-thread"] }
 tower = "0.4.11"
-tower-http = { version = "0.2.2", features = ["trace"] }
+tower-http = { version = "0.2.2", features = ["trace", "cors"] }
 tracing = "0.1.30"
 tracing-subscriber = { version = "0.3.8", features = ["env-filter"] }
 uuid = "0.8.2"

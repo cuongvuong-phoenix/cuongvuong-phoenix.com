@@ -1,9 +1,16 @@
-use axum::{routing::get, AddExtensionLayer, Router, Server};
+use axum::{
+    http::{header, Method},
+    routing::get,
+    AddExtensionLayer, Router, Server,
+};
 use config::*;
 use sqlx::{Pool, Postgres};
 use std::sync::Arc;
 use tower::ServiceBuilder;
-use tower_http::trace::TraceLayer;
+use tower_http::{
+    cors::{Any, CorsLayer, Origin},
+    trace::TraceLayer,
+};
 
 mod config;
 mod graphql;
@@ -27,6 +34,12 @@ async fn main() {
     // Middlewares.
     let middlewares = ServiceBuilder::new()
         .layer(TraceLayer::new_for_http())
+        .layer(
+            CorsLayer::new()
+                .allow_methods(vec![Method::POST, Method::GET])
+                .allow_headers(vec![header::CONTENT_TYPE, header::ACCEPT])
+                .allow_origin(Any),
+        )
         .layer(AddExtensionLayer::new(state.clone()));
 
     // App.
