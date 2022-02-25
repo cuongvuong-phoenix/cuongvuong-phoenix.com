@@ -1,13 +1,7 @@
 <template>
-  <RouterView v-slot="{ Component }">
+  <RouterView v-slot="{ Component, route }">
     <template v-if="Component">
-      <transition
-        mode="out-in"
-        enter-active-class="transition-opacity duration-300 ease-out"
-        enter-from-class="opacity-0"
-        leave-active-class="transition-opacity duration-200 ease-in"
-        leave-to-class="opacity-0"
-      >
+      <transition mode="out-in" :name="route.meta.transition || 'fade'">
         <KeepAlive>
           <Suspense>
             <component :is="Component" />
@@ -21,3 +15,18 @@
 <script setup lang="ts">
   import { RouterView } from 'vue-router';
 </script>
+
+<style lang="postcss">
+  .fade-enter-active {
+    @apply transition-opacity duration-300 ease-out;
+  }
+
+  .fade-leave-active {
+    @apply transition-opacity duration-200 ease-in;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    @apply opacity-0;
+  }
+</style>
