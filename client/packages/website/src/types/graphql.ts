@@ -96,6 +96,7 @@ export type PaginationParams = {
 
 export type Post = {
   __typename?: 'Post';
+  content: Scalars['String'];
   createdAt: Scalars['NaiveDateTime'];
   id: Scalars['UUID'];
   readingTime: Scalars['Int'];
@@ -116,6 +117,7 @@ export type PostConnection = {
 };
 
 export type PostCreate = {
+  content: Scalars['String'];
   readingTime: Scalars['Int'];
   slug: Scalars['String'];
   tagIds: Array<Scalars['UUID']>;
@@ -133,6 +135,7 @@ export type PostEdge = {
 };
 
 export type PostUpdate = {
+  content?: InputMaybe<Scalars['String']>;
   readingTime?: InputMaybe<Scalars['Int']>;
   slug?: InputMaybe<Scalars['String']>;
   tagIds?: InputMaybe<Array<Scalars['UUID']>>;

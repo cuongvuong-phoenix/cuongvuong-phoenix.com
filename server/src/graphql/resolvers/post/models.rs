@@ -1,10 +1,9 @@
+use super::PostError;
 use crate::graphql::shared::errors::SharedError;
 use async_graphql::{ErrorExtensions, InputObject, Result, SimpleObject};
 use chrono::{Local, NaiveDateTime};
 use sqlx::{Pool, Postgres, Transaction};
 use uuid::Uuid;
-
-use super::PostError;
 
 #[derive(SimpleObject)]
 #[graphql(complex)]
@@ -14,6 +13,7 @@ pub struct Post {
     slug: String,
     reading_time: i32,
     visible: bool,
+    content: String,
     created_at: NaiveDateTime,
     updated_at: Option<NaiveDateTime>,
 }
@@ -31,7 +31,7 @@ impl Post {
         sqlx::query_as!(
             Post,
             r#"
-            SELECT id, title, slug, reading_time, visible, created_at, updated_at
+            SELECT id, title, slug, reading_time, visible, content, created_at, updated_at
             FROM post
             ORDER BY coalesce(updated_at, created_at) DESC, reading_time DESC, title ASC
             LIMIT $1
@@ -49,7 +49,7 @@ impl Post {
         sqlx::query_as!(
             Post,
             r#"
-            SELECT id, title, slug, reading_time, visible, created_at, updated_at
+            SELECT id, title, slug, reading_time, visible, content, created_at, updated_at
             FROM post
             WHERE id = $1
             "#,
@@ -67,7 +67,7 @@ impl Post {
             r#"
             DELETE FROM post
             WHERE id = $1
-            RETURNING id, title, slug, reading_time, visible, created_at, updated_at
+            RETURNING id, title, slug, reading_time, visible, content, created_at, updated_at
             "#,
             id
         )
@@ -108,6 +108,7 @@ pub struct PostCreate {
     slug: String,
     reading_time: i32,
     visible: bool,
+    content: String,
     tag_ids: Vec<Uuid>,
 }
 
@@ -121,14 +122,15 @@ impl PostCreate {
         let post = sqlx::query_as!(
             Post,
             r#"
-            INSERT INTO post(title, slug, reading_time, visible)
-            VALUES ($1, $2, $3, $4)
-            RETURNING id, title, slug, reading_time, visible, created_at, updated_at
+            INSERT INTO post(title, slug, reading_time, visible, content)
+            VALUES ($1, $2, $3, $4, $5)
+            RETURNING id, title, slug, reading_time, visible, content, created_at, updated_at
             "#,
             self.title,
             self.slug,
             self.reading_time,
-            self.visible
+            self.visible,
+            self.content
         )
         .fetch_one(&mut transaction)
         .await
@@ -154,6 +156,7 @@ pub struct PostUpdate {
     slug: Option<String>,
     reading_time: Option<i32>,
     visible: Option<bool>,
+    content: Option<String>,
     tag_ids: Option<Vec<Uuid>>,
 }
 
@@ -173,15 +176,17 @@ impl PostUpdate {
                 slug = coalesce($3, slug),
                 reading_time = coalesce($4, reading_time),
                 visible = coalesce($5, visible),
-                updated_at = $6
+                content = coalesce($6, content),
+                updated_at = $7
             WHERE id = $1
-            RETURNING id, title, slug, reading_time, visible, created_at, updated_at;
+            RETURNING id, title, slug, reading_time, visible, content, created_at, updated_at;
             "#,
             id,
             self.title,
             self.slug,
             self.reading_time,
             self.visible,
+            self.content,
             Local::now().naive_local()
         )
         .fetch_optional(&mut transaction)

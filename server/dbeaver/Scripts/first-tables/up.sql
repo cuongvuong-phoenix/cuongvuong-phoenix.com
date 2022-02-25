@@ -4,6 +4,7 @@ CREATE TABLE post (
 	slug 			VARCHAR(256) UNIQUE NOT NULL,
 	reading_time 	INTEGER NOT NULL,
 	visible 		BOOLEAN NOT NULL,
+	content			TEXT NOT NULL,
 	created_at 		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at 		TIMESTAMP
 );

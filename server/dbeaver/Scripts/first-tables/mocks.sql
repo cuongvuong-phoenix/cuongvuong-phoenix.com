@@ -2,12 +2,13 @@
 -- post
 -- ----------------------------------------------------------------
 -- Mocks
-INSERT INTO post(title, slug, reading_time, visible)
+INSERT INTO post(title, slug, reading_time, visible, content)
 SELECT
 	'Post ' || seq AS title,
 	'post-' || seq AS slug,
 	round((random() * 30)::NUMERIC, 0) AS reading_time,
-	random() > 0.5 AS visible
+	random() > 0.5 AS visible,
+	'Content ' || seq AS content
 FROM GENERATE_SERIES(1, 64) seq;
 
 -- ----------------------------------------------------------------
