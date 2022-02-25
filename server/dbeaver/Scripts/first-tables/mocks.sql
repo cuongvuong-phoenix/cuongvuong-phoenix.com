@@ -8,7 +8,7 @@ SELECT
 	'post-' || seq AS slug,
 	round((random() * 30)::NUMERIC, 0) AS reading_time,
 	random() > 0.5 AS visible
-FROM GENERATE_SERIES(1, 256) seq;
+FROM GENERATE_SERIES(1, 64) seq;
 
 -- ----------------------------------------------------------------
 -- tag
@@ -17,8 +17,8 @@ FROM GENERATE_SERIES(1, 256) seq;
 INSERT INTO tag(name, icon)
 SELECT
 	'Tag ' || seq AS name,
-	'icon-' || seq AS icon
-FROM generate_series(1, 64) seq;
+	'mdi:vuejs' AS icon
+FROM generate_series(1, 16) seq;
 
 -- ----------------------------------------------------------------
 -- post_has_tag
@@ -27,7 +27,7 @@ FROM generate_series(1, 64) seq;
 WITH
 	expanded AS (
 		SELECT random(), seq, p.id AS post_id, t.id AS tag_id
-		FROM generate_series(1, 128) seq, post p, tag t
+		FROM generate_series(1, 64) seq, post p, tag t
 	),
 	shuffled AS (
 		SELECT e.post_id, e.tag_id

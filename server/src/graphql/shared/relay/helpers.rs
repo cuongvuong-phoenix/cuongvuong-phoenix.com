@@ -58,7 +58,10 @@ pub fn get_start_end_cursor_offsets(
     match (first, last) {
         (Some(first), _) => (start_offset, (start_offset + first).min(end_offset)),
         (_, Some(last)) => ((end_offset - last).max(start_offset), end_offset),
-        _ => (start_offset, (start_offset + DEFAULT_PAGE_SIZE)),
+        _ => (
+            start_offset,
+            (start_offset + DEFAULT_PAGE_SIZE).min(end_offset),
+        ),
     }
 }
 
