@@ -1,5 +1,5 @@
 <template>
-  <div
+  <!-- <div
     :class="{
       'fixed inset-x-0 z-10 backdrop-blur-xl transition-[top] duration-500 border-fg-darkest': !route.meta.staticHeader,
       'border-b': !route.meta.staticHeader && scrolledOutDirection,
@@ -12,6 +12,12 @@
           ? 0
           : `${-(uiStore.headerHeight + 1)}px`
         : undefined,
+    }"
+  > -->
+  <div
+    :class="{
+      'fixed inset-x-0 top-0 z-10 backdrop-blur-xl border-fg-darkest': !route.meta.staticHeader,
+      'border-b': !route.meta.staticHeader && scrolledOutDirection,
     }"
   >
     <div
