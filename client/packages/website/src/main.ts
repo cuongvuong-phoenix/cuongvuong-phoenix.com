@@ -15,7 +15,7 @@ import '@cvp-web-client/ui/css';
 // Vue Apollo.
 const apolloClient = new ApolloClient({
   link: createHttpLink({
-    uri: 'http://localhost:7878/api/graphql',
+    uri: import.meta.env.VITE_SERVER_ADDRESS,
   }),
   cache: new InMemoryCache(),
 });

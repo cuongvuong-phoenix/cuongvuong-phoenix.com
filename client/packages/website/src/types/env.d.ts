@@ -12,3 +12,14 @@ declare module '*.md' {
   const component: DefineComponent<{}, {}, any>;
   export default component;
 }
+
+/* ----------------------------------------------------------------
+Environments
+---------------------------------------------------------------- */
+interface ImportMetaEnv {
+  readonly VITE_SERVER_ADDRESS: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
