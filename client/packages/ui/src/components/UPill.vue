@@ -14,8 +14,8 @@
   import UIcon from './UIcon.vue';
 
   const { dim, active } = defineProps<{
-    name?: string;
-    icon?: string;
+    name: string;
+    icon?: string | null;
     active?: boolean;
     dim?: boolean;
   }>();

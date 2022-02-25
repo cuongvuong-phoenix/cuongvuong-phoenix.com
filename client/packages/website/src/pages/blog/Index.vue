@@ -25,7 +25,9 @@
           <!-- "Total results count" -->
           <p class="truncate">
             <span class="font-bold text-fg-darker">{{ t('common.total').toUpperCase() }}&colon;&nbsp;</span
-            ><span class="italic">{{ totalPosts }} {{ t('common.post', totalPosts).toLowerCase() }}</span>
+            ><span v-if="gqlPostsTotalCount" class="italic"
+              >{{ gqlPostsTotalCount }} {{ t('common.post', gqlPostsTotalCount).toLowerCase() }}</span
+            >
           </p>
           <!-- END "Total results count" -->
 
@@ -68,7 +70,7 @@
         <!-- "Posts" -->
         <div class="border rounded-lg border-fg-darkest">
           <WPost
-            v-for="(post, i) in posts"
+            v-for="(post, i) in gqlPosts"
             :key="post.id"
             :post="post"
             :class="{
@@ -79,15 +81,19 @@
         <!-- END "Posts" -->
 
         <!-- "Pagination" -->
-        <div class="flex items-center mt-8 space-x-8">
+        <div v-if="gqlPostsPageInfo" class="flex items-center mt-8 space-x-8">
           <div class="flex items-center flex-1 min-w-0">
             <UButton
+              v-if="gqlPostsPageInfo.hasPreviousPage"
               :link="
-                hasPreviousPage
-                  ? { name: RouteName.BLOG, params: { locale: locale }, query: { before: startCursor } }
+                gqlPostsPageInfo.hasPreviousPage
+                  ? {
+                      name: RouteName.BLOG,
+                      params: { locale: locale },
+                      query: { last: postsPageSize, before: gqlPostsPageInfo.startCursor },
+                    }
                   : undefined
               "
-              :disabled="!hasPreviousPage"
               link-active-type="none"
             >
               <UIcon icon="fluent:arrow-left-24-regular" />
@@ -100,12 +106,16 @@
 
           <div class="flex items-center justify-end flex-1 min-w-0">
             <UButton
+              v-if="gqlPostsPageInfo.hasNextPage"
               :link="
-                hasNextPage
-                  ? { name: RouteName.BLOG, params: { locale: locale }, query: { after: endCursor } }
+                gqlPostsPageInfo.hasNextPage
+                  ? {
+                      name: RouteName.BLOG,
+                      params: { locale: locale },
+                      query: { first: postsPageSize, after: gqlPostsPageInfo.endCursor },
+                    }
                   : undefined
               "
-              :disabled="!hasNextPage"
               link-active-type="none"
             >
               <span>{{ t('common.next') }}</span>
@@ -122,15 +132,19 @@
 </template>
 
 <script setup lang="ts">
-  import { type Ref, computed, ref } from 'vue';
+  import { type Ref, computed, ref, watch } from 'vue';
+  import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
+  import { useQuery, useResult } from '@vue/apollo-composable';
+  import { gql } from 'graphql-tag';
+  import { parseISO } from 'date-fns';
   import { type Option, UButton, UIcon, UInput, UListbox, UPill } from '@cvp-web-client/ui';
-  import faker from '@faker-js/faker/locale/en';
   import WPost from './_components/WPost.vue';
   import { useUiStore } from '~/store/ui';
-  import { postTags } from '~/utils/mocks';
   import { RouteName } from '~/utils/constants';
+  import { type PostsQuery, type PostsQueryVariables, type Tag, type TagsQuery } from '~/types/graphql';
 
+  const route = useRoute();
   const uiStore = useUiStore();
   const { t, locale } = useI18n();
 
@@ -152,33 +166,99 @@
   /* ----------------------------------------------------------------
   READ tags
   ---------------------------------------------------------------- */
-  const tags = ref(postTags) as Ref<Model.PostTagR[]>;
+  const {
+    result: tagsResult,
+    loading: tagsLoading,
+    error: tagsError,
+  } = useQuery<TagsQuery>(gql`
+    query tags {
+      tags(params: { first: 4 }) {
+        edges {
+          cursor
+          node {
+            id
+            name
+            icon
+          }
+        }
+      }
+    }
+  `);
+
+  const gqlTags = useResult(tagsResult, [], (data) => data.tags.edges.map((edge) => edge.node));
+
+  interface TagR extends Omit<Tag, 'createdAt' | 'updatedAt'> {
+    active: boolean;
+  }
+  const tags = ref([]) as Ref<TagR[]>;
+
+  watch(gqlTags, (value) => {
+    tags.value = value.map((item) => ({
+      ...item,
+      active: false,
+    }));
+  });
 
   /* ----------------------------------------------------------------
   READ posts
   ---------------------------------------------------------------- */
-  const totalPosts = ref(93);
+  const postsPageSize = ref(8);
 
-  const posts = ref(
-    Array.from({ length: 16 }).map(
-      () =>
-        ({
-          id: faker.datatype.uuid(),
-          slug: faker.lorem.slug(8),
-          title: faker.lorem.words(8),
-          createdAt: faker.date.past(1),
-          updatedAt: faker.random.arrayElement([faker.date.past(0.5), undefined]),
-          readingTime: faker.datatype.number(60),
-          tags: faker.random.arrayElements(postTags, faker.datatype.number(4)),
-        } as Model.PostListItemR)
-    )
-  ) as Ref<Model.PostListItemR[]>;
+  const {
+    result: postsResult,
+    loading: postsLoading,
+    error: postsError,
+  } = useQuery<PostsQuery, PostsQueryVariables>(
+    gql`
+      query posts($after: String, $before: String, $first: Int, $last: Int) {
+        posts(params: { after: $after, before: $before, first: $first, last: $last }) {
+          totalCount
+          edges {
+            node {
+              id
+              title
+              slug
+              readingTime
+              createdAt
+              updatedAt
+              tags {
+                id
+                name
+                icon
+              }
+            }
+          }
+          pageInfo {
+            hasPreviousPage
+            hasNextPage
+            startCursor
+            endCursor
+          }
+        }
+      }
+    `,
+    () => ({
+      after: route.query.after as string | undefined,
+      before: route.query.before as string | undefined,
+      first: route.query.first ? parseInt(route.query.first as string) : undefined,
+      last: route.query.last ? parseInt(route.query.last as string) : undefined,
+    })
+  );
+
+  const gqlPosts = useResult(postsResult, [], (data) =>
+    data.posts.edges.map((edge) => {
+      return {
+        ...edge.node,
+        createdAt: parseISO(edge.node.createdAt),
+        updatedAt: edge.node.updatedAt ? parseISO(edge.node.updatedAt) : undefined,
+      };
+    })
+  );
 
   /* ----------------------------------------------------------------
   Pagination
   ---------------------------------------------------------------- */
-  const startCursor = ref('abc');
-  const endCursor = ref('xyz');
-  const hasPreviousPage = ref(false);
-  const hasNextPage = ref(true);
+  const gqlPostsTotalCount = useResult(postsResult, undefined, (data) => data.posts.totalCount);
+
+  const gqlPostsPageInfo = useResult(postsResult, undefined, (data) => data.posts.pageInfo);
 </script>

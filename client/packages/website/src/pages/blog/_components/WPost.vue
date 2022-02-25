@@ -43,9 +43,16 @@
   import { UIcon } from '@cvp-web-client/ui';
   import { RouteName } from '~/utils/constants';
   import { formatDatetime } from '~/utils/helpers';
+  import { type Post, type Tag } from '~/types/graphql';
+
+  interface PostR extends Omit<Post, 'visible' | 'createdAt' | 'updatedAt' | 'tags'> {
+    createdAt: Date;
+    updatedAt?: Date;
+    tags: Omit<Tag, 'createdAt' | 'updatedAt'>[];
+  }
 
   defineProps<{
-    post: Model.PostListItemR;
+    post: PostR;
   }>();
 
   const { t, locale } = useI18n();
