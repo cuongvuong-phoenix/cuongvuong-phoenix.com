@@ -45,14 +45,14 @@
   import { formatDatetime } from '~/utils/helpers';
   import { type Post, type Tag } from '~/types/graphql';
 
-  interface PostR extends Omit<Post, 'visible' | 'content' | 'createdAt' | 'updatedAt' | 'tags'> {
+  interface WPost extends Omit<Post, 'visible' | 'content' | 'createdAt' | 'updatedAt' | 'tags'> {
     createdAt: Date;
     updatedAt?: Date;
     tags: Omit<Tag, 'createdAt' | 'updatedAt'>[];
   }
 
   defineProps<{
-    post: PostR;
+    post: WPost;
   }>();
 
   const { t, locale } = useI18n();

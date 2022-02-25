@@ -187,10 +187,10 @@
 
   const gqlTags = useResult(tagsResult, [], (data) => data.tags.edges.map((edge) => edge.node));
 
-  interface TagR extends Omit<Tag, 'createdAt' | 'updatedAt'> {
+  interface WTag extends Omit<Tag, 'createdAt' | 'updatedAt'> {
     active: boolean;
   }
-  const tags = ref([]) as Ref<TagR[]>;
+  const tags = ref([]) as Ref<WTag[]>;
 
   watch(gqlTags, (value) => {
     tags.value = value.map((item) => ({
