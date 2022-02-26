@@ -28,7 +28,7 @@
     >
       <!-- "Left" -->
       <div class="flex flex-1 space-x-12">
-        <UButton v-for="nav in leftNavs" :key="nav" :link="{ name: nav }" size="lg" class="!p-0">
+        <UButton v-for="nav in leftNavs" :key="nav" :link="{ name: nav, params: { locale } }" size="lg" class="!p-0">
           {{ t(`nav.${nav}`).toUpperCase() }}
         </UButton>
       </div>
@@ -42,7 +42,7 @@
 
       <!-- "Right" -->
       <div class="flex justify-end flex-1 space-x-12">
-        <UButton v-for="nav in rightNavs" :key="nav" :link="{ name: nav }" size="lg" class="!p-0">
+        <UButton v-for="nav in rightNavs" :key="nav" :link="{ name: nav, params: { locale } }" size="lg" class="!p-0">
           {{ t(`nav.${nav}`).toUpperCase() }}
         </UButton>
       </div>
@@ -62,7 +62,7 @@
 
   const route = useRoute();
   const uiStore = useUiStore();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   /* ----------------------------------------------------------------
   Scroll based on `dimHeaderFooter`.
