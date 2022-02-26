@@ -42,43 +42,62 @@
 </template>
 
 <script setup lang="ts">
+  import { gql } from 'graphql-tag';
   import { computed } from 'vue';
   import { useI18n } from 'vue-i18n';
+  import { useQuery } from '@vue/apollo-composable';
   import avatarUrl from '~/assets/images/avatar.jpg';
+  import { type ReadHomeContentQuery } from '~/types/graphql';
 
   const { t } = useI18n();
 
   /* ----------------------------------------------------------------
-  Kebab-sections
+  READ Home Content
   ---------------------------------------------------------------- */
+  const {
+    result: homeContentResult,
+    loading: homeContentLoading,
+    error: homeContentError,
+  } = useQuery<ReadHomeContentQuery>(gql`
+    query readHomeContent {
+      homeContent {
+        biography
+        contact
+        yearsOfExperience
+        numBlogPosts
+        numProjects
+      }
+    }
+  `);
+
   interface KebabSection {
     label: string;
-    body: string | number;
+    body?: string | number;
   }
 
   const leftKebabSections = computed<KebabSection[]>(() => [
     {
       label: t('pages.home.kebab-sections.biography'),
-      body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rutrum quisque non tellus orci ac. Turpis nunc eget lorem dolor sed. Semper quis lectus nulla at volutpat diam ut venenatis tellus. Libero volutpat sed cras ornare arcu. Malesuada fames ac turpis egestas sed. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus et. Nisl purus in mollis nunc sed id semper risus in. Ut eu sem integer vitae justo. Ipsum dolor sit amet consectetur adipiscing elit duis. A iaculis at erat pellentesque adipiscing commodo elit at. Cursus in hac habitasse platea dictumst quisque sagittis. Nulla posuere sollicitudin aliquam ultrices.',
+      body: homeContentResult.value?.homeContent.biography,
     },
     {
       label: t('pages.home.kebab-sections.contact'),
-      body: 'Est pellentesque elit ullamcorper dignissim. Libero volutpat sed cras ornare arcu dui vivamus arcu. Ultrices eros in cursus turpis massa tincidunt dui ut ornare. Ac tincidunt vitae semper quis lectus nulla at volutpat diam. Sed odio morbi quis commodo. Posuere ac ut consequat semper viverra. Sed ullamcorper morbi tincidunt ornare massa eget. Molestie nunc non blandit massa enim nec. In cursus turpis massa tincidunt dui ut ornare. Non arcu risus quis varius quam quisque. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus scelerisque.',
+      body: homeContentResult.value?.homeContent.contact,
     },
   ]);
 
   const rightKebabSections = computed<KebabSection[]>(() => [
     {
       label: t('pages.home.kebab-sections.years-of-experience'),
-      body: 2,
+      body: homeContentResult.value?.homeContent.yearsOfExperience,
     },
     {
       label: t('pages.home.kebab-sections.blog'),
-      body: 16,
+      body: homeContentResult.value?.homeContent.numBlogPosts,
     },
     {
-      label: t('pages.home.kebab-sections.notes', 2),
-      body: 8,
+      label: t('pages.home.kebab-sections.projects', 2),
+      body: homeContentResult.value?.homeContent.numProjects,
     },
   ]);
 </script>

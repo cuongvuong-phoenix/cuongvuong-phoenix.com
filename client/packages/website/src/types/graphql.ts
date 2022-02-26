@@ -32,14 +32,46 @@ export type Scalars = {
   UUID: any;
 };
 
+export type HomeContent = {
+  __typename?: 'HomeContent';
+  biography: Scalars['String'];
+  contact: Scalars['String'];
+  createdAt: Scalars['NaiveDateTime'];
+  numBlogPosts: Scalars['Int'];
+  numProjects: Scalars['Int'];
+  updatedAt?: Maybe<Scalars['NaiveDateTime']>;
+  yearsOfExperience: Scalars['Int'];
+};
+
+export type HomeContentCreate = {
+  biography: Scalars['String'];
+  contact: Scalars['String'];
+  numProjects: Scalars['Int'];
+  yearsOfExperience: Scalars['Int'];
+};
+
+export type HomeContentUpdate = {
+  biography?: InputMaybe<Scalars['String']>;
+  contact?: InputMaybe<Scalars['String']>;
+  numProjects?: InputMaybe<Scalars['Int']>;
+  yearsOfExperience?: InputMaybe<Scalars['Int']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createHomeContent: HomeContent;
   createPost: Post;
   createTag: Tag;
   deletePost: Post;
   deleteTag: Tag;
+  updateHomeContent: HomeContent;
   updatePost: Post;
   updateTag: Tag;
+};
+
+
+export type MutationCreateHomeContentArgs = {
+  home: HomeContentCreate;
 };
 
 
@@ -60,6 +92,11 @@ export type MutationDeletePostArgs = {
 
 export type MutationDeleteTagArgs = {
   id: Scalars['UUID'];
+};
+
+
+export type MutationUpdateHomeContentArgs = {
+  home: HomeContentUpdate;
 };
 
 
@@ -145,6 +182,7 @@ export type PostUpdate = {
 
 export type Query = {
   __typename?: 'Query';
+  homeContent: HomeContent;
   post: Post;
   posts: PostConnection;
   tag: Tag;
@@ -208,6 +246,11 @@ export type TagUpdate = {
   name?: InputMaybe<Scalars['String']>;
 };
 
+export type ReadHomeContentQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ReadHomeContentQuery = { __typename?: 'Query', homeContent: { __typename?: 'HomeContent', biography: string, contact: string, yearsOfExperience: number, numBlogPosts: number, numProjects: number } };
+
 export type TagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -224,5 +267,6 @@ export type PostsQueryVariables = Exact<{
 export type PostsQuery = { __typename?: 'Query', posts: { __typename?: 'PostConnection', totalCount: number, edges?: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: any, title: string, slug: string, readingTime: number, createdAt: any, updatedAt?: any | null, tags: Array<{ __typename?: 'Tag', id: any, name: string, icon?: string | null }> } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 
+export const ReadHomeContentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"readHomeContent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homeContent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"biography"}},{"kind":"Field","name":{"kind":"Name","value":"contact"}},{"kind":"Field","name":{"kind":"Name","value":"yearsOfExperience"}},{"kind":"Field","name":{"kind":"Name","value":"numBlogPosts"}},{"kind":"Field","name":{"kind":"Name","value":"numProjects"}}]}}]}}]} as unknown as DocumentNode<ReadHomeContentQuery, ReadHomeContentQueryVariables>;
 export const TagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tags"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"params"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"4"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}}]}}]}}]}}]}}]} as unknown as DocumentNode<TagsQuery, TagsQueryVariables>;
 export const PostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"posts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"before"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"params"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"before"},"value":{"kind":"Variable","name":{"kind":"Name","value":"before"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalCount"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"readingTime"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hasPreviousPage"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"startCursor"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}}]}}]}}]} as unknown as DocumentNode<PostsQuery, PostsQueryVariables>;

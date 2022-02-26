@@ -16,7 +16,7 @@ pages:
       contact: "@:{'common.contact'}"
       years-of-experience: Years of experience
       blog: "@:{'common.blog'}"
-      notes: "@:{'common.note'}"
+      projects: "@:{'common.project'}"
   blog:
     filters:
       by-tags: "By @.lower:{'common.tag'}"
@@ -35,6 +35,8 @@ common:
 
   blog: Blog
   post: Post | Posts
+
+  project: Project | Projects
 
   search: Search
 
