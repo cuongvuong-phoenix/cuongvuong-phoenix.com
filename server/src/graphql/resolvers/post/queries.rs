@@ -68,9 +68,9 @@ impl PostQuery {
         }
     }
 
-    async fn post(&self, ctx: &Context<'_>, id: Uuid) -> Result<Post> {
+    async fn post(&self, ctx: &Context<'_>, slug: String) -> Result<Post> {
         let state = ctx.data::<Arc<State>>()?;
 
-        Post::read_one(&state.db_pool, id).await
+        Post::read_one_by_slug(&state.db_pool, slug).await
     }
 }

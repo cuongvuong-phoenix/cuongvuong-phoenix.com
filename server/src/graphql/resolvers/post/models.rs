@@ -91,15 +91,15 @@ impl Post {
         .map_err(|e| SharedError::Database(e).extend())
     }
 
-    pub async fn read_one(db_pool: &Pool<Postgres>, id: Uuid) -> Result<Post> {
+    pub async fn read_one_by_slug(db_pool: &Pool<Postgres>, slug: String) -> Result<Post> {
         sqlx::query_as!(
             Post,
             r#"
             SELECT id, title, slug, reading_time, visible, created_at, updated_at
             FROM post
-            WHERE id = $1
+            WHERE slug = $1
             "#,
-            id
+            slug
         )
         .fetch_optional(db_pool)
         .await
