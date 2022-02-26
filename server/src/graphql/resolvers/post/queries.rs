@@ -15,7 +15,7 @@ pub struct PostQuery;
 
 #[Object]
 impl PostQuery {
-    pub async fn posts(
+    async fn posts(
         &self,
         ctx: &Context<'_>,
         params: PaginationParams,
@@ -25,7 +25,7 @@ impl PostQuery {
         query_connection(params, &state.db_pool, Post::read_count, Post::read_many).await
     }
 
-    pub async fn post(&self, ctx: &Context<'_>, id: Uuid) -> Result<Post> {
+    async fn post(&self, ctx: &Context<'_>, id: Uuid) -> Result<Post> {
         let state = ctx.data::<Arc<State>>()?;
 
         Post::read_one(&state.db_pool, id).await

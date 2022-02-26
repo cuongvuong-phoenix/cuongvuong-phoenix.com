@@ -9,19 +9,19 @@ pub struct TagMutation;
 
 #[Object]
 impl TagMutation {
-    pub async fn create_tag(&self, ctx: &Context<'_>, tag: TagCreate) -> Result<Tag> {
+    async fn create_tag(&self, ctx: &Context<'_>, tag: TagCreate) -> Result<Tag> {
         let state = ctx.data::<Arc<State>>()?;
 
         tag.create(&state.db_pool).await
     }
 
-    pub async fn update_tag(&self, ctx: &Context<'_>, id: Uuid, tag: TagUpdate) -> Result<Tag> {
+    async fn update_tag(&self, ctx: &Context<'_>, id: Uuid, tag: TagUpdate) -> Result<Tag> {
         let state = ctx.data::<Arc<State>>()?;
 
         tag.update(&state.db_pool, id).await
     }
 
-    pub async fn delete_tag(&self, ctx: &Context<'_>, id: Uuid) -> Result<Tag> {
+    async fn delete_tag(&self, ctx: &Context<'_>, id: Uuid) -> Result<Tag> {
         let state = ctx.data::<Arc<State>>()?;
 
         Tag::delete(&state.db_pool, id).await

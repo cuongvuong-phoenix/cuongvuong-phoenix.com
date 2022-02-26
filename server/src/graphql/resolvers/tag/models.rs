@@ -10,7 +10,7 @@ use uuid::Uuid;
 // ----------------------------------------------------------------
 #[derive(SimpleObject, Clone)]
 pub struct Tag {
-    id: Uuid,
+    pub id: Uuid,
     name: String,
     icon: Option<String>,
     created_at: NaiveDateTime,
