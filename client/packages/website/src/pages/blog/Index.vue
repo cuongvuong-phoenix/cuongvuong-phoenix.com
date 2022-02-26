@@ -193,12 +193,12 @@
 
   watch(
     () => route.query.tags,
-    (currTagsQueryParams, prevTagsQueryParams) => {
-      if (JSON.stringify(currTagsQueryParams) !== JSON.stringify(prevTagsQueryParams)) {
-        if (Array.isArray(currTagsQueryParams) && currTagsQueryParams.length > 0) {
-          activeTagIds.value = currTagsQueryParams as string[];
-        } else if (currTagsQueryParams && !Array.isArray(currTagsQueryParams)) {
-          activeTagIds.value = [currTagsQueryParams];
+    (currTagsRouteQuery, prevTagsRouteQuery) => {
+      if (JSON.stringify(currTagsRouteQuery) !== JSON.stringify(prevTagsRouteQuery)) {
+        if (Array.isArray(currTagsRouteQuery) && currTagsRouteQuery.length > 0) {
+          activeTagIds.value = currTagsRouteQuery as string[];
+        } else if (currTagsRouteQuery && !Array.isArray(currTagsRouteQuery)) {
+          activeTagIds.value = [currTagsRouteQuery];
         } else {
           activeTagIds.value = [];
         }
@@ -215,12 +215,16 @@
   }
   const tags = ref([]) as Ref<WTag[]>;
 
-  watch([gqlTags, activeTagIds], ([gqlTagValues, activeTagIdValues]) => {
-    tags.value = gqlTagValues.map((gqlTag) => ({
-      ...gqlTag,
-      active: activeTagIdValues.includes(gqlTag.id),
-    }));
-  });
+  watch(
+    [gqlTags, activeTagIds],
+    ([gqlTagValues, activeTagIdValues]) => {
+      tags.value = gqlTagValues.map((gqlTag) => ({
+        ...gqlTag,
+        active: activeTagIdValues.includes(gqlTag.id),
+      }));
+    },
+    { immediate: true }
+  );
 
   // Functions.
   function toggleTag(id: string) {
@@ -252,8 +256,6 @@
   /* ----------------------------------------------------------------
   READ posts
   ---------------------------------------------------------------- */
-  const postsPageSize = ref(8);
-
   const {
     result: postsResult,
     loading: postsLoading,
@@ -309,6 +311,8 @@
   /* ----------------------------------------------------------------
   Pagination
   ---------------------------------------------------------------- */
+  const postsPageSize = ref(8);
+
   const gqlPostsTotalCount = useResult(postsResult, undefined, (data) => data.posts.totalCount);
 
   const gqlPostsPageInfo = useResult(postsResult, undefined, (data) => data.posts.pageInfo);
