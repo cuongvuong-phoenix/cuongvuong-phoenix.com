@@ -1,15 +1,16 @@
 use super::resolvers::{
-    PostContentLoader, PostMutation, PostQuery, PostTagsLoader, TagMutation, TagQuery,
+    HomeMutation, HomeQuery, PostContentLoader, PostMutation, PostQuery, PostTagsLoader,
+    TagMutation, TagQuery,
 };
 use crate::State;
 use async_graphql::{dataloader::DataLoader, EmptySubscription, MergedObject, Schema};
 use std::sync::Arc;
 
 #[derive(Default, MergedObject)]
-pub struct Query(PostQuery, TagQuery);
+pub struct Query(HomeQuery, PostQuery, TagQuery);
 
 #[derive(Default, MergedObject)]
-pub struct Mutation(PostMutation, TagMutation);
+pub struct Mutation(HomeMutation, PostMutation, TagMutation);
 
 pub type AppSchema = Schema<Query, Mutation, EmptySubscription>;
 

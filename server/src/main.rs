@@ -8,7 +8,7 @@ use sqlx::{Pool, Postgres};
 use std::sync::Arc;
 use tower::ServiceBuilder;
 use tower_http::{
-    cors::{Any, CorsLayer, Origin},
+    cors::{Any, CorsLayer},
     trace::TraceLayer,
 };
 
