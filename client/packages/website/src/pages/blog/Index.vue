@@ -56,7 +56,7 @@
 
             <div class="flex flex-wrap items-center -mx-1">
               <div v-for="tag in tags" :key="tag.name" class="p-1">
-                <UPill :icon="tag.icon" :name="tag.name" :active="tag.active" dim @click="tag.active = !tag.active" />
+                <UPill :icon="tag.icon" :name="tag.name" :active="tag.active" dim @click="toggleTag(tag.id)" />
               </div>
             </div>
           </div>
@@ -89,8 +89,8 @@
                 gqlPostsPageInfo.hasPreviousPage
                   ? {
                       name: RouteName.BLOG,
-                      params: { locale: locale },
-                      query: { last: postsPageSize, before: gqlPostsPageInfo.startCursor },
+                      params: { locale },
+                      query: { last: postsPageSize, before: gqlPostsPageInfo.startCursor, tags: route.query.tags },
                     }
                   : undefined
               "
@@ -111,8 +111,8 @@
                 gqlPostsPageInfo.hasNextPage
                   ? {
                       name: RouteName.BLOG,
-                      params: { locale: locale },
-                      query: { first: postsPageSize, after: gqlPostsPageInfo.endCursor },
+                      params: { locale },
+                      query: { first: postsPageSize, after: gqlPostsPageInfo.endCursor, tags: route.query.tags },
                     }
                   : undefined
               "
@@ -133,7 +133,7 @@
 
 <script setup lang="ts">
   import { type Ref, computed, ref, watch } from 'vue';
-  import { useRoute } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useQuery, useResult } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
@@ -144,6 +144,7 @@
   import { RouteName } from '~/utils/constants';
   import { type PostsQuery, type PostsQueryVariables, type Tag, type TagsQuery } from '~/types/graphql';
 
+  const router = useRouter();
   const route = useRoute();
   const uiStore = useUiStore();
   const { t, locale } = useI18n();
@@ -187,17 +188,66 @@
 
   const gqlTags = useResult(tagsResult, [], (data) => data.tags.edges.map((edge) => edge.node));
 
+  // Check for activing tags based on `route.query.tags` query params.
+  const activeTagIds = ref<string[]>([]);
+
+  watch(
+    () => route.query.tags,
+    (currTagsQueryParams, prevTagsQueryParams) => {
+      if (JSON.stringify(currTagsQueryParams) !== JSON.stringify(prevTagsQueryParams)) {
+        if (Array.isArray(currTagsQueryParams) && currTagsQueryParams.length > 0) {
+          activeTagIds.value = currTagsQueryParams as string[];
+        } else if (currTagsQueryParams && !Array.isArray(currTagsQueryParams)) {
+          activeTagIds.value = [currTagsQueryParams];
+        } else {
+          activeTagIds.value = [];
+        }
+      }
+    },
+    {
+      immediate: true,
+    }
+  );
+
+  // Tags to render.
   interface WTag extends Omit<Tag, 'createdAt' | 'updatedAt'> {
-    active: boolean;
+    active?: boolean;
   }
   const tags = ref([]) as Ref<WTag[]>;
 
-  watch(gqlTags, (value) => {
-    tags.value = value.map((item) => ({
-      ...item,
-      active: false,
+  watch([gqlTags, activeTagIds], ([gqlTagValues, activeTagIdValues]) => {
+    tags.value = gqlTagValues.map((gqlTag) => ({
+      ...gqlTag,
+      active: activeTagIdValues.includes(gqlTag.id),
     }));
   });
+
+  // Functions.
+  function toggleTag(id: string) {
+    let tagsQueryParams: string[];
+
+    if (activeTagIds.value) {
+      tagsQueryParams = activeTagIds.value.slice() as string[];
+
+      const activedTagIndex = tagsQueryParams.findIndex((activeTagId) => activeTagId === id);
+
+      if (activedTagIndex === -1) {
+        tagsQueryParams.push(id);
+      } else {
+        tagsQueryParams.splice(activedTagIndex, 1);
+      }
+    } else {
+      tagsQueryParams = [id];
+    }
+
+    router.push({
+      name: RouteName.BLOG,
+      params: { locale: locale.value },
+      query: {
+        tags: tagsQueryParams,
+      },
+    });
+  }
 
   /* ----------------------------------------------------------------
   READ posts
@@ -210,8 +260,8 @@
     error: postsError,
   } = useQuery<PostsQuery, PostsQueryVariables>(
     gql`
-      query posts($after: String, $before: String, $first: Int, $last: Int) {
-        posts(paginationParams: { after: $after, before: $before, first: $first, last: $last }) {
+      query posts($tagIds: [UUID!]!, $after: String, $before: String, $first: Int, $last: Int) {
+        posts(tagIds: $tagIds, paginationParams: { after: $after, before: $before, first: $first, last: $last }) {
           totalCount
           edges {
             node {
@@ -238,6 +288,7 @@
       }
     `,
     () => ({
+      tagIds: activeTagIds.value,
       after: route.query.after as string | undefined,
       before: route.query.before as string | undefined,
       first: route.query.first ? parseInt(route.query.first as string) : undefined,
