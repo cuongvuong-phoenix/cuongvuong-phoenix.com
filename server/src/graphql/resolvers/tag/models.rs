@@ -1,7 +1,7 @@
 use super::errors::TagError;
 use crate::graphql::shared::errors::SharedError;
 use async_graphql::{ErrorExtensions, InputObject, Result, SimpleObject};
-use chrono::{Local, NaiveDateTime};
+use chrono::{DateTime, Utc};
 use sqlx::{Pool, Postgres};
 use uuid::Uuid;
 
@@ -13,8 +13,8 @@ pub struct Tag {
     pub id: Uuid,
     name: String,
     icon: Option<String>,
-    created_at: NaiveDateTime,
-    updated_at: Option<NaiveDateTime>,
+    created_at: DateTime<Utc>,
+    updated_at: Option<DateTime<Utc>>,
 }
 
 impl Tag {
@@ -22,8 +22,8 @@ impl Tag {
         id: Uuid,
         name: String,
         icon: Option<String>,
-        created_at: NaiveDateTime,
-        updated_at: Option<NaiveDateTime>,
+        created_at: DateTime<Utc>,
+        updated_at: Option<DateTime<Utc>>,
     ) -> Self {
         Self {
             id,
@@ -149,7 +149,7 @@ impl TagUpdate {
             id,
             self.name,
             self.icon,
-            Local::now().naive_local()
+            Utc::now()
         )
         .fetch_optional(db_pool)
         .await

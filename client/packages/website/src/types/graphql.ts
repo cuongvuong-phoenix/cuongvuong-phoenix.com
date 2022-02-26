@@ -12,13 +12,11 @@ export type Scalars = {
   Int: number;
   Float: number;
   /**
-   * ISO 8601 combined date and time without timezone.
+   * Implement the DateTime<Utc> scalar
    *
-   * # Examples
-   *
-   * * `2015-07-01T08:59:60.123`,
+   * The input/output is a string in RFC3339 format.
    */
-  NaiveDateTime: any;
+  DateTime: any;
   /**
    * A UUID is a unique 128-bit number, stored as 16 octets. UUIDs are parsed as Strings
    * within GraphQL. UUIDs are used to assign unique identifiers to entities without requiring a central
@@ -36,10 +34,10 @@ export type HomeContent = {
   __typename?: 'HomeContent';
   biography: Scalars['String'];
   contact: Scalars['String'];
-  createdAt: Scalars['NaiveDateTime'];
+  createdAt: Scalars['DateTime'];
   numBlogPosts: Scalars['Int'];
   numProjects: Scalars['Int'];
-  updatedAt?: Maybe<Scalars['NaiveDateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   yearsOfExperience: Scalars['Int'];
 };
 
@@ -134,13 +132,13 @@ export type PaginationParams = {
 export type Post = {
   __typename?: 'Post';
   content: Scalars['String'];
-  createdAt: Scalars['NaiveDateTime'];
+  createdAt: Scalars['DateTime'];
   id: Scalars['UUID'];
   readingTime: Scalars['Int'];
   slug: Scalars['String'];
   tags: Array<Tag>;
   title: Scalars['String'];
-  updatedAt?: Maybe<Scalars['NaiveDateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   visible: Scalars['Boolean'];
 };
 
@@ -211,11 +209,11 @@ export type QueryTagsArgs = {
 
 export type Tag = {
   __typename?: 'Tag';
-  createdAt: Scalars['NaiveDateTime'];
+  createdAt: Scalars['DateTime'];
   icon?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   name: Scalars['String'];
-  updatedAt?: Maybe<Scalars['NaiveDateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type TagConnection = {

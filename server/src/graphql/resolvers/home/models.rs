@@ -1,6 +1,6 @@
 use crate::graphql::shared::errors::SharedError;
 use async_graphql::{ErrorExtensions, InputObject, Result, SimpleObject};
-use chrono::{Local, NaiveDateTime};
+use chrono::{DateTime, Utc};
 use sqlx::{Pool, Postgres};
 
 #[derive(SimpleObject)]
@@ -10,8 +10,8 @@ pub struct HomeContent {
     contact: String,
     years_of_experience: i32,
     num_projects: i32,
-    created_at: NaiveDateTime,
-    updated_at: Option<NaiveDateTime>,
+    created_at: DateTime<Utc>,
+    updated_at: Option<DateTime<Utc>>,
 }
 
 impl HomeContent {
@@ -89,7 +89,7 @@ impl HomeContentUpdate {
             self.contact,
             self.years_of_experience,
             self.num_projects,
-            Local::now().naive_local(),
+            Utc::now(),
         )
         .fetch_one(db_pool)
         .await
