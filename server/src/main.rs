@@ -8,7 +8,7 @@ use sqlx::{Pool, Postgres};
 use std::sync::Arc;
 use tower::ServiceBuilder;
 use tower_http::{
-    cors::{Any, CorsLayer},
+    cors::{CorsLayer, Origin},
     trace::TraceLayer,
 };
 
@@ -38,7 +38,9 @@ async fn main() {
             CorsLayer::new()
                 .allow_methods(vec![Method::POST, Method::GET])
                 .allow_headers(vec![header::CONTENT_TYPE, header::ACCEPT])
-                .allow_origin(Any),
+                .allow_origin(Origin::list(
+                    ALLOWED_ORIGIN.iter().map(|origin| origin.parse().unwrap()),
+                )),
         )
         .layer(AddExtensionLayer::new(state.clone()));
 
