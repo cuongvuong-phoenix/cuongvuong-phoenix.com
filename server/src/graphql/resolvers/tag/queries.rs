@@ -18,11 +18,17 @@ impl TagQuery {
     async fn tags(
         &self,
         ctx: &Context<'_>,
-        params: PaginationParams,
+        pagination_params: PaginationParams,
     ) -> Result<Connection<Base64Cursor, Tag, ConnectionFields, EmptyFields>> {
         let state = ctx.data::<Arc<State>>()?;
 
-        query_connection(params, &state.db_pool, Tag::read_count, Tag::read_many).await
+        query_connection(
+            pagination_params,
+            &state.db_pool,
+            Tag::read_count,
+            Tag::read_many,
+        )
+        .await
     }
 
     async fn tag(&self, ctx: &Context<'_>, id: Uuid) -> Result<Tag> {

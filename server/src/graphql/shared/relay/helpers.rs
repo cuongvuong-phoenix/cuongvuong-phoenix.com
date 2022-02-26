@@ -9,7 +9,7 @@ use std::future::Future;
 pub const DEFAULT_PAGE_SIZE: usize = 8;
 
 pub async fn query_connection<'a, N, CF, CFR, VF, VFR>(
-    params: PaginationParams,
+    pagination_params: PaginationParams,
     db_pool: &'a Pool<Postgres>,
     count_fn: CF,
     vec_fn: VF,
@@ -25,7 +25,7 @@ where
         before,
         first,
         last,
-    } = params;
+    } = pagination_params;
 
     connection::query::<Base64Cursor, N, ConnectionFields, _, _, _, Error>(
         after,

@@ -47,7 +47,7 @@
   import { useI18n } from 'vue-i18n';
   import { useQuery } from '@vue/apollo-composable';
   import avatarUrl from '~/assets/images/avatar.jpg';
-  import { type ReadHomeContentQuery } from '~/types/graphql';
+  import { type HomeContentQuery } from '~/types/graphql';
 
   const { t } = useI18n();
 
@@ -58,8 +58,8 @@
     result: homeContentResult,
     loading: homeContentLoading,
     error: homeContentError,
-  } = useQuery<ReadHomeContentQuery>(gql`
-    query readHomeContent {
+  } = useQuery<HomeContentQuery>(gql`
+    query homeContent {
       homeContent {
         biography
         contact

@@ -18,11 +18,17 @@ impl PostQuery {
     async fn posts(
         &self,
         ctx: &Context<'_>,
-        params: PaginationParams,
+        pagination_params: PaginationParams,
     ) -> Result<Connection<Base64Cursor, Post, ConnectionFields, EmptyFields>> {
         let state = ctx.data::<Arc<State>>()?;
 
-        query_connection(params, &state.db_pool, Post::read_count, Post::read_many).await
+        query_connection(
+            pagination_params,
+            &state.db_pool,
+            Post::read_count,
+            Post::read_many,
+        )
+        .await
     }
 
     async fn post(&self, ctx: &Context<'_>, id: Uuid) -> Result<Post> {

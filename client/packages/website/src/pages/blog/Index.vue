@@ -172,7 +172,7 @@
     error: tagsError,
   } = useQuery<TagsQuery>(gql`
     query tags {
-      tags(params: { first: 4 }) {
+      tags(paginationParams: { first: 4 }) {
         edges {
           cursor
           node {
@@ -211,7 +211,7 @@
   } = useQuery<PostsQuery, PostsQueryVariables>(
     gql`
       query posts($after: String, $before: String, $first: Int, $last: Int) {
-        posts(params: { after: $after, before: $before, first: $first, last: $last }) {
+        posts(paginationParams: { after: $after, before: $before, first: $first, last: $last }) {
           totalCount
           edges {
             node {
