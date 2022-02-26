@@ -2,13 +2,11 @@
   <RouterView v-slot="{ Component, route }">
     <template v-if="Component">
       <transition mode="out-in" :name="route.meta.transition || 'fade'">
-        <KeepAlive v-if="keepAlive">
+        <KeepAlive :include="!keepAlive ? [] : undefined">
           <Suspense>
             <component :is="Component" />
           </Suspense>
         </KeepAlive>
-
-        <component :is="Component" v-else />
       </transition>
     </template>
   </RouterView>
@@ -17,7 +15,7 @@
 <script setup lang="ts">
   import { RouterView } from 'vue-router';
 
-  const { keepAlive = true } = defineProps<{
+  defineProps<{
     keepAlive?: boolean;
   }>();
 </script>
