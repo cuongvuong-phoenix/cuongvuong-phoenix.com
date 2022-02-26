@@ -21,53 +21,50 @@ impl PostQuery {
     async fn posts(
         &self,
         ctx: &Context<'_>,
-        tag_ids: Option<Vec<Uuid>>,
+        tag_ids: Vec<Uuid>,
         pagination_params: PaginationParams,
     ) -> Result<Connection<Base64Cursor, Post, ConnectionFields, EmptyFields>> {
         let state = ctx.data::<Arc<State>>()?;
 
-        match tag_ids {
-            None => {
-                query_connection(
-                    pagination_params,
-                    &state.db_pool,
-                    Post::read_count,
-                    Post::read_many,
-                )
-                .await
-            }
-            Some(tag_ids) => {
-                let PaginationParams {
-                    after,
-                    before,
-                    first,
-                    last,
-                } = pagination_params;
+        if tag_ids.len() == 0 {
+            query_connection(
+                pagination_params,
+                &state.db_pool,
+                Post::read_count,
+                Post::read_many,
+            )
+            .await
+        } else {
+            let PaginationParams {
+                after,
+                before,
+                first,
+                last,
+            } = pagination_params;
 
-                connection::query::<Base64Cursor, Post, ConnectionFields, _, _, _, Error>(
-                    after,
-                    before,
-                    first,
-                    last,
-                    |after, before, first, last| async move {
-                        let count = Post::read_count_by_tags(&state.db_pool, &tag_ids).await?;
+            connection::query::<Base64Cursor, Post, ConnectionFields, _, _, _, Error>(
+                after,
+                before,
+                first,
+                last,
+                |after, before, first, last| async move {
+                    let count = Post::read_count_by_tags(&state.db_pool, &tag_ids).await?;
 
-                        let (start, end) =
-                            get_start_end_cursor_offsets(after, before, first, last, count);
+                    let (start, end) =
+                        get_start_end_cursor_offsets(after, before, first, last, count);
 
-                        let posts = Post::read_many_by_tags(
-                            &state.db_pool,
-                            &tag_ids,
-                            (end - start) as i64,
-                            start as i64,
-                        )
-                        .await?;
+                    let posts = Post::read_many_by_tags(
+                        &state.db_pool,
+                        &tag_ids,
+                        (end - start) as i64,
+                        start as i64,
+                    )
+                    .await?;
 
-                        Ok(create_connection(start, end, count, posts.into_iter()))
-                    },
-                )
-                .await
-            }
+                    Ok(create_connection(start, end, count, posts.into_iter()))
+                },
+            )
+            .await
         }
     }
 
