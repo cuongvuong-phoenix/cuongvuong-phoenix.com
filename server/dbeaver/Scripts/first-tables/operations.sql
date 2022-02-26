@@ -13,7 +13,7 @@ DEALLOCATE create_post;
 -- READ
 SELECT COUNT(*) FROM post;
 
-PREPARE read_many_posts(INTEGER, INTEGER) AS
+PREPARE read_posts(INTEGER, INTEGER) AS
 	SELECT id, title, slug, reading_time, visible, created_at, updated_at
 	FROM post
 	ORDER BY
@@ -23,8 +23,8 @@ PREPARE read_many_posts(INTEGER, INTEGER) AS
 	LIMIT $1
 	OFFSET $2;
 
-EXECUTE read_many_posts(8, 0);
-DEALLOCATE read_many_posts;
+EXECUTE read_posts(8, 0);
+DEALLOCATE read_posts;
 
 PREPARE read_posts_content(UUID[]) AS
 	SELECT content
@@ -33,6 +33,33 @@ PREPARE read_posts_content(UUID[]) AS
 
 EXECUTE read_posts_content(ARRAY['b1c1209f-c247-48a8-bda4-d52fc637d90a', '359ae44d-19fc-4143-9cfd-c08bf44fdfa6']::UUID[]);
 DEALLOCATE read_posts_content;
+
+-- READ by `tag`s.
+PREPARE count_posts_by_tags(UUID[]) AS
+	SELECT COUNT(*)
+	FROM
+		post p
+		JOIN post_has_tag pht ON p.id = pht.post_id
+	WHERE pht.tag_id = ANY($1);
+
+EXECUTE count_posts_by_tags(ARRAY['92d9019c-7610-491d-a2f2-86157ed0af0e', '739d9a28-23bf-4071-8b9a-c4a84e7553eb']::UUID[]);
+DEALLOCATE count_posts_by_tags;
+
+PREPARE read_posts_by_tags(UUID[], INTEGER, INTEGER) AS
+	SELECT p.id, p.title, p.slug, p.reading_time, p.visible, p.created_at, p.updated_at
+	FROM
+		post p
+		JOIN post_has_tag pht ON p.id = pht.post_id
+	WHERE pht.tag_id = ANY($1)
+	ORDER BY
+		coalesce(p.updated_at, p.created_at) DESC,
+		p.reading_time DESC,
+		p.title ASC
+	LIMIT $2
+	OFFSET $3;
+
+EXECUTE read_posts_by_tags(ARRAY['92d9019c-7610-491d-a2f2-86157ed0af0e', '739d9a28-23bf-4071-8b9a-c4a84e7553eb']::UUID[], 8, 0);
+DEALLOCATE read_posts_by_tags;
 
 -- UPDATE
 PREPARE update_post(VARCHAR, VARCHAR, INTEGER, BOOLEAN, UUID) AS

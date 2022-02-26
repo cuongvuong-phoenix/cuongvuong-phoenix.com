@@ -44,6 +44,53 @@ impl Post {
         .map_err(|e| SharedError::Database(e).extend())
     }
 
+    pub async fn read_count_by_tags(db_pool: &Pool<Postgres>, tag_ids: &[Uuid]) -> Result<usize> {
+        Ok(sqlx::query!(
+            r#"
+            SELECT COUNT(*) AS "count!"
+            FROM
+                post p
+                JOIN post_has_tag pht ON p.id = pht.post_id
+            WHERE pht.tag_id = ANY($1);
+            "#,
+            tag_ids
+        )
+        .fetch_one(db_pool)
+        .await
+        .map_err(|e| SharedError::Database(e).extend())?
+        .count as usize)
+    }
+
+    pub async fn read_many_by_tags(
+        db_pool: &Pool<Postgres>,
+        tag_ids: &[Uuid],
+        limit: i64,
+        offset: i64,
+    ) -> Result<Vec<Post>> {
+        sqlx::query_as!(
+            Post,
+            r#"
+            SELECT p.id, p.title, p.slug, p.reading_time, p.visible, p.created_at, p.updated_at
+            FROM
+                post p
+                JOIN post_has_tag pht ON p.id = pht.post_id
+            WHERE pht.tag_id = ANY($1)
+            ORDER BY
+                coalesce(p.updated_at, p.created_at) DESC,
+                p.reading_time DESC,
+                p.title ASC
+            LIMIT $2
+            OFFSET $3;
+            "#,
+            &tag_ids,
+            limit,
+            offset
+        )
+        .fetch_all(db_pool)
+        .await
+        .map_err(|e| SharedError::Database(e).extend())
+    }
+
     pub async fn read_one(db_pool: &Pool<Postgres>, id: Uuid) -> Result<Post> {
         sqlx::query_as!(
             Post,
