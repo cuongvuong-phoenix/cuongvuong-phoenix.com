@@ -31,6 +31,7 @@
         height: uiStore.headerHeightString,
       }"
     >
+      <!-- "(2xl)" -->
       <template v-if="!smallerMd">
         <!-- "Left" -->
         <div class="flex flex-1 space-x-12">
@@ -54,6 +55,7 @@
         </div>
         <!-- END "Right" -->
       </template>
+      <!-- END "(2xl)" -->
 
       <!-- "(md)" -->
       <template v-else>

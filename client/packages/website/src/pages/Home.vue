@@ -8,35 +8,81 @@
     <!-- END "Top" -->
 
     <!-- "Next" -->
-    <div class="flex justify-between mt-12 space-x-32">
-      <!-- "Left" -->
-      <div class="flex flex-col justify-between flex-1 min-w-0">
-        <div v-for="section in leftKebabSections" :key="section.label">
+    <!-- "(2xl)" -->
+    <template v-if="!smallerLg">
+      <div class="flex mt-12 space-x-32">
+        <!-- "Left" -->
+        <div class="flex flex-col justify-between flex-1 min-w-0">
+          <div v-for="section in leftKebabSections" :key="section.label">
+            <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
+            <div class="mt-4 font-serif text-xl font-medium line-clamp-5">{{ section.body }}</div>
+          </div>
+        </div>
+        <!-- END "Left" -->
+
+        <!-- "Middle - Avatar" -->
+        <div
+          class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring-primary-default"
+        >
+          <div class="w-full h-full rounded-[8rem] border border-fg-darkest overflow-hidden">
+            <img :src="avatarUrl" :alt="t('common.avatar')" class="object-cover w-full h-full" />
+          </div>
+        </div>
+        <!-- END "Middle - Avatar" -->
+
+        <!-- "Right" -->
+        <div class="flex flex-col justify-between flex-1 min-w-0">
+          <div v-for="section in rightKebabSections" :key="section.label" class="text-right">
+            <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
+            <div class="mt-4 font-serif text-5xl font-medium truncate">{{ section.body }}</div>
+          </div>
+        </div>
+        <!-- END "Right" -->
+      </div>
+    </template>
+    <!-- END "(2xl)" -->
+
+    <!-- "(lg)" -->
+    <template v-else>
+      <!-- "Avatar" -->
+      <div class="flex justify-center mt-12">
+        <div
+          class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring-primary-default"
+        >
+          <div class="w-full h-full rounded-[8rem] border border-fg-darkest overflow-hidden">
+            <img :src="avatarUrl" :alt="t('common.avatar')" class="object-cover w-full h-full" />
+          </div>
+        </div>
+      </div>
+      <!-- END "Avatar" -->
+
+      <!-- "Left Sections" -->
+      <div class="grid grid-cols-2 gap-16 mt-12 text-center md:grid-cols-1 md:gap-8">
+        <div
+          v-for="section in leftKebabSections"
+          :key="section.label"
+          class="flex flex-col items-center justify-between"
+        >
           <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
           <div class="mt-4 font-serif text-xl font-medium line-clamp-5">{{ section.body }}</div>
         </div>
       </div>
-      <!-- END "Left" -->
+      <!-- END "Left Sections" -->
 
-      <!-- "Middle" -->
-      <div
-        class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring-primary-default"
-      >
-        <div class="w-full h-full rounded-[8rem] border border-fg-darkest overflow-hidden">
-          <img :src="avatarUrl" :alt="t('common.avatar')" class="object-cover w-full h-full" />
-        </div>
-      </div>
-      <!-- END "Middle" -->
-
-      <!-- "Right" -->
-      <div class="flex flex-col justify-between flex-1 min-w-0">
-        <div v-for="section in rightKebabSections" :key="section.label" class="text-right">
+      <!-- "Right Sections" -->
+      <div class="grid grid-cols-3 gap-16 mt-12 text-center md:grid-cols-1 md:gap-8">
+        <div
+          v-for="section in rightKebabSections"
+          :key="section.label"
+          class="flex flex-col items-center justify-between"
+        >
           <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
           <div class="mt-4 font-serif text-5xl font-medium truncate">{{ section.body }}</div>
         </div>
       </div>
-      <!-- END "Right" -->
-    </div>
+      <!-- END "Right Sections" -->
+    </template>
+    <!-- END "(lg)" -->
     <!-- END "Next" -->
   </div>
 </template>
@@ -45,11 +91,21 @@
   import { gql } from 'graphql-tag';
   import { computed } from 'vue';
   import { useI18n } from 'vue-i18n';
+  import { useBreakpoints } from '@vueuse/core';
   import { useQuery } from '@vue/apollo-composable';
   import avatarUrl from '~/assets/images/avatar.jpg';
   import { type HomeContentQuery } from '~/types/graphql';
+  import { appBreakpoints } from '~/utils/constants';
 
   const { t } = useI18n();
+
+  /* ----------------------------------------------------------------
+  Breakpoints
+  ---------------------------------------------------------------- */
+  const breakpoints = useBreakpoints(appBreakpoints);
+
+  const smallerLg = breakpoints.smaller('lg');
+  const smallerMd = breakpoints.smaller('md');
 
   /* ----------------------------------------------------------------
   READ Home Content
