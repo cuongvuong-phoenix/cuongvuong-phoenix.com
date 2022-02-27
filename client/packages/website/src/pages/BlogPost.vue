@@ -3,7 +3,22 @@
     <!-- "Top" -->
     <!-- "Row 1 - Tags" -->
     <div v-if="gqlPost && gqlPost.tags.length > 0" class="flex flex-wrap items-center justify-center gap-2">
-      <UPill v-for="tag in gqlPost?.tags" :key="tag.id" :icon="tag.icon" :name="tag.name" dim />
+      <UPill
+        v-for="tag in gqlPost?.tags"
+        :key="tag.id"
+        :icon="tag.icon"
+        :name="tag.name"
+        dim
+        @click="
+          router.push({
+            name: RouteName.BLOG,
+            params: { locale: locale },
+            query: {
+              tags: [tag.id],
+            },
+          })
+        "
+      />
     </div>
     <!-- END "Row 1 - Tags" -->
 
@@ -50,15 +65,17 @@
 
 <script setup lang="ts">
   import { reactive, watch } from 'vue';
-  import { useRoute } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useQuery, useResult } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
   import { UIcon, UPill } from '@cvp-web-client/ui';
   import { formatDatetime } from '~/utils/helpers';
+  import { RouteName } from '~/utils/constants';
   import type { PostQuery, PostQueryVariables } from '~/types/graphql';
 
+  const router = useRouter();
   const route = useRoute();
   const { t, locale } = useI18n();
 
