@@ -2,7 +2,7 @@
   <div>
     <!-- "Top" -->
     <!-- "Row 1 - Tags" -->
-    <div v-if="gqlPost && gqlPost.tags.length > 0" class="flex flex-wrap items-center justify-center space-x-2">
+    <div v-if="gqlPost && gqlPost.tags.length > 0" class="flex flex-wrap items-center justify-center gap-2">
       <UPill v-for="tag in gqlPost?.tags" :key="tag.id" :icon="tag.icon" :name="tag.name" dim />
     </div>
     <!-- END "Row 1 - Tags" -->
@@ -12,7 +12,7 @@
     <!-- END "Row 2 - Title" -->
 
     <!-- "Row 3" -->
-    <div class="flex items-center justify-center mt-6 space-x-4 text-fg-darker">
+    <div class="flex flex-wrap items-center justify-center mt-6 gap-x-4 gap-y-2 text-fg-darker">
       <div class="flex items-center space-x-2">
         <UIcon icon="fluent:calendar-ltr-24-regular" />
         <span v-if="gqlPost">{{ formatDatetime(gqlPost.createdAt, locale) }}</span>
@@ -22,18 +22,20 @@
         <span class="dot-1"></span>
         <div class="flex items-center space-x-2">
           <UIcon icon="fluent:calendar-edit-24-regular" />
-          <span>{{ formatDatetime(gqlPost?.updatedAt, locale) }}</span>
+          <span>{{ formatDatetime(gqlPost.updatedAt, locale) }}</span>
         </div>
       </template>
 
-      <span class="dot-1"></span>
-      <div class="flex items-center space-x-2">
+      <!-- "(sm) Row 4" -->
+      <span class="dot-1 sm:hidden"></span>
+      <div class="flex items-center justify-center space-x-2 sm:basis-full">
         <UIcon icon="fluent:book-clock-24-regular" />
         <span
           >{{ gqlPost?.readingTime }}
           {{ `${t('common.minute', gqlPost ? gqlPost.readingTime : 0)} ${t('common.read')}`.toLowerCase() }}</span
         >
       </div>
+      <!-- END "(sm) Row 4" -->
     </div>
     <!-- END "Row 3" -->
     <!-- END "Top" -->
