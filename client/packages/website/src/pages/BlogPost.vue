@@ -39,7 +39,7 @@
     <!-- END "Top" -->
 
     <!-- "Content" -->
-    <div class="mx-auto mt-16 prose prose-light">
+    <div class="mx-auto mt-12 prose prose-light">
       {{ gqlPost?.content }}
     </div>
     <!-- END "Content" -->

@@ -5,7 +5,7 @@
     </h1>
 
     <!-- "Body" -->
-    <div class="grid grid-cols-3 gap-8 mt-16">
+    <div class="grid grid-cols-3 gap-8 mt-12">
       <!-- "Left" -->
       <div>
         <div

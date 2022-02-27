@@ -2,7 +2,7 @@
   <WHeader />
 
   <div
-    class="container py-16 mx-auto"
+    class="container py-8 mx-auto"
     :style="{
       'margin-top': !route.meta.staticHeader ? uiStore.headerHeightString : undefined,
     }"

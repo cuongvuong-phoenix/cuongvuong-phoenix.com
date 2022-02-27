@@ -8,7 +8,7 @@
     <!-- END "Top" -->
 
     <!-- "Next" -->
-    <div class="flex justify-between mt-16 space-x-32">
+    <div class="flex justify-between mt-12 space-x-32">
       <!-- "Left" -->
       <div class="flex flex-col justify-between flex-1 min-w-0">
         <div v-for="section in leftKebabSections" :key="section.label">

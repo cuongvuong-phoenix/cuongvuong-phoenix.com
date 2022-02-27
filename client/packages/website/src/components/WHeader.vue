@@ -26,7 +26,7 @@
     }"
   >
     <div
-      class="container flex items-center mx-auto space-x-8 md:space-x-0"
+      class="container flex items-center mx-auto space-x-8"
       :style="{
         height: uiStore.headerHeightString,
       }"
