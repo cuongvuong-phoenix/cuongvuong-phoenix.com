@@ -54,10 +54,16 @@
           <div class="space-y-2">
             <div class="font-bold text-fg-darker">{{ t('pages.blog.filters.by-tags', 2).toUpperCase() }}</div>
 
-            <div class="flex flex-wrap items-center -mx-1">
-              <div v-for="tag in tags" :key="tag.name" class="p-1">
-                <UPill :icon="tag.icon" :name="tag.name" :active="tag.active" dim @click="toggleTag(tag.id)" />
-              </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <UPill
+                v-for="tag in tags"
+                :key="tag.name"
+                :icon="tag.icon"
+                :name="tag.name"
+                :active="tag.active"
+                dim
+                @click="toggleTag(tag.id)"
+              />
             </div>
           </div>
           <!-- END "Filter (by Tags)" -->
