@@ -1,5 +1,7 @@
 <template>
   <button
+    v-if="!loading"
+    v-bind="$attrs"
     type="button"
     :disabled="disabled"
     class="px-2.5 py-1.5 space-x-1 inline-flex items-center justify-center transition duration-300 rounded-4xl border disabled:opacity-50"
@@ -8,18 +10,30 @@
     <UIcon v-if="icon" :icon="icon" />
     <span>{{ name }}</span>
   </button>
+
+  <!-- "Skeleton" -->
+  <div
+    v-else
+    v-bind="$attrs"
+    class="px-2.5 py-1.5 inline-flex items-center justify-center animate-pulse border border-fg-darkest rounded-4xl"
+  >
+    <USkeleton class="w-[8ch] h-6 rounded-4xl" />
+  </div>
+  <!-- END "Skeleton" -->
 </template>
 
 <script setup lang="ts">
   import { computed } from 'vue';
   import UIcon from './UIcon.vue';
+  import USkeleton from './USkeleton.vue';
 
   const { dim, active } = defineProps<{
-    name: string;
+    name?: string;
     icon?: string | null;
     active?: boolean;
     dim?: boolean;
     disabled?: boolean;
+    loading?: boolean;
   }>();
 
   /* ----------------------------------------------------------------

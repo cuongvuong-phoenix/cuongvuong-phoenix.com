@@ -2,62 +2,84 @@
   <div>
     <!-- "Top" -->
     <!-- "Row 1 - Tags" -->
-    <div v-if="gqlPost && gqlPost.tags.length > 0" class="flex flex-wrap items-center justify-center gap-2">
-      <UPill
-        v-for="tag in gqlPost?.tags"
-        :key="tag.id"
-        :icon="tag.icon"
-        :name="tag.name"
-        dim
-        @click="
-          router.push({
-            name: RouteName.BLOG,
-            params: { locale: locale },
-            query: {
-              tags: [tag.id],
-            },
-          })
-        "
-      />
+    <div class="flex flex-wrap items-center justify-center gap-2">
+      <template v-if="gqlPost && !postLoading">
+        <UPill
+          v-for="tag in gqlPost.tags"
+          :key="tag.id"
+          :icon="tag.icon"
+          :name="tag.name"
+          dim
+          @click="
+            router.push({
+              name: RouteName.BLOG,
+              params: { locale: locale },
+              query: {
+                tags: [tag.id],
+              },
+            })
+          "
+        />
+      </template>
+      <template v-else-if="postLoading">
+        <UPill v-for="num in 4" :key="num" loading />
+      </template>
     </div>
     <!-- END "Row 1 - Tags" -->
 
     <!-- "Row 2 - Title" -->
-    <h1 class="mt-6 font-serif text-4xl font-bold text-center">{{ gqlPost?.title }}</h1>
+    <h1
+      v-if="gqlPost && !postLoading"
+      class="font-serif text-4xl font-bold text-center"
+      :class="{ 'mt-6': gqlPost.tags.length > 0 }"
+    >
+      {{ gqlPost.title }}
+    </h1>
+    <USkeleton v-else-if="postLoading" type="lines" :num-lines="2" class="mt-6 text-4xl text-center" />
     <!-- END "Row 2 - Title" -->
 
     <!-- "Row 3" -->
     <div class="flex flex-wrap items-center justify-center mt-6 gap-x-4 gap-y-2 text-fg-darker">
-      <div class="flex items-center space-x-2">
-        <UIcon icon="fluent:calendar-ltr-24-regular" />
-        <span v-if="gqlPost">{{ formatDatetime(gqlPost.createdAt, locale) }}</span>
-      </div>
-
-      <template v-if="gqlPost?.updatedAt">
-        <span class="dot-1"></span>
+      <template v-if="gqlPost && !postLoading">
         <div class="flex items-center space-x-2">
-          <UIcon icon="fluent:calendar-edit-24-regular" />
-          <span>{{ formatDatetime(gqlPost.updatedAt, locale) }}</span>
+          <UIcon icon="fluent:calendar-ltr-24-regular" />
+          <span>{{ formatDatetime(gqlPost.createdAt, locale) }}</span>
         </div>
-      </template>
 
-      <!-- "(sm) Row 4" -->
-      <span class="dot-1 sm:hidden"></span>
-      <div class="flex items-center justify-center space-x-2 sm:basis-full">
-        <UIcon icon="fluent:book-clock-24-regular" />
-        <span
-          >{{ gqlPost?.readingTime }}
-          {{ `${t('common.minute', gqlPost ? gqlPost.readingTime : 0)} ${t('common.read')}`.toLowerCase() }}</span
-        >
-      </div>
-      <!-- END "(sm) Row 4" -->
+        <template v-if="gqlPost.updatedAt">
+          <span class="dot-1"></span>
+          <div class="flex items-center space-x-2">
+            <UIcon icon="fluent:calendar-edit-24-regular" />
+            <span>{{ formatDatetime(gqlPost.updatedAt, locale) }}</span>
+          </div>
+        </template>
+
+        <!-- "(sm) Row 4" -->
+        <span class="dot-1 sm:hidden"></span>
+        <div class="flex items-center justify-center space-x-2 sm:basis-full">
+          <UIcon icon="fluent:book-clock-24-regular" />
+          <span
+            >{{ gqlPost.readingTime }}
+            {{ `${t('common.minute', gqlPost.readingTime)} ${t('common.read')}`.toLowerCase() }}</span
+          >
+        </div>
+        <!-- END "(sm) Row 4" -->
+      </template>
+      <USkeleton v-else-if="postLoading" type="lines" class="w-[32ch]" />
     </div>
     <!-- END "Row 3" -->
     <!-- END "Top" -->
 
     <!-- "Content" -->
     <div class="mx-auto mt-12 prose prose-light">
-      {{ gqlPost?.content }}
+      <template v-if="gqlPost && !postLoading">
+        {{ gqlPost.content }}
+      </template>
+      <template v-else-if="postLoading">
+        <USkeleton type="lines" :num-lines="4" />
+        <USkeleton type="lines" :num-lines="8" />
+        <USkeleton type="lines" :num-lines="6" />
+      </template>
     </div>
     <!-- END "Content" -->
   </div>
@@ -70,7 +92,7 @@
   import { useQuery, useResult } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
-  import { UIcon, UPill } from '@cvp-web-client/ui';
+  import { UIcon, UPill, USkeleton } from '@cvp-web-client/ui';
   import { formatDatetime } from '~/utils/helpers';
   import { RouteName } from '~/utils/constants';
   import type { PostQuery, PostQueryVariables } from '~/types/graphql';

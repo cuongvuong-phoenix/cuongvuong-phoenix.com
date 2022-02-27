@@ -1,13 +1,23 @@
 <template>
-  <div class="relative px-12 py-8 transition-colors group hover:bg-bg-lighter">
+  <div
+    class="px-12 py-8"
+    :class="[!loading ? 'relative transition-colors group hover:bg-bg-lighter' : 'animate-pulse']"
+  >
     <!-- "Row 1" -->
-    <RouterLink :to="{ name: RouteName.BLOG_POST, params: { locale, post: post.slug } }" class="text-xl font-medium">{{
-      post.title
-    }}</RouterLink>
+    <RouterLink
+      v-if="post && !loading"
+      :to="{ name: RouteName.BLOG_POST, params: { locale, post: post.slug } }"
+      class="text-xl font-medium"
+      >{{ post.title }}</RouterLink
+    >
+    <USkeleton v-else-if="loading" type="lines" class="w-1/2 text-xl" />
     <!-- END "Row 1" -->
 
     <!-- "Row 2" -->
-    <div class="flex items-center gap-3 mt-4 overflow-hidden text-sm text-fg-darker sm:flex-wrap">
+    <div
+      v-if="post && !loading"
+      class="flex items-center gap-3 mt-4 overflow-hidden text-sm text-fg-darker sm:flex-wrap"
+    >
       <span>{{ formatDatetime(post.updatedAt || post.createdAt, locale) }}</span>
 
       <span class="dot-1"></span>
@@ -29,6 +39,7 @@
       </template>
       <!-- END "Tags" -->
     </div>
+    <USkeleton v-else-if="loading" type="lines" class="w-3/4 mt-4 text-sm" />
     <!-- END "Row 2" -->
 
     <!-- "Hover indicator" -->
@@ -42,7 +53,7 @@
 <script setup lang="ts">
   import { useI18n } from 'vue-i18n';
   import { RouterLink } from 'vue-router';
-  import { UIcon } from '@cvp-web-client/ui';
+  import { UIcon, USkeleton } from '@cvp-web-client/ui';
   import { RouteName } from '~/utils/constants';
   import { formatDatetime } from '~/utils/helpers';
   import { type Post, type Tag } from '~/types/graphql';
@@ -54,7 +65,8 @@
   }
 
   defineProps<{
-    post: WPost;
+    post?: WPost;
+    loading?: boolean;
   }>();
 
   const { t, locale } = useI18n();

@@ -13,9 +13,12 @@
       <div class="flex mt-12 space-x-32">
         <!-- "Left" -->
         <div class="flex flex-col justify-between flex-1 min-w-0">
-          <div v-for="section in leftKebabSections" :key="section.label">
+          <div v-for="section in leftKebabSections" :key="section.label" class="space-y-4">
             <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
-            <div class="mt-4 font-serif text-xl font-medium line-clamp-5">{{ section.body }}</div>
+            <div v-if="section.body && !homeContentLoading" class="font-serif text-xl font-medium line-clamp-5">
+              {{ section.body }}
+            </div>
+            <USkeleton v-else-if="homeContentLoading" type="lines" :num-lines="5" class="text-xl" />
           </div>
         </div>
         <!-- END "Left" -->
@@ -32,9 +35,12 @@
 
         <!-- "Right" -->
         <div class="flex flex-col justify-between flex-1 min-w-0">
-          <div v-for="section in rightKebabSections" :key="section.label" class="text-right">
+          <div v-for="section in rightKebabSections" :key="section.label" class="space-y-4 text-right">
             <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
-            <div class="mt-4 font-serif text-5xl font-medium truncate">{{ section.body }}</div>
+            <div v-if="section.body && !homeContentLoading" class="font-serif text-5xl font-medium truncate">
+              {{ section.body }}
+            </div>
+            <USkeleton v-else-if="homeContentLoading" type="lines" class="text-5xl w-[2ch] ml-auto" />
           </div>
         </div>
         <!-- END "Right" -->
@@ -61,10 +67,13 @@
         <div
           v-for="section in leftKebabSections"
           :key="section.label"
-          class="flex flex-col items-center justify-between"
+          class="flex flex-col items-center justify-between space-y-4"
         >
           <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
-          <div class="mt-4 font-serif text-xl font-medium line-clamp-5">{{ section.body }}</div>
+          <div v-if="section.body && !homeContentLoading" class="font-serif text-xl font-medium line-clamp-5">
+            {{ section.body }}
+          </div>
+          <USkeleton v-else-if="homeContentLoading" type="lines" :num-lines="5" class="self-stretch text-xl" />
         </div>
       </div>
       <!-- END "Left Sections" -->
@@ -74,10 +83,13 @@
         <div
           v-for="section in rightKebabSections"
           :key="section.label"
-          class="flex flex-col items-center justify-between"
+          class="flex flex-col items-center justify-between space-y-4"
         >
           <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
-          <div class="mt-4 font-serif text-5xl font-medium truncate">{{ section.body }}</div>
+          <div v-if="section.body && !homeContentLoading" class="font-serif text-5xl font-medium truncate">
+            {{ section.body }}
+          </div>
+          <USkeleton v-else-if="homeContentLoading" type="lines" class="text-5xl w-[2ch]" />
         </div>
       </div>
       <!-- END "Right Sections" -->
@@ -93,6 +105,7 @@
   import { useI18n } from 'vue-i18n';
   import { useBreakpoints } from '@vueuse/core';
   import { useQuery } from '@vue/apollo-composable';
+  import { USkeleton } from '@cvp-web-client/ui';
   import avatarUrl from '~/assets/images/avatar.jpg';
   import { type HomeContentQuery } from '~/types/graphql';
   import { appBreakpoints } from '~/utils/constants';

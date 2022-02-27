@@ -23,16 +23,17 @@
           <!-- END "Search box" -->
 
           <!-- "Total results count" -->
-          <p class="truncate">
+          <div class="truncate">
             <span class="font-bold text-fg-darker">{{ t('common.total').toUpperCase() }}&colon;&nbsp;</span
-            ><span v-if="gqlPostsTotalCount" class="italic"
+            ><span v-if="gqlPostsTotalCount && !postsLoading" class="italic"
               >{{ gqlPostsTotalCount }} {{ t('common.post', gqlPostsTotalCount).toLowerCase() }}</span
             >
-          </p>
+            <USkeleton v-else-if="postsLoading" type="lines" class="w-[8ch] inline-block" />
+          </div>
           <!-- END "Total results count" -->
 
           <!-- "Sort" -->
-          <div class="flex items-center space-x-4">
+          <!-- <div class="flex items-center space-x-4">
             <div class="flex items-center flex-1 min-w-0">
               <span class="font-bold text-fg-darker">{{ t('common.sort').toUpperCase() }}&colon;&nbsp;</span>
 
@@ -47,7 +48,7 @@
             <UButton class="!p-0">
               <UIcon icon="octicon:sort-desc-24" />
             </UButton>
-          </div>
+          </div> -->
           <!-- END "Sort" -->
 
           <!-- "Filter (by Tags)" -->
@@ -55,15 +56,20 @@
             <div class="font-bold text-fg-darker">{{ t('pages.blog.filters.by-tags', 2).toUpperCase() }}</div>
 
             <div class="flex flex-wrap items-center gap-2">
-              <UPill
-                v-for="tag in tags"
-                :key="tag.name"
-                :icon="tag.icon"
-                :name="tag.name"
-                :active="tag.active"
-                dim
-                @click="toggleTag(tag.id)"
-              />
+              <template v-if="tags.length > 0 && !tagsLoading">
+                <UPill
+                  v-for="tag in tags"
+                  :key="tag.name"
+                  :icon="tag.icon"
+                  :name="tag.name"
+                  :active="tag.active"
+                  dim
+                  @click="toggleTag(tag.id)"
+                />
+              </template>
+              <template v-else-if="tagsLoading">
+                <UPill v-for="num in 8" :key="num" loading />
+              </template>
             </div>
           </div>
           <!-- END "Filter (by Tags)" -->
@@ -75,14 +81,24 @@
       <div class="col-span-2 lg:col-auto">
         <!-- "Posts" -->
         <div class="overflow-hidden border rounded-lg border-fg-darkest">
-          <WPost
-            v-for="(post, i) in gqlPosts"
-            :key="post.id"
-            :post="post"
-            :class="{
-              'border-t border-fg-darkest': i > 0,
-            }"
-          />
+          <template v-if="gqlPosts.length > 0 && !postsLoading">
+            <WPost
+              v-for="(post, i) in gqlPosts"
+              :key="post.id"
+              :post="post"
+              :class="{
+                'border-t border-fg-darkest': i > 0,
+              }"
+            />
+          </template>
+          <template v-else-if="postsLoading">
+            <WPost
+              v-for="(num, i) in postsPageSize"
+              :key="num"
+              loading
+              :class="{ 'border-t border-fg-darkest': i > 0 }"
+            />
+          </template>
         </div>
         <!-- END "Posts" -->
 
@@ -144,7 +160,7 @@
   import { useQuery, useResult } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
-  import { type Option, UButton, UIcon, UInput, UListbox, UPill } from '@cvp-web-client/ui';
+  import { type Option, UButton, UIcon, UInput, UListbox, UPill, USkeleton } from '@cvp-web-client/ui';
   import WPost from './_components/WPost.vue';
   import { useUiStore } from '~/store/ui';
   import { RouteName } from '~/utils/constants';
