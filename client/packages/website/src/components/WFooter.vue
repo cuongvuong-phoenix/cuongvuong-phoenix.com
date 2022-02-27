@@ -1,6 +1,8 @@
 <template>
   <div class="py-12">
-    <div class="container flex items-center justify-between mx-auto space-x-8">
+    <div
+      class="container flex items-center justify-between mx-auto space-x-8 md:!block md:space-x-0 md:space-y-8 md:text-center"
+    >
       <!-- "Left" -->
       <i18n-t keypath="footer.about" tag="p" class="text-fg-darker">
         <span class="text-fg-default">{{ t('common.whoami') }}</span>
@@ -10,7 +12,7 @@
       <!-- END "Left" -->
 
       <!-- "Right" -->
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center justify-center space-x-2">
         <UButton
           v-for="socialNetwork in socialNetworks"
           :key="socialNetwork.href"
