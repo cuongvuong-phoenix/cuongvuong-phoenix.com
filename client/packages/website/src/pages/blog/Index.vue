@@ -5,7 +5,7 @@
     </h1>
 
     <!-- "Body" -->
-    <div class="grid grid-cols-3 gap-8 mt-12">
+    <div class="grid grid-cols-3 gap-8 mt-12 lg:grid-cols-1">
       <!-- "Left" -->
       <div>
         <div
@@ -66,7 +66,7 @@
       <!-- END "Left" -->
 
       <!-- "Right" -->
-      <div class="col-span-2">
+      <div class="col-span-2 lg:col-auto">
         <!-- "Posts" -->
         <div class="border rounded-lg border-fg-darkest">
           <WPost
