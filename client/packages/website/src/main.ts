@@ -10,7 +10,6 @@ import { router } from '~/router';
 import { store } from '~/store';
 import { setupI18n } from '~/locales';
 import '~/assets/styles/index.css';
-import '@cvp-web-client/ui/css';
 
 // Vue Apollo.
 const apolloClient = new ApolloClient({

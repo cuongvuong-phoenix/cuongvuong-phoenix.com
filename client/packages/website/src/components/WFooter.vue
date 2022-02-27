@@ -1,7 +1,7 @@
 <template>
   <div class="py-12">
     <div
-      class="container flex items-center justify-between mx-auto space-x-8 md:!block md:space-x-0 md:space-y-8 md:text-center"
+      class="container flex items-center justify-between mx-auto space-x-8 md:block md:space-x-0 md:space-y-8 md:text-center"
     >
       <!-- "Left" -->
       <i18n-t keypath="footer.about" tag="p" class="text-fg-darker">
