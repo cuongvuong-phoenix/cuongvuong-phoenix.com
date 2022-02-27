@@ -1,7 +1,8 @@
 <template>
   <button
     type="button"
-    class="px-2.5 py-1.5 space-x-1 inline-flex items-center justify-center transition duration-300 rounded-4xl border"
+    :disabled="disabled"
+    class="px-2.5 py-1.5 space-x-1 inline-flex items-center justify-center transition duration-300 rounded-4xl border disabled:opacity-50"
     :class="classes"
   >
     <UIcon v-if="icon" :icon="icon" />
@@ -18,6 +19,7 @@
     icon?: string | null;
     active?: boolean;
     dim?: boolean;
+    disabled?: boolean;
   }>();
 
   /* ----------------------------------------------------------------
