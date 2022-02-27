@@ -49,6 +49,8 @@
     "postcss": "^8.4.7",
     "postcss-at-rules-variables": "^0.3.0",
     "postcss-calc": "^8.2.4",
+    "postcss-cli": "^9.1.0",
+    "postcss-combine-duplicated-selectors": "^10.0.3",
     "postcss-each": "^1.1.0",
     "postcss-for": "^2.1.1",
     "postcss-import": "^14.0.2",

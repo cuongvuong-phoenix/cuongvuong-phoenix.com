@@ -97,6 +97,8 @@ importers:
       postcss: ^8.4.7
       postcss-at-rules-variables: ^0.3.0
       postcss-calc: ^8.2.4
+      postcss-cli: ^9.1.0
+      postcss-combine-duplicated-selectors: ^10.0.3
       postcss-each: ^1.1.0
       postcss-for: ^2.1.1
       postcss-import: ^14.0.2
@@ -147,6 +149,8 @@ importers:
       postcss: 8.4.7
       postcss-at-rules-variables: 0.3.0_postcss@8.4.7
       postcss-calc: 8.2.4_postcss@8.4.7
+      postcss-cli: 9.1.0_postcss@8.4.7
+      postcss-combine-duplicated-selectors: 10.0.3_postcss@8.4.7
       postcss-each: 1.1.0_postcss@8.4.7
       postcss-for: 2.1.1
       postcss-import: 14.0.2_postcss@8.4.7
@@ -5513,6 +5517,16 @@ packages:
       - ts-node
     dev: true
 
+  /postcss-combine-duplicated-selectors/10.0.3_postcss@8.4.7:
+    resolution: {integrity: sha512-IP0BmwFloCskv7DV7xqvzDXqMHpwdczJa6ZvIW8abgHdcIHs9mCJX2ltFhu3EwA51ozp13DByng30+Ke+eIExA==}
+    engines: {node: ^10.0.0 || ^12.0.0 || >=14.0.0}
+    peerDependencies:
+      postcss: ^8.1.0
+    dependencies:
+      postcss: 8.4.7
+      postcss-selector-parser: 6.0.9
+    dev: true
+
   /postcss-each/1.1.0_postcss@8.4.7:
     resolution: {integrity: sha512-YfTPHHAPFVRgEJfLg9RM4R9WYEHVU9Rf1R8QgZfnObwV2dgNqzTLzTl0w5tF71ApFcYLiJAXiTpHAoqJFYcZVw==}
     peerDependencies:
@@ -6470,7 +6484,7 @@ packages:
       autoprefixer: ^10.0.2
     dependencies:
       arg: 5.0.1
-      autoprefixer: 10.4.2
+      autoprefixer: 10.4.2_postcss@8.4.7
       chalk: 4.1.2
       chokidar: 3.5.3
       color-name: 1.1.4
