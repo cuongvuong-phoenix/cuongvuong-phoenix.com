@@ -3,9 +3,6 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   content: ['./src/**/*.{vue,js,ts,jsx,tsx}'],
   plugins: [require('@cvp-web-client/tailwind-plugins')],
-  corePlugins: {
-    preflight: false,
-  },
   theme: {
     extend: {
       colors: {

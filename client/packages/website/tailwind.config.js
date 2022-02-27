@@ -10,6 +10,7 @@ module.exports = {
     require('@cvp-web-client/tailwind-plugins'),
   ],
   corePlugins: {
+    preflight: false,
     container: false,
   },
   theme: {

@@ -68,7 +68,7 @@
       <!-- "Right" -->
       <div class="col-span-2 lg:col-auto">
         <!-- "Posts" -->
-        <div class="border rounded-lg border-fg-darkest">
+        <div class="overflow-hidden border rounded-lg border-fg-darkest">
           <WPost
             v-for="(post, i) in gqlPosts"
             :key="post.id"
