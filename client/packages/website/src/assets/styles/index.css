@@ -8,6 +8,7 @@
   --scrollbar--bg: theme('colors.gray.200');
   --scrollbar--thumb: theme('colors.gray.400');
   --scrollbar--thumb-hover: theme('colors.gray.500');
+  --scrollbar--width: 0.5rem;
 }
 
 * {
@@ -15,10 +16,10 @@
 }
 
 ::-webkit-scrollbar {
-  width: 0.5rem;
+  width: var(--scrollbar--width);
 }
 ::-webkit-scrollbar:horizontal {
-  height: 0.5rem;
+  height: var(--scrollbar--width);
 }
 ::-webkit-scrollbar-track {
   background: var(--scrollbar--bg);
