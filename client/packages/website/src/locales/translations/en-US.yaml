@@ -12,11 +12,22 @@ footer:
 pages:
   home:
     kebab-sections:
-      biography: "@:{'common.biography'}"
-      contact: "@:{'common.contact'}"
-      years-of-experience: Years of experience
-      blog: "@:{'common.blog'}"
-      projects: "@:{'common.project'}"
+      biography:
+        label: "@:{'common.biography'}"
+        body: I’m a software developer & UI/UX design enthusiasm come from <span class="italic">Vietnam</span>.<br />
+          I love working with <span class="italic">Vue.JS, Rust, GraphQL, Figma, Inkscape</span>.
+      contact:
+        label: "@:{'common.contact'}"
+        body: vuongcuong.phoenix{'@'}gmail.com<br />
+          +84 346 809 059
+      years-of-experience:
+        label: Years of experience
+        body: "1"
+      blog:
+        label: "@:{'common.blog'}"
+      projects:
+        label: "@:{'common.project'}"
+        body: "8"
   about:
     top:
       greeting: "Hello, I'm<br />@:{'common.whoami'}"

@@ -17,6 +17,12 @@ pub struct PostQuery;
 
 #[Object]
 impl PostQuery {
+    async fn posts_count(&self, ctx: &Context<'_>) -> Result<usize> {
+        let state = ctx.data::<Arc<State>>()?;
+
+        Post::read_count(&state.db_pool).await
+    }
+
     async fn posts(
         &self,
         ctx: &Context<'_>,
