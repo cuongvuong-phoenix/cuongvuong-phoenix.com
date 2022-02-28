@@ -35,7 +35,7 @@ WITH
 		FROM
 			expanded e
 			JOIN (
-				SELECT seq, min(random) FROM expanded GROUP BY seq
+				SELECT e_inner.seq, min(e_inner.random) FROM expanded e_inner GROUP BY e_inner.seq
 			) e_grouped
 			ON (e.seq = e_grouped.seq AND e.random = e_grouped.min)
 			ORDER BY e.seq
