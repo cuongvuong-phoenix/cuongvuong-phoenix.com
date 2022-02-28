@@ -3,8 +3,8 @@
     <!-- "Top" -->
     <div class="flex items-center justify-center gap-x-16 gap-y-12 md:flex-col">
       <!-- "Left" -->
-      <div class="w-[37.5%] space-y-4 md:w-auto">
-        <h1 class="font-serif text-4xl font-bold" v-html="t('pages.about.top.greeting')"></h1>
+      <div class="w-[37.5%] space-y-8 md:w-auto">
+        <h1 class="font-serif text-4xl font-bold sm:text-center" v-html="t('pages.about.top.greeting')"></h1>
         <p v-html="t('pages.about.top.biography')"></p>
       </div>
       <!-- END "Left" -->
