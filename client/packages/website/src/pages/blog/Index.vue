@@ -211,16 +211,16 @@
   const gqlTags = useResult(tagsResult, [], (data) => data.tags.edges.map((edge) => edge.node));
 
   // Check for activing tags based on `route.query.tags` query params.
-  const activeTagIds = ref<string[]>([]);
+  const activeTagIds = ref<number[]>([]);
 
   watch(
     () => route.query.tags,
     (currTagsRouteQuery, prevTagsRouteQuery) => {
       if (JSON.stringify(currTagsRouteQuery) !== JSON.stringify(prevTagsRouteQuery)) {
         if (Array.isArray(currTagsRouteQuery) && currTagsRouteQuery.length > 0) {
-          activeTagIds.value = currTagsRouteQuery as string[];
+          activeTagIds.value = currTagsRouteQuery.map(query => parseInt(query as string));
         } else if (currTagsRouteQuery && !Array.isArray(currTagsRouteQuery)) {
-          activeTagIds.value = [currTagsRouteQuery];
+          activeTagIds.value = [parseInt(currTagsRouteQuery)];
         } else {
           activeTagIds.value = [];
         }
@@ -249,11 +249,11 @@
   );
 
   // Functions.
-  function toggleTag(id: string) {
-    let tagsQueryParams: string[];
+  function toggleTag(id: number) {
+    let tagsQueryParams: number[];
 
     if (activeTagIds.value) {
-      tagsQueryParams = activeTagIds.value.slice() as string[];
+      tagsQueryParams = activeTagIds.value.slice();
 
       const activedTagIndex = tagsQueryParams.findIndex((activeTagId) => activeTagId === id);
 
@@ -284,7 +284,7 @@
     error: postsError,
   } = useQuery<PostsQuery, PostsQueryVariables>(
     gql`
-      query posts($tagIds: [UUID!]!, $after: String, $before: String, $first: Int, $last: Int) {
+      query posts($tagIds: [Int!]!, $after: String, $before: String, $first: Int, $last: Int) {
         posts(tagIds: $tagIds, paginationParams: { after: $after, before: $before, first: $first, last: $last }) {
           totalCount
           edges {
