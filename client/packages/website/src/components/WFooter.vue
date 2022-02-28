@@ -5,7 +5,7 @@
       <i18n-t keypath="footer.about" tag="p" class="text-fg-darker">
         <span class="text-fg-default">{{ t('common.whoami') }}</span>
         <br />
-        <span class="text-fg-default">Vue 3, GraphQL, Rust (Axum), PostgreSQL</span>
+        <span class="text-fg-default">Vue, GraphQL, Rust, PostgreSQL</span>
       </i18n-t>
       <!-- END "Left" -->
     </div>

@@ -83,7 +83,7 @@
           >
             <ULogo
               colored
-              class="w-[4.5rem] h-[4.5rem]"
+              class="w-[4.5rem] h-[4.5rem] transition-[height_width] duration-300"
               :class="{
                 'wh-12': scrolledOut,
               }"
