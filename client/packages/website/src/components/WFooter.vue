@@ -1,5 +1,5 @@
 <template>
-  <div class="py-12">
+  <footer class="py-12">
     <div
       class="container flex items-center justify-between mx-auto space-x-8 md:block md:space-x-0 md:space-y-8 md:text-center"
     >
@@ -25,7 +25,7 @@
       </div>
       <!-- END "Right" -->
     </div>
-  </div>
+  </footer>
 </template>
 
 <script setup lang="ts">

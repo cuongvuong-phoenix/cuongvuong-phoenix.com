@@ -1,5 +1,5 @@
 <template>
-  <!-- <div
+  <!-- <header
     :class="{
       'fixed inset-x-0 z-10 backdrop-blur-xl transition-[top] duration-500 border-fg-darkest': !route.meta.staticHeader,
       'border-b': !route.meta.staticHeader && scrolledOutDirection,
@@ -14,7 +14,7 @@
         : undefined,
     }"
   > -->
-  <div
+  <header
     :class="{
       'fixed inset-x-0 top-0 z-10 border-fg-darkest': uiStore.headerMenuOpenning || !route.meta.staticHeader,
       'border-b bg-bg-default': uiStore.headerMenuOpenning,
@@ -35,23 +35,29 @@
       <template v-if="!smallerMd">
         <!-- "Left" -->
         <div class="flex flex-1 space-x-12">
-          <UButton v-for="nav in leftNavs" :key="nav" :link="{ name: nav, params: { locale } }" size="lg" class="!p-0">
-            {{ t(`nav.${nav}`).toUpperCase() }}
-          </UButton>
+          <nav v-for="nav in leftNavs" :key="nav">
+            <UButton :link="{ name: nav, params: { locale } }" size="lg" class="!p-0">
+              {{ t(`nav.${nav}`).toUpperCase() }}
+            </UButton>
+          </nav>
         </div>
         <!-- END "Left" -->
 
         <!-- "Middle" -->
-        <UButton :link="{ name: RouteName.HOME }" link-active-exact rounded unified class="!p-1">
-          <ULogo colored class="w-[4.5rem] h-[4.5rem]" />
-        </UButton>
+        <nav>
+          <UButton :link="{ name: RouteName.HOME }" link-active-exact rounded unified class="!p-1">
+            <ULogo colored class="w-[4.5rem] h-[4.5rem]" />
+          </UButton>
+        </nav>
         <!-- END "Middle" -->
 
         <!-- "Right" -->
         <div class="flex justify-end flex-1 space-x-12">
-          <UButton v-for="nav in rightNavs" :key="nav" :link="{ name: nav, params: { locale } }" size="lg" class="!p-0">
-            {{ t(`nav.${nav}`).toUpperCase() }}
-          </UButton>
+          <nav v-for="nav in rightNavs" :key="nav">
+            <UButton :link="{ name: nav, params: { locale } }" size="lg" class="!p-0">
+              {{ t(`nav.${nav}`).toUpperCase() }}
+            </UButton>
+          </nav>
         </div>
         <!-- END "Right" -->
       </template>
@@ -60,50 +66,54 @@
       <!-- "(md)" -->
       <template v-else>
         <!-- "Left" -->
-        <UButton
-          :link="{ name: RouteName.HOME }"
-          link-active-exact
-          rounded
-          unified
-          class="!p-1"
-          @click="uiStore.toggleHeaderMenuOpenning(false)"
-        >
-          <ULogo colored class="w-[4.5rem] h-[4.5rem]" />
-        </UButton>
+        <nav>
+          <UButton
+            :link="{ name: RouteName.HOME }"
+            link-active-exact
+            rounded
+            unified
+            class="!p-1"
+            @click="uiStore.toggleHeaderMenuOpenning(false)"
+          >
+            <ULogo colored class="w-[4.5rem] h-[4.5rem]" />
+          </UButton>
+        </nav>
         <!-- END "Left" -->
 
         <!-- "Right" -->
         <div class="flex justify-end flex-1">
-          <UButton rounded unified @click="uiStore.toggleHeaderMenuOpenning()">
-            <UIcon v-if="!uiStore.headerMenuOpenning" icon="fluent:navigation-24-regular" />
-            <UIcon v-else icon="fluent:dismiss-24-regular" />
-          </UButton>
+          <nav>
+            <UButton rounded unified @click="uiStore.toggleHeaderMenuOpenning()">
+              <UIcon v-if="!uiStore.headerMenuOpenning" icon="fluent:navigation-24-regular" />
+              <UIcon v-else icon="fluent:dismiss-24-regular" />
+            </UButton>
+          </nav>
         </div>
         <!-- END "Right" -->
 
         <Teleport v-if="uiStore.headerMenuOpenning" to="#app">
-          <div
+          <header
             class="fixed inset-x-0 bottom-0 z-10 px-6 py-8 bg-bg-default"
             :style="{
               top: `${uiStore.headerHeight + 1}px`,
             }"
           >
-            <UButton
-              v-for="nav in [...leftNavs, ...rightNavs]"
-              :key="nav"
-              :link="{ name: nav, params: { locale } }"
-              size="lg"
-              class="w-full"
-              @click="uiStore.toggleHeaderMenuOpenning()"
-            >
-              {{ t(`nav.${nav}`).toUpperCase() }}
-            </UButton>
-          </div>
+            <nav v-for="nav in [...leftNavs, ...rightNavs]" :key="nav">
+              <UButton
+                :link="{ name: nav, params: { locale } }"
+                size="lg"
+                class="w-full"
+                @click="uiStore.toggleHeaderMenuOpenning()"
+              >
+                {{ t(`nav.${nav}`).toUpperCase() }}
+              </UButton>
+            </nav>
+          </header>
         </Teleport>
       </template>
       <!-- END "(md)" -->
     </div>
-  </div>
+  </header>
 </template>
 
 <script setup lang="ts">

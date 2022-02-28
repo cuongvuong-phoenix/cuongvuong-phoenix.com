@@ -1,14 +1,14 @@
 <template>
   <WHeader />
 
-  <div
+  <main
     class="container py-8 mx-auto"
     :style="{
       'margin-top': !route.meta.staticHeader ? uiStore.headerHeightString : undefined,
     }"
   >
     <RouterView />
-  </div>
+  </main>
 
   <WFooter />
 </template>
