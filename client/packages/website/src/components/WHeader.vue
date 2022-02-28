@@ -18,8 +18,8 @@
     :class="{
       'fixed inset-x-0 top-0 z-10 border-fg-darkest': uiStore.headerMenuOpenning || !route.meta.staticHeader,
       'border-b bg-bg-default': uiStore.headerMenuOpenning,
-      'backdrop-blur-xl ': !route.meta.staticHeader,
-      'border-b': !route.meta.staticHeader && scrolledOutDirection,
+      'backdrop-blur-xl': !route.meta.staticHeader,
+      'border-b': !route.meta.staticHeader && scrolledOut,
     }"
     :style="{
       'padding-right': smallerMd && uiStore.headerMenuOpenning ? 'var(--scrollbar--width)' : undefined,
@@ -27,6 +27,9 @@
   >
     <div
       class="container flex items-center mx-auto space-x-8"
+      :class="{
+        'transition-[height] duration-300': !route.meta.staticHeader,
+      }"
       :style="{
         height: uiStore.headerHeightString,
       }"
@@ -45,8 +48,23 @@
 
         <!-- "Middle - Logo" -->
         <nav>
-          <UButton :link="{ name: RouteName.HOME }" link-active-exact rounded unified class="!p-1">
-            <ULogo colored class="w-[4.5rem] h-[4.5rem]" />
+          <UButton
+            :link="{ name: RouteName.HOME }"
+            link-active-exact
+            rounded
+            unified
+            class="!p-1 duration-300"
+            :class="{
+              'rotate-[-360deg]': !route.meta.staticHeader && scrolledOut,
+            }"
+          >
+            <ULogo
+              colored
+              class="w-[4.5rem] h-[4.5rem] transition-[height_width] duration-300"
+              :class="{
+                'wh-12': !route.meta.staticHeader && scrolledOut,
+              }"
+            />
           </UButton>
         </nav>
         <!-- END "Middle - Logo" -->
@@ -76,10 +94,19 @@
             link-active-exact
             rounded
             unified
-            class="!p-1"
+            class="!p-1 duration-300"
+            :class="{
+              'rotate-[-360deg]': !route.meta.staticHeader && scrolledOut,
+            }"
             @click="uiStore.toggleHeaderMenuOpenning(false)"
           >
-            <ULogo colored class="w-[4.5rem] h-[4.5rem]" />
+            <ULogo
+              colored
+              class="w-[4.5rem] h-[4.5rem]"
+              :class="{
+                'wh-12': !route.meta.staticHeader && scrolledOut,
+              }"
+            />
           </UButton>
         </nav>
         <!-- END "Left - Logo" -->
@@ -146,7 +173,7 @@
   import { useI18n } from 'vue-i18n';
   import { useBreakpoints, useDark, useEventListener, useStyleTag } from '@vueuse/core';
   import { UButton, UIcon, ULogo } from '@cvp-web-client/ui';
-  import { useUiStore } from '~/store/ui';
+  import { HeaderHeight, useUiStore } from '~/store/ui';
   import { RouteName, appBreakpoints } from '~/utils/constants';
 
   const route = useRoute();
@@ -180,32 +207,28 @@
   /* ----------------------------------------------------------------
   Scroll based on `dimHeaderFooter`.
   ---------------------------------------------------------------- */
-  const scrolledOutDirection = ref<'down' | 'up'>();
+  const scrolledOut = ref<boolean>(false);
   const scrolledOutWatcher = ref<WatchStopHandle>();
 
   watch(
     () => route.meta.staticHeader,
-    (dimHeaderFooter) => {
+    (staticHeaderValue) => {
       if (scrolledOutWatcher.value) {
         scrolledOutWatcher.value();
         scrolledOutWatcher.value = undefined;
       }
 
-      if (!dimHeaderFooter) {
-        let prev = window.scrollY;
-
+      if (!staticHeaderValue) {
         scrolledOutWatcher.value = useEventListener('scroll', () => {
           const curr = window.scrollY;
 
-          if (curr > prev && curr > 16 * 6) {
-            scrolledOutDirection.value = 'down';
-          } else if (curr < prev && curr > 16 * 6) {
-            scrolledOutDirection.value = 'up';
+          if (curr > 16 * 6) {
+            scrolledOut.value = true;
+            uiStore.setHeaderHeight(HeaderHeight.NARROW);
           } else {
-            scrolledOutDirection.value = undefined;
+            scrolledOut.value = false;
+            uiStore.setHeaderHeight(HeaderHeight.DEFAULT);
           }
-
-          prev = curr;
         });
       }
     },

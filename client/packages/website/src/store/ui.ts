@@ -1,9 +1,14 @@
 import { defineStore } from 'pinia';
 
+export enum HeaderHeight {
+  DEFAULT = 96,
+  NARROW = 64,
+}
+
 export const useUiStore = defineStore('ui', {
   state: () => ({
     // Header height in pixel.
-    headerHeight: 96,
+    headerHeight: HeaderHeight.DEFAULT,
     // Header menu openning state.
     headerMenuOpenning: false,
   }),
