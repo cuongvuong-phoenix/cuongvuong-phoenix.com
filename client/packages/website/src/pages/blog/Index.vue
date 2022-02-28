@@ -25,7 +25,7 @@
           <!-- "Total results count" -->
           <div class="truncate">
             <span class="font-bold text-fg-darker">{{ t('common.total').toUpperCase() }}&colon;&nbsp;</span
-            ><span v-if="gqlPostsTotalCount && !postsLoading" class="italic"
+            ><span v-if="gqlPostsTotalCount !== undefined && !postsLoading" class="italic"
               >{{ gqlPostsTotalCount }} {{ t('common.post', gqlPostsTotalCount).toLowerCase() }}</span
             >
             <USkeleton v-else-if="postsLoading" type="lines" class="w-[8ch] inline-block" />
@@ -195,7 +195,7 @@
     error: tagsError,
   } = useQuery<TagsQuery>(gql`
     query tags {
-      tags(paginationParams: { first: 4 }) {
+      tags(paginationParams: {}) {
         edges {
           cursor
           node {
@@ -218,7 +218,7 @@
     (currTagsRouteQuery, prevTagsRouteQuery) => {
       if (JSON.stringify(currTagsRouteQuery) !== JSON.stringify(prevTagsRouteQuery)) {
         if (Array.isArray(currTagsRouteQuery) && currTagsRouteQuery.length > 0) {
-          activeTagIds.value = currTagsRouteQuery.map(query => parseInt(query as string));
+          activeTagIds.value = currTagsRouteQuery.map((query) => parseInt(query as string));
         } else if (currTagsRouteQuery && !Array.isArray(currTagsRouteQuery)) {
           activeTagIds.value = [parseInt(currTagsRouteQuery)];
         } else {
@@ -278,6 +278,8 @@
   /* ----------------------------------------------------------------
   READ posts
   ---------------------------------------------------------------- */
+  const postsPageSize = ref(8);
+
   const {
     result: postsResult,
     loading: postsLoading,
@@ -311,13 +313,22 @@
         }
       }
     `,
-    () => ({
-      tagIds: activeTagIds.value,
-      after: route.query.after as string | undefined,
-      before: route.query.before as string | undefined,
-      first: route.query.first ? parseInt(route.query.first as string) : undefined,
-      last: route.query.last ? parseInt(route.query.last as string) : undefined,
-    })
+    () => {
+      let first = route.query.first ? parseInt(route.query.first as string) : undefined;
+      const last = route.query.last ? parseInt(route.query.last as string) : undefined;
+
+      if (first === undefined && last === undefined) {
+        first = postsPageSize.value;
+      }
+
+      return {
+        tagIds: activeTagIds.value,
+        after: route.query.after as string | undefined,
+        before: route.query.before as string | undefined,
+        first,
+        last,
+      };
+    }
   );
 
   const gqlPosts = useResult(postsResult, [], (data) =>
@@ -333,8 +344,6 @@
   /* ----------------------------------------------------------------
   Pagination
   ---------------------------------------------------------------- */
-  const postsPageSize = ref(8);
-
   const gqlPostsTotalCount = useResult(postsResult, undefined, (data) => data.posts.totalCount);
 
   const gqlPostsPageInfo = useResult(postsResult, undefined, (data) => data.posts.pageInfo);

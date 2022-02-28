@@ -6,8 +6,6 @@ use async_graphql::{
 use sqlx::{Pool, Postgres};
 use std::future::Future;
 
-pub const DEFAULT_PAGE_SIZE: usize = 8;
-
 pub async fn query_connection<'a, N, CF, CFR, VF, VFR>(
     pagination_params: PaginationParams,
     db_pool: &'a Pool<Postgres>,
@@ -58,10 +56,7 @@ pub fn get_start_end_cursor_offsets(
     match (first, last) {
         (Some(first), _) => (start_offset, (start_offset + first).min(end_offset)),
         (_, Some(last)) => ((end_offset - last).max(start_offset), end_offset),
-        _ => (
-            start_offset,
-            (start_offset + DEFAULT_PAGE_SIZE).min(end_offset),
-        ),
+        _ => (start_offset, end_offset),
     }
 }
 
