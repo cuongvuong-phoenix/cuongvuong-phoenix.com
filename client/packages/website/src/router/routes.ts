@@ -12,9 +12,6 @@ export const routes: RouteRecordRaw[] = [
         path: '',
         name: RouteName.HOME,
         component: Home,
-        meta: {
-          staticHeader: true,
-        },
       },
       {
         path: 'about',

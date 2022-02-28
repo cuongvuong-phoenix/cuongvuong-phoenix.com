@@ -1,35 +1,16 @@
 <template>
-  <!-- <header
-    :class="{
-      'fixed inset-x-0 z-10 backdrop-blur-xl transition-[top] duration-500 border-fg-darkest': !route.meta.staticHeader,
-      'border-b': !route.meta.staticHeader && scrolledOutDirection,
-      'ease-out': !route.meta.staticHeader && scrolledOutDirection !== 'down',
-      'ease-in': !route.meta.staticHeader && scrolledOutDirection === 'down',
-    }"
-    :style="{
-      top: !route.meta.staticHeader
-        ? scrolledOutDirection !== 'down'
-          ? 0
-          : `${-(uiStore.headerHeight + 1)}px`
-        : undefined,
-    }"
-  > -->
   <header
+    class="fixed inset-x-0 top-0 z-10 border-fg-darkest"
     :class="{
-      'fixed inset-x-0 top-0 z-10 border-fg-darkest': uiStore.headerMenuOpenning || !route.meta.staticHeader,
       'border-b bg-bg-default': uiStore.headerMenuOpenning,
-      'backdrop-blur-xl': !route.meta.staticHeader,
-      'border-b': !route.meta.staticHeader && scrolledOut,
+      'border-b backdrop-blur-xl': scrolledOut,
     }"
     :style="{
       'padding-right': smallerMd && uiStore.headerMenuOpenning ? 'var(--scrollbar--width)' : undefined,
     }"
   >
     <div
-      class="container flex items-center mx-auto space-x-8"
-      :class="{
-        'transition-[height] duration-300': !route.meta.staticHeader,
-      }"
+      class="container flex items-center mx-auto space-x-8 transition-[height] duration-300"
       :style="{
         height: uiStore.headerHeightString,
       }"
@@ -55,14 +36,14 @@
             unified
             class="!p-1 duration-300"
             :class="{
-              'rotate-[-360deg]': !route.meta.staticHeader && scrolledOut,
+              'rotate-[-360deg]': scrolledOut,
             }"
           >
             <ULogo
               colored
               class="w-[4.5rem] h-[4.5rem] transition-[height_width] duration-300"
               :class="{
-                'wh-12': !route.meta.staticHeader && scrolledOut,
+                'wh-12': scrolledOut,
               }"
             />
           </UButton>
@@ -96,7 +77,7 @@
             unified
             class="!p-1 duration-300"
             :class="{
-              'rotate-[-360deg]': !route.meta.staticHeader && scrolledOut,
+              'rotate-[-360deg]': scrolledOut,
             }"
             @click="uiStore.toggleHeaderMenuOpenning(false)"
           >
@@ -104,7 +85,7 @@
               colored
               class="w-[4.5rem] h-[4.5rem]"
               :class="{
-                'wh-12': !route.meta.staticHeader && scrolledOut,
+                'wh-12': scrolledOut,
               }"
             />
           </UButton>
@@ -208,34 +189,18 @@
   Scroll based on `dimHeaderFooter`.
   ---------------------------------------------------------------- */
   const scrolledOut = ref<boolean>(false);
-  const scrolledOutWatcher = ref<WatchStopHandle>();
 
-  watch(
-    () => route.meta.staticHeader,
-    (staticHeaderValue) => {
-      if (scrolledOutWatcher.value) {
-        scrolledOutWatcher.value();
-        scrolledOutWatcher.value = undefined;
-      }
+  useEventListener('scroll', () => {
+    const curr = window.scrollY;
 
-      if (!staticHeaderValue) {
-        scrolledOutWatcher.value = useEventListener('scroll', () => {
-          const curr = window.scrollY;
-
-          if (curr > 16 * 6) {
-            scrolledOut.value = true;
-            uiStore.setHeaderHeight(HeaderHeight.NARROW);
-          } else {
-            scrolledOut.value = false;
-            uiStore.setHeaderHeight(HeaderHeight.DEFAULT);
-          }
-        });
-      }
-    },
-    {
-      immediate: true,
+    if (curr > uiStore.headerHeight) {
+      scrolledOut.value = true;
+      uiStore.setHeaderHeight(HeaderHeight.NARROW);
+    } else {
+      scrolledOut.value = false;
+      uiStore.setHeaderHeight(HeaderHeight.DEFAULT);
     }
-  );
+  });
 
   /* ----------------------------------------------------------------
   Dark theme

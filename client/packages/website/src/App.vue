@@ -4,7 +4,7 @@
   <main
     class="container py-8 mx-auto"
     :style="{
-      'margin-top': !route.meta.staticHeader ? uiStore.headerHeightString : undefined,
+      'margin-top': `${HeaderHeight.DEFAULT}px`,
     }"
   >
     <RouterView />
@@ -18,7 +18,7 @@
   import { RouterView, useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useHead } from '@vueuse/head';
-  import { useUiStore } from '~/store/ui';
+  import { HeaderHeight, useUiStore } from '~/store/ui';
   import WHeader from '~/components/WHeader.vue';
   import WFooter from '~/components/WFooter.vue';
 
