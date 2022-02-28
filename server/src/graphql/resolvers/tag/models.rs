@@ -3,14 +3,13 @@ use crate::graphql::shared::errors::SharedError;
 use async_graphql::{ErrorExtensions, InputObject, Result, SimpleObject};
 use chrono::{DateTime, Utc};
 use sqlx::{Pool, Postgres};
-use uuid::Uuid;
 
 // ----------------------------------------------------------------
 // READ
 // ----------------------------------------------------------------
 #[derive(SimpleObject, Clone)]
 pub struct Tag {
-    pub id: Uuid,
+    pub id: i32,
     name: String,
     icon: Option<String>,
     created_at: DateTime<Utc>,
@@ -19,7 +18,7 @@ pub struct Tag {
 
 impl Tag {
     pub fn new(
-        id: Uuid,
+        id: i32,
         name: String,
         icon: Option<String>,
         created_at: DateTime<Utc>,
@@ -64,7 +63,7 @@ impl Tag {
         .map_err(|e| SharedError::Database(e).extend())
     }
 
-    pub async fn read_one(db_pool: &Pool<Postgres>, id: Uuid) -> Result<Tag> {
+    pub async fn read_one(db_pool: &Pool<Postgres>, id: i32) -> Result<Tag> {
         sqlx::query_as!(
             Tag,
             r#"
@@ -80,7 +79,7 @@ impl Tag {
         .ok_or_else(|| TagError::NotFound.extend())
     }
 
-    pub async fn delete(db_pool: &Pool<Postgres>, id: Uuid) -> Result<Tag> {
+    pub async fn delete(db_pool: &Pool<Postgres>, id: i32) -> Result<Tag> {
         sqlx::query_as!(
             Tag,
             r#"
@@ -134,7 +133,7 @@ pub struct TagUpdate {
 }
 
 impl TagUpdate {
-    pub async fn update(&self, db_pool: &Pool<Postgres>, id: Uuid) -> Result<Tag> {
+    pub async fn update(&self, db_pool: &Pool<Postgres>, id: i32) -> Result<Tag> {
         sqlx::query_as!(
             Tag,
             r#"

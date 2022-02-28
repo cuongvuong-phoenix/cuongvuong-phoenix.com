@@ -11,7 +11,6 @@ use async_graphql::{
     Context, Error, Object, Result,
 };
 use std::sync::Arc;
-use uuid::Uuid;
 
 #[derive(Default)]
 pub struct PostQuery;
@@ -21,7 +20,7 @@ impl PostQuery {
     async fn posts(
         &self,
         ctx: &Context<'_>,
-        tag_ids: Vec<Uuid>,
+        tag_ids: Vec<i32>,
         pagination_params: PaginationParams,
     ) -> Result<Connection<Base64Cursor, Post, ConnectionFields, EmptyFields>> {
         let state = ctx.data::<Arc<State>>()?;

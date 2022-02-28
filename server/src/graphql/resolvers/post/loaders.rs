@@ -3,7 +3,6 @@ use async_graphql::{dataloader::Loader, Result};
 use async_trait::async_trait;
 use itertools::Itertools;
 use std::{collections::HashMap, sync::Arc};
-use uuid::Uuid;
 
 // ----------------------------------------------------------------
 // PostContentLoader
@@ -19,11 +18,11 @@ impl PostContentLoader {
 }
 
 #[async_trait]
-impl Loader<Uuid> for PostContentLoader {
+impl Loader<i32> for PostContentLoader {
     type Value = String;
     type Error = Arc<sqlx::Error>;
 
-    async fn load(&self, keys: &[Uuid]) -> Result<HashMap<Uuid, Self::Value>, Self::Error> {
+    async fn load(&self, keys: &[i32]) -> Result<HashMap<i32, Self::Value>, Self::Error> {
         Ok(sqlx::query!(
             r#"
             SELECT id, content
@@ -54,11 +53,11 @@ impl PostTagsLoader {
 }
 
 #[async_trait]
-impl Loader<Uuid> for PostTagsLoader {
+impl Loader<i32> for PostTagsLoader {
     type Value = Vec<Tag>;
     type Error = Arc<sqlx::Error>;
 
-    async fn load(&self, keys: &[Uuid]) -> Result<HashMap<Uuid, Self::Value>, Self::Error> {
+    async fn load(&self, keys: &[i32]) -> Result<HashMap<i32, Self::Value>, Self::Error> {
         Ok(sqlx::query!(
             r#"
             SELECT pht.post_id, t.id, t.name, t.icon, t.created_at, t.updated_at

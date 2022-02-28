@@ -3,12 +3,11 @@ use crate::graphql::shared::errors::SharedError;
 use async_graphql::{ErrorExtensions, InputObject, Result, SimpleObject};
 use chrono::{DateTime, Utc};
 use sqlx::{Pool, Postgres, Transaction};
-use uuid::Uuid;
 
 #[derive(SimpleObject)]
 #[graphql(complex)]
 pub struct Post {
-    pub id: Uuid,
+    pub id: i32,
     title: String,
     slug: String,
     reading_time: i32,
@@ -44,7 +43,7 @@ impl Post {
         .map_err(|e| SharedError::Database(e).extend())
     }
 
-    pub async fn read_count_by_tags(db_pool: &Pool<Postgres>, tag_ids: &[Uuid]) -> Result<usize> {
+    pub async fn read_count_by_tags(db_pool: &Pool<Postgres>, tag_ids: &[i32]) -> Result<usize> {
         Ok(sqlx::query!(
             r#"
             SELECT COUNT(*) AS "count!"
@@ -63,7 +62,7 @@ impl Post {
 
     pub async fn read_many_by_tags(
         db_pool: &Pool<Postgres>,
-        tag_ids: &[Uuid],
+        tag_ids: &[i32],
         limit: i64,
         offset: i64,
     ) -> Result<Vec<Post>> {
@@ -107,7 +106,7 @@ impl Post {
         .ok_or_else(|| PostError::NotFound.extend())
     }
 
-    pub async fn delete_one(db_pool: &Pool<Postgres>, id: Uuid) -> Result<Post> {
+    pub async fn delete_one(db_pool: &Pool<Postgres>, id: i32) -> Result<Post> {
         sqlx::query_as!(
             Post,
             r#"
@@ -125,14 +124,14 @@ impl Post {
 
     pub async fn create_tags_transaction(
         transaction: &mut Transaction<'_, Postgres>,
-        id: Uuid,
-        tag_ids: &[Uuid],
+        id: i32,
+        tag_ids: &[i32],
     ) -> Result<()> {
         sqlx::query!(
             r#"
             INSERT INTO post_has_tag(post_id, tag_id)
             SELECT $1 AS post_id, tag_id
-            FROM unnest($2::UUID[]) tag_id;
+            FROM unnest($2::INTEGER[]) tag_id;
             "#,
             id,
             &tag_ids
@@ -155,7 +154,7 @@ pub struct PostCreate {
     reading_time: i32,
     visible: bool,
     content: String,
-    tag_ids: Vec<Uuid>,
+    tag_ids: Vec<i32>,
 }
 
 impl PostCreate {
@@ -203,11 +202,11 @@ pub struct PostUpdate {
     reading_time: Option<i32>,
     visible: Option<bool>,
     content: Option<String>,
-    tag_ids: Option<Vec<Uuid>>,
+    tag_ids: Option<Vec<i32>>,
 }
 
 impl PostUpdate {
-    pub async fn update(&self, db_pool: &Pool<Postgres>, id: Uuid) -> Result<Post> {
+    pub async fn update(&self, db_pool: &Pool<Postgres>, id: i32) -> Result<Post> {
         let mut transaction = db_pool
             .begin()
             .await

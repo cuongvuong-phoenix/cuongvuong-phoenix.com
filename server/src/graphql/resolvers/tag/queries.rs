@@ -8,7 +8,6 @@ use async_graphql::{
     Context, Object, Result,
 };
 use std::sync::Arc;
-use uuid::Uuid;
 
 #[derive(Default)]
 pub struct TagQuery;
@@ -31,7 +30,7 @@ impl TagQuery {
         .await
     }
 
-    async fn tag(&self, ctx: &Context<'_>, id: Uuid) -> Result<Tag> {
+    async fn tag(&self, ctx: &Context<'_>, id: i32) -> Result<Tag> {
         let state = ctx.data::<Arc<State>>()?;
 
         Tag::read_one(&state.db_pool, id).await
