@@ -22,11 +22,6 @@ export const routes: RouteRecordRaw[] = [
         component: () => import('~/pages/About.vue'),
       },
       {
-        path: 'contact',
-        name: RouteName.CONTACT,
-        component: () => import('~/pages/Contact.vue'),
-      },
-      {
         path: 'blog',
         name: RouteName.BLOG,
         component: () => import('~/pages/blog/Index.vue'),
@@ -35,11 +30,6 @@ export const routes: RouteRecordRaw[] = [
         path: 'blog/:post',
         name: RouteName.BLOG_POST,
         component: () => import('~/pages/BlogPost.vue'),
-      },
-      {
-        path: 'notes',
-        name: RouteName.NOTES,
-        component: () => import('~/pages/Notes.vue'),
       },
       {
         path: ':pathMatch(.*)*',

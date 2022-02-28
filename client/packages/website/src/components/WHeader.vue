@@ -33,39 +33,43 @@
     >
       <!-- "(2xl)" -->
       <template v-if="!smallerMd">
-        <!-- "Left" -->
+        <!-- "Left - Navs" -->
         <div class="flex flex-1 space-x-12">
-          <nav v-for="nav in leftNavs" :key="nav">
+          <nav v-for="nav in navs" :key="nav">
             <UButton :link="{ name: nav, params: { locale } }" size="lg" class="!p-0">
               {{ t(`nav.${nav}`).toUpperCase() }}
             </UButton>
           </nav>
         </div>
-        <!-- END "Left" -->
+        <!-- END "Left - Navs" -->
 
-        <!-- "Middle" -->
+        <!-- "Middle - Logo" -->
         <nav>
           <UButton :link="{ name: RouteName.HOME }" link-active-exact rounded unified class="!p-1">
             <ULogo colored class="w-[4.5rem] h-[4.5rem]" />
           </UButton>
         </nav>
-        <!-- END "Middle" -->
+        <!-- END "Middle - Logo" -->
 
-        <!-- "Right" -->
-        <div class="flex justify-end flex-1 space-x-12">
-          <nav v-for="nav in rightNavs" :key="nav">
-            <UButton :link="{ name: nav, params: { locale } }" size="lg" class="!p-0">
-              {{ t(`nav.${nav}`).toUpperCase() }}
-            </UButton>
-          </nav>
+        <!-- "Right - Social Networks" -->
+        <div class="flex justify-end flex-1 space-x-2">
+          <UButton
+            v-for="socialNetwork in socialNetworks"
+            :key="socialNetwork.href"
+            :link="socialNetwork.href"
+            unified
+            rounded
+          >
+            <UIcon :icon="socialNetwork.icon" class="wh-7" />
+          </UButton>
         </div>
-        <!-- END "Right" -->
+        <!-- END "Right - Social Networks" -->
       </template>
       <!-- END "(2xl)" -->
 
       <!-- "(md)" -->
       <template v-else>
-        <!-- "Left" -->
+        <!-- "Left - Logo" -->
         <nav>
           <UButton
             :link="{ name: RouteName.HOME }"
@@ -78,9 +82,9 @@
             <ULogo colored class="w-[4.5rem] h-[4.5rem]" />
           </UButton>
         </nav>
-        <!-- END "Left" -->
+        <!-- END "Left - Logo" -->
 
-        <!-- "Right" -->
+        <!-- "Right - Menu Toggler" -->
         <div class="flex justify-end flex-1">
           <nav>
             <UButton rounded unified @click="uiStore.toggleHeaderMenuOpenning()">
@@ -89,16 +93,18 @@
             </UButton>
           </nav>
         </div>
-        <!-- END "Right" -->
+        <!-- END "Right - Menu Toggler" -->
 
+        <!-- "Menu" -->
         <Teleport v-if="uiStore.headerMenuOpenning" to="#app">
           <header
-            class="fixed inset-x-0 bottom-0 z-10 px-6 py-8 bg-bg-default"
+            class="fixed inset-x-0 bottom-0 z-10 px-16 py-8 bg-bg-default"
             :style="{
               top: `${uiStore.headerHeight + 1}px`,
             }"
           >
-            <nav v-for="nav in [...leftNavs, ...rightNavs]" :key="nav">
+            <!-- "Navs" -->
+            <nav v-for="nav in navs" :key="nav">
               <UButton
                 :link="{ name: nav, params: { locale } }"
                 size="lg"
@@ -108,8 +114,26 @@
                 {{ t(`nav.${nav}`).toUpperCase() }}
               </UButton>
             </nav>
+            <!-- END "Navs" -->
+
+            <hr class="my-4 border-fg-darkest" />
+
+            <!-- "Social Networks" -->
+            <div class="flex justify-center space-x-2">
+              <UButton
+                v-for="socialNetwork in socialNetworks"
+                :key="socialNetwork.href"
+                :link="socialNetwork.href"
+                unified
+                rounded
+              >
+                <UIcon :icon="socialNetwork.icon" class="wh-7" />
+              </UButton>
+            </div>
+            <!-- END "Social Networks" -->
           </header>
         </Teleport>
+        <!-- END "Menu" -->
       </template>
       <!-- END "(md)" -->
     </div>
@@ -203,7 +227,27 @@
   /* ----------------------------------------------------------------
   Navigations
   ---------------------------------------------------------------- */
-  const leftNavs = shallowRef([RouteName.ABOUT, RouteName.CONTACT]);
+  const navs = shallowRef([RouteName.ABOUT, RouteName.BLOG]);
 
-  const rightNavs = shallowRef([RouteName.BLOG, RouteName.NOTES]);
+  /* ----------------------------------------------------------------
+  Social Networks
+  ---------------------------------------------------------------- */
+  interface SocialNetwork {
+    href: string;
+    icon: string;
+  }
+  const socialNetworks = [
+    {
+      href: 'https://github.com/vuong-cuong-phoenix',
+      icon: 'mdi:github',
+    },
+    {
+      href: 'https://www.facebook.com/vuongcuong.phoenix/',
+      icon: 'mdi:facebook',
+    },
+    {
+      href: 'https://www.linkedin.com/in/vuong-cuong-phoenix/',
+      icon: 'mdi:linkedin',
+    },
+  ] as SocialNetwork[];
 </script>
