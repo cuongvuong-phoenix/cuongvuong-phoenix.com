@@ -2,7 +2,13 @@ const colors = require('tailwindcss/colors');
 
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  safelist: ['prose', 'dark:prose-light', 'mx-auto'],
+  safelist: [
+    'prose',
+    'dark:prose-light',
+    'mx-auto',
+    // Custom.
+    'underline',
+  ],
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),

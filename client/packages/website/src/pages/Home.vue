@@ -28,7 +28,7 @@
           class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring-primary-default"
         >
           <div class="w-full h-full rounded-[8rem] border border-fg-darkest overflow-hidden">
-            <img :src="avatarUrl" :alt="t('common.avatar')" class="object-cover w-full h-full" />
+            <img :src="selfImageSrc" :alt="t('common.self-image')" class="object-cover w-full h-full" />
           </div>
         </div>
         <!-- END "Middle - Avatar" -->
@@ -50,17 +50,17 @@
 
     <!-- "(lg)" -->
     <template v-else>
-      <!-- "Avatar" -->
+      <!-- "Self Image" -->
       <div class="flex justify-center mt-12">
         <div
           class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring-primary-default"
         >
           <div class="w-full h-full rounded-[8rem] border border-fg-darkest overflow-hidden">
-            <img :src="avatarUrl" :alt="t('common.avatar')" class="object-cover w-full h-full" />
+            <img :src="selfImageSrc" :alt="t('common.self-image')" class="object-cover w-full h-full" />
           </div>
         </div>
       </div>
-      <!-- END "Avatar" -->
+      <!-- END "Self Image" -->
 
       <!-- "Left Sections" -->
       <div class="grid grid-cols-2 gap-16 mt-12 text-center md:grid-cols-1 md:gap-8">
@@ -106,7 +106,7 @@
   import { useBreakpoints } from '@vueuse/core';
   import { useQuery } from '@vue/apollo-composable';
   import { USkeleton } from '@cvp-web-client/ui';
-  import avatarUrl from '~/assets/images/avatar.jpg';
+  import selfImageSrc from '~/assets/images/avatar.jpg';
   import { type HomeContentQuery } from '~/types/graphql';
   import { appBreakpoints } from '~/utils/constants';
 
