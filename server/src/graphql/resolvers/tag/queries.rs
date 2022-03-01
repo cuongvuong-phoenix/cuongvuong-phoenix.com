@@ -23,9 +23,8 @@ impl TagQuery {
 
         query_connection(
             pagination_params,
-            &state.db_pool,
-            Tag::read_count,
-            Tag::read_many,
+            || Tag::read_count(&state.db_pool),
+            |limit, offset| Tag::read_many(&state.db_pool, limit, offset),
         )
         .await
     }

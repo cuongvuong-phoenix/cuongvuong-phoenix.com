@@ -3,19 +3,17 @@ use async_graphql::{
     connection::{self, Connection, Edge, EmptyFields},
     Error, Result,
 };
-use sqlx::{Pool, Postgres};
 use std::future::Future;
 
-pub async fn query_connection<'a, N, CF, CFR, VF, VFR>(
+pub async fn query_connection<N, CF, CFR, VF, VFR>(
     pagination_params: PaginationParams,
-    db_pool: &'a Pool<Postgres>,
     count_fn: CF,
     vec_fn: VF,
 ) -> Result<Connection<Base64Cursor, N, ConnectionFields, EmptyFields>>
 where
-    CF: FnOnce(&'a Pool<Postgres>) -> CFR,
+    CF: FnOnce() -> CFR,
     CFR: Future<Output = Result<usize>>,
-    VF: FnOnce(&'a Pool<Postgres>, i64, i64) -> VFR,
+    VF: FnOnce(i64, i64) -> VFR,
     VFR: Future<Output = Result<Vec<N>>>,
 {
     let PaginationParams {
@@ -31,13 +29,13 @@ where
         first,
         last,
         |after, before, first, last| async move {
-            let count = count_fn(db_pool).await?;
+            let count = count_fn().await?;
 
             let (start, end) = get_start_end_cursor_offsets(after, before, first, last, count);
 
-            let posts = vec_fn(db_pool, (end - start) as i64, start as i64).await?;
+            let nodes = vec_fn((end - start) as i64, start as i64).await?;
 
-            Ok(create_connection(start, end, count, posts.into_iter()))
+            Ok(create_connection(start, end, count, nodes.into_iter()))
         },
     )
     .await
