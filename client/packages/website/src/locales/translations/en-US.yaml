@@ -14,8 +14,9 @@ pages:
     kebab-sections:
       biography:
         label: "@:{'common.biography'}"
-        body: I’m a software developer & UI/UX design enthusiasm come from <span class="italic">Vietnam</span>.<br />
-          I love working with <span class="italic">Vue.JS, Rust, GraphQL, Figma, Inkscape</span>.
+        body:
+          I’m a software developer & UI/UX design enthusiasm come from <span class="italic">Vietnam</span>.<br />I love
+          working with <span class="italic">Vue.JS, Rust, GraphQL, Figma, Inkscape</span>.
       contact:
         label: "@:{'common.contact'}"
         body: vuongcuong.phoenix{'@'}gmail.com<br />
@@ -31,44 +32,74 @@ pages:
   about:
     top:
       greeting: "Hello, I'm<br />@:{'common.whoami'}"
-      biography: I’m a software developer & UI/UX design enthusiasm come from Vietnam.<br /><br />
-        From the fact that developing applications using <span class="text-primary-default">JavaScript</span> is very
-        popular nowadays, I really love working with <span class="text-primary-default">Vue.JS</span>, and recently
-        interested in <span class="text-primary-default">Rust</span> to use it as a back-end language.<br /><br />
-        Besides, I also like <span class="text-primary-default">designing UI/UX</span>. I’m a perfectionist, therefore
-        I want every single component in an application need to be precise, balanced and ergonomic.
+      biography:
+        I’m a software developer & UI/UX design enthusiasm come from Vietnam.<br /><br />From the fact that developing
+        applications using <span class="text-primary-default">JavaScript</span> is very popular nowadays, I really love
+        working with <span class="text-primary-default">Vue.JS</span>, and recently interested in
+        <span class="text-primary-default">Rust</span> to use it as a back-end language.<br /><br />Besides, I also like
+        <span class="text-primary-default">designing UI/UX</span>. I’m a perfectionist, therefore I want every single
+        component in an application need to be precise, balanced and ergonomic.
     hobbies:
       title: "My @:{'common.hobby'}"
       vuejs:
         label: Vue.JS
-        description: Since the release of version 3 and its continuous rising community and improvement of the ergonomic ecosystem, <span class="text-secondary-default">Vue.JS</span> has evolved to the point that building web applications with it is some kind of a “must” to me.
+        description:
+          Since the release of version 3 and its continuous rising community and improvement of the ergonomic ecosystem,
+          <span class="text-secondary-default">Vue.JS</span> has evolved to the point that building web applications with it
+          is some kind of a “must” to me.
       rust:
         label: Rust
-        description: Although I can quickly learn and apply other languages/frameworks, I strongly believe performance and development experience are the key factors for any application. <span class="text-secondary-default">Rust</span> is not very easy to begin with but it covers things that I demand for!
+        description:
+          Although I can quickly learn and apply other languages/frameworks, I strongly believe performance and development
+          experience are the key factors for any application. <span class="text-secondary-default">Rust</span> is not very
+          easy to begin with but it covers things that I demand for!
       uiux-design:
         label: UI/UX Design
-        description: Every application need an interface that balances between glamour and ease-of-use. I want to give end-users the best experience. I also enforce rules and best practices from “coding” when designing with <span class="text-secondary-default">Figma</span>, <span class="text-secondary-default">Inkscape</span>.
+        description:
+          Every application need an interface that balances between glamour and ease-of-use. I want to give end-users the best
+          experience. I also enforce rules and best practices from “coding” when designing with
+          <span class="text-secondary-default">Figma</span>, <span class="text-secondary-default">Inkscape</span>.
       database:
         label: Database
-        description: I graduated from a theory-hard university (Ho Chi Minh city University of Technology), thus I like to work with every aspect of a software, including <span class="text-secondary-default">Database</span>. I’m not expert at writing SQLs though, just had some experiences and kind of theoretically inclined.
+        description:
+          I graduated from a theory-hard university (Ho Chi Minh city University of Technology), thus I like to work with
+          every aspect of a software, including <span class="text-secondary-default">Database</span>. I’m not expert at
+          writing SQLs though, just had some experiences and kind of theoretically inclined.
       linux:
         label: Linux
-        description: 'My current setup is running on <span class="text-secondary-default">Arch Linux</span>. I’ve used it as a daily driven operating system since 2019. After using it and its wide-range software and applications, my only question is: <span class="italic">"Why don’t people all use it now?"</span>.'
+        description:
+          'My current setup is running on <span class="text-secondary-default">Arch Linux</span>. I’ve used it as a daily
+          driven operating system since 2019. After using it and its wide-range software and applications, my only question
+          is: <span class="italic">"Why don’t people all use it now?"</span>.'
       neovim:
         label: Neovim
-        description: When I first-touched <span class="text-secondary-default">Vi</span>, I couldn’t last for 24 hours!<br />6 months later, I revisited it again, now with a clearer mind and with the help of <code>vimtutor</code>, I felt in love with it!<br />I extended into <span class="text-secondary-default">Neovim</span> and now almost everything I use has some "Vim" in it. Check out <a href="https://github.com/vuong-cuong-phoenix/neovim-config" class="underline">my Neovim config</a>.
+        description:
+          When I first-touched <span class="text-secondary-default">Vi</span>, I couldn’t last for 23 hours!<br />6 months
+          later, I revisited it again, now with a clearer mind and with the help of <code>vimtutor</code>, I felt in love with
+          it!<br />I extended into <span class="text-secondary-default">Neovim</span> and now almost everything I use has some
+          "Vim" in it. Check out
+          <a href="https://github.com/vuong-cuong-phoenix/neovim-config" class="underline">my Neovim config</a>.
       learning:
         label: Learning
-        description: '"Learn, learn more, learn forever!"<br />I love learning new things, specially software and technology-related. One of my favorite domain I learned is <span class="italic">Principles of Programming Languages</span> and I believe with the help of it, I can learn and apply any programming languages easily!'
+        description:
+          '"Learn, learn more, learn forever!"<br />I love learning new things, specially software and technology related. One
+          of my favorite domain that I learned is <span class="italic">Principles of Programming Languages</span> and I
+          believe with the help of it, I can learn and use any programming languages easily!'
       music:
         label: Music
-        description: 'Whenever I’m working, I listen to soft and chill music such as: <span class="italic">instrumentals, LoFi,...</span><br />Sometimes, I need a dose to boost-up my emotions, so I also listen to <span class="italic">Future House</span> and <span class="italic">EDM</span> songs.'
+        description:
+          'Whenever I’m working, I listen to soft and chill music such as: <span class="italic">instrumentals, LoFi,...</span
+          ><br />Sometimes, I need a dose to boost-up my emotions, so I also listen to
+          <span class="italic">Future House</span> and <span class="italic">EDM</span> songs.'
       movies:
         label: Movies
-        description: 'I also enjoy watching movies. My genres vary, but I can name some of my favorite titles: <span class="italic">Inception, Breaking Bad, Better Call Saul, The Dark Knight Trilogy, The Witcher, Game of Thrones,...</span>'
+        description: 'I also enjoy watching movies. My genres vary, but I can name some of my favorite titles:
+          <span class="italic">Inception, Breaking Bad, Better Call Saul, The Dark Knight Trilogy, The Witcher, Game of Thrones,...</span>'
       football:
         label: Football
-        description: Like most man in this world do, I love watching football!<br />My favorite club is <span class="text-secondary-default">Barcelona</span> and my idol is <span class="text-secondary-default">Messi</span> (of course).
+        description: Like most man in this world do, I love watching football!<br />My favorite club is
+          <span class="text-secondary-default">Barcelona</span> and my idol is
+          <span class="text-secondary-default">Messi</span> (of course).
 
   blog:
     filters:
