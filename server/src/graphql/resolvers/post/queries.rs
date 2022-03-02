@@ -14,35 +14,32 @@ pub struct PostQuery;
 
 #[Object]
 impl PostQuery {
-    async fn posts_count(&self, ctx: &Context<'_>) -> Result<usize> {
+    async fn posts_count(
+        &self,
+        ctx: &Context<'_>,
+        search: String,
+        tag_ids: Vec<i32>,
+    ) -> Result<usize> {
         let state = ctx.data::<Arc<State>>()?;
 
-        Post::read_count(&state.db_pool).await
+        Post::read_count(&state.db_pool, &search, &tag_ids).await
     }
 
     async fn posts(
         &self,
         ctx: &Context<'_>,
-        tag_ids: Vec<i32>,
         pagination_params: PaginationParams,
+        search: String,
+        tag_ids: Vec<i32>,
     ) -> Result<Connection<Base64Cursor, Post, ConnectionFields, EmptyFields>> {
         let state = ctx.data::<Arc<State>>()?;
 
-        if tag_ids.len() == 0 {
-            query_connection(
-                pagination_params,
-                || Post::read_count(&state.db_pool),
-                |limit, offset| Post::read_many(&state.db_pool, limit, offset),
-            )
-            .await
-        } else {
-            query_connection(
-                pagination_params,
-                || Post::read_count_by_tags(&state.db_pool, &tag_ids),
-                |limit, offset| Post::read_many_by_tags(&state.db_pool, &tag_ids, limit, offset),
-            )
-            .await
-        }
+        query_connection(
+            pagination_params,
+            || Post::read_count(&state.db_pool, &search, &tag_ids),
+            |limit, offset| Post::read_many(&state.db_pool, limit, offset, &search, &tag_ids),
+        )
+        .await
     }
 
     async fn post(&self, ctx: &Context<'_>, slug: String) -> Result<Post> {

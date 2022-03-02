@@ -8,6 +8,6 @@ impl HomeContent {
     async fn num_blog_posts(&self, ctx: &Context<'_>) -> Result<usize> {
         let state = ctx.data::<Arc<State>>()?;
 
-        Post::read_count(&state.db_pool).await
+        Post::read_count(&state.db_pool, Default::default(), Default::default()).await
     }
 }
