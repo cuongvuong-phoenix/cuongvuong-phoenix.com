@@ -190,7 +190,7 @@
   Search
   ---------------------------------------------------------------- */
   const search = computed({
-    get: () => route.query.search as string | undefined,
+    get: () => (route.query.search as string) || '',
     set: (value?: string) => {
       const trimmedvalue = value?.trim();
 
@@ -360,7 +360,7 @@
         first,
         last,
         tagIds: activeTagIds.value,
-        search: route.query.search === undefined ? '' : (route.query.search as string),
+        search: search.value,
       };
     }
   );
