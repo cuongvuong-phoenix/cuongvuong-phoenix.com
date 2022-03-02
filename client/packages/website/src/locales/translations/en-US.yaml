@@ -105,6 +105,9 @@ pages:
     filters:
       by-tags: "By @.lower:{'common.tag'}"
 
+placeholders:
+  no-post: "No @.lower:{'common.post'} found"
+
 common:
   whoami: Cuong Vuong
   my-expertise: Software Developer & UI/UX Design Enthusiasm

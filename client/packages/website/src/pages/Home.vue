@@ -119,7 +119,7 @@
     error: postsCountError,
   } = useQuery<PostsCountQuery>(gql`
     query postsCount {
-      postsCount
+      postsCount(search: "", tagIds: [])
     }
   `);
 

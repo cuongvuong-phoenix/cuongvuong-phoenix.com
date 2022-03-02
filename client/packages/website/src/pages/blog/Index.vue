@@ -91,6 +91,11 @@
               }"
             />
           </template>
+          <template v-else-if="gqlPosts.length === 0">
+            <div class="flex flex-col items-center justify-center px-12 py-8 text-3xl text-fg-darkest">
+              <span>{{ t('placeholders.no-post').toUpperCase() }}</span>
+            </div>
+          </template>
           <template v-else-if="postsLoading">
             <WPost
               v-for="(num, i) in postsPageSize"
@@ -112,7 +117,12 @@
                   ? {
                       name: RouteName.BLOG,
                       params: { locale },
-                      query: { last: postsPageSize, before: gqlPostsPageInfo.startCursor, tags: route.query.tags },
+                      query: {
+                        last: postsPageSize,
+                        before: gqlPostsPageInfo.startCursor,
+                        search: route.query.search,
+                        tags: route.query.tags,
+                      },
                     }
                   : undefined
               "
@@ -134,7 +144,12 @@
                   ? {
                       name: RouteName.BLOG,
                       params: { locale },
-                      query: { first: postsPageSize, after: gqlPostsPageInfo.endCursor, tags: route.query.tags },
+                      query: {
+                        first: postsPageSize,
+                        after: gqlPostsPageInfo.endCursor,
+                        search: route.query.search,
+                        tags: route.query.tags,
+                      },
                     }
                   : undefined
               "
@@ -160,7 +175,7 @@
   import { useQuery, useResult } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
-  import { type Option, UButton, UIcon, UInput, UListbox, UPill, USkeleton } from '@cvp-web-client/ui';
+  import { UButton, UIcon, UInput, UPill, USkeleton } from '@cvp-web-client/ui';
   import WPost from './_components/WPost.vue';
   import { useUiStore } from '~/store/ui';
   import { RouteName } from '~/utils/constants';
@@ -174,17 +189,31 @@
   /* ----------------------------------------------------------------
   Search
   ---------------------------------------------------------------- */
-  const search = ref();
+  const search = computed({
+    get: () => route.query.search as string | undefined,
+    set: (value?: string) => {
+      const trimmedvalue = value?.trim();
+
+      router.push({
+        name: RouteName.BLOG,
+        params: { locale: locale.value },
+        query: {
+          search: trimmedvalue || undefined,
+          tags: route.query.tags,
+        },
+      });
+    },
+  });
 
   /* ----------------------------------------------------------------
-  Sort
+  TODO: Sort
   ---------------------------------------------------------------- */
-  const sortOptions = computed<Option[]>(() => [
-    { value: 'updated', text: t('common.updated') },
-    { value: 'relevance', text: t('common.relevance') },
-    { value: 'reading-time', text: t('common.reading-time') },
-  ]);
-  const selectedSortOption = ref(sortOptions.value[0]) as Ref<Option>;
+  // const sortOptions = computed<Option[]>(() => [
+  //   { value: 'updated', text: t('common.updated') },
+  //   { value: 'relevance', text: t('common.relevance') },
+  //   { value: 'reading-time', text: t('common.reading-time') },
+  // ]);
+  // const selectedSortOption = ref(sortOptions.value[0]) as Ref<Option>;
 
   /* ----------------------------------------------------------------
   READ tags
@@ -286,8 +315,12 @@
     error: postsError,
   } = useQuery<PostsQuery, PostsQueryVariables>(
     gql`
-      query posts($tagIds: [Int!]!, $after: String, $before: String, $first: Int, $last: Int) {
-        posts(tagIds: $tagIds, paginationParams: { after: $after, before: $before, first: $first, last: $last }) {
+      query posts($after: String, $before: String, $first: Int, $last: Int, $search: String!, $tagIds: [Int!]!) {
+        posts(
+          paginationParams: { after: $after, before: $before, first: $first, last: $last }
+          search: $search
+          tagIds: $tagIds
+        ) {
           totalCount
           edges {
             node {
@@ -322,11 +355,12 @@
       }
 
       return {
-        tagIds: activeTagIds.value,
         after: route.query.after as string | undefined,
         before: route.query.before as string | undefined,
         first,
         last,
+        tagIds: activeTagIds.value,
+        search: route.query.search === undefined ? '' : (route.query.search as string),
       };
     }
   );
