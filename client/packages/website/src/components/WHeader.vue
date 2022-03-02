@@ -149,10 +149,10 @@
 </template>
 
 <script setup lang="ts">
-  import { type WatchStopHandle, ref, shallowRef, watch } from 'vue';
+  import { ref, shallowRef, watch } from 'vue';
   import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
-  import { useBreakpoints, useDark, useEventListener, useStyleTag } from '@vueuse/core';
+  import { useBreakpoints, useColorMode, useEventListener, useStyleTag } from '@vueuse/core';
   import { UButton, UIcon, ULogo } from '@cvp-web-client/ui';
   import { HeaderHeight, useUiStore } from '~/store/ui';
   import { RouteName, appBreakpoints } from '~/utils/constants';
@@ -205,12 +205,10 @@
   /* ----------------------------------------------------------------
   Dark theme
   ---------------------------------------------------------------- */
-  const isDark = useDark({
+  // TODO: Implement light theme.
+  const colorMode = useColorMode({
     storageKey: 'theme',
   });
-
-  // TODO: Implement light theme.
-  isDark.value = true;
 
   /* ----------------------------------------------------------------
   Navigations

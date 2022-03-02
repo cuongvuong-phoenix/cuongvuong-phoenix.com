@@ -6,9 +6,9 @@
 @import './layout.css';
 
 :root {
-  --scrollbar--bg: theme('colors.gray.200');
-  --scrollbar--thumb: theme('colors.gray.400');
-  --scrollbar--thumb-hover: theme('colors.gray.500');
+  --scrollbar--bg: theme('colors.zinc.800');
+  --scrollbar--thumb: theme('colors.zinc.600');
+  --scrollbar--thumb-hover: theme('colors.zinc.500');
   --scrollbar--width: 0.5rem;
 }
 
@@ -35,11 +35,7 @@
 }
 
 /* TODO: Implement light theme */
-html.dark {
-  --scrollbar--bg: theme('colors.gray.800');
-  --scrollbar--thumb: theme('colors.gray.600');
-  --scrollbar--thumb-hover: theme('colors.gray.500');
-
+html {
   @apply font-sans text-fg-default bg-bg-default;
 }
 
