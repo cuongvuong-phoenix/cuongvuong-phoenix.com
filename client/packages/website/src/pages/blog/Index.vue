@@ -299,6 +299,7 @@
       name: RouteName.BLOG,
       params: { locale: locale.value },
       query: {
+        search: route.query.search,
         tags: tagsQueryParams,
       },
     });
