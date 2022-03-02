@@ -92,7 +92,8 @@
             />
           </template>
           <template v-else-if="gqlPosts.length === 0">
-            <div class="flex flex-col items-center justify-center px-12 py-8 text-3xl text-fg-darkest">
+            <div class="flex flex-col items-center px-12 py-8 space-y-4 text-2xl text-center text-fg-darkest">
+              <UIcon icon="fluent:document-bullet-list-off-24-regular" />
               <span>{{ t('placeholders.no-post').toUpperCase() }}</span>
             </div>
           </template>
