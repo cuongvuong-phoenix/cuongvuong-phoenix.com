@@ -8,11 +8,12 @@
     "build": "postcss src/assets/index.css --output=dist/assets/index.css"
   },
   "devDependencies": {
+    "@cvp-web-client/tailwind-plugins": "workspace:*",
     "@headlessui/vue": "^1.5.0",
     "@iconify/iconify": "^2.1.2",
     "@iconify/json": "^2.1.7",
     "@purge-icons/generated": "^0.7.0",
-    "@cvp-web-client/tailwind-plugins": "workspace:*",
+    "@vueuse/core": "^7.6.2",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.7",
     "postcss-at-rules-variables": "^0.3.0",
@@ -29,6 +30,7 @@
   },
   "peerDependencies": {
     "@iconify/iconify": "^2.1.2",
+    "@vueuse/core": "^7.6.2",
     "vue": "^3.2.31",
     "vue-router": "4"
   }

@@ -29,6 +29,7 @@ importers:
       '@iconify/iconify': ^2.1.2
       '@iconify/json': ^2.1.7
       '@purge-icons/generated': ^0.7.0
+      '@vueuse/core': ^7.6.2
       autoprefixer: ^10.4.2
       postcss: ^8.4.7
       postcss-at-rules-variables: ^0.3.0
@@ -48,6 +49,7 @@ importers:
       '@iconify/iconify': 2.1.2
       '@iconify/json': 2.1.7
       '@purge-icons/generated': 0.7.0
+      '@vueuse/core': 7.6.2_vue@3.2.31
       autoprefixer: 10.4.2_postcss@8.4.7
       postcss: 8.4.7
       postcss-at-rules-variables: 0.3.0_postcss@8.4.7
@@ -2029,7 +2031,6 @@ packages:
       '@vueuse/shared': 7.6.2_vue@3.2.31
       vue: 3.2.31
       vue-demi: 0.12.1_vue@3.2.31
-    dev: false
 
   /@vueuse/head/0.7.5_vue@3.2.31:
     resolution: {integrity: sha512-L+XQ5Act0nT/ZyO8Qo10J4FyM1qPOyQb6MT4MMn6+AITzrStpmKs/nUDDLJKD/rCcNWl/65XbdQm4T2vKp3VOQ==}
@@ -2052,7 +2053,6 @@ packages:
     dependencies:
       vue: 3.2.31
       vue-demi: 0.12.1_vue@3.2.31
-    dev: false
 
   /@wry/context/0.6.1:
     resolution: {integrity: sha512-LOmVnY1iTU2D8tv4Xf6MVMZZ+juIJ87Kt/plMijjN20NMAXGmH4u8bS1t0uT74cZ5gwpocYueV58YwyI8y+GKw==}
@@ -6930,7 +6930,6 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.31
-    dev: false
 
   /vue-eslint-parser/8.2.0_eslint@8.9.0:
     resolution: {integrity: sha512-hvl8OVT8imlKk/lQyhkshqwQQChzHETcBd5abiO4ePw7ib7QUZLfW+2TUrJHKUvFOCFRJrDin5KJO9OHzB5bRQ==}

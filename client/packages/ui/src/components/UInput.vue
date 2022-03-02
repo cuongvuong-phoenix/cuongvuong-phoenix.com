@@ -14,7 +14,7 @@
         :placeholder="placeholder"
         :value="modelValue"
         class="block w-full"
-        @input="event => emit('update:modelValue', (event.target as HTMLInputElement).value)"
+        @input="onInputDebounced"
       />
 
       <slot name="appended" />
@@ -23,14 +23,20 @@
 </template>
 
 <script setup lang="ts">
+  import { useDebounceFn } from '@vueuse/core';
   import ULabel from './ULabel.vue';
 
-  const { label, required } = defineProps<{
+  const {
+    label,
+    required,
+    debounceTime = 300,
+  } = defineProps<{
     // Label.
     label?: string;
     required?: boolean;
     // Core.
     modelValue?: string;
+    debounceTime?: number;
     // Attrs.
     id?: string;
     name?: string;
@@ -40,6 +46,10 @@
   const emit = defineEmits<{
     (e: 'update:modelValue', value?: string): void;
   }>();
+
+  const onInputDebounced = useDebounceFn((event: Event) => {
+    emit('update:modelValue', (event.target as HTMLInputElement).value);
+  }, debounceTime);
 </script>
 
 <style lang="postcss">
