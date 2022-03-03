@@ -2,7 +2,7 @@
   <WHeader />
 
   <main
-    class="container py-8 mx-auto"
+    class="container pt-8 pb-16 mx-auto"
     :style="{
       'margin-top': `${HeaderHeight.DEFAULT}px`,
     }"

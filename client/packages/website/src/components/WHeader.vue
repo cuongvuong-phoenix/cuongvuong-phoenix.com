@@ -106,7 +106,7 @@
         <!-- "Menu" -->
         <Teleport v-if="uiStore.headerMenuOpenning" to="#app">
           <header
-            class="fixed inset-x-0 bottom-0 z-10 px-16 py-8 bg-bg-default"
+            class="fixed inset-x-0 bottom-0 z-10 px-16 pt-8 pb-16 bg-bg-default"
             :style="{
               top: `${uiStore.headerHeight + 1}px`,
             }"
