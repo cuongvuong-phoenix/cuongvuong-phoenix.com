@@ -16,7 +16,7 @@
           <div v-for="section in leftKebabSections" :key="section.label" class="space-y-4">
             <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
             <div
-              v-if="section.body"
+              v-if="section.body !== undefined"
               class="font-serif text-xl font-medium break-words line-clamp-6"
               v-html="section.body"
             ></div>
@@ -38,7 +38,11 @@
         <div class="flex flex-col justify-between flex-1 min-w-0">
           <div v-for="section in rightKebabSections" :key="section.label" class="space-y-4 text-right">
             <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
-            <div v-if="section.body" class="font-serif text-5xl font-medium truncate" v-html="section.body"></div>
+            <div
+              v-if="section.body !== undefined"
+              class="font-serif text-5xl font-medium truncate"
+              v-html="section.body"
+            ></div>
           </div>
         </div>
         <!-- END "Right" -->
@@ -68,7 +72,11 @@
           class="flex flex-col items-center justify-between space-y-4"
         >
           <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
-          <div v-if="section.body" class="font-serif text-xl font-medium line-clamp-6" v-html="section.body"></div>
+          <div
+            v-if="section.body !== undefined"
+            class="font-serif text-xl font-medium line-clamp-6"
+            v-html="section.body"
+          ></div>
         </div>
       </div>
       <!-- END "Left Sections" -->
@@ -81,7 +89,11 @@
           class="flex flex-col items-center justify-between space-y-4"
         >
           <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
-          <div v-if="section.body" class="font-serif text-5xl font-medium truncate" v-html="section.body"></div>
+          <div
+            v-if="section.body !== undefined"
+            class="font-serif text-5xl font-medium truncate"
+            v-html="section.body"
+          ></div>
         </div>
       </div>
       <!-- END "Right Sections" -->
