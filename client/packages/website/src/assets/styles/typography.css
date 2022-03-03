@@ -1,0 +1,24 @@
+html {
+  @apply font-sans text-fg-default bg-bg-default;
+}
+
+html.light {
+  @apply text-zinc-700 bg-zinc-100;
+}
+
+a {
+  &:hover {
+    @apply underline text-primary-default;
+  }
+}
+
+code,
+kbd,
+samp,
+pre {
+  @apply font-mono;
+}
+
+code {
+  @apply px-1 py-0.5 bg-bg-lighter rounded-lg;
+}

@@ -3,6 +3,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import './nprogress.css';
+@import './typography.css';
 @import './layout.css';
 
 :root {
@@ -32,15 +33,4 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar--thumb-hover);
-}
-
-/* TODO: Implement light theme */
-html {
-  @apply font-sans text-fg-default bg-bg-default;
-}
-
-a {
-  &:hover {
-    @apply text-primary-default;
-  }
 }

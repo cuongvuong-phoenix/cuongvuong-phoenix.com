@@ -35,6 +35,7 @@ module.exports = {
     fontFamily: {
       sans: "'IBM Plex Sans', sans-serif",
       serif: "'IBM Plex Serif', serif",
+      mono: "'JetBrains Mono', monospace",
     },
 
     /* ----------------------------------------------------------------
@@ -45,6 +46,7 @@ module.exports = {
         bg: {
           default: '#20182B',
           lighter: '#2b2436',
+          lightest: '#362f40',
         },
         fg: {
           default: colors.zinc[100],
@@ -73,63 +75,56 @@ module.exports = {
         '4xl': '2rem',
       },
 
-      // Customize from official styles
-      // (https://github.com/tailwindlabs/tailwindcss-typography/blob/master/src/styles.js)
-      typography: (theme) => ({
+      typography: ({ theme }) => ({
         DEFAULT: {
           css: {
-            'ul > li::before': {
-              backgroundColor: theme('colors.gray.500'),
-            },
-
+            '--tw-prose-body': theme('colors.fg.default'),
+            '--tw-prose-headings': theme('colors.primary.default'),
+            '--tw-prose-lead': theme('colors.fg.darker'),
+            '--tw-prose-links': theme('colors.primary.default'),
+            '--tw-prose-bold': theme('colors.fg.default'),
+            '--tw-prose-counters': theme('colors.fg.darker'),
+            '--tw-prose-bullets': theme('colors.fg.darkest'),
+            '--tw-prose-hr': theme('colors.fg.darkest'),
+            '--tw-prose-quotes': theme('colors.secondary.default'),
+            '--tw-prose-quote-borders': theme('colors.fg.darkest'),
+            '--tw-prose-captions': theme('colors.fg.darker'),
+            '--tw-prose-code': theme('colors.primary.darker'),
+            '--tw-prose-pre-code': theme('colors.zinc[300]'),
+            '--tw-prose-pre-bg': theme('colors.bg.lighter'),
+            '--tw-prose-th-borders': theme('colors.fg.darkest'),
+            '--tw-prose-td-borders': theme('colors.zinc[700]'),
+            // TODO: Light theme (invert).
+            '--tw-prose-invert-body': theme('colors.zinc[700]'),
+            '--tw-prose-invert-headings': theme('colors.zinc[900]'),
+            '--tw-prose-invert-lead': theme('colors.zinc[600]'),
+            '--tw-prose-invert-links': theme('colors.zinc[900]'),
+            '--tw-prose-invert-bold': theme('colors.zinc[900]'),
+            '--tw-prose-invert-counters': theme('colors.zinc[500]'),
+            '--tw-prose-invert-bullets': theme('colors.zinc[300]'),
+            '--tw-prose-invert-hr': theme('colors.zinc[200]'),
+            '--tw-prose-invert-quotes': theme('colors.zinc[900]'),
+            '--tw-prose-invert-quote-borders': theme('colors.zinc[200]'),
+            '--tw-prose-invert-captions': theme('colors.zinc[500]'),
+            '--tw-prose-invert-code': theme('colors.zinc[900]'),
+            '--tw-prose-invert-pre-code': theme('colors.zinc[200]'),
+            '--tw-prose-invert-pre-bg': theme('colors.zinc[800]'),
+            '--tw-prose-invert-th-borders': theme('colors.zinc[300]'),
+            '--tw-prose-invert-td-borders': theme('colors.zinc[200]'),
+            // Elements.
             'a': {
-              'color': theme('colors.amber.600'),
-              'fontStyle': 'italic',
-              'textDecoration': 'none',
-              'textUnderlinePosition': 'from-font',
-              '&:hover, &:focus': {
-                textDecoration: 'underline',
+              'text-decoration': 'none',
+              'text-underline-offset': '1px',
+
+              'code': {
+                color: 'var(--tw-prose-code)',
               },
             },
-
-            // Avoid overriding Prism's theme.
-            'code': false,
-            'code::before': false,
-            'code::after': false,
-            'a code': false,
-            'pre code': false,
-            'pre': {
-              color: false,
-              backgroundColor: false,
-              fontSize: false,
-              borderRadius: false,
+            'code::before': {
+              content: '""',
             },
-          },
-        },
-        light: {
-          css: {
-            'color': theme('colors.gray.300'),
-            '[class~="lead"]': {
-              color: theme('colors.gray.400'),
-            },
-            'strong, h1, h2, h3, h4, thead': {
-              color: theme('colors.gray.200'),
-            },
-            'ol > li::before, figure figcaption': {
-              color: theme('colors.gray.400'),
-            },
-            'ul > li::before': {
-              backgroundColor: theme('colors.gray.400'),
-            },
-            'blockquote': {
-              color: theme('colors.gray.400'),
-              borderLeftColor: theme('colors.gray.700'),
-            },
-            'thead': {
-              borderBottomColor: theme('colors.gray.600'),
-            },
-            'tbody tr': {
-              borderBottomColor: theme('colors.gray.700'),
+            'code::after': {
+              content: '""',
             },
           },
         },
