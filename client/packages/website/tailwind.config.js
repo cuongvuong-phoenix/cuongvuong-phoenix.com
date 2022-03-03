@@ -113,8 +113,12 @@ module.exports = {
             '--tw-prose-invert-td-borders': theme('colors.zinc[200]'),
             // Elements.
             'a': {
-              'text-decoration': 'none',
+              'text-decoration-line': 'none',
               'text-underline-offset': '1px',
+
+              '&:hover': {
+                'text-decoration-line': 'underline',
+              },
 
               'code': {
                 color: 'var(--tw-prose-code)',

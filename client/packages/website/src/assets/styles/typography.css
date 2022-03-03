@@ -8,7 +8,7 @@ html.light {
 
 a {
   &:hover {
-    @apply underline text-primary-default;
+    @apply text-primary-default;
   }
 }
 
