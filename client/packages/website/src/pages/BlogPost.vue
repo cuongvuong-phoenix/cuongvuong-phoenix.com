@@ -71,15 +71,11 @@
     <!-- END "Top" -->
 
     <!-- "Content" -->
-    <div class="mx-auto mt-12 prose prose-light">
-      <template v-if="gqlPost && !postLoading">
-        {{ gqlPost.content }}
-      </template>
-      <template v-else-if="postLoading">
-        <USkeleton type="lines" :num-lines="4" />
-        <USkeleton type="lines" :num-lines="8" />
-        <USkeleton type="lines" :num-lines="6" />
-      </template>
+    <div v-if="gqlPost && !postLoading" class="mx-auto mt-12 prose light:prose-invert" v-html="gqlPost.content"></div>
+    <div v-else-if="postLoading" class="mx-auto mt-12 prose light:prose-invert">
+      <USkeleton type="lines" :num-lines="4" />
+      <USkeleton type="lines" :num-lines="8" />
+      <USkeleton type="lines" :num-lines="6" />
     </div>
     <!-- END "Content" -->
   </div>
