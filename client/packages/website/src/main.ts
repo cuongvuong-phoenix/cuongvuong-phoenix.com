@@ -14,7 +14,7 @@ import '~/assets/styles/index.css';
 // Vue Apollo.
 const apolloClient = new ApolloClient({
   link: createHttpLink({
-    uri: import.meta.env.VITE_SERVER_ADDRESS,
+    uri: `${import.meta.env.VITE_SERVER_ADDRESS}/api/graphql`,
   }),
   cache: new InMemoryCache(),
 });
