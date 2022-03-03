@@ -6,7 +6,8 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint .",
-    "dev": "pnpm dev --filter ./packages --parallel"
+    "dev": "pnpm dev --filter ./packages --parallel",
+    "build": "pnpm build --filter ./packages --parallel"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.16.1",
