@@ -71,7 +71,11 @@
     <!-- END "Top" -->
 
     <!-- "Content" -->
-    <div v-if="gqlPost && !postLoading" class="mx-auto mt-12 prose light:prose-invert" v-html="gqlPost.content"></div>
+    <div
+      v-if="gqlPost && !postLoading"
+      v-dompurify-html="gqlPost.content"
+      class="mx-auto mt-12 prose light:prose-invert"
+    ></div>
     <div v-else-if="postLoading" class="mx-auto mt-12 prose light:prose-invert">
       <USkeleton type="lines" :num-lines="4" />
       <USkeleton type="lines" :num-lines="8" />
@@ -85,6 +89,7 @@
   import { reactive, watch } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import { useI18n } from 'vue-i18n';
+  import { buildVueDompurifyHTMLDirective } from 'vue-dompurify-html';
   import { useQuery, useResult } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
@@ -96,6 +101,8 @@
   const router = useRouter();
   const route = useRoute();
   const { t, locale } = useI18n();
+
+  const vDompurifyHtml = buildVueDompurifyHTMLDirective();
 
   /* ----------------------------------------------------------------
   READ post

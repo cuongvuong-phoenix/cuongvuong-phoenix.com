@@ -110,6 +110,7 @@ importers:
       vite-plugin-md: ^0.11.8
       vite-plugin-purge-icons: ^0.7.0
       vue: ^3.2.31
+      vue-dompurify-html: ^3.0.0-beta.2
       vue-i18n: ^9.1.9
       vue-router: ^4
       vue-tsc: ^0.32.0
@@ -128,6 +129,7 @@ importers:
       nprogress: 0.2.0
       pinia: 2.0.11_typescript@4.5.5+vue@3.2.31
       vue: 3.2.31
+      vue-dompurify-html: 3.0.0-beta.2_vue@3.2.31
       vue-i18n: 9.1.9_vue@3.2.31
       vue-router: 4.0.12_vue@3.2.31
     devDependencies:
@@ -2940,6 +2942,10 @@ packages:
     dependencies:
       domelementtype: 2.2.0
     dev: true
+
+  /dompurify/2.3.6:
+    resolution: {integrity: sha512-OFP2u/3T1R5CEgWCEONuJ1a5+MFKnOYpkywpUSxv/dj1LeBT1erK+JwM7zK0ROy2BRhqVCf0LRw/kHqKuMkVGg==}
+    dev: false
 
   /domutils/2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}
@@ -6930,6 +6936,15 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.31
+
+  /vue-dompurify-html/3.0.0-beta.2_vue@3.2.31:
+    resolution: {integrity: sha512-2gWkaStpTDETuoRpUBvPSZ7KDXH4Axerz7k/wwso6p+MYz51VDVNU4GZPbWTso5IWrDyQ/fVQ5jpYx0UZugFng==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      dompurify: 2.3.6
+      vue: 3.2.31
+    dev: false
 
   /vue-eslint-parser/8.2.0_eslint@8.9.0:
     resolution: {integrity: sha512-hvl8OVT8imlKk/lQyhkshqwQQChzHETcBd5abiO4ePw7ib7QUZLfW+2TUrJHKUvFOCFRJrDin5KJO9OHzB5bRQ==}
