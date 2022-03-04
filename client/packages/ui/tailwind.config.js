@@ -9,6 +9,7 @@ module.exports = {
         bg: {
           default: '#20182B',
           lighter: '#2b2436',
+          lightest: '#362f40',
         },
         fg: {
           default: colors.zinc[100],
