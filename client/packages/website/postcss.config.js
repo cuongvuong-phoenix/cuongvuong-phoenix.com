@@ -8,8 +8,8 @@ module.exports = {
     'tailwindcss/nesting': {},
     'tailwindcss': {},
     'autoprefixer': {},
-    'postcss-combine-duplicated-selectors': {
-      removeDuplicatedProperties: true,
-    },
+    // 'postcss-combine-duplicated-selectors': {
+    //   removeDuplicatedValues: true,
+    // },
   },
 };
