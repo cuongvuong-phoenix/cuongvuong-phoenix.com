@@ -17,7 +17,7 @@
     v-bind="$attrs"
     class="px-2.5 py-1.5 inline-flex items-center justify-center animate-pulse border border-fg-darkest rounded-4xl"
   >
-    <USkeleton class="w-[8ch] h-6 rounded-4xl" />
+    <USkeleton type="line" class="w-[8ch] !rounded-4xl" />
   </div>
   <!-- END "Skeleton" -->
 </template>

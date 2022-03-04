@@ -35,7 +35,7 @@
     >
       {{ gqlPost.title }}
     </h1>
-    <USkeleton v-else-if="postLoading" type="lines" :num-lines="2" class="mt-6 text-4xl text-center" />
+    <USkeleton v-else-if="postLoading" type="paragraph" class="mt-6 text-4xl text-center" />
     <!-- END "Row 2 - Title" -->
 
     <!-- "Row 3" -->
@@ -65,7 +65,7 @@
         </div>
         <!-- END "(sm) Row 4" -->
       </template>
-      <USkeleton v-else-if="postLoading" type="lines" class="w-[32ch]" />
+      <USkeleton v-else-if="postLoading" type="line" class="w-[24ch]" />
     </div>
     <!-- END "Row 3" -->
     <!-- END "Top" -->
@@ -77,9 +77,9 @@
       class="mx-auto mt-12 prose light:prose-invert"
     ></div>
     <div v-else-if="postLoading" class="mx-auto mt-12 prose light:prose-invert">
-      <USkeleton type="lines" :num-lines="4" />
-      <USkeleton type="lines" :num-lines="8" />
-      <USkeleton type="lines" :num-lines="6" />
+      <USkeleton type="paragraph" :num-lines="4" />
+      <USkeleton type="paragraph" :num-lines="8" />
+      <USkeleton type="paragraph" :num-lines="6" />
     </div>
     <!-- END "Content" -->
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div
     class="px-12 py-8"
-    :class="[!loading ? 'relative transition-colors group hover:bg-bg-lighter' : 'animate-pulse']"
+    :class="[post && !loading ? 'relative transition-colors group hover:bg-bg-lighter' : 'animate-pulse']"
   >
     <!-- "Row 1" -->
     <RouterLink
@@ -10,7 +10,7 @@
       class="text-xl font-medium"
       >{{ post.title }}</RouterLink
     >
-    <USkeleton v-else-if="loading" type="lines" class="w-1/2 text-xl" />
+    <USkeleton v-else-if="loading" type="line" font-size="xl" class="w-3/4" />
     <!-- END "Row 1" -->
 
     <!-- "Row 2" -->
@@ -39,11 +39,12 @@
       </template>
       <!-- END "Tags" -->
     </div>
-    <USkeleton v-else-if="loading" type="lines" class="w-3/4 mt-4 text-sm" />
+    <USkeleton v-else-if="loading" type="line" font-size="sm" class="w-1/2 mt-4" />
     <!-- END "Row 2" -->
 
     <!-- "Hover indicator" -->
     <div
+      v-if="post && !loading"
       class="absolute inset-y-0 right-0 w-2 transition-opacity opacity-0 bg-primary-default group-hover:opacity-100"
     ></div>
     <!-- END "Hover indicator" -->

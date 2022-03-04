@@ -12,14 +12,15 @@
     <template v-if="!smallerLg">
       <div class="flex mt-12 space-x-32">
         <!-- "Left" -->
-        <div class="flex flex-col justify-between flex-1 min-w-0">
+        <div class="flex flex-col justify-between flex-1 min-w-0 space-y-8">
           <div v-for="section in leftKebabSections" :key="section.label" class="space-y-4">
             <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
             <div
-              v-if="section.body !== undefined"
+              v-if="section.body !== undefined && !section.loading"
               class="font-serif text-xl font-medium break-words line-clamp-6"
               v-html="section.body"
             ></div>
+            <USkeleton v-else-if="section.loading" type="paragraph" :num-lines="6" class="text-xl" />
           </div>
         </div>
         <!-- END "Left" -->
@@ -35,14 +36,15 @@
         <!-- END "Middle - Avatar" -->
 
         <!-- "Right" -->
-        <div class="flex flex-col justify-between flex-1 min-w-0">
+        <div class="flex flex-col justify-between flex-1 min-w-0 space-y-8">
           <div v-for="section in rightKebabSections" :key="section.label" class="space-y-4 text-right">
             <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
             <div
-              v-if="section.body !== undefined"
+              v-if="section.body !== undefined && !section.loading"
               class="font-serif text-5xl font-medium truncate"
               v-html="section.body"
             ></div>
+            <USkeleton v-else-if="section.loading" type="line" font-size="5xl" />
           </div>
         </div>
         <!-- END "Right" -->
@@ -77,6 +79,7 @@
             class="font-serif text-xl font-medium line-clamp-6"
             v-html="section.body"
           ></div>
+          <USkeleton v-else-if="section.loading" type="paragraph" :num-lines="6" class="w-full text-xl" />
         </div>
       </div>
       <!-- END "Left Sections" -->
@@ -90,10 +93,11 @@
         >
           <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
           <div
-            v-if="section.body !== undefined"
+            v-if="section.body !== undefined && !section.loading"
             class="font-serif text-5xl font-medium truncate"
             v-html="section.body"
           ></div>
+          <USkeleton v-else-if="section.loading" type="line" font-size="5xl" />
         </div>
       </div>
       <!-- END "Right Sections" -->
@@ -109,6 +113,7 @@
   import { useBreakpoints } from '@vueuse/core';
   import { useQuery } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
+  import { USkeleton } from '@cvp-web-client/ui';
   import selfImageSrc from '~/assets/images/avatar.jpg';
   import { appBreakpoints } from '~/utils/constants';
   import type { PostsCountQuery } from '~/types/graphql';
@@ -138,6 +143,7 @@
   interface KebabSection {
     label: string;
     body?: string | number;
+    loading?: boolean;
   }
 
   const leftKebabSections = computed<KebabSection[]>(() => [
@@ -159,6 +165,7 @@
     {
       label: t('pages.home.kebab-sections.blog.label'),
       body: postsCountResult.value?.postsCount,
+      loading: postsCountLoading.value,
     },
     {
       label: t('pages.home.kebab-sections.projects.label', 2),

@@ -28,7 +28,7 @@
             ><span v-if="gqlPostsTotalCount !== undefined && !postsLoading" class="italic"
               >{{ gqlPostsTotalCount }} {{ t('common.post', gqlPostsTotalCount).toLowerCase() }}</span
             >
-            <USkeleton v-else-if="postsLoading" type="lines" class="w-[8ch] inline-block" />
+            <USkeleton v-else-if="postsLoading" type="line" class="w-[8ch]" />
           </div>
           <!-- END "Total results count" -->
 
@@ -91,7 +91,7 @@
               }"
             />
           </template>
-          <template v-else-if="gqlPosts.length === 0">
+          <template v-else-if="gqlPosts.length === 0 && !postsLoading">
             <div class="flex flex-col items-center px-12 py-8 space-y-4 text-2xl text-center text-fg-darkest">
               <UIcon icon="fluent:document-bullet-list-off-24-regular" />
               <span>{{ t('placeholders.no-post').toUpperCase() }}</span>
