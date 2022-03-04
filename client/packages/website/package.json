@@ -7,8 +7,9 @@
     "vite": "vite",
     "graphql-codegen": "graphql-codegen",
     "dev": "run-p vite graphql-codegen",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",

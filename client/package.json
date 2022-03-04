@@ -9,7 +9,7 @@
     "dev": "pnpm --filter=./packages --parallel dev",
     "build:ui": "pnpm --filter=ui build",
     "build:website": "pnpm --filter=website build",
-    "build": "pnpm build --filter=./packages"
+    "build": "run-s build:ui build:website"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.16.1",
