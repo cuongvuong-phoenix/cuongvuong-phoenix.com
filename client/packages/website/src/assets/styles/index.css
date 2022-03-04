@@ -3,6 +3,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import './nprogress.css';
+@import './base.css';
 @import './typography.css';
 @import './layout.css';
 

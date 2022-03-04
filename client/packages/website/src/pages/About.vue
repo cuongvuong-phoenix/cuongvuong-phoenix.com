@@ -20,7 +20,7 @@
     <!-- END "Biograpy" -->
 
     <!-- "Hobbies Section" -->
-    <div class="mt-12 space-y-8">
+    <div class="mt-16 space-y-8">
       <h2 class="font-serif text-3xl font-bold text-center">{{ t('pages.about.hobbies.title', 2).toUpperCase() }}</h2>
 
       <!-- "Hobbies" -->
