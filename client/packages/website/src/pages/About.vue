@@ -45,7 +45,7 @@
   import { computed } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { UIcon } from '@cvp-web-client/ui';
-  import selfImageSrc from '~/assets/images/self-image.jpg';
+  import selfImageSrc from '~/assets/images/self-image.webp';
 
   const { t } = useI18n();
 
