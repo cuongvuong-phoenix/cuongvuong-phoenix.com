@@ -224,15 +224,15 @@
   }
   const socialNetworks = [
     {
-      href: 'https://github.com/vuong-cuong-phoenix',
+      href: 'https://github.com/cuongvuong-phoenix',
       icon: 'mdi:github',
     },
     {
-      href: 'https://www.facebook.com/vuongcuong.phoenix/',
+      href: 'https://www.facebook.com/cuongvuong.phoenix/',
       icon: 'mdi:facebook',
     },
     {
-      href: 'https://www.linkedin.com/in/vuong-cuong-phoenix/',
+      href: 'https://www.linkedin.com/in/cuongvuong-phoenix/',
       icon: 'mdi:linkedin',
     },
   ] as SocialNetwork[];

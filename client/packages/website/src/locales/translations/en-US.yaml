@@ -19,7 +19,7 @@ pages:
           working with <span class="italic">Vue.JS, Rust, GraphQL, Figma, Inkscape</span>.
       contact:
         label: "@:{'common.contact'}"
-        body: vuongcuong.phoenix{'@'}gmail.com<br />
+        body: cuongvuong.phoenix{'@'}gmail.com<br />
           +84 346 809 059
       years-of-experience:
         label: Years of experience
@@ -78,7 +78,7 @@ pages:
           later, I revisited it again, now with a clearer mind and with the help of <code>vimtutor</code>, I felt in love with
           it!<br />I extended into <span class="text-secondary-default">Neovim</span> and now almost everything I use has some
           "Vim" in it. Check out
-          <a href="https://github.com/vuong-cuong-phoenix/neovim-config" class="underline">my Neovim config</a>.
+          <a href="https://github.com/cuongvuong-phoenix/neovim-config" class="underline">my Neovim config</a>.
       learning:
         label: Learning
         description:
