@@ -1,23 +1,23 @@
 <template>
   <div>
-    <!-- "Top" -->
+    <!-- "Biograpy" -->
     <div class="flex items-center justify-center gap-x-16 gap-y-12 md:flex-col">
       <!-- "Left" -->
       <div class="w-[37.5%] space-y-8 md:w-auto">
         <h1 class="font-serif text-4xl font-bold sm:text-center" v-html="t('pages.about.top.greeting')"></h1>
-        <p v-html="t('pages.about.top.biography')"></p>
+        <p class="text-lg" v-html="t('pages.about.top.biography')"></p>
       </div>
       <!-- END "Left" -->
 
       <!-- "Right" -->
-      <div class="p-4 border border-fg-darkest">
+      <div class="p-4 transition duration-300 ring-1 ring-fg-darkest hover:ring-primary-default">
         <div class="border border-fg-darkest w-64 h-[28rem] overflow-hidden">
           <img :src="selfImageSrc" :alt="t('common.self-image')" class="object-cover w-full h-full" />
         </div>
       </div>
       <!-- END "Right" -->
     </div>
-    <!-- END "Top" -->
+    <!-- END "Biograpy" -->
 
     <!-- "Hobbies Section" -->
     <div class="mt-12 space-y-8">

@@ -25,7 +25,7 @@
         </div>
         <!-- END "Left" -->
 
-        <!-- "Middle - Avatar" -->
+        <!-- "Middle - SelfImage" -->
         <div
           class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring-primary-default"
         >
@@ -33,7 +33,7 @@
             <img :src="selfImageSrc" :alt="t('common.self-image')" class="object-cover w-full h-full" />
           </div>
         </div>
-        <!-- END "Middle - Avatar" -->
+        <!-- END "Middle - SelfImage" -->
 
         <!-- "Right" -->
         <div class="flex flex-col justify-between flex-1 min-w-0 space-y-8">
