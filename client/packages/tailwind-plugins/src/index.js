@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin');
+const { getSpacings } = require('./helpers');
 
 const plugins = {
   /* ----------------------------------------------------------------
@@ -16,7 +17,7 @@ const plugins = {
   Utilities
   ---------------------------------------------------------------- */
   whUtilities: ({ addUtilities, matchUtilities, theme }) => {
-    const spacings = Object.entries(theme('spacing'));
+    const spacings = getSpacings(theme);
 
     const wh = spacings.reduce(
       (accum, [key, value]) => ({
@@ -76,7 +77,8 @@ const plugins = {
   },
 
   dotComponents: ({ addComponents, theme }) => {
-    const spacings = Object.entries(theme('spacing'));
+    const spacings = getSpacings(theme);
+
     const dots = spacings.reduce(
       (accum, [key, value]) => ({
         ...accum,
