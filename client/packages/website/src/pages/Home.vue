@@ -114,7 +114,7 @@
   import { useQuery } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { USkeleton } from '@cvp-web-client/ui';
-  import selfImageSrc from '~/assets/images/avatar.jpg';
+  import selfImageSrc from '~/assets/images/self-image.jpg';
   import { appBreakpoints } from '~/utils/constants';
   import type { PostsCountQuery } from '~/types/graphql';
 
