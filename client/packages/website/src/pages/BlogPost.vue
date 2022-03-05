@@ -90,6 +90,7 @@
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
   import { UIcon, UPill, USkeleton } from '@cvp-web-client/ui';
+  import { useHeadStore } from '~/store/head';
   import { formatDatetime } from '~/utils/helpers';
   import { RouteName } from '~/utils/constants';
   import type { PostQuery, PostQueryVariables } from '~/types/graphql';
@@ -97,6 +98,7 @@
   const router = useRouter();
   const route = useRoute();
   const { t, locale } = useI18n();
+  const headStore = useHeadStore();
 
   const vDompurifyHtml = buildVueDompurifyHTMLDirective();
 
@@ -148,4 +150,17 @@
     createdAt: parseISO(data.post.createdAt),
     updatedAt: data.post.updatedAt ? parseISO(data.post.updatedAt) : undefined,
   }));
+
+  /* ----------------------------------------------------------------
+  Head
+  ---------------------------------------------------------------- */
+  watch(
+    [gqlPost, locale],
+    ([gqlPostValue]) => {
+      if (gqlPostValue) {
+        headStore.title = t(`head.${RouteName.BLOG_POST}.title`, { post: gqlPostValue.title });
+      }
+    },
+    { immediate: true }
+  );
 </script>

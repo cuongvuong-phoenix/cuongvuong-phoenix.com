@@ -14,46 +14,60 @@
 </template>
 
 <script setup lang="ts">
-  import { reactive, toRef, watch } from 'vue';
+  import { computed, watch } from 'vue';
   import { RouterView, useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useHead } from '@vueuse/head';
-  import { HeaderHeight, useUiStore } from '~/store/ui';
+  import { HeaderHeight } from '~/store/ui';
+  import { useHeadStore } from '~/store/head';
   import WHeader from '~/components/WHeader.vue';
   import WFooter from '~/components/WFooter.vue';
 
   const route = useRoute();
-  const uiStore = useUiStore();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const headStore = useHeadStore();
 
   /* ----------------------------------------------------------------
-  App title
+  Head
   ---------------------------------------------------------------- */
-  const titleBase = 'CVP-Web';
+  // Initialize.
+  headStore.title = t(`head.home.title`);
+  headStore.ogTitle = t('common.my-app.title');
+  headStore.description = t('common.my-app.description');
 
-  const title = reactive({
-    full: titleBase,
-    short: '',
-  });
+  watch(
+    [() => route.name, locale, () => route.meta.customHead, () => route.meta.dynamicHeadTitle],
+    ([name, _, customHead, dynamicHeadTitle]) => {
+      if (!dynamicHeadTitle) {
+        headStore.title = t(`head.${String(name)}.title`);
+      }
 
-  // Auto-change `<title>` based on route name and locale.
-  watch([() => route.name, () => route.params.locale], ([name, _]) => {
-    const titleRoute = t(`nav.${String(name)}`);
+      if (!customHead) {
+        headStore.ogTitle = t('common.my-app.title');
+        headStore.description = t('common.my-app.description');
+      }
+    }
+  );
 
-    title.full = name === 'home' ? titleBase : `${titleBase} · ${titleRoute}`;
-    title.short = titleRoute;
-  });
-
-  /* ----------------------------------------------------------------
-  <head>
-  ---------------------------------------------------------------- */
   useHead({
-    title: toRef(title, 'full'),
+    title: computed(() => headStore.title),
     meta: [
+      {
+        name: 'description',
+        content: computed(() => headStore.description),
+      },
       // Open Graph protocol (https://ogp.me/).
       {
         property: 'og:title',
-        content: toRef(title, 'short'),
+        content: computed(() => headStore.ogTitle),
+      },
+      {
+        property: 'og:description',
+        content: computed(() => headStore.description),
+      },
+      {
+        property: 'og:image',
+        content: '/apple-touch-icon.png',
       },
     ],
   });

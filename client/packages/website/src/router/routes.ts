@@ -27,6 +27,9 @@ export const routes: RouteRecordRaw[] = [
         path: 'blog/:post',
         name: RouteName.BLOG_POST,
         component: () => import('~/pages/BlogPost.vue'),
+        meta: {
+          dynamicHeadTitle: true,
+        },
       },
       {
         path: ':pathMatch(.*)*',

@@ -150,14 +150,12 @@
 
 <script setup lang="ts">
   import { ref, shallowRef, watch } from 'vue';
-  import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useBreakpoints, useColorMode, useEventListener, useStyleTag } from '@vueuse/core';
   import { UButton, UIcon, ULogo } from '@cvp-web-client/ui';
   import { HeaderHeight, useUiStore } from '~/store/ui';
   import { RouteName, appBreakpoints } from '~/utils/constants';
 
-  const route = useRoute();
   const uiStore = useUiStore();
   const { t, locale } = useI18n();
 

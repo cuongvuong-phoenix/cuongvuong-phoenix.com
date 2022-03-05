@@ -6,6 +6,16 @@ nav:
   blog-post: "@:{'common.post'}"
   notes: "@:{'common.note'}"
 
+head:
+  home:
+    title: "@:{'common.my-app.title'}"
+  about:
+    title: "@:{'common.about'} {'|'} @:{'common.my-app.title'}"
+  blog:
+    title: "@:{'common.blog'} {'|'} @:{'common.my-app.title'}"
+  blog-post:
+    title: "{post} {'|'} @:{'common.blog'} {'|'} @:{'common.my-app.title'}"
+
 footer:
   about: Designed and developed by {0}.{1}Built with {2}.
 
@@ -109,6 +119,9 @@ placeholders:
   no-post: "No @.lower:{'common.post'} found"
 
 common:
+  my-app:
+    title: Cuong Vuong Phoenix
+    description: My Personal Website
   whoami: Cuong Vuong
   my-expertise: Software Developer & UI/UX Design Enthusiast
   self-image: Self Image
