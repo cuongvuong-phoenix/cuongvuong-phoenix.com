@@ -71,12 +71,8 @@
     <!-- END "Top" -->
 
     <!-- "Content" -->
-    <div
-      v-if="gqlPost && !postLoading"
-      v-dompurify-html="gqlPost.content"
-      class="mx-auto mt-12 prose light:prose-invert"
-    ></div>
-    <div v-else-if="postLoading" class="mx-auto mt-12 prose light:prose-invert">
+    <div v-if="gqlPost && !postLoading" v-dompurify-html="gqlPost.content" class="mx-auto mt-12 prose"></div>
+    <div v-else-if="postLoading" class="mx-auto mt-12 prose">
       <USkeleton type="paragraph" :num-lines="4" />
       <USkeleton type="paragraph" :num-lines="8" />
       <USkeleton type="paragraph" :num-lines="6" />

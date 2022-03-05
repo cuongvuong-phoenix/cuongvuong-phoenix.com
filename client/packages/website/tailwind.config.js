@@ -4,9 +4,9 @@ module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   safelist: [
     'prose',
-    'dark:prose-light',
+    // TODO: Light theme.
+    // 'light:prose-invert',
     'mx-auto',
-    // Custom.
     'underline',
   ],
   plugins: [
@@ -82,11 +82,11 @@ module.exports = {
             '--tw-prose-headings': theme('colors.primary.default'),
             '--tw-prose-lead': theme('colors.fg.darker'),
             '--tw-prose-links': theme('colors.primary.default'),
-            '--tw-prose-bold': theme('colors.fg.default'),
+            '--tw-prose-bold': theme('colors.secondary.default'),
             '--tw-prose-counters': theme('colors.fg.darker'),
             '--tw-prose-bullets': theme('colors.fg.darkest'),
             '--tw-prose-hr': theme('colors.fg.darkest'),
-            '--tw-prose-quotes': theme('colors.secondary.default'),
+            '--tw-prose-quotes': theme('colors.fg.darker'),
             '--tw-prose-quote-borders': theme('colors.fg.darkest'),
             '--tw-prose-captions': theme('colors.fg.darker'),
             '--tw-prose-code': theme('colors.primary.darker'),

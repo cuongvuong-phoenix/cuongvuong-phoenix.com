@@ -38,7 +38,7 @@ export default defineConfig({
       include: path.resolve(__dirname, 'src/locales/translations/**'),
     }),
     markdown({
-      wrapperClasses: 'prose dark:prose-invert mx-auto',
+      wrapperClasses: 'prose mx-auto',
       markdownItSetup(md) {
         md.use(MarkdownItAttrs, {
           // Security (https://github.com/arve0/markdown-it-attrs#security).

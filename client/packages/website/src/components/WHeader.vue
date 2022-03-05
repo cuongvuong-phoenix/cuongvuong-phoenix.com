@@ -205,7 +205,7 @@
   /* ----------------------------------------------------------------
   Dark theme
   ---------------------------------------------------------------- */
-  // TODO: Implement light theme.
+  // TODO: Light theme.
   const colorMode = useColorMode({
     storageKey: 'theme',
   });
