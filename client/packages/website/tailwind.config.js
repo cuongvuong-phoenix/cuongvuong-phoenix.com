@@ -112,19 +112,6 @@ module.exports = {
             '--tw-prose-invert-th-borders': theme('colors.zinc[300]'),
             '--tw-prose-invert-td-borders': theme('colors.zinc[200]'),
             // Elements.
-            'a': {
-              'font-style': 'italic',
-              'text-decoration-line': 'none',
-              'text-underline-offset': '1px',
-
-              '&:hover': {
-                'text-decoration-line': 'underline',
-              },
-
-              'code': {
-                color: 'var(--tw-prose-code)',
-              },
-            },
             'code::before': false,
             'code::after': false,
           },
