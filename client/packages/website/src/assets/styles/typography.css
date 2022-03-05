@@ -1,3 +1,6 @@
+/* ----------------------------------------------------------------
+Core
+---------------------------------------------------------------- */
 html {
   @apply font-sans text-fg-default bg-bg-default;
 }
@@ -6,12 +9,46 @@ html.light {
   @apply text-zinc-700 bg-zinc-100;
 }
 
+/* ----------------------------------------------------------------
+Link
+---------------------------------------------------------------- */
 a {
   &:hover {
     @apply text-primary-default;
   }
 }
 
+/* ----------------------------------------------------------------
+Anchor Link
+---------------------------------------------------------------- */
+a.header-anchor {
+  @apply pr-0.5 -ml-[1.375rem] transition duration-300 opacity-0;
+
+  &:hover,
+  &:focus-visible {
+    @apply opacity-100 text-primary-darker;
+  }
+
+  svg {
+    @apply wh-5;
+  }
+}
+
+@for $i from 1 to 6 {
+  h$(i) {
+    @apply flex items-center;
+
+    &:hover {
+      a.header-anchor {
+        @apply opacity-100;
+      }
+    }
+  }
+}
+
+/* ----------------------------------------------------------------
+Code
+---------------------------------------------------------------- */
 code,
 kbd,
 samp,
@@ -20,5 +57,25 @@ pre {
 }
 
 code {
-  @apply px-1 py-0.5 bg-bg-lighter rounded-lg;
+  @apply bg-bg-lighter;
+}
+
+/* ----------------------------------------------------------------
+Marking
+---------------------------------------------------------------- */
+ins {
+  @apply no-underline bg-success-default text-bg-default;
+}
+
+mark {
+  @apply text-bg-default bg-secondary-default;
+}
+
+/* ----------------------------------------------------------------
+Shared
+---------------------------------------------------------------- */
+ins,
+code,
+mark {
+  @apply px-1 py-0.5 rounded-lg;
 }
