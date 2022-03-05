@@ -1,9 +1,5 @@
 .container {
-  @apply max-w-[1920px] px-32;
-
-  @screen 3xl {
-    @apply max-w-[1536px] px-32;
-  }
+  @apply max-w-[1536px] px-32;
 
   @screen 2xl {
     @apply max-w-[1280px] px-24;

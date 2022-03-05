@@ -1,20 +1,20 @@
 <template>
   <div>
     <!-- "Top" -->
-    <div class="font-serif font-bold text-center">
-      <h1 class="text-5xl">{{ t('common.whoami') }}</h1>
-      <h2 class="mt-4 text-4xl">{{ t('common.my-expertise') }}</h2>
+    <div class="font-serif text-center">
+      <h1 class="text-5xl font-bold">{{ t('common.whoami') }}</h1>
+      <div class="mt-4 text-4xl text-fg-darker">{{ t('common.my-expertise') }}</div>
     </div>
     <!-- END "Top" -->
 
     <!-- "Next" -->
     <!-- "(2xl)" -->
     <template v-if="!smallerLg">
-      <div class="flex mt-12 space-x-32">
+      <div class="flex justify-between mt-12 space-x-32">
         <!-- "Left" -->
-        <div class="flex flex-col justify-between flex-1 min-w-0 space-y-8">
+        <div class="flex flex-col justify-between flex-1 min-w-0 space-y-8 max-w-[16rem]">
           <div v-for="section in leftKebabSections" :key="section.label" class="space-y-4">
-            <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
+            <h2 class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</h2>
             <div
               v-if="section.body !== undefined && !section.loading"
               class="font-serif text-xl font-medium break-words line-clamp-6"
@@ -36,9 +36,9 @@
         <!-- END "Middle - SelfImage" -->
 
         <!-- "Right" -->
-        <div class="flex flex-col justify-between flex-1 min-w-0 space-y-8">
+        <div class="flex flex-col justify-between flex-1 min-w-0 space-y-8 max-w-[16rem]">
           <div v-for="section in rightKebabSections" :key="section.label" class="space-y-4 text-right">
-            <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
+            <h2 class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</h2>
             <div
               v-if="section.body !== undefined && !section.loading"
               class="font-serif text-5xl font-medium truncate"
@@ -68,12 +68,8 @@
 
       <!-- "Left Sections" -->
       <div class="grid grid-cols-2 gap-16 mt-12 text-center md:grid-cols-1 md:gap-8">
-        <div
-          v-for="section in leftKebabSections"
-          :key="section.label"
-          class="flex flex-col items-center justify-between space-y-4"
-        >
-          <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
+        <div v-for="section in leftKebabSections" :key="section.label" class="flex flex-col items-center space-y-4">
+          <h2 class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</h2>
           <div
             v-if="section.body !== undefined"
             class="font-serif text-xl font-medium line-clamp-6"
@@ -86,12 +82,8 @@
 
       <!-- "Right Sections" -->
       <div class="grid grid-cols-3 gap-16 mt-12 text-center md:grid-cols-1 md:gap-8">
-        <div
-          v-for="section in rightKebabSections"
-          :key="section.label"
-          class="flex flex-col items-center justify-between space-y-4"
-        >
-          <div class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</div>
+        <div v-for="section in rightKebabSections" :key="section.label" class="flex flex-col items-center space-y-4">
+          <h2 class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</h2>
           <div
             v-if="section.body !== undefined && !section.loading"
             class="font-serif text-5xl font-medium truncate"
