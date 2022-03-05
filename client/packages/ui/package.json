@@ -1,8 +1,9 @@
 {
   "name": "@cvp-web-client/ui",
   "version": "0.0.0",
-  "private": true,
+  "license": "MIT",
   "author": "Cuong Vuong Chi",
+  "private": true,
   "scripts": {
     "dev": "postcss src/assets/styles/index.css --output=dist/assets/index.css --watch",
     "build": "postcss src/assets/styles/index.css --output=dist/assets/index.css"
