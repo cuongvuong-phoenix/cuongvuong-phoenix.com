@@ -117,7 +117,6 @@
                 gqlPostsPageInfo.hasPreviousPage
                   ? {
                       name: RouteName.BLOG,
-                      params: { locale },
                       query: {
                         last: postsPageSize,
                         before: gqlPostsPageInfo.startCursor,
@@ -144,7 +143,6 @@
                 gqlPostsPageInfo.hasNextPage
                   ? {
                       name: RouteName.BLOG,
-                      params: { locale },
                       query: {
                         first: postsPageSize,
                         after: gqlPostsPageInfo.endCursor,
@@ -185,7 +183,7 @@
   const router = useRouter();
   const route = useRoute();
   const uiStore = useUiStore();
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
 
   /* ----------------------------------------------------------------
   Search
@@ -197,7 +195,6 @@
 
       router.push({
         name: RouteName.BLOG,
-        params: { locale: locale.value },
         query: {
           search: trimmedvalue || undefined,
           tags: route.query.tags,
@@ -298,7 +295,6 @@
 
     router.push({
       name: RouteName.BLOG,
-      params: { locale: locale.value },
       query: {
         search: route.query.search,
         tags: tagsQueryParams,

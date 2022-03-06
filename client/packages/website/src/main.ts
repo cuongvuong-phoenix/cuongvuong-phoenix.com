@@ -28,7 +28,7 @@ const app = createApp({
 });
 
 // vue-i18n.
-const i18n = setupI18n(router, messages);
+const i18n = setupI18n(messages);
 
 // @vueuse/head.
 const head = createHead();

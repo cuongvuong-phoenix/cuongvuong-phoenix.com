@@ -13,7 +13,6 @@
           @click="
             router.push({
               name: RouteName.BLOG,
-              params: { locale: locale },
               query: {
                 tags: [tag.id],
               },

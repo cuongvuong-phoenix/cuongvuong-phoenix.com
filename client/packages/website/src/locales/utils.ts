@@ -7,8 +7,7 @@ Constants
 ---------------------------------------------------------------- */
 export const LANGUAGES = [
   { locale: 'en-US', name: 'English (US)', default: true },
-  // TODO: support Vietnamese.
-  // { locale: 'vi-VI', name: 'Tiếng Việt' },
+  // { locale: 'vi-VI', name: 'Tiếng Việt', default: false },
 ] as const;
 
 export type AppLocale = typeof LANGUAGES[number]['locale'];

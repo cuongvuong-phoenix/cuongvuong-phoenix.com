@@ -20,7 +20,7 @@
         <!-- "Left - Navs" -->
         <div class="flex flex-1 space-x-12">
           <nav v-for="nav in navs" :key="nav">
-            <UButton :link="{ name: nav, params: { locale } }" size="lg" class="!p-0">
+            <UButton :link="{ name: nav }" size="lg" class="!p-0">
               {{ t(`nav.${nav}`).toUpperCase() }}
             </UButton>
           </nav>
@@ -113,12 +113,7 @@
           >
             <!-- "Navs" -->
             <nav v-for="nav in navs" :key="nav">
-              <UButton
-                :link="{ name: nav, params: { locale } }"
-                size="lg"
-                class="w-full"
-                @click="uiStore.toggleHeaderMenuOpenning()"
-              >
+              <UButton :link="{ name: nav }" size="lg" class="w-full" @click="uiStore.toggleHeaderMenuOpenning()">
                 {{ t(`nav.${nav}`).toUpperCase() }}
               </UButton>
             </nav>
@@ -157,7 +152,7 @@
   import { RouteName, appBreakpoints } from '~/utils/constants';
 
   const uiStore = useUiStore();
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
 
   /* ----------------------------------------------------------------
   Breakpoints

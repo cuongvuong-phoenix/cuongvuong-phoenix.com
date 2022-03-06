@@ -1,6 +1,6 @@
 import { type Locale, format } from 'date-fns';
 import { enUS } from 'date-fns/locale';
-import { type AppLocale } from '~/locales/utils';
+import { type AppLocale } from '~/locales';
 
 const localeObjectMap: Record<AppLocale, Locale> = {
   'en-US': enUS,

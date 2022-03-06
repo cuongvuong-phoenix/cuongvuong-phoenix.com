@@ -7,7 +7,7 @@
       'margin-top': `${HeaderHeight.DEFAULT}px`,
     }"
   >
-    <RouterView />
+    <AnimatedRouterView />
   </main>
 
   <WFooter />
@@ -15,11 +15,12 @@
 
 <script setup lang="ts">
   import { computed, watch } from 'vue';
-  import { RouterView, useRoute } from 'vue-router';
+  import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { useHead } from '@vueuse/head';
   import { HeaderHeight } from '~/store/ui';
   import { useHeadStore } from '~/store/head';
+  import AnimatedRouterView from '~/components/AnimatedRouterView.vue';
   import WHeader from '~/components/WHeader.vue';
   import WFooter from '~/components/WFooter.vue';
 
@@ -36,8 +37,8 @@
   headStore.description = t('common.my-app.description');
 
   watch(
-    [() => route.name, locale, () => route.meta.customHead, () => route.meta.dynamicHeadTitle],
-    ([name, _, customHead, dynamicHeadTitle]) => {
+    [() => route.name, locale, () => route.meta.dynamicHeadTitle, () => route.meta.customHead],
+    ([name, _, dynamicHeadTitle, customHead]) => {
       if (!dynamicHeadTitle) {
         headStore.title = t(`head.${String(name)}.title`);
       }

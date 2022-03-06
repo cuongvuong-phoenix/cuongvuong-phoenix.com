@@ -6,7 +6,7 @@
     <!-- "Row 1" -->
     <RouterLink
       v-if="post && !loading"
-      :to="{ name: RouteName.BLOG_POST, params: { locale, post: post.slug } }"
+      :to="{ name: RouteName.BLOG_POST, params: { post: post.slug } }"
       class="text-xl font-medium"
       >{{ post.title }}</RouterLink
     >
