@@ -10,5 +10,12 @@
   },
   "peerDependencies": {
     "tailwindcss": "^3.0.23"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "autoprefixer"
+      ]
+    }
   }
 }

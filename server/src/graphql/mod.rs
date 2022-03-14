@@ -6,7 +6,7 @@ use axum::{
     extract::{Extension, OriginalUri},
     response::{Html, IntoResponse},
     routing::get,
-    AddExtensionLayer, Router,
+    Router,
 };
 use std::sync::Arc;
 
@@ -21,7 +21,7 @@ pub fn init_routes(state: Arc<State>) -> Router {
         "/graphql",
         Router::new()
             .route("/", get(graphql_playground).post(graphql_handler))
-            .layer(AddExtensionLayer::new(schema)),
+            .layer(Extension(schema)),
     )
 }
 

@@ -1,7 +1,8 @@
 use axum::{
+    extract::Extension,
     http::{header, Method},
     routing::get,
-    AddExtensionLayer, Router, Server,
+    Router, Server,
 };
 use config::*;
 use sqlx::{Pool, Postgres};
@@ -42,7 +43,7 @@ async fn main() {
                     ALLOWED_ORIGIN.iter().map(|origin| origin.parse().unwrap()),
                 )),
         )
-        .layer(AddExtensionLayer::new(state.clone()));
+        .layer(Extension(state.clone()));
 
     // App.
     let app = Router::new()
