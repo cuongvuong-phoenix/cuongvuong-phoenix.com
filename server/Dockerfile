@@ -27,8 +27,8 @@ RUN cargo build --release --target x86_64-unknown-linux-musl
 # ----------------------------------------------------------------
 FROM alpine as runtime
 COPY --from=builder \
-    /volume/target/x86_64-unknown-linux-musl/release/cvp-web-server \
+    /volume/target/x86_64-unknown-linux-musl/release/cuongvuong-phoenix-com-server \
     /bin
 
 EXPOSE 80
-CMD [ "/bin/cvp-web-server" ]
+CMD [ "/bin/cuongvuong-phoenix-com-server" ]

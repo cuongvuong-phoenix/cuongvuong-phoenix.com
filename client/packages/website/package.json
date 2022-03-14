@@ -1,5 +1,5 @@
 {
-  "name": "@cvp-web-client/website",
+  "name": "@cuongvuong-phoenix-com-client/website",
   "version": "0.0.0",
   "license": "MIT",
   "author": "Cuong Vuong Chi",
@@ -10,12 +10,12 @@
     "dev": "run-p vite graphql-codegen",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "vue-tsc --noEmit"
+    "lint:type": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
-    "@cvp-web-client/tailwind-plugins": "workspace:*",
-    "@cvp-web-client/ui": "workspace:*",
+    "@cuongvuong-phoenix-com-client/tailwind-plugins": "workspace:*",
+    "@cuongvuong-phoenix-com-client/ui": "workspace:*",
     "@headlessui/vue": "^1.5.0",
     "@iconify/iconify": "^2.1.2",
     "@vue/apollo-composable": "^4.0.0-alpha.16",

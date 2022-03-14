@@ -26,7 +26,7 @@ importers:
 
   packages/ui:
     specifiers:
-      '@cvp-web-client/tailwind-plugins': workspace:*
+      '@cuongvuong-phoenix-com-client/tailwind-plugins': workspace:*
       '@headlessui/vue': ^1.5.0
       '@iconify/iconify': ^2.1.2
       '@iconify/json': ^2.1.11
@@ -46,7 +46,7 @@ importers:
       vue-router: '4'
       vue-tsc: ^0.32.1
     devDependencies:
-      '@cvp-web-client/tailwind-plugins': link:../tailwind-plugins
+      '@cuongvuong-phoenix-com-client/tailwind-plugins': link:../tailwind-plugins
       '@headlessui/vue': 1.5.0_vue@3.2.31
       '@iconify/iconify': 2.1.2
       '@iconify/json': 2.1.11
@@ -69,8 +69,8 @@ importers:
   packages/website:
     specifiers:
       '@apollo/client': ^3.5.10
-      '@cvp-web-client/tailwind-plugins': workspace:*
-      '@cvp-web-client/ui': workspace:*
+      '@cuongvuong-phoenix-com-client/tailwind-plugins': workspace:*
+      '@cuongvuong-phoenix-com-client/ui': workspace:*
       '@faker-js/faker': ^6.0.0-alpha.7
       '@graphql-codegen/cli': ^2.6.2
       '@graphql-codegen/typed-document-node': ^2.2.5
@@ -118,8 +118,8 @@ importers:
       vue-tsc: ^0.32.1
     dependencies:
       '@apollo/client': 3.5.10_graphql@16.3.0
-      '@cvp-web-client/tailwind-plugins': link:../tailwind-plugins
-      '@cvp-web-client/ui': link:../ui
+      '@cuongvuong-phoenix-com-client/tailwind-plugins': link:../tailwind-plugins
+      '@cuongvuong-phoenix-com-client/ui': link:../ui
       '@headlessui/vue': 1.5.0_vue@3.2.31
       '@iconify/iconify': 2.1.2
       '@vue/apollo-composable': 4.0.0-alpha.16_cb0af929ecdd7bfbaaa3731f9cc57deb

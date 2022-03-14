@@ -174,7 +174,7 @@
   import { useQuery, useResult } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
-  import { UButton, UIcon, UInput, UPill, USkeleton } from '@cvp-web-client/ui';
+  import { UButton, UIcon, UInput, UPill, USkeleton } from '@cuongvuong-phoenix-com-client/ui';
   import WPost from './_components/WPost.vue';
   import { useUiStore } from '~/store/ui';
   import { RouteName } from '~/utils/constants';

@@ -147,7 +147,7 @@
   import { ref, shallowRef, watch } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { useBreakpoints, useColorMode, useEventListener, useStyleTag } from '@vueuse/core';
-  import { UButton, UIcon, ULogo } from '@cvp-web-client/ui';
+  import { UButton, UIcon, ULogo } from '@cuongvuong-phoenix-com-client/ui';
   import { HeaderHeight, useUiStore } from '~/store/ui';
   import { RouteName, appBreakpoints } from '~/utils/constants';
 

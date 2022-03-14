@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
   import { useI18n } from 'vue-i18n';
-  import { UButton, UIcon } from '@cvp-web-client/ui';
+  import { UButton, UIcon } from '@cuongvuong-phoenix-com-client/ui';
 
   const { t } = useI18n();
 </script>

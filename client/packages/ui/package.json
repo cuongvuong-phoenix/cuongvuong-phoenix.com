@@ -1,5 +1,5 @@
 {
-  "name": "@cvp-web-client/ui",
+  "name": "@cuongvuong-phoenix-com-client/ui",
   "version": "0.0.0",
   "license": "MIT",
   "author": "Cuong Vuong Chi",
@@ -9,7 +9,7 @@
     "build": "postcss src/assets/styles/index.css --output=dist/assets/index.css"
   },
   "devDependencies": {
-    "@cvp-web-client/tailwind-plugins": "workspace:*",
+    "@cuongvuong-phoenix-com-client/tailwind-plugins": "workspace:*",
     "@headlessui/vue": "^1.5.0",
     "@iconify/iconify": "^2.1.2",
     "@iconify/json": "^2.1.11",

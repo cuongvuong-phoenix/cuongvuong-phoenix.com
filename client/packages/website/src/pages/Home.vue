@@ -105,7 +105,7 @@
   import { useBreakpoints } from '@vueuse/core';
   import { useQuery } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
-  import { USkeleton } from '@cvp-web-client/ui';
+  import { USkeleton } from '@cuongvuong-phoenix-com-client/ui';
   import selfImageSrc from '~/assets/images/self-image.webp';
   import { appBreakpoints } from '~/utils/constants';
   import type { PostsCountQuery } from '~/types/graphql';

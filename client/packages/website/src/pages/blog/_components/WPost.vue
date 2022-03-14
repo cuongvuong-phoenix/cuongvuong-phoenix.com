@@ -54,7 +54,7 @@
 <script setup lang="ts">
   import { useI18n } from 'vue-i18n';
   import { RouterLink } from 'vue-router';
-  import { UIcon, USkeleton } from '@cvp-web-client/ui';
+  import { UIcon, USkeleton } from '@cuongvuong-phoenix-com-client/ui';
   import { RouteName } from '~/utils/constants';
   import { formatDatetime } from '~/utils/helpers';
   import { type Post, type Tag } from '~/types/graphql';

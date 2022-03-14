@@ -13,7 +13,7 @@ module.exports = {
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/line-clamp'),
-    require('@cvp-web-client/tailwind-plugins'),
+    require('@cuongvuong-phoenix-com-client/tailwind-plugins'),
   ],
   corePlugins: {
     preflight: false,

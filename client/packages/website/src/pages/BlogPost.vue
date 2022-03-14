@@ -88,7 +88,7 @@
   import { useQuery, useResult } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
-  import { UIcon, UPill, USkeleton } from '@cvp-web-client/ui';
+  import { UIcon, UPill, USkeleton } from '@cuongvuong-phoenix-com-client/ui';
   import { useHeadStore } from '~/store/head';
   import { formatDatetime } from '~/utils/helpers';
   import { RouteName } from '~/utils/constants';

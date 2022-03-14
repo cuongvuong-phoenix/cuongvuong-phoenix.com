@@ -419,7 +419,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "cvp-web-server"
+name = "cuongvuong-phoenix-com-server"
 version = "0.1.0"
 dependencies = [
  "async-graphql",
