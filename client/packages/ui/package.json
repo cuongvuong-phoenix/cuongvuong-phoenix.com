@@ -4,6 +4,11 @@
   "license": "MIT",
   "author": "Cuong Vuong Chi",
   "private": true,
+  "exports": {
+    "./css": {
+      "import": "./dist/assets/index.css"
+    }
+  },
   "scripts": {
     "dev": "postcss src/assets/styles/index.css --output=dist/assets/index.css --watch",
     "build": "postcss src/assets/styles/index.css --output=dist/assets/index.css"

@@ -10,7 +10,7 @@ export default defineConfig({
     alias: {
       '~': path.resolve(__dirname, 'src'),
       'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js',
-      '@cuongvuong-phoenix-com-client/ui/css': path.resolve(__dirname, '../ui/dist/assets/index.css'),
+      '@cuongvuong-phoenix-com-client/ui/css': '@cuongvuong-phoenix-com-client/ui/css',
       '@cuongvuong-phoenix-com-client/ui': path.resolve(__dirname, '../ui/src/index.ts'),
     },
   },
