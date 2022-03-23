@@ -77,18 +77,52 @@
       <USkeleton type="paragraph" :num-lines="6" />
     </div>
     <!-- END "Content" -->
+
+    <!-- "Toc" -->
+    <div v-if="tocContent" class="fixed z-20 p-2 rounded-full bottom-2 right-2 backdrop-blur-xl">
+      <UButton
+        color="secondary"
+        variant="full"
+        size="sm"
+        unified
+        rounded
+        class="duration-300"
+        :class="{
+          'rotate-[360deg]': tocOpenning,
+        }"
+        @click="tocOpenning = !tocOpenning"
+      >
+        <UIcon :icon="!tocOpenning ? 'fluent:text-bullet-list-ltr-24-regular' : 'fluent:dismiss-24-regular'" />
+      </UButton>
+
+      <!-- "Toc Content" -->
+      <Transition
+        enter-active-class="duration-300 ease-out"
+        enter-from-class="scale-50 opacity-0"
+        leave-active-class="duration-200 ease-in"
+        leave-to-class="scale-50 opacity-0"
+      >
+        <div
+          v-show="tocOpenning"
+          v-dompurify-html="tocContent"
+          class="absolute p-2 transition origin-bottom-right border rounded-lg right-[calc(100%-0.5rem)] bottom-[calc(100%-0.5rem)] bg-bg-lighter border-fg-darkest prose overflow-auto sm:w-[calc(100vw-5rem)] xl:w-[18rem] 2xl:w-[20rem] w-[24rem] max-h-[60vh] min-h-[3rem]"
+        ></div>
+      </Transition>
+      <!-- END "Toc Content" -->
+    </div>
+    <!-- END "Toc" -->
   </div>
 </template>
 
 <script setup lang="ts">
-  import { reactive, watch } from 'vue';
+  import { reactive, ref, watch } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { buildVueDompurifyHTMLDirective } from 'vue-dompurify-html';
   import { useQuery, useResult } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
-  import { UIcon, UPill, USkeleton } from '@cuongvuong-phoenix-com-client/ui';
+  import { UButton, UIcon, UPill, USkeleton } from '@cuongvuong-phoenix-com-client/ui';
   import { useHeadStore } from '~/store/head';
   import { formatDatetime } from '~/utils/helpers';
   import { RouteName } from '~/utils/constants';
@@ -144,11 +178,27 @@
     postQueryVariables
   );
 
-  const gqlPost = useResult(postResult, undefined, (data) => ({
-    ...data.post,
-    createdAt: parseISO(data.post.createdAt),
-    updatedAt: data.post.updatedAt ? parseISO(data.post.updatedAt) : undefined,
-  }));
+  const tocContent = ref<string>();
+
+  const gqlPost = useResult(postResult, undefined, (data) => {
+    const content = data.post.content.replace(/(<nav.*<\/nav>)/, (_, toc) => {
+      tocContent.value = toc;
+
+      return '';
+    });
+
+    return {
+      ...data.post,
+      content,
+      createdAt: parseISO(data.post.createdAt),
+      updatedAt: data.post.updatedAt ? parseISO(data.post.updatedAt) : undefined,
+    };
+  });
+
+  /* ----------------------------------------------------------------
+  Toc
+  ---------------------------------------------------------------- */
+  const tocOpenning = ref(false);
 
   /* ----------------------------------------------------------------
   Head
