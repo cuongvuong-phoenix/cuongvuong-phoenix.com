@@ -83,7 +83,6 @@
       <UButton
         color="secondary"
         variant="full"
-        size="sm"
         unified
         rounded
         class="duration-300"
@@ -105,7 +104,7 @@
         <div
           v-show="tocOpenning"
           v-dompurify-html="tocContent"
-          class="absolute p-2 transition origin-bottom-right border rounded-lg right-[calc(100%-0.5rem)] bottom-[calc(100%-0.5rem)] bg-bg-lighter border-fg-darkest prose overflow-auto sm:w-[calc(100vw-5rem)] xl:w-[18rem] 2xl:w-[20rem] w-[24rem] max-h-[60vh] min-h-[3rem]"
+          class="absolute p-2 transition origin-bottom-right border rounded-lg right-[calc(100%-0.5rem)] bottom-[calc(100%-0.5rem)] bg-bg-lighter border-fg-darkest shadow-xl overflow-auto sm:w-[calc(100vw-5.5rem)] xl:w-[18rem] 2xl:w-[20rem] w-[24rem] max-h-[60vh] min-h-[3rem] prose"
         ></div>
       </Transition>
       <!-- END "Toc Content" -->
