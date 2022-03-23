@@ -9,7 +9,7 @@
       'padding-right': smallerMd && uiStore.headerMenuOpenning ? 'var(--scrollbar--width)' : undefined,
     }"
   >
-    <div
+    <nav
       class="container flex items-center mx-auto space-x-8 transition-[height] duration-300"
       :style="{
         height: uiStore.headerHeightString,
@@ -19,35 +19,31 @@
       <template v-if="!smallerMd">
         <!-- "Left - Navs" -->
         <div class="flex flex-1 space-x-12">
-          <nav v-for="nav in navs" :key="nav">
-            <UButton :link="{ name: nav }" size="lg" class="!p-0">
-              {{ t(`nav.${nav}`).toUpperCase() }}
-            </UButton>
-          </nav>
+          <UButton v-for="nav in navs" :key="nav" :link="{ name: nav }" size="lg" class="!p-0">
+            {{ t(`nav.${nav}`).toUpperCase() }}
+          </UButton>
         </div>
         <!-- END "Left - Navs" -->
 
         <!-- "Middle - Logo" -->
-        <nav>
-          <UButton
-            :link="{ name: RouteName.HOME }"
-            link-active-exact
-            rounded
-            unified
-            class="!p-1 duration-300"
+        <UButton
+          :link="{ name: RouteName.HOME }"
+          link-active-exact
+          rounded
+          unified
+          class="!p-1 duration-300"
+          :class="{
+            'rotate-[-360deg]': scrolledOut,
+          }"
+        >
+          <ULogo
+            colored
+            class="w-[4.5rem] h-[4.5rem] transition-[height_width] duration-300"
             :class="{
-              'rotate-[-360deg]': scrolledOut,
+              'wh-12': scrolledOut,
             }"
-          >
-            <ULogo
-              colored
-              class="w-[4.5rem] h-[4.5rem] transition-[height_width] duration-300"
-              :class="{
-                'wh-12': scrolledOut,
-              }"
-            />
-          </UButton>
-        </nav>
+          />
+        </UButton>
         <!-- END "Middle - Logo" -->
 
         <!-- "Right - Social Networks" -->
@@ -69,54 +65,55 @@
       <!-- "(md)" -->
       <template v-else>
         <!-- "Left - Logo" -->
-        <nav>
-          <UButton
-            :link="{ name: RouteName.HOME }"
-            link-active-exact
-            rounded
-            unified
-            class="!p-1 duration-300"
+        <UButton
+          :link="{ name: RouteName.HOME }"
+          link-active-exact
+          rounded
+          unified
+          class="!p-1 duration-300"
+          :class="{
+            'rotate-[-360deg]': scrolledOut,
+          }"
+          @click="uiStore.toggleHeaderMenuOpenning(false)"
+        >
+          <ULogo
+            colored
+            class="w-[4.5rem] h-[4.5rem] transition-[height_width] duration-300"
             :class="{
-              'rotate-[-360deg]': scrolledOut,
+              'wh-12': scrolledOut,
             }"
-            @click="uiStore.toggleHeaderMenuOpenning(false)"
-          >
-            <ULogo
-              colored
-              class="w-[4.5rem] h-[4.5rem] transition-[height_width] duration-300"
-              :class="{
-                'wh-12': scrolledOut,
-              }"
-            />
-          </UButton>
-        </nav>
+          />
+        </UButton>
         <!-- END "Left - Logo" -->
 
         <!-- "Right - Menu Toggler" -->
         <div class="flex justify-end flex-1">
-          <nav>
-            <UButton rounded unified @click="uiStore.toggleHeaderMenuOpenning()">
-              <UIcon v-if="!uiStore.headerMenuOpenning" icon="fluent:navigation-24-regular" />
-              <UIcon v-else icon="fluent:dismiss-24-regular" />
-            </UButton>
-          </nav>
+          <UButton rounded unified @click="uiStore.toggleHeaderMenuOpenning()">
+            <UIcon v-if="!uiStore.headerMenuOpenning" icon="fluent:navigation-24-regular" />
+            <UIcon v-else icon="fluent:dismiss-24-regular" />
+          </UButton>
         </div>
         <!-- END "Right - Menu Toggler" -->
 
         <!-- "Menu" -->
         <Teleport v-if="uiStore.headerMenuOpenning" to="#app">
-          <header
+          <nav
             class="fixed inset-x-0 bottom-0 z-10 px-16 pt-8 pb-16 bg-bg-default"
             :style="{
               top: `${uiStore.headerHeight + 1}px`,
             }"
           >
             <!-- "Navs" -->
-            <nav v-for="nav in navs" :key="nav">
-              <UButton :link="{ name: nav }" size="lg" class="w-full" @click="uiStore.toggleHeaderMenuOpenning()">
-                {{ t(`nav.${nav}`).toUpperCase() }}
-              </UButton>
-            </nav>
+            <UButton
+              v-for="nav in navs"
+              :key="nav"
+              :link="{ name: nav }"
+              size="lg"
+              class="w-full"
+              @click="uiStore.toggleHeaderMenuOpenning()"
+            >
+              {{ t(`nav.${nav}`).toUpperCase() }}
+            </UButton>
             <!-- END "Navs" -->
 
             <hr class="my-4 border-fg-darkest" />
@@ -134,12 +131,12 @@
               </UButton>
             </div>
             <!-- END "Social Networks" -->
-          </header>
+          </nav>
         </Teleport>
         <!-- END "Menu" -->
       </template>
       <!-- END "(md)" -->
-    </div>
+    </nav>
   </header>
 </template>
 
