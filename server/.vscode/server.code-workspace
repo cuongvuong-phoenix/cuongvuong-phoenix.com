@@ -5,8 +5,8 @@
 			"path": "../"
 		},
 		{
-			"name": "dbeaver",
-			"path": "../dbeaver"
+			"name": "db",
+			"path": "../db"
 		}
 	],
 }
