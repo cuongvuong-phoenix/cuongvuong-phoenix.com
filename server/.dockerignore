@@ -1,2 +1,2 @@
-target
-dbeaver
+*
+!./target/x86_64-unknown-linux-musl/release/cuongvuong-phoenix-com-server
