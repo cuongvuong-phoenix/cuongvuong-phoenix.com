@@ -1,13 +1,18 @@
 {
-  "extends": ["@antfu/eslint-config", "prettier"],
+  "extends": ["@antfu", "prettier"],
   "rules": {
-    "vue/no-setup-props-destructure": "off",
-    "@typescript-eslint/consistent-indexed-object-style": "off"
+    "vue/component-tags-order": [
+      "error",
+      {
+        "order": [["script", "template"], "style"]
+      }
+    ]
   },
   "overrides": [
     {
       "files": ["*.vue"],
       "rules": {
+        // Multiple <script> tags.
         "import/first": "off"
       }
     }

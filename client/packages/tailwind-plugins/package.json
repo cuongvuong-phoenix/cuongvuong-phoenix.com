@@ -1,14 +1,14 @@
 {
   "name": "@cuongvuong-phoenix-com-client/tailwind-plugins",
   "version": "0.0.0",
+  "private": true,
   "license": "MIT",
   "author": "Cuong Vuong Chi",
-  "private": true,
   "main": "src/index.js",
-  "devDependencies": {
+  "peerDependencies": {
     "tailwindcss": "^3.0.23"
   },
-  "peerDependencies": {
+  "devDependencies": {
     "tailwindcss": "^3.0.23"
   },
   "pnpm": {
