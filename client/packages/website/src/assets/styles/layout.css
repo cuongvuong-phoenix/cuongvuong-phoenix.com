@@ -1,23 +1,25 @@
-.container {
-  @apply max-w-[1536px] px-32;
+@layer components {
+  .container {
+    @apply max-w-[1536px] px-32;
 
-  @screen 2xl {
-    @apply max-w-[1280px] px-24;
-  }
+    @media screen(2xl) {
+      @apply max-w-[1280px] px-24;
+    }
 
-  @screen xl {
-    @apply max-w-[1024px] px-24;
-  }
+    @media screen(xl) {
+      @apply max-w-[1024px] px-24;
+    }
 
-  @screen lg {
-    @apply max-w-[768px] px-12;
-  }
+    @media screen(lg) {
+      @apply max-w-[768px] px-12;
+    }
 
-  @screen md {
-    @apply max-w-[640px] px-6;
-  }
+    @media screen(md) {
+      @apply max-w-[640px] px-6;
+    }
 
-  @screen sm {
-    @apply max-w-full px-6;
+    @media screen(sm) {
+      @apply max-w-full px-6;
+    }
   }
 }
