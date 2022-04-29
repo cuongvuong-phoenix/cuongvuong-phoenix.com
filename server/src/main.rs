@@ -1,6 +1,6 @@
 use axum::{
     extract::Extension,
-    http::{header, Method},
+    http::{header, HeaderValue, Method},
     routing::get,
     Router, Server,
 };
@@ -8,10 +8,7 @@ use config::*;
 use sqlx::{Pool, Postgres};
 use std::sync::Arc;
 use tower::ServiceBuilder;
-use tower_http::{
-    cors::{CorsLayer, Origin},
-    trace::TraceLayer,
-};
+use tower_http::{cors::CorsLayer, trace::TraceLayer};
 
 mod config;
 mod graphql;
@@ -39,9 +36,12 @@ async fn main() {
             CorsLayer::new()
                 .allow_methods(vec![Method::POST, Method::GET])
                 .allow_headers(vec![header::CONTENT_TYPE, header::ACCEPT])
-                .allow_origin(Origin::list(
-                    ALLOWED_ORIGIN.iter().map(|origin| origin.parse().unwrap()),
-                )),
+                .allow_origin(
+                    ALLOWED_ORIGIN
+                        .iter()
+                        .map(|origin| origin.parse().unwrap())
+                        .collect::<Vec<HeaderValue>>(),
+                ),
         )
         .layer(Extension(state.clone()));
 
