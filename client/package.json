@@ -7,7 +7,7 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint .",
-    "dev": "pnpm --filter=./packages --parallel dev",
+    "dev": "pnpm --filter=./packages/** --parallel dev",
     "build:ui": "pnpm --filter=ui build",
     "build:website": "pnpm --filter=website build",
     "build": "run-s build:ui build:website"
