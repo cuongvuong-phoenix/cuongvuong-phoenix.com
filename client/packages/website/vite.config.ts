@@ -1,4 +1,5 @@
-import * as path from 'path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import purgeIcons from 'vite-plugin-purge-icons';
@@ -8,10 +9,9 @@ import vueI18n from '@intlify/vite-plugin-vue-i18n';
 export default defineConfig({
   resolve: {
     alias: {
-      '~': path.resolve(__dirname, 'src'),
-      'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js',
+      '~': resolve(__dirname, 'src'),
       '@cuongvuong-phoenix-com-client/ui/css': '@cuongvuong-phoenix-com-client/ui/css',
-      '@cuongvuong-phoenix-com-client/ui': path.resolve(__dirname, '../ui/src/index.ts'),
+      '@cuongvuong-phoenix-com-client/ui': resolve(__dirname, '../ui/src/index.ts'),
     },
   },
   plugins: [
@@ -20,7 +20,7 @@ export default defineConfig({
     }),
     purgeIcons(),
     vueI18n({
-      include: path.resolve(__dirname, 'src/locales/translations/**'),
+      include: resolve(dirname(fileURLToPath(import.meta.url)), 'src/locales/translations/**'),
     }),
   ],
 });
