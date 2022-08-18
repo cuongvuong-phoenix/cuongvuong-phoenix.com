@@ -223,19 +223,16 @@
   } = useQuery<TagsQuery>(gql`
     query tags {
       tags(paginationParams: {}) {
-        edges {
-          cursor
-          node {
-            id
-            name
-            icon
-          }
+        nodes {
+          id
+          name
+          icon
         }
       }
     }
   `);
 
-  const gqlTags = computed(() => (tagsResult.value?.tags.edges ?? []).map((edge) => edge.node));
+  const gqlTags = computed(() => tagsResult.value?.tags.nodes ?? []);
 
   // Check for activing tags based on `route.query.tags` query params.
   const activeTagIds = ref<number[]>([]);
@@ -320,19 +317,17 @@
           tagIds: $tagIds
         ) {
           totalCount
-          edges {
-            node {
+          nodes {
+            id
+            title
+            slug
+            readingTime
+            createdAt
+            updatedAt
+            tags {
               id
-              title
-              slug
-              readingTime
-              createdAt
-              updatedAt
-              tags {
-                id
-                name
-                icon
-              }
+              name
+              icon
             }
           }
           pageInfo {
@@ -368,11 +363,11 @@
       return [];
     }
 
-    return (postsResult.value.posts.edges ?? []).map((edge) => {
+    return postsResult.value.posts.nodes.map((node) => {
       return {
-        ...edge.node,
-        createdAt: parseISO(edge.node.createdAt),
-        updatedAt: edge.node.updatedAt ? parseISO(edge.node.updatedAt) : undefined,
+        ...node,
+        createdAt: parseISO(node.createdAt),
+        updatedAt: node.updatedAt ? parseISO(node.updatedAt) : undefined,
       };
     });
   });
