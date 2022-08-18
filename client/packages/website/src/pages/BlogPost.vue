@@ -114,11 +114,11 @@
 </template>
 
 <script setup lang="ts">
-  import { reactive, ref, watch } from 'vue';
+  import { computed, reactive, ref, watch } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import { useI18n } from 'vue-i18n';
   import { buildVueDompurifyHTMLDirective } from 'vue-dompurify-html';
-  import { useQuery, useResult } from '@vue/apollo-composable';
+  import { useQuery } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
   import { UButton, UIcon, UPill, USkeleton } from '@cuongvuong-phoenix-com-client/ui';
@@ -179,18 +179,22 @@
 
   const tocContent = ref<string>();
 
-  const gqlPost = useResult(postResult, undefined, (data) => {
-    const content = data.post.content.replace(/(<nav.*<\/nav>)/, (_, toc) => {
+  const gqlPost = computed(() => {
+    if (!postResult.value) {
+      return;
+    }
+
+    const content = postResult.value?.post.content.replace(/(<nav.*<\/nav>)/, (_, toc) => {
       tocContent.value = toc;
 
       return '';
     });
 
     return {
-      ...data.post,
+      ...postResult.value.post,
       content,
-      createdAt: parseISO(data.post.createdAt),
-      updatedAt: data.post.updatedAt ? parseISO(data.post.updatedAt) : undefined,
+      createdAt: parseISO(postResult.value.post.createdAt),
+      updatedAt: postResult.value.post.updatedAt ? parseISO(postResult.value.post.updatedAt) : undefined,
     };
   });
 

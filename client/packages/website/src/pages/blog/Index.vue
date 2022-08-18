@@ -171,7 +171,7 @@
   import { type Ref, computed, ref, watch } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import { useI18n } from 'vue-i18n';
-  import { useQuery, useResult } from '@vue/apollo-composable';
+  import { useQuery } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
   import { UButton, UIcon, UInput, UPill, USkeleton } from '@cuongvuong-phoenix-com-client/ui';
@@ -235,7 +235,7 @@
     }
   `);
 
-  const gqlTags = useResult(tagsResult, [], (data) => data.tags.edges.map((edge) => edge.node));
+  const gqlTags = computed(() => (tagsResult.value?.tags.edges ?? []).map((edge) => edge!.node));
 
   // Check for activing tags based on `route.query.tags` query params.
   const activeTagIds = ref<number[]>([]);
@@ -363,20 +363,24 @@
     }
   );
 
-  const gqlPosts = useResult(postsResult, [], (data) =>
-    data.posts.edges.map((edge) => {
+  const gqlPosts = computed(() => {
+    if (!postsResult.value) {
+      return [];
+    }
+
+    return (postsResult.value.posts.edges ?? []).map((edge) => {
       return {
-        ...edge.node,
-        createdAt: parseISO(edge.node.createdAt),
-        updatedAt: edge.node.updatedAt ? parseISO(edge.node.updatedAt) : undefined,
+        ...edge!.node,
+        createdAt: parseISO(edge!.node.createdAt),
+        updatedAt: edge!.node.updatedAt ? parseISO(edge!.node.updatedAt) : undefined,
       };
-    })
-  );
+    });
+  });
 
   /* ----------------------------------------------------------------
   Pagination
   ---------------------------------------------------------------- */
-  const gqlPostsTotalCount = useResult(postsResult, undefined, (data) => data.posts.totalCount);
+  const gqlPostsTotalCount = computed(() => postsResult.value?.posts.totalCount);
 
-  const gqlPostsPageInfo = useResult(postsResult, undefined, (data) => data.posts.pageInfo);
+  const gqlPostsPageInfo = computed(() => postsResult.value?.posts.pageInfo);
 </script>
