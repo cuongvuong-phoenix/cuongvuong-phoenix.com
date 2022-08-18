@@ -1,7 +1,7 @@
 <template>
   <div
     class="px-12 py-8"
-    :class="[post && !loading ? 'relative transition-colors group hover:bg-bg-lighter' : 'animate-pulse']"
+    :class="[post && !loading ? 'hover:bg-bg-lighter group relative transition-colors' : 'animate-pulse']"
   >
     <!-- "Row 1" -->
     <RouterLink
@@ -16,7 +16,7 @@
     <!-- "Row 2" -->
     <div
       v-if="post && !loading"
-      class="flex items-center gap-3 mt-4 overflow-hidden text-sm text-fg-darker sm:flex-wrap"
+      class="text-fg-darker mt-4 flex items-center gap-3 overflow-hidden text-sm sm:flex-wrap"
     >
       <span>{{ formatDatetime(post.updatedAt || post.createdAt, locale) }}</span>
 
@@ -26,7 +26,7 @@
       <!-- "Tags" -->
       <template v-if="post.tags.length > 0">
         <span class="dot-1 sm:hidden"></span>
-        <div class="inline-flex flex-wrap items-center flex-1 min-w-0 gap-2 sm:basis-full">
+        <div class="inline-flex min-w-0 flex-1 flex-wrap items-center gap-2 sm:basis-full">
           <div v-for="(tag, i) in post.tags" :key="tag.id" class="inline-flex items-center">
             <div class="inline-flex items-center space-x-1">
               <UIcon v-if="tag.icon" :icon="tag.icon" class="min-wh-5" />
@@ -39,13 +39,13 @@
       </template>
       <!-- END "Tags" -->
     </div>
-    <USkeleton v-else-if="loading" type="line" font-size="sm" class="w-1/2 mt-4" />
+    <USkeleton v-else-if="loading" type="line" font-size="sm" class="mt-4 w-1/2" />
     <!-- END "Row 2" -->
 
     <!-- "Hover indicator" -->
     <div
       v-if="post && !loading"
-      class="absolute inset-y-0 right-0 w-2 transition-opacity opacity-0 bg-primary-default group-hover:opacity-100"
+      class="bg-primary-default absolute inset-y-0 right-0 w-2 opacity-0 transition-opacity group-hover:opacity-100"
     ></div>
     <!-- END "Hover indicator" -->
   </div>

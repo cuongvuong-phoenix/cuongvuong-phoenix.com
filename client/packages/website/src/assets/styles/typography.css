@@ -2,7 +2,7 @@
 Core
 ---------------------------------------------------------------- */
 html {
-  @apply font-sans text-fg-default bg-bg-default;
+  @apply text-fg-default bg-bg-default font-sans;
 }
 
 a {
@@ -40,11 +40,11 @@ pre {
   Anchor Link
   ---------------------------------------------------------------- */
   a.header-anchor {
-    @apply pr-0.5 -ml-[1.375rem] transition duration-300 opacity-0;
+    @apply -ml-[1.375rem] pr-0.5 opacity-0 transition duration-300;
 
     &:hover,
     &:focus-visible {
-      @apply opacity-100 text-primary-darker;
+      @apply text-primary-darker opacity-100;
     }
 
     svg {
@@ -75,7 +75,7 @@ pre {
   Marking
   ---------------------------------------------------------------- */
   ins {
-    @apply no-underline bg-success-default text-bg-default;
+    @apply bg-success-default text-bg-default no-underline;
   }
 
   mark {
@@ -88,6 +88,6 @@ pre {
   ins,
   code,
   mark {
-    @apply px-1 py-0.5 rounded-lg;
+    @apply rounded-lg px-1 py-0.5;
   }
 }

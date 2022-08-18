@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1 class="font-serif text-5xl font-bold text-center">
+    <h1 class="text-center font-serif text-5xl font-bold">
       {{ t('common.blog').toUpperCase() }}
     </h1>
 
     <!-- "Body" -->
-    <div class="grid grid-cols-3 gap-8 mt-12 lg:grid-cols-1">
+    <div class="mt-12 grid grid-cols-3 gap-8 lg:grid-cols-1">
       <!-- "Left" -->
       <div>
         <div
@@ -24,7 +24,7 @@
 
           <!-- "Total results count" -->
           <div class="truncate">
-            <span class="font-bold text-fg-darker">{{ t('common.total').toUpperCase() }}&colon;&nbsp;</span
+            <span class="text-fg-darker font-bold">{{ t('common.total').toUpperCase() }}&colon;&nbsp;</span
             ><span v-if="gqlPostsTotalCount !== undefined && !postsLoading" class="italic"
               >{{ gqlPostsTotalCount }} {{ t('common.post', gqlPostsTotalCount).toLowerCase() }}</span
             >
@@ -53,7 +53,7 @@
 
           <!-- "Filter (by Tags)" -->
           <div class="space-y-2">
-            <div class="font-bold text-fg-darker">{{ t('pages.blog.filters.by-tags', 2).toUpperCase() }}</div>
+            <div class="text-fg-darker font-bold">{{ t('pages.blog.filters.by-tags', 2).toUpperCase() }}</div>
 
             <div class="flex flex-wrap items-center gap-2">
               <template v-if="tags.length > 0 && !tagsLoading">
@@ -80,19 +80,19 @@
       <!-- "Right" -->
       <div class="col-span-2 lg:col-auto">
         <!-- "Posts" -->
-        <div class="overflow-hidden border rounded-lg border-fg-darkest">
+        <div class="border-fg-darkest overflow-hidden rounded-lg border">
           <template v-if="gqlPosts.length > 0 && !postsLoading">
             <WPost
               v-for="(post, i) in gqlPosts"
               :key="post.id"
               :post="post"
               :class="{
-                'border-t border-fg-darkest': i > 0,
+                'border-fg-darkest border-t': i > 0,
               }"
             />
           </template>
           <template v-else-if="gqlPosts.length === 0 && !postsLoading">
-            <div class="flex flex-col items-center px-12 py-8 space-y-4 text-2xl text-center text-fg-darkest">
+            <div class="text-fg-darkest flex flex-col items-center space-y-4 px-12 py-8 text-center text-2xl">
               <UIcon icon="fluent:document-bullet-list-off-24-regular" />
               <span>{{ t('placeholders.no-post').toUpperCase() }}</span>
             </div>
@@ -102,15 +102,15 @@
               v-for="(num, i) in postsPageSize"
               :key="num"
               loading
-              :class="{ 'border-t border-fg-darkest': i > 0 }"
+              :class="{ 'border-fg-darkest border-t': i > 0 }"
             />
           </template>
         </div>
         <!-- END "Posts" -->
 
         <!-- "Pagination" -->
-        <div v-if="gqlPostsPageInfo" class="flex items-center mt-8 space-x-8">
-          <div class="flex items-center flex-1 min-w-0">
+        <div v-if="gqlPostsPageInfo" class="mt-8 flex items-center space-x-8">
+          <div class="flex min-w-0 flex-1 items-center">
             <UButton
               v-if="gqlPostsPageInfo.hasPreviousPage"
               :link="
@@ -136,7 +136,7 @@
           <!-- TODO: Paginator -->
           <div></div>
 
-          <div class="flex items-center justify-end flex-1 min-w-0">
+          <div class="flex min-w-0 flex-1 items-center justify-end">
             <UButton
               v-if="gqlPostsPageInfo.hasNextPage"
               :link="

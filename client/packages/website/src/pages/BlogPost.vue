@@ -29,16 +29,16 @@
     <!-- "Row 2 - Title" -->
     <h1
       v-if="gqlPost && !postLoading"
-      class="font-serif text-4xl font-bold text-center"
+      class="text-center font-serif text-4xl font-bold"
       :class="{ 'mt-6': gqlPost.tags.length > 0 }"
     >
       {{ gqlPost.title }}
     </h1>
-    <USkeleton v-else-if="postLoading" type="paragraph" class="mt-6 text-4xl text-center" />
+    <USkeleton v-else-if="postLoading" type="paragraph" class="mt-6 text-center text-4xl" />
     <!-- END "Row 2 - Title" -->
 
     <!-- "Row 3" -->
-    <div class="flex flex-wrap items-center justify-center mt-6 gap-x-4 gap-y-2 text-fg-darker">
+    <div class="text-fg-darker mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
       <template v-if="gqlPost && !postLoading">
         <div class="flex items-center space-x-2">
           <UIcon icon="fluent:calendar-ltr-24-regular" />
@@ -70,8 +70,8 @@
     <!-- END "Top" -->
 
     <!-- "Content" -->
-    <div v-if="gqlPost && !postLoading" v-dompurify-html="gqlPost.content" class="mx-auto mt-12 prose"></div>
-    <div v-else-if="postLoading" class="mx-auto mt-12 prose">
+    <div v-if="gqlPost && !postLoading" v-dompurify-html="gqlPost.content" class="prose mx-auto mt-12"></div>
+    <div v-else-if="postLoading" class="prose mx-auto mt-12">
       <USkeleton type="paragraph" :num-lines="4" />
       <USkeleton type="paragraph" :num-lines="8" />
       <USkeleton type="paragraph" :num-lines="6" />
@@ -79,7 +79,7 @@
     <!-- END "Content" -->
 
     <!-- "Toc" -->
-    <div v-if="tocContent" class="fixed z-20 p-2 rounded-full bottom-2 right-2 backdrop-blur-xl">
+    <div v-if="tocContent" class="fixed bottom-2 right-2 z-20 rounded-full p-2 backdrop-blur-xl">
       <UButton
         color="secondary"
         variant="full"
@@ -104,7 +104,7 @@
         <div
           v-show="tocOpenning"
           v-dompurify-html="tocContent"
-          class="absolute p-2 transition origin-bottom-right border rounded-lg right-[calc(100%-0.5rem)] bottom-[calc(100%-0.5rem)] bg-bg-lighter border-fg-darkest shadow-xl overflow-auto sm:w-[calc(100vw-5.5rem)] xl:w-[18rem] 2xl:w-[20rem] w-[24rem] max-h-[60vh] min-h-[3rem] prose"
+          class="bg-bg-lighter border-fg-darkest prose absolute right-[calc(100%-0.5rem)] bottom-[calc(100%-0.5rem)] max-h-[60vh] min-h-[3rem] w-[24rem] origin-bottom-right overflow-auto rounded-lg border p-2 shadow-xl transition sm:w-[calc(100vw-5.5rem)] xl:w-[18rem] 2xl:w-[20rem]"
         ></div>
       </Transition>
       <!-- END "Toc Content" -->

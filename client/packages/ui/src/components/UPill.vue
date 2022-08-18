@@ -4,7 +4,7 @@
     v-bind="$attrs"
     type="button"
     :disabled="disabled"
-    class="px-2.5 py-1.5 space-x-1 inline-flex items-center justify-center transition duration-300 rounded-4xl border disabled:opacity-50"
+    class="rounded-4xl inline-flex items-center justify-center space-x-1 border px-2.5 py-1.5 transition duration-300 disabled:opacity-50"
     :class="classes"
   >
     <UIcon v-if="icon" :icon="icon" />
@@ -15,9 +15,9 @@
   <div
     v-else
     v-bind="$attrs"
-    class="px-2.5 py-1.5 inline-flex items-center justify-center animate-pulse border border-fg-darkest rounded-4xl"
+    class="border-fg-darkest rounded-4xl inline-flex animate-pulse items-center justify-center border px-2.5 py-1.5"
   >
-    <USkeleton type="line" class="w-[8ch] !rounded-4xl" />
+    <USkeleton type="line" class="!rounded-4xl w-[8ch]" />
   </div>
   <!-- END "Skeleton" -->
 </template>

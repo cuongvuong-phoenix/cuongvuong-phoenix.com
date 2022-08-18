@@ -1,5 +1,5 @@
 <template>
-  <div ref="el" class="min-w-[1.5em] min-h-[1.5em] shrink-0"></div>
+  <div ref="el" class="min-h-[1.5em] min-w-[1.5em] shrink-0"></div>
 </template>
 
 <script setup lang="ts">
@@ -38,6 +38,6 @@
 
 <style lang="postcss">
   .iconify {
-    @apply w-full h-full;
+    @apply h-full w-full;
   }
 </style>

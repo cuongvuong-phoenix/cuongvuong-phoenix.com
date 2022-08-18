@@ -3,7 +3,7 @@
     <ULabel v-if="label" :label="label" :required="required" />
 
     <div
-      class="flex items-center px-3 py-2 space-x-2 border rounded-lg border-fg-dark-default placeholder-fg-dark-darker focusible-within"
+      class="border-fg-dark-default placeholder-fg-dark-darker focusible-within flex items-center space-x-2 rounded-lg border px-3 py-2"
     >
       <slot name="prepended" />
 
@@ -54,10 +54,10 @@
 
 <style lang="postcss">
   input[type='text'] {
-    @apply p-0 bg-transparent border-none;
+    @apply border-none bg-transparent p-0;
 
     &:focus {
-      @apply outline-none ring-0 border-none;
+      @apply border-none outline-none ring-0;
     }
   }
 </style>

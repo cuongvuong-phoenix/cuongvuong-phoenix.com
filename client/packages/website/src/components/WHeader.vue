@@ -1,8 +1,8 @@
 <template>
   <header
-    class="fixed inset-x-0 top-0 z-10 border-fg-darkest"
+    class="border-fg-darkest fixed inset-x-0 top-0 z-10"
     :class="{
-      'border-b bg-bg-default': uiStore.headerMenuOpenning,
+      'bg-bg-default border-b': uiStore.headerMenuOpenning,
       'border-b backdrop-blur-xl': scrolledOut,
     }"
     :style="{
@@ -10,7 +10,7 @@
     }"
   >
     <nav
-      class="container flex items-center mx-auto space-x-8 transition-[height] duration-300"
+      class="container mx-auto flex items-center space-x-8 transition-[height] duration-300"
       :style="{
         height: uiStore.headerHeightString,
       }"
@@ -38,7 +38,7 @@
         >
           <ULogo
             colored
-            class="w-[4.5rem] h-[4.5rem] transition-[height_width] duration-300"
+            class="h-[4.5rem] w-[4.5rem] transition-[height_width] duration-300"
             :class="{
               'wh-12': scrolledOut,
             }"
@@ -47,7 +47,7 @@
         <!-- END "Middle - Logo" -->
 
         <!-- "Right - Social Networks" -->
-        <div class="flex justify-end flex-1 space-x-2">
+        <div class="flex flex-1 justify-end space-x-2">
           <UButton
             v-for="socialNetwork in socialNetworks"
             :key="socialNetwork.href"
@@ -78,7 +78,7 @@
         >
           <ULogo
             colored
-            class="w-[4.5rem] h-[4.5rem] transition-[height_width] duration-300"
+            class="h-[4.5rem] w-[4.5rem] transition-[height_width] duration-300"
             :class="{
               'wh-12': scrolledOut,
             }"
@@ -87,7 +87,7 @@
         <!-- END "Left - Logo" -->
 
         <!-- "Right - Menu Toggler" -->
-        <div class="flex justify-end flex-1">
+        <div class="flex flex-1 justify-end">
           <UButton rounded unified @click="uiStore.toggleHeaderMenuOpenning()">
             <UIcon v-if="!uiStore.headerMenuOpenning" icon="fluent:navigation-24-regular" />
             <UIcon v-else icon="fluent:dismiss-24-regular" />
@@ -98,7 +98,7 @@
         <!-- "Menu" -->
         <Teleport v-if="uiStore.headerMenuOpenning" to="#app">
           <nav
-            class="fixed inset-x-0 bottom-0 z-10 px-16 pt-8 pb-16 bg-bg-default"
+            class="bg-bg-default fixed inset-x-0 bottom-0 z-10 px-16 pt-8 pb-16"
             :style="{
               top: `${uiStore.headerHeight + 1}px`,
             }"
@@ -116,7 +116,7 @@
             </UButton>
             <!-- END "Navs" -->
 
-            <hr class="my-4 border-fg-darkest" />
+            <hr class="border-fg-darkest my-4" />
 
             <!-- "Social Networks" -->
             <div class="flex justify-center space-x-2">

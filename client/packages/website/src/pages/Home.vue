@@ -1,23 +1,23 @@
 <template>
   <div>
     <!-- "Top" -->
-    <div class="font-serif text-center">
+    <div class="text-center font-serif">
       <h1 class="text-5xl font-bold">{{ t('common.whoami') }}</h1>
-      <div class="mt-4 text-4xl text-fg-darker">{{ t('common.my-expertise') }}</div>
+      <div class="text-fg-darker mt-4 text-4xl">{{ t('common.my-expertise') }}</div>
     </div>
     <!-- END "Top" -->
 
     <!-- "Next" -->
     <!-- "(2xl)" -->
     <template v-if="!smallerLg">
-      <div class="flex justify-between mt-12 space-x-32">
+      <div class="mt-12 flex justify-between space-x-32">
         <!-- "Left" -->
-        <div class="flex flex-col justify-between flex-1 min-w-0 space-y-8 max-w-[16rem]">
+        <div class="flex min-w-0 max-w-[16rem] flex-1 flex-col justify-between space-y-8">
           <div v-for="section in leftKebabSections" :key="section.label" class="space-y-4">
-            <h2 class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</h2>
+            <h2 class="text-fg-darker font-bold">{{ section.label.toUpperCase() }}</h2>
             <div
               v-if="section.body !== undefined && !section.loading"
-              class="font-serif text-xl font-medium break-words line-clamp-6"
+              class="line-clamp-6 break-words font-serif text-xl font-medium"
               v-html="section.body"
             ></div>
             <USkeleton v-else-if="section.loading" type="paragraph" :num-lines="6" class="text-xl" />
@@ -27,21 +27,21 @@
 
         <!-- "Middle - SelfImage" -->
         <div
-          class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring-primary-default"
+          class="ring-fg-darkest hover:ring-primary-default h-[28rem] w-64 self-center rounded-[8rem] p-4 ring-1 transition duration-300"
         >
-          <div class="w-full h-full rounded-[8rem] border border-fg-darkest overflow-hidden">
-            <img :src="selfImageSrc" :alt="t('common.self-image')" class="object-cover w-full h-full" />
+          <div class="border-fg-darkest h-full w-full overflow-hidden rounded-[8rem] border">
+            <img :src="selfImageSrc" :alt="t('common.self-image')" class="h-full w-full object-cover" />
           </div>
         </div>
         <!-- END "Middle - SelfImage" -->
 
         <!-- "Right" -->
-        <div class="flex flex-col justify-between flex-1 min-w-0 space-y-8 max-w-[16rem]">
+        <div class="flex min-w-0 max-w-[16rem] flex-1 flex-col justify-between space-y-8">
           <div v-for="section in rightKebabSections" :key="section.label" class="space-y-4 text-right">
-            <h2 class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</h2>
+            <h2 class="text-fg-darker font-bold">{{ section.label.toUpperCase() }}</h2>
             <div
               v-if="section.body !== undefined && !section.loading"
-              class="font-serif text-5xl font-medium truncate"
+              class="truncate font-serif text-5xl font-medium"
               v-html="section.body"
             ></div>
             <USkeleton v-else-if="section.loading" type="line" font-size="5xl" />
@@ -55,24 +55,24 @@
     <!-- "(lg)" -->
     <template v-else>
       <!-- "Self Image" -->
-      <div class="flex justify-center mt-12">
+      <div class="mt-12 flex justify-center">
         <div
-          class="w-64 h-[28rem] p-4 self-center transition duration-300 rounded-[8rem] ring-1 ring-fg-darkest hover:ring-primary-default"
+          class="ring-fg-darkest hover:ring-primary-default h-[28rem] w-64 self-center rounded-[8rem] p-4 ring-1 transition duration-300"
         >
-          <div class="w-full h-full rounded-[8rem] border border-fg-darkest overflow-hidden">
-            <img :src="selfImageSrc" :alt="t('common.self-image')" class="object-cover w-full h-full" />
+          <div class="border-fg-darkest h-full w-full overflow-hidden rounded-[8rem] border">
+            <img :src="selfImageSrc" :alt="t('common.self-image')" class="h-full w-full object-cover" />
           </div>
         </div>
       </div>
       <!-- END "Self Image" -->
 
       <!-- "Left Sections" -->
-      <div class="grid grid-cols-2 gap-16 mt-12 text-center md:grid-cols-1 md:gap-8">
+      <div class="mt-12 grid grid-cols-2 gap-16 text-center md:grid-cols-1 md:gap-8">
         <div v-for="section in leftKebabSections" :key="section.label" class="flex flex-col items-center space-y-4">
-          <h2 class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</h2>
+          <h2 class="text-fg-darker font-bold">{{ section.label.toUpperCase() }}</h2>
           <div
             v-if="section.body !== undefined"
-            class="font-serif text-xl font-medium line-clamp-6"
+            class="line-clamp-6 font-serif text-xl font-medium"
             v-html="section.body"
           ></div>
           <USkeleton v-else-if="section.loading" type="paragraph" :num-lines="6" class="w-full text-xl" />
@@ -81,12 +81,12 @@
       <!-- END "Left Sections" -->
 
       <!-- "Right Sections" -->
-      <div class="grid grid-cols-3 gap-16 mt-12 text-center md:grid-cols-1 md:gap-8">
+      <div class="mt-12 grid grid-cols-3 gap-16 text-center md:grid-cols-1 md:gap-8">
         <div v-for="section in rightKebabSections" :key="section.label" class="flex flex-col items-center space-y-4">
-          <h2 class="font-bold text-fg-darker">{{ section.label.toUpperCase() }}</h2>
+          <h2 class="text-fg-darker font-bold">{{ section.label.toUpperCase() }}</h2>
           <div
             v-if="section.body !== undefined && !section.loading"
-            class="font-serif text-5xl font-medium truncate"
+            class="truncate font-serif text-5xl font-medium"
             v-html="section.body"
           ></div>
           <USkeleton v-else-if="section.loading" type="line" font-size="5xl" />

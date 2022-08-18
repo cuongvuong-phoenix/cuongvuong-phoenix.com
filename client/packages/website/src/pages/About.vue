@@ -10,9 +10,9 @@
       <!-- END "Left" -->
 
       <!-- "Right" -->
-      <div class="p-4 transition duration-300 ring-1 ring-fg-darkest hover:ring-primary-default">
-        <div class="border border-fg-darkest w-64 h-[28rem] overflow-hidden">
-          <img :src="selfImageSrc" :alt="t('common.self-image')" class="object-cover w-full h-full" />
+      <div class="ring-fg-darkest hover:ring-primary-default p-4 ring-1 transition duration-300">
+        <div class="border-fg-darkest h-[28rem] w-64 overflow-hidden border">
+          <img :src="selfImageSrc" :alt="t('common.self-image')" class="h-full w-full object-cover" />
         </div>
       </div>
       <!-- END "Right" -->
@@ -21,17 +21,17 @@
 
     <!-- "Hobbies Section" -->
     <div class="mt-16 space-y-8">
-      <h2 class="font-serif text-3xl font-bold text-center">{{ t('pages.about.hobbies.title', 2).toUpperCase() }}</h2>
+      <h2 class="text-center font-serif text-3xl font-bold">{{ t('pages.about.hobbies.title', 2).toUpperCase() }}</h2>
 
       <!-- "Hobbies" -->
       <div class="flex flex-col items-center gap-12">
         <div
           v-for="hobby in hobbies"
           :key="hobby.id"
-          class="flex items-center gap-x-8 gap-y-4 w-[62.5%] lg:w-3/4 md:w-[87.5%] sm:w-auto sm:flex-col sm:px-4 sm:text-center"
+          class="flex w-[62.5%] items-center gap-x-8 gap-y-4 sm:w-auto sm:flex-col sm:px-4 sm:text-center md:w-[87.5%] lg:w-3/4"
         >
           <UIcon :icon="hobby.icon" class="text-fg-darkest wh-32 sm:wh-16" />
-          <div class="self-stretch w-px bg-fg-darkest sm:hidden"></div>
+          <div class="bg-fg-darkest w-px self-stretch sm:hidden"></div>
           <p v-html="hobby.description"></p>
         </div>
       </div>

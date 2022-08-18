@@ -2,7 +2,7 @@
   <WHeader />
 
   <main
-    class="container pt-8 pb-16 mx-auto"
+    class="container mx-auto pt-8 pb-16"
     :style="{
       'margin-top': `${HeaderHeight.DEFAULT}px`,
     }"

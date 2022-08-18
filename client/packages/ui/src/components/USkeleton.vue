@@ -1,13 +1,13 @@
 <template>
   <!-- "Rect" -->
-  <div v-if="type === 'rect'" v-bind="$attrs" class="rounded-lg bg-bg-lightest animate-pulse"></div>
+  <div v-if="type === 'rect'" v-bind="$attrs" class="bg-bg-lightest animate-pulse rounded-lg"></div>
   <!-- END "Rect" -->
 
   <!-- "Circle" -->
   <div
     v-else-if="type === 'circle'"
     v-bind="$attrs"
-    class="inline-block rounded-full bg-bg-lightest animate-pulse"
+    class="bg-bg-lightest inline-block animate-pulse rounded-full"
   ></div>
   <!-- END "Circle" -->
 
@@ -15,7 +15,7 @@
   <div
     v-else-if="type === 'line'"
     v-bind="$attrs"
-    class="min-w-[2ch] bg-bg-lightest rounded inline-block align-top animate-pulse"
+    class="bg-bg-lightest inline-block min-w-[2ch] animate-pulse rounded align-top"
     :class="fontSizeClasses"
   ></div>
   <!-- END "Line" -->
@@ -25,7 +25,7 @@
     <div
       v-for="num in numLines"
       :key="num"
-      class="h-[1em] bg-bg-lightest rounded inline-block"
+      class="bg-bg-lightest inline-block h-[1em] rounded"
       :style="{
         width: numLines > 1 && num === numLines ? lastLineStyle : '100%',
       }"

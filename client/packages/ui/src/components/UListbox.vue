@@ -7,13 +7,13 @@
   >
     <!-- "Button" -->
     <ListboxButton
-      class="inline-flex items-center justify-center w-full space-x-2 text-left"
+      class="inline-flex w-full items-center justify-center space-x-2 text-left"
       :class="[defaultButtonClasses, buttonClasses]"
     >
       <UIcon v-if="buttonIconPrepended" :icon="buttonIconPrepended" />
 
       <div
-        class="flex-1 min-w-0 truncate"
+        class="min-w-0 flex-1 truncate"
         :class="{
           'text-fg-darker': !modelValue,
         }"
@@ -34,7 +34,7 @@
       :leave-to-class="buttonVariant === 'outlined' ? '-mt-6 opacity-0' : '-mt-3 opacity-0'"
     >
       <ListboxOptions
-        class="absolute z-20 py-1 mt-1 overflow-auto border rounded-lg shadow-2xl top-full max-h-64 bg-bg-lighter border-fg-darkest focus:outline-none"
+        class="bg-bg-lighter border-fg-darkest absolute top-full z-20 mt-1 max-h-64 overflow-auto rounded-lg border py-1 shadow-2xl focus:outline-none"
         :class="{
           'w-full': optionsFullWidth,
         }"
@@ -48,10 +48,10 @@
           as="template"
         >
           <li
-            class="flex items-center px-3 py-2 space-x-2 cursor-pointer enabled:hover:bg-bg-default"
+            class="enabled:hover:bg-bg-default flex cursor-pointer items-center space-x-2 px-3 py-2"
             :class="{
               'bg-bg-default': active,
-              'font-medium text-primary-default': selected,
+              'text-primary-default font-medium': selected,
               'opacity-50': option.disabled,
             }"
           >
@@ -59,7 +59,7 @@
             <div
               class="flex-1"
               :class="{
-                'truncate min-w-0': !optionTextWrap,
+                'min-w-0 truncate': !optionTextWrap,
               }"
             >
               {{ option.text }}
