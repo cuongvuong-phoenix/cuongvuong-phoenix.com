@@ -235,7 +235,7 @@
     }
   `);
 
-  const gqlTags = computed(() => (tagsResult.value?.tags.edges ?? []).map((edge) => edge!.node));
+  const gqlTags = computed(() => (tagsResult.value?.tags.edges ?? []).map((edge) => edge.node));
 
   // Check for activing tags based on `route.query.tags` query params.
   const activeTagIds = ref<number[]>([]);
@@ -370,9 +370,9 @@
 
     return (postsResult.value.posts.edges ?? []).map((edge) => {
       return {
-        ...edge!.node,
-        createdAt: parseISO(edge!.node.createdAt),
-        updatedAt: edge!.node.updatedAt ? parseISO(edge!.node.updatedAt) : undefined,
+        ...edge.node,
+        createdAt: parseISO(edge.node.createdAt),
+        updatedAt: edge.node.updatedAt ? parseISO(edge.node.updatedAt) : undefined,
       };
     });
   });

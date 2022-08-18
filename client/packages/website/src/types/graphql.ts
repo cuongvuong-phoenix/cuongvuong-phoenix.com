@@ -129,7 +129,9 @@ export type Post = {
 export type PostConnection = {
   __typename?: 'PostConnection';
   /** A list of edges. */
-  edges?: Maybe<Array<Maybe<PostEdge>>>;
+  edges: Array<PostEdge>;
+  /** A list of nodes. */
+  nodes: Array<Post>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   totalCount: Scalars['Int'];
@@ -212,7 +214,9 @@ export type Tag = {
 export type TagConnection = {
   __typename?: 'TagConnection';
   /** A list of edges. */
-  edges?: Maybe<Array<Maybe<TagEdge>>>;
+  edges: Array<TagEdge>;
+  /** A list of nodes. */
+  nodes: Array<Tag>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   totalCount: Scalars['Int'];
@@ -252,7 +256,7 @@ export type PostsCountQuery = { __typename?: 'Query', postsCount: number };
 export type TagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TagsQuery = { __typename?: 'Query', tags: { __typename?: 'TagConnection', edges?: Array<{ __typename?: 'TagEdge', cursor: string, node: { __typename?: 'Tag', id: number, name: string, icon?: string | null } } | null> | null } };
+export type TagsQuery = { __typename?: 'Query', tags: { __typename?: 'TagConnection', edges: Array<{ __typename?: 'TagEdge', cursor: string, node: { __typename?: 'Tag', id: number, name: string, icon?: string | null } }> } };
 
 export type PostsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -264,7 +268,7 @@ export type PostsQueryVariables = Exact<{
 }>;
 
 
-export type PostsQuery = { __typename?: 'Query', posts: { __typename?: 'PostConnection', totalCount: number, edges?: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: number, title: string, slug: string, readingTime: number, createdAt: any, updatedAt?: any | null, tags: Array<{ __typename?: 'Tag', id: number, name: string, icon?: string | null }> } } | null> | null, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
+export type PostsQuery = { __typename?: 'Query', posts: { __typename?: 'PostConnection', totalCount: number, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: number, title: string, slug: string, readingTime: number, createdAt: any, updatedAt?: any | null, tags: Array<{ __typename?: 'Tag', id: number, name: string, icon?: string | null }> } }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 
 export const PostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"post"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"readingTime"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}}]}}]}}]}}]} as unknown as DocumentNode<PostQuery, PostQueryVariables>;
