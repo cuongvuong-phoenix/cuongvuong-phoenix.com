@@ -22,12 +22,6 @@
     "editor.tabSize": 2
   },
   "extensions": {
-    "recommendations": [
-      "johnsoncodehk.volar",
-      "bradlc.vscode-tailwindcss",
-      "heybourn.headwind",
-      "dbaeumer.vscode-eslint",
-      "esbenp.prettier-vscode"
-    ]
+    "recommendations": ["Vue.volar", "bradlc.vscode-tailwindcss", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
   }
 }
