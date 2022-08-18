@@ -6,10 +6,10 @@
   "author": "Cuong Vuong Chi",
   "main": "src/index.js",
   "peerDependencies": {
-    "tailwindcss": "^3.0.24"
+    "tailwindcss": "^3.1.8"
   },
   "devDependencies": {
-    "tailwindcss": "^3.0.24"
+    "tailwindcss": "^3.1.8"
   },
   "pnpm": {
     "peerDependencyRules": {

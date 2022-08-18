@@ -11,11 +11,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /**
-   * Implement the DateTime<Utc> scalar
-   *
-   * The input/output is a string in RFC3339 format.
-   */
   DateTime: any;
 };
 
