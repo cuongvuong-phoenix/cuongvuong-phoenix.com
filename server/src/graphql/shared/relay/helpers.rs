@@ -1,7 +1,7 @@
 use super::{Base64Cursor, ConnectionFields, PaginationParams};
 use async_graphql::{
     connection::{self, Connection, Edge, EmptyFields},
-    Error, Result,
+    Error, OutputType, Result,
 };
 use std::future::Future;
 
@@ -11,6 +11,7 @@ pub async fn query_connection<N, CF, CFR, VF, VFR>(
     vec_fn: VF,
 ) -> Result<Connection<Base64Cursor, N, ConnectionFields, EmptyFields>>
 where
+    N: OutputType,
     CF: FnOnce() -> CFR,
     CFR: Future<Output = Result<usize>>,
     VF: FnOnce(i64, i64) -> VFR,
@@ -23,7 +24,7 @@ where
         last,
     } = pagination_params;
 
-    connection::query::<Base64Cursor, N, ConnectionFields, _, _, _, Error>(
+    connection::query::<_, _, Base64Cursor, N, ConnectionFields, _, _, _, Error>(
         after,
         before,
         first,
@@ -58,19 +59,23 @@ pub fn get_start_end_cursor_offsets(
     }
 }
 
-pub fn create_connection<N, I: ExactSizeIterator<Item = N>>(
+pub fn create_connection<N, I>(
     start: usize,
     end: usize,
     count: usize,
-    iter: I,
-) -> Connection<Base64Cursor, N, ConnectionFields, EmptyFields> {
+    iterator: I,
+) -> Connection<Base64Cursor, N, ConnectionFields>
+where
+    N: OutputType,
+    I: ExactSizeIterator<Item = N>,
+{
     let mut connection =
         Connection::with_additional_fields(start > 0, end < count, ConnectionFields::new(count));
 
-    connection.append(
+    connection.edges.extend(
         (start..end)
             .into_iter()
-            .zip(iter)
+            .zip(iterator)
             .map(|(offset, node)| Edge::new(Base64Cursor::new(offset), node)),
     );
 
