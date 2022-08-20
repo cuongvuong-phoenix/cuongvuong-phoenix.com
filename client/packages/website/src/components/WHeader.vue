@@ -161,7 +161,9 @@
   /* ----------------------------------------------------------------
   (md) Menu
   ---------------------------------------------------------------- */
-  const { load: loadBodyStyleTag, unload: unloadBodyStyleTag } = useStyleTag('body { overflow: hidden }');
+  const { load: loadBodyStyleTag, unload: unloadBodyStyleTag } = useStyleTag('body { overflow: hidden }', {
+    immediate: false,
+  });
 
   watch(
     [smallerMd, () => uiStore.headerMenuOpenning],
