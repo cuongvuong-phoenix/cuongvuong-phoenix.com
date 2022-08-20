@@ -11,8 +11,8 @@ pub fn load_env() {
         "production"
     };
 
-    dotenv::from_filename(format!(".env.{}.local", profile)).ok();
-    dotenv::from_filename(format!(".env.local")).ok();
-    dotenv::from_filename(format!(".env.{}", profile)).ok();
-    dotenv::dotenv().ok();
+    dotenvy::from_filename(format!(".env.{}.local", profile)).ok();
+    dotenvy::from_filename(format!(".env.local")).ok();
+    dotenvy::from_filename(format!(".env.{}", profile)).ok();
+    dotenvy::dotenv().ok();
 }
