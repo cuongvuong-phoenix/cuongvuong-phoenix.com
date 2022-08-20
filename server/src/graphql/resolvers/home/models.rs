@@ -1,7 +1,7 @@
 use crate::graphql::shared::errors::SharedError;
 use async_graphql::{ErrorExtensions, InputObject, Result, SimpleObject};
-use chrono::{DateTime, Utc};
 use sqlx::{Pool, Postgres};
+use time::OffsetDateTime;
 
 #[derive(SimpleObject)]
 #[graphql(complex)]
@@ -10,8 +10,8 @@ pub struct HomeContent {
     contact: String,
     years_of_experience: i32,
     num_projects: i32,
-    created_at: DateTime<Utc>,
-    updated_at: Option<DateTime<Utc>>,
+    created_at: OffsetDateTime,
+    updated_at: Option<OffsetDateTime>,
 }
 
 impl HomeContent {
@@ -89,7 +89,7 @@ impl HomeContentUpdate {
             self.contact,
             self.years_of_experience,
             self.num_projects,
-            Utc::now(),
+            OffsetDateTime::now_local()?,
         )
         .fetch_one(db_pool)
         .await

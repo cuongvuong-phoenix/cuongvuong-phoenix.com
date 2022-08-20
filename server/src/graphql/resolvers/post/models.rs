@@ -1,8 +1,8 @@
 use super::PostError;
 use crate::graphql::shared::errors::SharedError;
 use async_graphql::{ErrorExtensions, InputObject, Result, SimpleObject};
-use chrono::{DateTime, Utc};
 use sqlx::{FromRow, Pool, Postgres, Transaction};
+use time::OffsetDateTime;
 
 #[derive(SimpleObject, FromRow)]
 #[graphql(complex)]
@@ -12,8 +12,8 @@ pub struct Post {
     slug: String,
     reading_time: i32,
     visible: bool,
-    created_at: DateTime<Utc>,
-    updated_at: Option<DateTime<Utc>>,
+    created_at: OffsetDateTime,
+    updated_at: Option<OffsetDateTime>,
 }
 
 impl Post {
@@ -370,7 +370,7 @@ impl PostUpdate {
             self.reading_time,
             self.visible,
             self.content,
-            Utc::now()
+            OffsetDateTime::now_local()?,
         )
         .fetch_optional(&mut transaction)
         .await

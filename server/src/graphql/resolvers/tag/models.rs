@@ -1,8 +1,8 @@
 use super::errors::TagError;
 use crate::graphql::shared::errors::SharedError;
 use async_graphql::{ErrorExtensions, InputObject, Result, SimpleObject};
-use chrono::{DateTime, Utc};
 use sqlx::{Pool, Postgres};
+use time::OffsetDateTime;
 
 // ----------------------------------------------------------------
 // READ
@@ -12,8 +12,8 @@ pub struct Tag {
     pub id: i32,
     name: String,
     icon: Option<String>,
-    created_at: DateTime<Utc>,
-    updated_at: Option<DateTime<Utc>>,
+    created_at: OffsetDateTime,
+    updated_at: Option<OffsetDateTime>,
 }
 
 impl Tag {
@@ -21,8 +21,8 @@ impl Tag {
         id: i32,
         name: String,
         icon: Option<String>,
-        created_at: DateTime<Utc>,
-        updated_at: Option<DateTime<Utc>>,
+        created_at: OffsetDateTime,
+        updated_at: Option<OffsetDateTime>,
     ) -> Self {
         Self {
             id,
@@ -148,7 +148,7 @@ impl TagUpdate {
             id,
             self.name,
             self.icon,
-            Utc::now()
+            OffsetDateTime::now_local()?,
         )
         .fetch_optional(db_pool)
         .await
