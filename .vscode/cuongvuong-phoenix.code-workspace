@@ -1,0 +1,39 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": ".."
+    },
+    {
+      "name": "@client",
+      "path": "../client"
+    },
+    {
+      "name": "@client/tailwind-plugins",
+      "path": "../client/packages/tailwind-plugins"
+    },
+    {
+      "name": "@client/ui",
+      "path": "../client/packages/ui"
+    },
+    {
+      "name": "@client/website",
+      "path": "../client/packages/website"
+    },
+    {
+      "name": "@server",
+      "path": "../server"
+    }
+  ],
+  "settings": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[rust]": {
+      "editor.tabSize": 4,
+      "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    }
+  },
+  "extensions": {
+    "recommendations": ["Vue.volar", "bradlc.vscode-tailwindcss", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+  }
+}

@@ -25,7 +25,7 @@ pages:
       biography:
         label: "@:{'common.biography'}"
         body:
-          I’m a software developer & UI/UX design enthusiast come from <span class="italic">Vietnam</span>.<br />I love
+          I’m a software developer & UI/UX design enthusiast come from <span class="italic">Vietnam</span> 🇻🇳.<br />I love
           working with <span class="italic">Vue.JS, Rust, GraphQL, Figma, Inkscape</span>.
       contact:
         label: "@:{'common.contact'}"
