@@ -171,6 +171,7 @@
   import { type Ref, computed, ref, watch } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import { useI18n } from 'vue-i18n';
+  import { useRouteQuery } from '@vueuse/router';
   import { useQuery } from '@vue/apollo-composable';
   import { gql } from 'graphql-tag';
   import { parseISO } from 'date-fns';
@@ -188,20 +189,7 @@
   /* ----------------------------------------------------------------
   Search
   ---------------------------------------------------------------- */
-  const search = computed({
-    get: () => (route.query.search as string) || '',
-    set: (value?: string) => {
-      const trimmedvalue = value?.trim();
-
-      router.push({
-        name: RouteName.BLOG,
-        query: {
-          search: trimmedvalue || undefined,
-          tags: route.query.tags,
-        },
-      });
-    },
-  });
+  const search = useRouteQuery('search', '', { route, router });
 
   /* ----------------------------------------------------------------
   TODO: Sort
