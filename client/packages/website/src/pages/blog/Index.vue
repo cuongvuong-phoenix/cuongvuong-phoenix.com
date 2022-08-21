@@ -179,7 +179,7 @@
   import WPost from './_components/WPost.vue';
   import { useUiStore } from '~/store/ui';
   import { RouteName } from '~/utils/constants';
-  import { type PostsQuery, type PostsQueryVariables, type Tag, type TagsQuery } from '~/types/graphql';
+  import { type PostsQuery, type PostsQueryVariables, type TagsQuery } from '~/types/graphql';
 
   const router = useRouter();
   const route = useRoute();
@@ -244,7 +244,8 @@
   );
 
   // Tags to render.
-  interface WTag extends Omit<Tag, 'createdAt' | 'updatedAt'> {
+  type Tag = TagsQuery['tags']['nodes'][number];
+  interface WTag extends Tag {
     active?: boolean;
   }
   const tags = ref([]) as Ref<WTag[]>;
