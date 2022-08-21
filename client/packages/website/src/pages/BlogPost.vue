@@ -144,7 +144,11 @@
     () => route.params.post,
     (postParam) => {
       if (postParam) {
-        postQueryVariables.slug = postParam as string;
+        if (Array.isArray(postParam)) {
+          postQueryVariables.slug = postParam[0];
+        } else {
+          postQueryVariables.slug = postParam;
+        }
       }
     },
     { immediate: true }
