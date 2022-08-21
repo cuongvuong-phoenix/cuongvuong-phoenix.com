@@ -261,28 +261,22 @@
   );
 
   // Functions.
-  function toggleTag(id: number) {
-    let tagsQueryParams: number[];
+  async function toggleTag(id: number) {
+    const newActiveTagIds = activeTagIds.value.slice();
 
-    if (activeTagIds.value) {
-      tagsQueryParams = activeTagIds.value.slice();
+    const currentTagActiveIndex = newActiveTagIds.findIndex((activeTagId) => activeTagId === id);
 
-      const activedTagIndex = tagsQueryParams.findIndex((activeTagId) => activeTagId === id);
-
-      if (activedTagIndex === -1) {
-        tagsQueryParams.push(id);
-      } else {
-        tagsQueryParams.splice(activedTagIndex, 1);
-      }
+    if (currentTagActiveIndex === -1) {
+      newActiveTagIds.push(id);
     } else {
-      tagsQueryParams = [id];
+      newActiveTagIds.splice(currentTagActiveIndex, 1);
     }
 
-    router.push({
+    await router.push({
       name: RouteName.BLOG,
       query: {
         search: route.query.search,
-        tags: tagsQueryParams,
+        tags: newActiveTagIds,
       },
     });
   }
