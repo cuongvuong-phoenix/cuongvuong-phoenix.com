@@ -11,7 +11,7 @@
         <div
           class="sticky space-y-4"
           :style="{
-            top: `${uiStore.headerHeight + 16}px`,
+            top: `${headerHeight + 16}px`,
           }"
         >
           <!-- "Search box" -->
@@ -170,6 +170,7 @@
 <script setup lang="ts">
   import { type Ref, computed, ref, watch } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
+  import { storeToRefs } from 'pinia';
   import { useI18n } from 'vue-i18n';
   import { useRouteQuery } from '@vueuse/router';
   import { useQuery } from '@vue/apollo-composable';
@@ -184,6 +185,7 @@
   const router = useRouter();
   const route = useRoute();
   const uiStore = useUiStore();
+  const { headerHeight } = storeToRefs(uiStore);
   const { t } = useI18n();
 
   /* ----------------------------------------------------------------

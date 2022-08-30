@@ -116,6 +116,7 @@
 <script setup lang="ts">
   import { computed, reactive, ref, watch } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
+  import { storeToRefs } from 'pinia';
   import { useI18n } from 'vue-i18n';
   import { buildVueDompurifyHTMLDirective } from 'vue-dompurify-html';
   import { useQuery } from '@vue/apollo-composable';
@@ -129,8 +130,9 @@
 
   const router = useRouter();
   const route = useRoute();
-  const { t, locale } = useI18n();
   const headStore = useHeadStore();
+  const { title } = storeToRefs(headStore);
+  const { t, locale } = useI18n();
 
   const vDompurifyHtml = buildVueDompurifyHTMLDirective();
 
@@ -214,7 +216,7 @@
     [gqlPost, locale],
     ([gqlPostValue]) => {
       if (gqlPostValue) {
-        headStore.title = t(`head.${RouteName.BLOG_POST}.title`, { post: gqlPostValue.title });
+        title.value = t(`head.${RouteName.BLOG_POST}.title`, { post: gqlPostValue.title });
       }
     },
     { immediate: true }

@@ -16,6 +16,7 @@
 <script setup lang="ts">
   import { computed, watch } from 'vue';
   import { useRoute } from 'vue-router';
+  import { storeToRefs } from 'pinia';
   import { useI18n } from 'vue-i18n';
   import { useHead } from '@vueuse/head';
   import { HeaderHeight } from '~/store/ui';
@@ -25,46 +26,47 @@
   import WFooter from '~/components/WFooter.vue';
 
   const route = useRoute();
-  const { t, locale } = useI18n();
   const headStore = useHeadStore();
+  const { title, ogTitle, description } = storeToRefs(headStore);
+  const { t, locale } = useI18n();
 
   /* ----------------------------------------------------------------
   Head
   ---------------------------------------------------------------- */
   // Initialize.
-  headStore.title = t(`head.home.title`);
-  headStore.ogTitle = t('common.my-app.title');
-  headStore.description = t('common.my-app.description');
+  title.value = t(`head.home.title`);
+  ogTitle.value = t('common.my-app.title');
+  description.value = t('common.my-app.description');
 
   watch(
     [() => route.name, locale, () => route.meta.dynamicHeadTitle, () => route.meta.customHead],
     ([name, _, dynamicHeadTitle, customHead]) => {
       if (!dynamicHeadTitle) {
-        headStore.title = t(`head.${String(name)}.title`);
+        title.value = t(`head.${String(name)}.title`);
       }
 
       if (!customHead) {
-        headStore.ogTitle = t('common.my-app.title');
-        headStore.description = t('common.my-app.description');
+        ogTitle.value = t('common.my-app.title');
+        description.value = t('common.my-app.description');
       }
     }
   );
 
   useHead({
-    title: computed(() => headStore.title),
+    title,
     meta: [
       {
         name: 'description',
-        content: computed(() => headStore.description),
+        content: description,
       },
       // Open Graph protocol (https://ogp.me/).
       {
         property: 'og:title',
-        content: computed(() => headStore.ogTitle),
+        content: ogTitle,
       },
       {
         property: 'og:description',
-        content: computed(() => headStore.description),
+        content: description,
       },
       {
         property: 'og:image',

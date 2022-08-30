@@ -2,17 +2,17 @@
   <header
     class="border-fg-darkest fixed inset-x-0 top-0 z-10"
     :class="{
-      'bg-bg-default border-b': uiStore.headerMenuOpenning,
+      'bg-bg-default border-b': headerMenuOpenning,
       'border-b backdrop-blur-xl': scrolledOut,
     }"
     :style="{
-      'padding-right': smallerMd && uiStore.headerMenuOpenning ? 'var(--scrollbar--width)' : undefined,
+      'padding-right': smallerMd && headerMenuOpenning ? 'var(--scrollbar--width)' : undefined,
     }"
   >
     <nav
       class="container mx-auto flex items-center space-x-8 transition-[height] duration-300"
       :style="{
-        height: uiStore.headerHeightString,
+        height: headerHeightString,
       }"
     >
       <!-- "(2xl)" -->
@@ -89,18 +89,18 @@
         <!-- "Right - Menu Toggler" -->
         <div class="flex flex-1 justify-end">
           <UButton rounded unified @click="uiStore.toggleHeaderMenuOpenning()">
-            <UIcon v-if="!uiStore.headerMenuOpenning" icon="fluent:navigation-24-regular" />
+            <UIcon v-if="!headerMenuOpenning" icon="fluent:navigation-24-regular" />
             <UIcon v-else icon="fluent:dismiss-24-regular" />
           </UButton>
         </div>
         <!-- END "Right - Menu Toggler" -->
 
         <!-- "Menu" -->
-        <Teleport v-if="uiStore.headerMenuOpenning" to="#app">
+        <Teleport v-if="headerMenuOpenning" to="#app">
           <nav
             class="bg-bg-default fixed inset-x-0 bottom-0 z-10 px-16 pt-8 pb-16"
             :style="{
-              top: `${uiStore.headerHeight + 1}px`,
+              top: `${headerHeight + 1}px`,
             }"
           >
             <!-- "Navs" -->
@@ -142,6 +142,7 @@
 
 <script setup lang="ts">
   import { ref, shallowRef, watch } from 'vue';
+  import { storeToRefs } from 'pinia';
   import { useI18n } from 'vue-i18n';
   import { useBreakpoints, useColorMode, useEventListener, useStyleTag } from '@vueuse/core';
   import { UButton, UIcon, ULogo } from '@cuongvuong-phoenix-com-client/ui';
@@ -149,6 +150,7 @@
   import { RouteName, appBreakpoints } from '~/utils/constants';
 
   const uiStore = useUiStore();
+  const { headerHeight, headerHeightString, headerMenuOpenning } = storeToRefs(uiStore);
   const { t } = useI18n();
 
   /* ----------------------------------------------------------------
@@ -166,9 +168,9 @@
   });
 
   watch(
-    [smallerMd, () => uiStore.headerMenuOpenning],
-    ([smallerMdValue, headerMenuOpenning]) => {
-      if (smallerMdValue && headerMenuOpenning) {
+    [smallerMd, headerMenuOpenning],
+    ([smallerMdValue, headerMenuOpenningValue]) => {
+      if (smallerMdValue && headerMenuOpenningValue) {
         loadBodyStyleTag();
       } else {
         unloadBodyStyleTag();
@@ -178,19 +180,19 @@
   );
 
   /* ----------------------------------------------------------------
-  Scroll based on `dimHeaderFooter`.
+  Scroll.
   ---------------------------------------------------------------- */
   const scrolledOut = ref<boolean>(false);
 
   useEventListener('scroll', () => {
     const curr = window.scrollY;
 
-    if (curr > uiStore.headerHeight) {
+    if (curr > headerHeight.value) {
       scrolledOut.value = true;
-      uiStore.setHeaderHeight(HeaderHeight.NARROW);
+      headerHeight.value = HeaderHeight.NARROW;
     } else {
       scrolledOut.value = false;
-      uiStore.setHeaderHeight(HeaderHeight.DEFAULT);
+      headerHeight.value = HeaderHeight.DEFAULT;
     }
   });
 

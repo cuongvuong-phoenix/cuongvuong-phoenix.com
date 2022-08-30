@@ -1,3 +1,4 @@
+import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
 
 export enum HeaderHeight {
@@ -5,28 +6,25 @@ export enum HeaderHeight {
   NARROW = 64,
 }
 
-export const useUiStore = defineStore('ui', {
-  state: () => ({
-    // Header height in pixel.
-    headerHeight: HeaderHeight.DEFAULT,
-    // Header menu openning state.
-    headerMenuOpenning: false,
-  }),
-  getters: {
-    headerHeightString: (state) => {
-      return `${state.headerHeight}px`;
-    },
-  },
-  actions: {
-    setHeaderHeight(value: number) {
-      this.headerHeight = value;
-    },
-    toggleHeaderMenuOpenning(value?: boolean) {
-      if (typeof value === 'boolean') {
-        this.headerMenuOpenning = value;
-      } else {
-        this.headerMenuOpenning = !this.headerMenuOpenning;
-      }
-    },
-  },
+export const useUiStore = defineStore('ui', () => {
+  /* ----------------------------------------------------------------
+  Header Height
+  ---------------------------------------------------------------- */
+  const headerHeight = ref(HeaderHeight.DEFAULT);
+  const headerHeightString = computed(() => `${headerHeight.value}px`);
+
+  /* ----------------------------------------------------------------
+  Header Menu Opening
+  ---------------------------------------------------------------- */
+  const headerMenuOpenning = ref(false);
+
+  function toggleHeaderMenuOpenning(value?: boolean) {
+    if (typeof value === 'boolean') {
+      headerMenuOpenning.value = value;
+    } else {
+      headerMenuOpenning.value = !headerMenuOpenning.value;
+    }
+  }
+
+  return { headerHeight, headerHeightString, headerMenuOpenning, toggleHeaderMenuOpenning };
 });

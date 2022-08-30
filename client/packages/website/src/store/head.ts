@@ -1,16 +1,10 @@
+import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
-export interface HeadStoreState {
-  title: string;
-  ogTitle: string;
-  description: string;
-}
+export const useHeadStore = defineStore('head', () => {
+  const title = ref('');
+  const ogTitle = ref('');
+  const description = ref('');
 
-export const useHeadStore = defineStore('head', {
-  state: () =>
-    ({
-      title: '',
-      ogTitle: '',
-      description: '',
-    } as HeadStoreState),
+  return { title, ogTitle, description };
 });
