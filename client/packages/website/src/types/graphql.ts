@@ -25,74 +25,6 @@ export type HomeContent = {
   yearsOfExperience: Scalars['Int'];
 };
 
-export type HomeContentCreate = {
-  biography: Scalars['String'];
-  contact: Scalars['String'];
-  numProjects: Scalars['Int'];
-  yearsOfExperience: Scalars['Int'];
-};
-
-export type HomeContentUpdate = {
-  biography?: InputMaybe<Scalars['String']>;
-  contact?: InputMaybe<Scalars['String']>;
-  numProjects?: InputMaybe<Scalars['Int']>;
-  yearsOfExperience?: InputMaybe<Scalars['Int']>;
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  createHomeContent: HomeContent;
-  createPost: Post;
-  createTag: Tag;
-  deletePost: Post;
-  deleteTag: Tag;
-  updateHomeContent: HomeContent;
-  updatePost: Post;
-  updateTag: Tag;
-};
-
-
-export type MutationCreateHomeContentArgs = {
-  home: HomeContentCreate;
-};
-
-
-export type MutationCreatePostArgs = {
-  post: PostCreate;
-};
-
-
-export type MutationCreateTagArgs = {
-  tag: TagCreate;
-};
-
-
-export type MutationDeletePostArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type MutationDeleteTagArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type MutationUpdateHomeContentArgs = {
-  home: HomeContentUpdate;
-};
-
-
-export type MutationUpdatePostArgs = {
-  id: Scalars['Int'];
-  post: PostUpdate;
-};
-
-
-export type MutationUpdateTagArgs = {
-  id: Scalars['Int'];
-  tag: TagUpdate;
-};
-
 /** Information about pagination in a connection */
 export type PageInfo = {
   __typename?: 'PageInfo';
@@ -137,15 +69,6 @@ export type PostConnection = {
   totalCount: Scalars['Int'];
 };
 
-export type PostCreate = {
-  content: Scalars['String'];
-  readingTime: Scalars['Int'];
-  slug: Scalars['String'];
-  tagIds: Array<Scalars['Int']>;
-  title: Scalars['String'];
-  visible: Scalars['Boolean'];
-};
-
 /** An edge in a connection. */
 export type PostEdge = {
   __typename?: 'PostEdge';
@@ -153,15 +76,6 @@ export type PostEdge = {
   cursor: Scalars['String'];
   /** The item at the end of the edge */
   node: Post;
-};
-
-export type PostUpdate = {
-  content?: InputMaybe<Scalars['String']>;
-  readingTime?: InputMaybe<Scalars['Int']>;
-  slug?: InputMaybe<Scalars['String']>;
-  tagIds?: InputMaybe<Array<Scalars['Int']>>;
-  title?: InputMaybe<Scalars['String']>;
-  visible?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type Query = {
@@ -222,11 +136,6 @@ export type TagConnection = {
   totalCount: Scalars['Int'];
 };
 
-export type TagCreate = {
-  icon?: InputMaybe<Scalars['String']>;
-  name: Scalars['String'];
-};
-
 /** An edge in a connection. */
 export type TagEdge = {
   __typename?: 'TagEdge';
@@ -234,11 +143,6 @@ export type TagEdge = {
   cursor: Scalars['String'];
   /** The item at the end of the edge */
   node: Tag;
-};
-
-export type TagUpdate = {
-  icon?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
 };
 
 export type PostQueryVariables = Exact<{
