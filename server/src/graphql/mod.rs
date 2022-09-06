@@ -1,6 +1,6 @@
 use self::schema::AppSchema;
 use crate::State;
-use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
+use async_graphql::http::GraphiQLSource;
 use async_graphql_axum::{GraphQLRequest, GraphQLResponse};
 use axum::{
     extract::{Extension, OriginalUri},
@@ -20,15 +20,13 @@ pub fn init_routes(state: Arc<State>) -> Router {
     Router::new().nest(
         "/graphql",
         Router::new()
-            .route("/", get(graphql_playground).post(graphql_handler))
+            .route("/", get(graphiql).post(graphql_handler))
             .layer(Extension(schema)),
     )
 }
 
-async fn graphql_playground(OriginalUri(uri): OriginalUri) -> impl IntoResponse {
-    Html(playground_source(
-        GraphQLPlaygroundConfig::new(uri.path()).with_setting("schema.polling.enable", false),
-    ))
+async fn graphiql(OriginalUri(uri): OriginalUri) -> impl IntoResponse {
+    Html(GraphiQLSource::build().endpoint(uri.path()).finish())
 }
 
 async fn graphql_handler(
