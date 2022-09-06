@@ -1,0 +1,42 @@
+# fly.toml file generated for cuongvuong-phoenix-com-server on 2022-09-05T22:48:15+07:00
+
+app = "cuongvuong-phoenix-com-server"
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[env]
+RUST_LOG = "cuongvuong_phoenix_com_server=info,tower_http=debug"
+HOST = "0.0.0.0"
+PORT = 7878
+
+[experimental]
+  allowed_public_ports = []
+  auto_rollback = true
+
+[[services]]
+  internal_port = 7878
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.http_checks]]
+    method = "get"
+    path = "/health"
+    grace_period = "2s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
