@@ -14,18 +14,18 @@
     "build": "postcss src/assets/styles/index.css --output=dist/assets/index.css"
   },
   "peerDependencies": {
-    "@iconify/iconify": "^2.2.1",
-    "@vueuse/core": "^9.1.0",
-    "vue": "^3.2.37",
+    "@iconify/iconify": "^3.0.0",
+    "@vueuse/core": "^9.2.0",
+    "vue": "^3.2.39",
     "vue-router": "4"
   },
   "devDependencies": {
     "@cuongvuong-phoenix-com-client/tailwind-plugins": "workspace:*",
-    "@headlessui/vue": "^1.6.7",
-    "@iconify/iconify": "^2.2.1",
-    "@iconify/json": "^2.1.94",
+    "@headlessui/vue": "^1.7.0",
+    "@iconify/iconify": "^3.0.0",
+    "@iconify/json": "^2.1.104",
     "@purge-icons/generated": "^0.9.0",
-    "@vueuse/core": "^9.1.0",
+    "@vueuse/core": "^9.2.0",
     "autoprefixer": "^10.4.8",
     "postcss": "^8.4.16",
     "postcss-at-rules-variables": "^0.3.0",
@@ -33,11 +33,11 @@
     "postcss-cli": "^10.0.0",
     "postcss-each": "^1.1.0",
     "postcss-for": "^2.1.1",
-    "postcss-import": "^14.1.0",
+    "postcss-import": "^15.0.0",
     "tailwindcss": "^3.1.8",
-    "typescript": "^4.7.4",
-    "vue": "^3.2.37",
+    "typescript": "^4.8.2",
+    "vue": "^3.2.39",
     "vue-router": "4",
-    "vue-tsc": "^0.40.1"
+    "vue-tsc": "^0.40.13"
   }
 }
