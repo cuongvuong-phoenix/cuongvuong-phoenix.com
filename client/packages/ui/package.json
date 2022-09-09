@@ -4,6 +4,7 @@
   "private": true,
   "author": "Cuong Vuong Chi",
   "license": "MIT",
+  "type": "module",
   "exports": {
     "./css": {
       "import": "./dist/assets/index.css"

@@ -4,6 +4,7 @@
   "private": true,
   "author": "Cuong Vuong Chi",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "vite": "vite",
     "graphql-codegen": "graphql-codegen",
