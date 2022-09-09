@@ -2,8 +2,8 @@
   "name": "@cuongvuong-phoenix-com-client/ui",
   "version": "0.0.0",
   "private": true,
-  "license": "MIT",
   "author": "Cuong Vuong Chi",
+  "license": "MIT",
   "exports": {
     "./css": {
       "import": "./dist/assets/index.css"
